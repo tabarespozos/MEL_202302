@@ -1,0 +1,1776 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1-2: Estadística Descriptiva &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_1/1-2-Estadística_descriptiva';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 1-3: Visualización de datos con Python" href="1-3-Visualizations.html" />
+    <link rel="prev" title="Lectura 1-1: Introducción al Pensamiento estadístico" href="1-1-Introduction_pensamiento_stat.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_1/1-2-Estadística_descriptiva.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_1/1-2-Estadística_descriptiva.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_1/1-2-Estadística_descriptiva.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1-2:  Estadística Descriptiva</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 1-2:  Estadística Descriptiva</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos">Análisis Exploratorio de Datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-conjunto-de-datos-iris">El conjunto de datos Iris</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticos-de-resumen">Estadísticos de resumen</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frecuencia-y-moda">Frecuencia y moda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">Moda</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#medidas-de-tendencia-central">Medidas de Tendencia Central</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media">Media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">Mediana</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#medidas-de-dispersion">Medidas de Dispersión</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-o-cuantiles">Percentiles o Cuantiles</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Medidas de dispersión</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticas-de-resumen-multivariadas">Estadísticas de Resumen Multivariadas</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tablas-de-contingencia">Tablas de Contingencia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficiente-de-cramer-v">Coeficiente de Cramér V</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asimetria-y-curtosis">Asimetría y Curtosis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosis">Curtosis</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-2-estadistica-descriptiva">
+<h1>Lectura 1-2:  Estadística Descriptiva<a class="headerlink" href="#lectura-1-2-estadistica-descriptiva" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="analisis-exploratorio-de-datos">
+<h1>Análisis Exploratorio de Datos<a class="headerlink" href="#analisis-exploratorio-de-datos" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>La estadística descriptiva o el análisis exploratorio de datos (AED) engloba un conjunto de técnicas para comprender rápidamente la naturaleza de    una colección de datos o <strong>conjunto de datos</strong>.</p></li>
+<li><p>El objetivo principal de la estadística descriptiva es explorar los datos para    encontrar algunos patrones que puedan explotarse para generar hipótesis.</p></li>
+<li><p>Fue propuesta por el estadístico John Tukey.</p></li>
+<li><p>Se basa principalmente en dos tipos de técnicas: <strong>resumen estadístico</strong> y <strong>visualización de datos</strong>.</p></li>
+<li><p>En esta clase verás ambos tipos de técnicas, además de su aplicación en Python para algunos conjuntos de datos de juguete.</p></li>
+</ul>
+</section>
+<section id="el-conjunto-de-datos-iris">
+<h1>El conjunto de datos Iris<a class="headerlink" href="#el-conjunto-de-datos-iris" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Trabajaremos con un conjunto de datos muy conocido llamado <strong>Iris</strong>.</p></li>
+<li><p>El conjunto de datos consta de 150 observaciones de flores de la planta iris.</p></li>
+<li><p>Hay tres clases de flores de iris: <strong>virginica</strong>,   <strong>setosa</strong> y <strong>versicolor</strong>.</p></li>
+<li><p>Hay 50 observaciones de cada una.</p></li>
+<li><p>Las variables o atributos medidos para cada flor son:</p></li>
+</ul>
+<p><img alt="" src="Week_1/images/Petal-sepal.jpg" /></p>
+<img src="https://raw.githubusercontent.com/ML-course/master/master/notebooks/images/01_iris.jpeg" alt="ml" style="width: 75%;"/>
+<img src="https://raw.githubusercontent.com/ML-course/master/master/notebooks/images/01_terminology.png" alt="ml" style="float: left; width: 50%;"/>
+<img src="https://raw.githubusercontent.com/ML-course/master/master/notebooks/images/01_iris3d.png" alt="ml" style="float: left; width: 35%;"/><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+
+<span class="c1"># Load iris dataset</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">iris_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>sepal length (cm)</th>
+      <th>sepal width (cm)</th>
+      <th>petal length (cm)</th>
+      <th>petal width (cm)</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vector frequencies</span>
+<span class="n">vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">vec_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>  <span class="c1"># Convert list to pandas Series</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vec_series</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    4
+1    3
+0    2
+2    1
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estadisticos-de-resumen">
+<h1>Estadísticos de resumen<a class="headerlink" href="#estadisticos-de-resumen" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Los estadísticos de resumen son valores que explican propiedades de los datos.</p></li>
+<li><p>Algunas de estas propiedades son: frecuencias, medidas de tendencia tendencia central y dispersión.</p></li>
+<li><p>Ejemplo:</p>
+<ul>
+<li><p><strong>Las medidas de tendencia central:</strong> media, mediana y moda.</p></li>
+<li><p><strong>Variación:</strong> rango, varianza y desviación estándar.</p></li>
+</ul>
+</li>
+<li><p>Estas estadísticas se pueden calcular para variables numéricas y categóricas.</p></li>
+<li><p>La mayoría de las estadísticas de síntesis pueden calcularse con una sola pasada por los datos.</p></li>
+</ul>
+<section id="frecuencia-y-moda">
+<h2>Frecuencia y moda<a class="headerlink" href="#frecuencia-y-moda" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La frecuencia absoluta de un valor de atributo es el número de veces que se observa.</p></li>
+<li><p>La frecuencia relativa es la frecuencia absoluta dividida por el número total de ejemplos.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print frequencies of species</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    50
+1    50
+2    50
+Name: Species, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the relative frequency of each species</span>
+<span class="n">relative_frequency</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iris_df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">relative_frequency</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    0.333333
+1    0.333333
+2    0.333333
+Name: Species, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tenga en cuenta que en el conjunto de datos de iris de scikit-learn, las especies están representadas por números (0, 1, 2), no por sus nombres reales (setosa, versicolor, virginica), por lo que la salida serán las frecuencias relativas de estos números, no los nombres de las especies.</p>
+<p>Si lo prefiere, puede sustituir la representación numérica por los nombres de las especies:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define species names</span>
+<span class="n">species_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;setosa&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;versicolor&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;virginica&#39;</span><span class="p">}</span>
+
+<span class="c1"># Replace numerical representation with species names</span>
+<span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">species_dict</span><span class="p">)</span>
+
+<span class="c1"># Calculate the relative frequency of each species</span>
+<span class="n">relative_frequency</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iris_df</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">relative_frequency</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>setosa        0.333333
+versicolor    0.333333
+virginica     0.333333
+Name: Species, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><strong>Ejercicio</strong></p>
+<p>Intente calcular las frecuencias absolutas y relativas del siguiente vector</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vector frequencies</span>
+<span class="n">vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="moda">
+<h3>Moda<a class="headerlink" href="#moda" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>La moda de un atributo es el valor más frecuente observado.</p></li>
+</ul>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Moda</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Generalmente utilizamos frecuencias y moda para estudiar variables categóricas.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        setosa
+1    versicolor
+2     virginica
+Name: Species, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="medidas-de-tendencia-central">
+<h1>Medidas de Tendencia Central<a class="headerlink" href="#medidas-de-tendencia-central" title="Permalink to this heading">#</a></h1>
+<section id="media">
+<h2>Media<a class="headerlink" href="#media" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Estas medidas intentan resumir los valores observados en un único valor asociado con el valor central.</p></li>
+<li><p>La media es la medida de tendencia central más común para una variable numérica.</p></li>
+<li><p>Si tenemos <span class="math notranslate nohighlight">\(n\)</span> observaciones, se calcula como la media aritmética o promedio.
+$<span class="math notranslate nohighlight">\(\text{media}(x) = \overline{x} = \frac{1}{n} \sum_{i=1}^{n} x_i\)</span>$</p></li>
+<li><p>El principal problema con la media es que es muy sensible a los <strong>valores atípicos</strong>.</p></li>
+<li><p>Tomamos un vector aleatorio con una media de <span class="math notranslate nohighlight">\(20\)</span> y luego añadimos un elemento aleatorio que proviene de una distribución con una media mucho mayor. Vemos que la media se ve fuertemente afectada por el ruido:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Generate 10 random numbers from a normal distribution </span>
+<span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean of vec: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span>
+
+<span class="c1"># Generate 1 more random number from a normal distribution with a mean of 300 and a standard deviation of 100</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Append this number to the vector</span>
+<span class="n">vec_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">noise</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean of vec_noise: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vec_noise</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean of vec:  18.02392102989245
+Mean of vec_noise:  52.558065091465714
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Podemos robustecer la media eliminando una fracción de los valores extremos utilizando la <strong>media recortada</strong>.</p></li>
+</ul>
+<p>En Python, puedes calcular la media recortada de una lista o un array de números usando la función <code class="docutils literal notranslate"><span class="pre">trim_mean</span></code> del módulo <code class="docutils literal notranslate"><span class="pre">stats</span></code> de la biblioteca scipy. Esta función toma dos argumentos: la lista o array de números y la fracción de observaciones a recortar de cada extremo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="c1"># Compute trimmed mean of vec</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trimmed mean of vec: &quot;</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+
+<span class="c1"># Compute trimmed mean of vec_noise</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trimmed mean of vec_noise: &quot;</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">trim_mean</span><span class="p">(</span><span class="n">vec_noise</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Trimmed mean of vec:  17.344004558034705
+Trimmed mean of vec_noise:  19.9285132156059
+</pre></div>
+</div>
+</div>
+</div>
+<p>La función <code class="docutils literal notranslate"><span class="pre">trim_mean</span></code> descartará la proporción dada de observaciones de cada extremo y luego calculará la media de las observaciones restantes. En este caso, descartará el 10% de los valores más pequeños y el 10% de los valores más grandes de cada vector, luego calculará la media de los valores restantes. Esto puede proporcionar una estimación más robusta de la tendencia central de una distribución con valores atípicos extremos.</p>
+</section>
+<section id="mediana">
+<h2>Mediana<a class="headerlink" href="#mediana" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La mediana representa la posición central de clasificación de la variable que separa la mitad inferior y la mitad superior de las observaciones.</p></li>
+<li><p>Intuitivamente, consiste en el valor donde para una mitad de las observaciones todos los valores son mayores que él, y para la otra mitad todos son menores.</p></li>
+</ul>
+<p>Si <span class="math notranslate nohighlight">\(|x|\)</span> (la longitud del vector) es impar (<span class="math notranslate nohighlight">\(|x|=2r+1\)</span>), entonces:</p>
+<div class="math notranslate nohighlight">
+\[\text{mediana}(x) = x_{r+1} \]</div>
+<p>Si <span class="math notranslate nohighlight">\(|x|\)</span> es par (<span class="math notranslate nohighlight">\(|x|=2r\)</span>), entonces:</p>
+<div class="math notranslate nohighlight">
+\[\text{mediana}(x) = \frac{1}{2}(x_r + x_{r+1})\]</div>
+<ul class="simple">
+<li><p>Para el ejemplo anterior, vemos que la mediana es más robusta al ruido que la media.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate median of vec</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median of vec: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span>
+
+<span class="c1"># Calculate median of vec_noise</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median of vec_noise: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">vec_noise</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Median of vec:  14.264068132636794
+Median of vec_noise:  19.52478549118682
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Comparación de la moda, la media y la mediana</strong></p>
+<p><img alt="image center" src="../_images/centrales.png" /></p>
+</section>
+</section>
+<section id="medidas-de-dispersion">
+<h1>Medidas de Dispersión<a class="headerlink" href="#medidas-de-dispersion" title="Permalink to this heading">#</a></h1>
+<section id="percentiles-o-cuantiles">
+<h2>Percentiles o Cuantiles<a class="headerlink" href="#percentiles-o-cuantiles" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El percentil <span class="math notranslate nohighlight">\(k\)</span>-ésimo de una variable numérica es un valor tal que el <span class="math notranslate nohighlight">\(k\%\)</span> de las observaciones están por debajo del percentil y el <span class="math notranslate nohighlight">\((100-k)\%\)</span> están por encima de este valor.</p></li>
+<li><p>Los cuantiles son equivalentes a los percentiles pero se expresan en fracciones en lugar de porcentajes.</p></li>
+<li><p>En Python, puedes calcular percentiles usando la función percentile de la biblioteca numpy. Proporcionas la matriz o lista de números y el valor del percentil como argumentos. Los valores de percentiles están entre 0 y 100:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate all percentiles from 0 to 100 with a step of 1 for the &#39;sepal length (cm)&#39; column</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">th percentile: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="n">i</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0th percentile:  4.3
+1th percentile:  4.4
+2th percentile:  4.4
+3th percentile:  4.547
+4th percentile:  4.6
+5th percentile:  4.6
+6th percentile:  4.694
+7th percentile:  4.743
+8th percentile:  4.8
+9th percentile:  4.8
+10th percentile:  4.8
+11th percentile:  4.9
+12th percentile:  4.9
+13th percentile:  4.9
+14th percentile:  4.9
+15th percentile:  5.0
+16th percentile:  5.0
+17th percentile:  5.0
+18th percentile:  5.0
+19th percentile:  5.0
+20th percentile:  5.0
+21th percentile:  5.029
+22th percentile:  5.1
+23th percentile:  5.1
+24th percentile:  5.1
+25th percentile:  5.1
+26th percentile:  5.1
+27th percentile:  5.123
+28th percentile:  5.2
+28th percentile:  5.2
+30th percentile:  5.27
+31th percentile:  5.4
+32th percentile:  5.4
+33th percentile:  5.4
+34th percentile:  5.4
+35th percentile:  5.5
+36th percentile:  5.5
+37th percentile:  5.5
+38th percentile:  5.5
+39th percentile:  5.511
+40th percentile:  5.6
+41th percentile:  5.6
+42th percentile:  5.6
+43th percentile:  5.606999999999999
+44th percentile:  5.7
+45th percentile:  5.7
+46th percentile:  5.7
+47th percentile:  5.7
+48th percentile:  5.7
+49th percentile:  5.8
+50th percentile:  5.8
+51th percentile:  5.8
+52th percentile:  5.8
+53th percentile:  5.8
+54th percentile:  5.9
+55th percentile:  5.9
+56th percentile:  6.0
+57th percentile:  6.0
+57th percentile:  6.0
+59th percentile:  6.0
+60th percentile:  6.1
+61th percentile:  6.1
+62th percentile:  6.1
+63th percentile:  6.1
+64th percentile:  6.2
+65th percentile:  6.2
+66th percentile:  6.234
+67th percentile:  6.3
+68th percentile:  6.3
+69th percentile:  6.3
+70th percentile:  6.3
+71th percentile:  6.3
+72th percentile:  6.328
+73th percentile:  6.4
+74th percentile:  6.4
+75th percentile:  6.4
+76th percentile:  6.4
+77th percentile:  6.473000000000001
+78th percentile:  6.5
+79th percentile:  6.5
+80th percentile:  6.5200000000000005
+81th percentile:  6.6
+82th percentile:  6.7
+83th percentile:  6.7
+84th percentile:  6.7
+85th percentile:  6.7
+86th percentile:  6.7
+87th percentile:  6.763
+88th percentile:  6.8
+89th percentile:  6.8610000000000015
+90th percentile:  6.9
+91th percentile:  6.9
+92th percentile:  7.008000000000001
+93th percentile:  7.156999999999999
+94th percentile:  7.2
+95th percentile:  7.254999999999998
+96th percentile:  7.407999999999999
+97th percentile:  7.6530000000000005
+98th percentile:  7.7
+99th percentile:  7.7
+100th percentile:  7.9
+</pre></div>
+</div>
+</div>
+</div>
+<p>En Python, puedes calcular los cuartiles de una lista o matriz de números usando la función quantile de la biblioteca pandas.</p>
+<p>Los cuartiles son los percentiles 25, 50 y 75 de una distribución. El percentil 50 también se conoce como la mediana. Los valores mínimos y máximos son equivalentes a los percentiles 0 y 100, respectivamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the minimum, the three quartiles and the maximum for the &#39;sepal length (cm)&#39; column</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00    4.3
+0.25    5.1
+0.50    5.8
+0.75    6.4
+1.00    7.9
+Name: sepal length (cm), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>En Python, podemos usar el método <code class="docutils literal notranslate"><span class="pre">describe</span></code> en un DataFrame de pandas para obtener un resumen estadístico de las variables numéricas. El resumen incluirá el conteo de valores no nulos, la media, la desviación estándar, el valor mínimo, el primer cuartil (25%), la mediana (50%), el tercer cuartil (75%) y el valor máximo.</p></li>
+<li><p>Para variables categóricas, podemos usar el método <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> para obtener una tabla de frecuencias.</p></li>
+</ul>
+<p><em>Aquí hay un ejemplo de cómo podrías hacer esto en Python:</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Summary statistics for the entire DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       sepal length (cm)  sepal width (cm)  petal length (cm)  \
+count         150.000000        150.000000         150.000000   
+mean            5.843333          3.057333           3.758000   
+std             0.828066          0.435866           1.765298   
+min             4.300000          2.000000           1.000000   
+25%             5.100000          2.800000           1.600000   
+50%             5.800000          3.000000           4.350000   
+75%             6.400000          3.300000           5.100000   
+max             7.900000          4.400000           6.900000   
+
+       petal width (cm)  
+count        150.000000  
+mean           1.199333  
+std            0.762238  
+min            0.100000  
+25%            0.300000  
+50%            1.300000  
+75%            1.800000  
+max            2.500000  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Summary statistics for a single numerical column</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    150.000000
+mean       5.843333
+std        0.828066
+min        4.300000
+25%        5.100000
+50%        5.800000
+75%        6.400000
+max        7.900000
+Name: sepal length (cm), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Summary statistics for a single categorical column</span>
+
+<span class="c1"># Let&#39;s first convert the &#39;Species&#39; column to categorical data type</span>
+
+<span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count        150
+unique         3
+top       setosa
+freq          50
+Name: Species, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tenga en cuenta que el método describe devuelve resultados diferentes para datos numéricos y categóricos, por lo que si su DataFrame contiene ambos tipos de datos, es posible que tenga que llamar a este método por separado para cada tipo.</p>
+<p>Tenga en cuenta también que la columna “Especie” en el conjunto de datos del iris de scikit-learn es numérica (con 0, 1 y 2 representando diferentes especies), por lo que tenemos que convertirla en un tipo de datos categórico antes de llamar al método describe. Puede que no necesite hacer esta conversión si sus datos categóricos ya están en el formato correcto.</p>
+</section>
+</section>
+<section id="ejercicio">
+<h1>Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h1>
+<p>Ahora intente agrupar los resultados por especie y calcular los percentiles para cada especie.</p>
+<p>Consejo: puede utilizar el método <code class="docutils literal notranslate"><span class="pre">groupby</span></code> para agrupar los datos por especie y luego aplicar el método <code class="docutils literal notranslate"><span class="pre">describe</span></code> a cada grupo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate mean for each species and variable</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="c1"># Calculate median for each species and variable</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
+
+<span class="c1"># Calculate quartiles for each species and variable</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iris_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Species&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            sepal length (cm)  sepal width (cm)  petal length (cm)  \
+Species                                                              
+setosa                  5.006             3.428              1.462   
+versicolor              5.936             2.770              4.260   
+virginica               6.588             2.974              5.552   
+
+            petal width (cm)  
+Species                       
+setosa                 0.246  
+versicolor             1.326  
+virginica              2.026  
+            sepal length (cm)  sepal width (cm)  petal length (cm)  \
+Species                                                              
+setosa                    5.0               3.4               1.50   
+versicolor                5.9               2.8               4.35   
+virginica                 6.5               3.0               5.55   
+
+            petal width (cm)  
+Species                       
+setosa                   0.2  
+versicolor               1.3  
+virginica                2.0  
+                 sepal length (cm)  sepal width (cm)  petal length (cm)  \
+Species                                                                   
+setosa     0.25              4.800             3.200              1.400   
+           0.50              5.000             3.400              1.500   
+           0.75              5.200             3.675              1.575   
+versicolor 0.25              5.600             2.525              4.000   
+           0.50              5.900             2.800              4.350   
+           0.75              6.300             3.000              4.600   
+virginica  0.25              6.225             2.800              5.100   
+           0.50              6.500             3.000              5.550   
+           0.75              6.900             3.175              5.875   
+
+                 petal width (cm)  
+Species                            
+setosa     0.25               0.2  
+           0.50               0.2  
+           0.75               0.3  
+versicolor 0.25               1.2  
+           0.50               1.3  
+           0.75               1.5  
+virginica  0.25               1.8  
+           0.50               2.0  
+           0.75               2.3  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h1>Medidas de dispersión<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Las medidas de variabilidad o de dispersión nos indican lo diferentes o    similares tienden a ser las observaciones con respecto a uno particular. Normalmente este valor se refiere a alguna medida de tendencia central.</p></li>
+<li><p>El rango es la diferencia entre el valor máximo y el mínimo:</p></li>
+</ul>
+<p>En Python, puedes calcular el rango de una lista o un array de números utilizando las funciones <code class="docutils literal notranslate"><span class="pre">max</span></code> y <code class="docutils literal notranslate"><span class="pre">min</span></code> de la biblioteca numpy. El rango se calcula como la diferencia entre el valor máximo y el valor mínimo de</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate range of &#39;sepal length (cm)&#39;</span>
+<span class="n">sepal_length_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Range of sepal length: &quot;</span><span class="p">,</span> <span class="n">sepal_length_range</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Range of sepal length:  3.6000000000000005
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>La desviación estándar es la raíz cuadrada de la varianza que mide las diferencias medias al cuadrado de las observaciones respecto a la   media.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{var}(x)=\frac{1}{n-1}\sum_{i=1}^{n}(x_{i} - \overline{x} )^2\]</div>
+<div class="math notranslate nohighlight">
+\[\text{sd}(x)=\sqrt{\text{var}(x)}\]</div>
+<p>En Python, puedes calcular la varianza y la desviación estándar de una lista o una matriz de números utilizando las funciones <code class="docutils literal notranslate"><span class="pre">var</span></code> y <code class="docutils literal notranslate"><span class="pre">std</span></code> de la biblioteca numpy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate variance of &#39;sepal length (cm)&#39;</span>
+<span class="n">sepal_length_variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variance of sepal length: &quot;</span><span class="p">,</span> <span class="n">sepal_length_variance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variance of sepal length:  0.6856935123042505
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate standard deviation of &#39;sepal length (cm)&#39;</span>
+<span class="n">sepal_length_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard deviation of sepal length: &quot;</span><span class="p">,</span> <span class="n">sepal_length_std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard deviation of sepal length:  0.8280661279778629
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Nota:</strong> La función <code class="docutils literal notranslate"><span class="pre">var</span></code> toma un argumento opcional <code class="docutils literal notranslate"><span class="pre">ddof</span></code> que representa el número de grados de libertad. Por defecto, <code class="docutils literal notranslate"><span class="pre">ddof=0</span></code>, lo que significa que la función calcula la varianza de la población. Si desea calcular la varianza de la muestra, debe establecer <code class="docutils literal notranslate"><span class="pre">ddof=1</span></code>.</p>
+<ul class="simple">
+<li><p>Al igual que la media, la desviación estándar es sensible a los valores atípicos.</p></li>
+<li><p>Las medidas más robustas suelen basarse en la mediana.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(m(x)\)</span> una medida de tendencia central de <span class="math notranslate nohighlight">\(x\)</span> (generalmente la mediana), definimos la <strong>desviación absoluta media</strong> (DAM) como:
+$<span class="math notranslate nohighlight">\(\text{DAM}(x) = \frac{1}{n}\sum_{i=1}^{n}|x_i-m(x)|\)</span>$</p></li>
+</ul>
+<ul class="simple">
+<li><p>Ejercicio: Programe la función <code class="docutils literal notranslate"><span class="pre">add</span></code> en Python, como una función que recibe un vector <code class="docutils literal notranslate"><span class="pre">x</span></code> y una función de la mediana <code class="docutils literal notranslate"><span class="pre">fun</span></code>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">aad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the function with &#39;sepal length (cm)&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aad</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]))</span>
+
+
+<span class="c1"># Using the function with &#39;sepal length (cm)&#39; and mean as the central location</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aad</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6846666666666669
+0.6875555555555561
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Definimos la <strong>desviación absoluta mediana</strong> (DAMed) como: $<span class="math notranslate nohighlight">\(\text{DAMed}(x) = b \times \text{mediana}(|x_{i}-\text{m}(x)|)\)</span>$</p></li>
+<li><p>En Python se calcula usando la libreria Pandas y scipy con los parámetros <code class="docutils literal notranslate"><span class="pre">center</span></code> como una función que mide la tendencia central de la variable y <code class="docutils literal notranslate"><span class="pre">constant</span></code> como la constante <span class="math notranslate nohighlight">\(b\)</span>. Por defecto se usa la mediana y el valor <span class="math notranslate nohighlight">\(1.482\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mad_sep_len</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mad</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median Absolute Deviation of sepal length: &quot;</span><span class="p">,</span> <span class="n">mad_sep_len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Median Absolute Deviation of sepal length:  0.6875555555555561
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">median_abs_deviation</span>
+
+<span class="n">mad_sep_len</span> <span class="o">=</span> <span class="n">median_abs_deviation</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Median Absolute Deviation of sepal length: &quot;</span><span class="p">,</span> <span class="n">mad_sep_len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Median Absolute Deviation of sepal length:  0.7000000000000002
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Finalmente, el rango intercuartílico (RIC) se define como la diferencia entre el tercer y el primer cuartil (<span class="math notranslate nohighlight">\(Q_3 - Q_1\)</span>).</p></li>
+</ul>
+<p>En Python, puede calcular el rango intercuartílico (IQR) utilizando la función de cuantiles de la biblioteca pandas. El IQR es el rango entre el primer cuartil (percentil 25) y el tercer cuartil (percentil 75). A continuación se explica cómo calcularlo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate IQR of &#39;sepal length (cm)&#39;</span>
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span> <span class="o">=</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interquartile Range of sepal length: &quot;</span><span class="p">,</span> <span class="n">IQR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interquartile Range of sepal length:  1.3000000000000007
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como alternativa, puede utilizar la función <code class="docutils literal notranslate"><span class="pre">iqr</span></code> de la biblioteca scipy.stats:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">iqr</span>
+
+<span class="c1"># Calculate IQR of &#39;sepal length (cm)&#39;</span>
+<span class="n">IQR</span> <span class="o">=</span> <span class="n">iqr</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interquartile Range of sepal length: &quot;</span><span class="p">,</span> <span class="n">IQR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interquartile Range of sepal length:  1.3000000000000007
+</pre></div>
+</div>
+</div>
+</div>
+<section id="estadisticas-de-resumen-multivariadas">
+<h2>Estadísticas de Resumen Multivariadas<a class="headerlink" href="#estadisticas-de-resumen-multivariadas" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Para comparar cómo varía una variable con respecto a otra, utilizamos medidas multivariadas.</p></li>
+<li><p>La covarianza <span class="math notranslate nohighlight">\(cov(x,y)\)</span> mide el grado de variación lineal conjunta de un par de variables <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>:
+$<span class="math notranslate nohighlight">\(cov(x,y)=\frac{1}{n-1}\sum_{i=1}^{n}(x-\overline{x})(y-\overline{y})\)</span>$</p></li>
+<li><p>Donde <span class="math notranslate nohighlight">\(cov(x,x)=var(x)\)</span></p></li>
+</ul>
+<p>En Python, puedes calcular la covarianza utilizando la función <code class="docutils literal notranslate"><span class="pre">cov</span></code> de la biblioteca numpy o el método <code class="docutils literal notranslate"><span class="pre">DataFrame.cov</span></code> de pandas.</p>
+<p>Así es como puedes calcular la covarianza entre ‘longitud del sépalo (cm)’ y ‘anchura del sépalo (cm)’ en Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate covariance between &#39;sepal length (cm)&#39; and &#39;sepal width (cm)&#39;</span>
+<span class="n">covariance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">],</span> <span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance between sepal length and sepal width: &quot;</span><span class="p">,</span> <span class="n">covariance</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance between sepal length and sepal width:  -0.042434004474272924
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance between sepal length and sepal width: &quot;</span><span class="p">,</span> <span class="n">covariance</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance between sepal length and sepal width:  0.6856935123042504
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6856935123042505
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal length (cm)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">iris_df</span><span class="p">[</span><span class="s1">&#39;sepal width (cm)&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.042434004474272924
+</pre></div>
+</div>
+</div>
+</div>
+<p>La función np.cov devuelve un array 2D (una matriz) donde la entrada en la i-ésima fila y j-ésima columna es la covarianza entre los elementos i-ésimo y j-ésimo de los arrays pasados.</p>
+<p>Para una matriz de covarianza en Python, pandas es una mejor opción, porque devuelve un DataFrame que es más fácil de leer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate covariance matrix of the first four columns of iris_df</span>
+<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">iris_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Covariance matrix: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cov_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Covariance matrix: 
+                   sepal length (cm)  sepal width (cm)  petal length (cm)  \
+sepal length (cm)           0.685694         -0.042434           1.274315   
+sepal width (cm)           -0.042434          0.189979          -0.329656   
+petal length (cm)           1.274315         -0.329656           3.116278   
+petal width (cm)            0.516271         -0.121639           1.295609   
+
+                   petal width (cm)  
+sepal length (cm)          0.516271  
+sepal width (cm)          -0.121639  
+petal length (cm)          1.295609  
+petal width (cm)           0.581006  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Calcula e imprime la matriz de covarianza de las cuatro primeras columnas del DataFrame iris. El método cov de pandas DataFrame calcula la covarianza por pares de las columnas, <strong>excluyendo los valores NA/nulos</strong>. La matriz de covarianza resultante es un DataFrame donde la celda en la i-ésima fila y j-ésima columna es la covarianza entre la i-ésima y j-ésima columnas del DataFrame original.</p>
+<ul class="simple">
+<li><p>Si dos variables son independientes entre sí, su covarianza es cero.</p></li>
+<li><p>Una medida de relación que no depende de la escala de cada variable es la <strong>correlación lineal</strong>.</p></li>
+<li><p>La correlación lineal o coeficiente de correlación de <strong>Pearson</strong> <span class="math notranslate nohighlight">\(r(x,y)\)</span> se define como: $<span class="math notranslate nohighlight">\(r(x,y)=\frac{cov(x,y)}{sd(x)sd(y)}\)</span>$</p></li>
+<li><p>La correlación lineal varía entre <span class="math notranslate nohighlight">\(-1\)</span> y <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p>Un valor cercano a 1 indica que a medida que una variable crece, la otra también crece en proporción lineal.</p></li>
+<li><p>Un valor cercano a -1 indica una relación inversa (una está creciendo y la otra está disminuyendo).</p></li>
+<li><p>Si la correlación está cerca de cero, tenemos independencia lineal.</p></li>
+<li><p>Note que una correlación de cero no implica que no pueda haber una relación no lineal entre las variables.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Generar datos</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Correlación positiva</span>
+<span class="n">y_positiva</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Añadimos ruido para que no sea una línea perfecta</span>
+
+<span class="c1"># Correlación negativa</span>
+<span class="n">y_negativa</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Sin correlación</span>
+<span class="n">y_sin_correlacion</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Crear gráficos</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_positiva</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlación Positiva&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_negativa</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlación Negativa&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_sin_correlacion</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sin Correlación&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/afb73297e6d87f38c997a7be9447c2ec5cc45e1e29f31b79cda793dc208d86b4.png" src="../_images/afb73297e6d87f38c997a7be9447c2ec5cc45e1e29f31b79cda793dc208d86b4.png" />
+</div>
+</div>
+<p>En Python, puedes calcular la correlación utilizando el método corr de pandas.</p>
+<p>A continuación se muestra cómo se puede calcular la matriz de correlaciones para las cuatro primeras columnas del conjunto de datos del iris:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate correlation matrix of the first four columns of iris_df</span>
+<span class="n">corr_matrix</span> <span class="o">=</span> <span class="n">iris_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correlation matrix: &quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corr_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation matrix: 
+                   sepal length (cm)  sepal width (cm)  petal length (cm)  \
+sepal length (cm)           1.000000         -0.117570           0.871754   
+sepal width (cm)           -0.117570          1.000000          -0.428440   
+petal length (cm)           0.871754         -0.428440           1.000000   
+petal width (cm)            0.817941         -0.366126           0.962865   
+
+                   petal width (cm)  
+sepal length (cm)          0.817941  
+sepal width (cm)          -0.366126  
+petal length (cm)          0.962865  
+petal width (cm)           1.000000  
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esta opción calcula e imprime la matriz de correlación de las cuatro primeras columnas del DataFrame iris. El método <code class="docutils literal notranslate"><span class="pre">corr</span></code> de pandas DataFrame calcula la correlación por pares de las columnas, excluyendo los valores NA/nulos. Por defecto, utiliza el coeficiente de correlación de Pearson.</p>
+<p>La matriz de correlación es una matriz cuadrada que contiene los coeficientes de correlación para diferentes variables. La celda de la i-ésima fila y la j-ésima columna representa la correlación entre la i-ésima y la j-ésima variable del conjunto de datos. Los elementos diagonales de la matriz son siempre 1, ya que una variable está perfectamente correlacionada consigo misma.</p>
+</section>
+</section>
+<section id="tablas-de-contingencia">
+<h1>Tablas de Contingencia<a class="headerlink" href="#tablas-de-contingencia" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Para analizar la relación entre variables categóricas, utilizamos las <strong>tablas de contingencia</strong>.</p></li>
+<li><p>La tabla se llena con las frecuencias marginales de todos los pares de valores entre dos variables categóricas.</p></li>
+</ul>
+<p>Veamos un ejemplo en python</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Sample data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Gender&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Preference&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Create a contingency table</span>
+<span class="n">contingency_table_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Preference&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">contingency_table_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preference  A  B
+Gender          
+Female      1  2
+Male        2  2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample data with 3 categorical variables</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Gender&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Male&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Preference&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Region&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;North&#39;</span><span class="p">,</span> <span class="s1">&#39;South&#39;</span><span class="p">,</span> <span class="s1">&#39;East&#39;</span><span class="p">,</span> <span class="s1">&#39;North&#39;</span><span class="p">,</span> <span class="s1">&#39;West&#39;</span><span class="p">,</span> <span class="s1">&#39;South&#39;</span><span class="p">,</span> <span class="s1">&#39;East&#39;</span><span class="p">,</span> <span class="s1">&#39;West&#39;</span><span class="p">,</span> <span class="s1">&#39;North&#39;</span><span class="p">,</span> <span class="s1">&#39;South&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Create a multi-level contingency table</span>
+<span class="n">contingency_table_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Gender&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">]],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Preference&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">contingency_table_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Preference     A  B
+Gender Region      
+Female East    0  1
+       North   1  0
+       South   0  1
+       West    1  0
+Male   East    1  0
+       North   1  1
+       South   1  1
+       West    0  1
+</pre></div>
+</div>
+</div>
+</div>
+<section id="coeficiente-de-cramer-v">
+<h2>Coeficiente de Cramér V<a class="headerlink" href="#coeficiente-de-cramer-v" title="Permalink to this heading">#</a></h2>
+<p>El coeficiente de Cramér V es una medida de asociación entre dos variables categóricas. Proporciona un número entre 0 y 1 que indica la fuerza de la relación, donde 0 indica ninguna relación y 1 indica una relación perfecta. Es una extensión de la prueba chi-cuadrado y se basa en el valor chi-cuadrado obtenido de la prueba.</p>
+<p>El coeficiente de Cramér V se define como:</p>
+<div class="math notranslate nohighlight">
+\[ V = \sqrt{\frac{\chi^2}{n \times \text{min}(k-1, r-1)} } \]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \chi^2 \)</span> es el valor chi-cuadrado de la prueba.</p></li>
+<li><p><span class="math notranslate nohighlight">\( n \)</span> es el número total de observaciones.</p></li>
+<li><p><span class="math notranslate nohighlight">\( k \)</span> es el número de categorías en la variable 1.</p></li>
+<li><p><span class="math notranslate nohighlight">\( r \)</span> es el número de categorías en la variable 2.</p></li>
+</ul>
+</section>
+<section id="interpretacion">
+<h2>Interpretación:<a class="headerlink" href="#interpretacion" title="Permalink to this heading">#</a></h2>
+<p>El valor de <span class="math notranslate nohighlight">\(V\)</span> indica la fuerza de la asociación entre las dos variables categóricas:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( V = 0 \)</span>: No hay relación.</p></li>
+<li><p><span class="math notranslate nohighlight">\( V = 1 \)</span>: Relación perfecta.</p></li>
+</ul>
+<p>Los valores intermedios de <span class="math notranslate nohighlight">\(V\)</span> indican asociaciones de fuerza intermedia. Es importante notar que el coeficiente de Cramér V no indica la dirección de la relación, solo su fuerza.</p>
+<p>Aquí hay un ejemplo de cómo calcularlo usando Python después de realizar una prueba chi-cuadrado:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2_contingency</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Suponiendo tabla_contingencia del ejemplo anterior:</span>
+<span class="n">chi2</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">chi2_contingency</span><span class="p">(</span><span class="n">contingency_table_1</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">contingency_table_1</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">min_dim</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">contingency_table_1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>  <span class="c1"># mínimo valor entre número de filas y columnas, menos 1</span>
+
+<span class="n">cramer_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">chi2</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">min_dim</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cramer&#39;s V: </span><span class="si">{</span><span class="n">cramer_v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cramer&#39;s V: 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Este coeficiente puede ser particularmente útil cuando se quiere cuantificar la fuerza de la relación entre dos variables categóricas, especialmente cuando hay más de dos categorías en al menos una de las variables.</p>
+</section>
+<section id="asimetria-y-curtosis">
+<h2>Asimetría y Curtosis<a class="headerlink" href="#asimetria-y-curtosis" title="Permalink to this heading">#</a></h2>
+<p>Existen otras dos estadísticas resumidas que se centran en propiedades más complejas de la distribución de los datos llamadas asimetría y curtosis.</p>
+<ul class="simple">
+<li><p>La asimetría es una medida de la <strong>asimetría</strong> de la distribución de probabilidad.
+$<span class="math notranslate nohighlight">\(\text{asimetría}(x) = \frac{\sum_{i=1}^{n}(x_i-\overline{x})^3}{(n-1)sd(x)^3}\)</span>$</p></li>
+<li><p>Indica cuánto se desvía nuestra distribución subyacente de la distribución normal, ya que esta última tiene una asimetría de 0.</p></li>
+<li><p>Generalmente, tenemos tres tipos de asimetría:</p>
+<ul>
+<li><p>Asimetría positiva: la cola de la distribución se extiende hacia la derecha (la media es mayor que la mediana).</p></li>
+<li><p>Asimetría negativa: la cola de la distribución se extiende hacia la izquierda (la media es menor que la mediana).</p></li>
+<li><p>Simétrica: la cola de la distribución se extiende hacia ambos lados (la media es igual a la mediana).</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Fuente: Wikipedia" src="../_images/skewness.png" /></p>
+</section>
+<section id="curtosis">
+<h2>Curtosis<a class="headerlink" href="#curtosis" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>La curtosis describe la “cola” de una distribución.</p>
+<div class="math notranslate nohighlight">
+\[\text{curtosis}(x) = \frac{\sum_{i=1}^{n}(x_i-\overline{x})^4}{(n-1)sd(x)^4}\]</div>
+</li>
+<li><p>Veamos los tres tipos principales de curtosis.</p></li>
+</ul>
+<p><img alt="Fuente: tutorialspoints" src="../_images/kurtosis.jpg" /></p>
+<ul class="simple">
+<li><p>En Python, podemos calcular la curtosis con La función kurt() de pandas. Sin embargo, es importante mencionar que pandas utiliza la definición “exceso de curtosis”, que es la curtosis menos 3.</p></li>
+</ul>
+<p>Tomando, pues, la distribución normal como referencia, una distribución puede ser:</p>
+<ul class="simple">
+<li><p>Leptocúrtica, cuando g2&gt;0: distribución con colas más gruesas que la normal.</p></li>
+<li><p>Platicúrtica, cuando g2&lt;0: distribución con colas menos gruesas que la normal.</p></li>
+<li><p>Mesocúrtica, cuando g2=0: cuando tiene una distribución normal (o su misma curtosis).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Establecer una semilla para la reproducibilidad</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Generar las distribuciones</span>
+<span class="n">normal_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">t_student_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">uniform_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Convertir los datos a DataFrames de pandas</span>
+<span class="n">df_normal</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">normal_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Normal&#39;</span><span class="p">])</span>
+<span class="n">df_t_student</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">t_student_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;T-Student&#39;</span><span class="p">])</span>
+<span class="n">df_uniform</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">uniform_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Uniform&#39;</span><span class="p">])</span>
+
+<span class="c1"># Calcular curtosis</span>
+<span class="n">curtosis_normal</span> <span class="o">=</span> <span class="n">df_normal</span><span class="p">[</span><span class="s1">&#39;Normal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kurt</span><span class="p">()</span>
+<span class="n">curtosis_t_student</span> <span class="o">=</span> <span class="n">df_t_student</span><span class="p">[</span><span class="s1">&#39;T-Student&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kurt</span><span class="p">()</span>
+<span class="n">curtosis_uniform</span> <span class="o">=</span> <span class="n">df_uniform</span><span class="p">[</span><span class="s1">&#39;Uniform&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">kurt</span><span class="p">()</span>
+
+<span class="c1"># Mostrar las distribuciones y sus curtosis</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">df_normal</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución Normal - Curtosis: </span><span class="si">{</span><span class="n">curtosis_normal</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">df_t_student</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución T de Student - Curtosis: </span><span class="si">{</span><span class="n">curtosis_t_student</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">df_uniform</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distribución Uniforme - Curtosis: </span><span class="si">{</span><span class="n">curtosis_uniform</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a5d5d50f7fe652d92ec4879f3ed5f403401f2c7936300c6fa6640d109b5c1f6e.png" src="../_images/a5d5d50f7fe652d92ec4879f3ed5f403401f2c7936300c6fa6640d109b5c1f6e.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-1-Introduction_pensamiento_stat.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 1-1: Introducción al Pensamiento estadístico</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-3-Visualizations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lectura 1-3: Visualización de datos con Python</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 1-2:  Estadística Descriptiva</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-exploratorio-de-datos">Análisis Exploratorio de Datos</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#el-conjunto-de-datos-iris">El conjunto de datos Iris</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticos-de-resumen">Estadísticos de resumen</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frecuencia-y-moda">Frecuencia y moda</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moda">Moda</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#medidas-de-tendencia-central">Medidas de Tendencia Central</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#media">Media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mediana">Mediana</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#medidas-de-dispersion">Medidas de Dispersión</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#percentiles-o-cuantiles">Percentiles o Cuantiles</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejercicio">Ejercicio</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Medidas de dispersión</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estadisticas-de-resumen-multivariadas">Estadísticas de Resumen Multivariadas</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tablas-de-contingencia">Tablas de Contingencia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficiente-de-cramer-v">Coeficiente de Cramér V</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion">Interpretación:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asimetria-y-curtosis">Asimetría y Curtosis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curtosis">Curtosis</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

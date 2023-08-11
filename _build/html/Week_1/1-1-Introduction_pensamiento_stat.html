@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1-1: Introducción al Pensamiento estadístico &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_1/1-1-Introduction_pensamiento_stat';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 1-2: Estadística Descriptiva" href="1-2-Estad%C3%ADstica_descriptiva.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="1-0-Schedule_week_1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_1/1-1-Introduction_pensamiento_stat.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_1/1-1-Introduction_pensamiento_stat.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_1/1-1-Introduction_pensamiento_stat.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1-1: Introducción al Pensamiento estadístico</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pensamiento-estadistico-e-intuicion">Pensamiento Estadístico e Intuición</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Pensamiento Estadístico e Intuición</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-puede-hacer-la-estadistica-por-nosotros">¿Qué puede hacer la estadística por nosotros?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#las-grandes-ideas-de-las-estadisticas">Las grandes ideas de las estadísticas</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendiendo-de-los-datos">Aprendiendo de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion">Agregación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incertidumbre">Incertidumbre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestreo-de-una-poblacion">Muestreo de una población</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causalidad-y-estadistica">Causalidad y estadística</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Causalidad y estadística</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-1-introduccion-al-pensamiento-estadistico">
+<h1>Lectura 1-1: Introducción al Pensamiento estadístico<a class="headerlink" href="#lectura-1-1-introduccion-al-pensamiento-estadistico" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>El pensamiento estadístico es una forma sistemática de pensar sobre cómo describimos el <strong>mundo</strong> y usamos los <strong>datos</strong> para tomar decisiones y hacer predicciones.</p></li>
+<li><p>Esto se hace teniendo en cuenta la <strong>incertidumbre</strong> inherente que existe en el mundo real.</p></li>
+<li><p>Los fundamentos del pensamiento estadístico provienen principalmente de las matemáticas y la estadística, pero también de la informática, la psicología y otros campos de estudio.</p></li>
+<li><p>La <strong>estadística</strong>, en particular, es la disciplina que se ocupa de la recopilación, organización, análisis, interpretación y presentación de datos.</p></li>
+</ul>
+<p><img alt=" " src="../_images/stats.png" /></p>
+</section>
+<section id="pensamiento-estadistico-e-intuicion">
+<h1>Pensamiento Estadístico e Intuición<a class="headerlink" href="#pensamiento-estadistico-e-intuicion" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>La <strong>intuición</strong> humana a menudo intenta responder a las mismas preguntas que podemos responder utilizando el pensamiento estadístico, pero a menudo se equivoca en la respuesta.</p></li>
+<li><p>Por ejemplo, en años recientes, la mayoría de los estadounidenses han informado que creen que el crimen violento fue peor en comparación con el año anterior (Pew Research Center).</p></li>
+<li><p>Sin embargo, un análisis estadístico de los datos reales del crimen muestra que en realidad el crimen violento ha disminuido de manera constante desde la década de 1990.</p></li>
+<li><p>La intuición nos falla porque confiamos en las <strong>mejores suposiciones</strong> (a las que los psicólogos se refieren como heurísticas) que a menudo pueden equivocarse.</p></li>
+</ul>
+<p><img alt="" src="../_images/crimen.png" /></p>
+<p><img alt="" src="Week_1/images/crimen.pgn" /></p>
+<p><img alt="" src="../_images/crimen2.png" /></p>
+</section>
+<section id="id1">
+<h1>Pensamiento Estadístico e Intuición<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="../_images/Odel_1.png" /></p>
+<p><img alt="" src="Week_1/images/Odel_2.pgn" /></p>
+</section>
+<section id="que-puede-hacer-la-estadistica-por-nosotros">
+<h1>¿Qué puede hacer la estadística por nosotros?<a class="headerlink" href="#que-puede-hacer-la-estadistica-por-nosotros" title="Permalink to this heading">#</a></h1>
+<p>Hay tres cosas principales que podemos hacer con la estadística:</p>
+<ul class="simple">
+<li><p><strong>Describir</strong>: El mundo es complejo y a menudo necesitamos describirlo de una manera simplificada que podamos entender.</p></li>
+<li><p><strong>Decidir</strong>: A menudo necesitamos tomar decisiones basadas en datos, generalmente ante la incertidumbre.</p></li>
+<li><p><strong>Predecir</strong>: A menudo deseamos hacer predicciones sobre nuevas situaciones basadas en nuestro conocimiento de situaciones anteriores.</p></li>
+</ul>
+<p><strong>Ejemplo: Grasa Saturada</strong></p>
+<ul class="simple">
+<li><p>Supongamos que queremos responder a la siguiente pregunta:
+¿La grasa saturada en nuestra dieta es algo malo?</p></li>
+</ul>
+<p><img alt="" src="../_images/saturated-fat.jpg" /></p>
+<ul class="simple">
+<li><p>Podemos responder a esta pregunta utilizando el pensamiento estadístico.</p></li>
+<li><p>Pero primero, debemos considerar lo que sabemos sobre la grasa saturada.</p>
+<ul>
+<li><p>Enfoque de sentido común: Si comemos grasa, entonces se convertirá directamente en grasa en nuestros cuerpos, ¿verdad?</p></li>
+<li><p>Y todos hemos visto fotos de arterias obstruidas con grasa, por lo tanto, comer grasa va a obstruir nuestras arterias, ¿verdad?</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Enfoque de expertos: Las Guías Alimentarias de la Administración de Alimentos y Medicamentos de los Estados Unidos tienen como una de sus Recomendaciones Clave que “Un patrón de alimentación saludable limita las grasas saturadas”.</p></li>
+<li><p>Podrías esperar que estas guías se basen en buena ciencia, y en algunos casos lo están.</p></li>
+<li><p>Sin embargo, como Nina Teicholz describió en su libro “Big Fat Surprise”, esta recomendación en particular parece estar basada más en el dogma de los investigadores de nutrición que en evidencia real.</p>
+<p><img alt="" src="../_images/bigfat.jpg" /></p>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Enfoque estadístico: podríamos observar la investigación científica real.</p></li>
+<li><p>PURE: un estudio grande que ha examinado dietas y resultados de salud (incluyendo la muerte) en más de 135,000 personas de 18 países diferentes.</p></li>
+<li><p>Uno de los análisis de este conjunto de datos informó cómo la ingesta de varias clases de macronutrientes (incluyendo grasas saturadas y carbohidratos) se relacionaba con la probabilidad de <strong>morir</strong> durante el tiempo que las personas fueron seguidas.</p></li>
+<li><p>Las personas fueron seguidas durante una mediana de 7.4 años, lo que significa que la mitad de las personas en el estudio fueron seguidas por menos y la mitad fueron seguidas por más de 7.4 años.</p></li>
+</ul>
+<ul class="simple">
+<li><p>La siguiente figura muestra la relación entre la ingesta de grasas saturadas y carbohidratos y el riesgo de morir por cualquier causa.</p></li>
+</ul>
+<p><img alt="" src="../_images/PureDeathSatFat-1.png" /></p>
+<ul class="simple">
+<li><p>Esta gráfica se basa en diez números.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Para obtener estos números, los investigadores dividieron al grupo de 135,335 participantes del estudio (al que llamamos la “muestra”) en 5 grupos (“quintiles”).</p></li>
+<li><p>El primer quintil contiene al 20% de las personas con la menor ingesta, y el quinto quintil contiene al 20% con la mayor ingesta.</p></li>
+<li><p>Luego, los investigadores calcularon con qué frecuencia las personas en cada uno de esos grupos morían durante el tiempo que estaban siendo seguidos.</p></li>
+<li><p>La figura expresa esto en términos del riesgo relativo de morir en comparación con el quintil más bajo.</p></li>
+<li><p>Si este número es mayor que uno, significa que las personas en el grupo tienen más probabilidades de morir que las personas en el quintil más bajo.</p></li>
+<li><p>Mientras que si es menor que uno, significa que las personas en el grupo tienen menos probabilidades de morir.</p></li>
+</ul>
+<p><img alt="" src="../_images/PureDeathSatFat-1.png" /></p>
+<ul class="simple">
+<li><p>La figura es bastante clara: las personas que consumieron más grasa saturada tenían menos probabilidades de morir durante el estudio.</p></li>
+<li><p>Lo opuesto se observa para los carbohidratos: cuanto más carbohidratos comía una persona, más probable era que muriera durante el estudio.</p></li>
+<li><p>Este ejemplo muestra cómo podemos usar las estadísticas para describir un conjunto de datos complejo en términos de un conjunto de números mucho más simple.</p></li>
+<li><p>Si tuviéramos que mirar los datos de cada uno de los participantes del estudio al mismo tiempo, estaríamos sobrecargados de datos.</p></li>
+<li><p>También sería difícil ver el patrón que surge cuando se describen de manera más simple.</p></li>
+</ul>
+<ul class="simple">
+<li><p>A pesar de las cifras en la figura, también sabemos que hay mucha <strong>incertidumbre</strong> en los datos.</p></li>
+<li><p>Hay algunas personas que murieron temprano a pesar de que llevaban una dieta baja en carbohidratos, y otras personas que comieron muchos carbohidratos pero vivieron hasta una edad avanzada.</p></li>
+<li><p>Dada esta variabilidad, queremos decidir si las relaciones que vemos en los datos son lo suficientemente grandes como para que no esperaríamos que ocurran <strong>aleatoriamente</strong>.</p></li>
+<li><p>Las estadísticas nos proporcionan las herramientas para tomar este tipo de decisiones.</p></li>
+<li><p>A menudo, las personas externas ven esto como el <strong>propósito principal</strong> de las estadísticas.</p></li>
+<li><p>Pero como veremos a lo largo del curso, esta necesidad de tomar decisiones <strong>blanco y negro</strong> basadas en evidencia difusa a menudo ha llevado a los investigadores por el camino equivocado.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Si nuestras conclusiones se limitaran a las personas específicas en el estudio en un momento particular, entonces el estudio no sería muy útil.</p></li>
+<li><p>Basándonos en los datos, también nos gustaría hacer <strong>predicciones</strong> sobre resultados futuros.</p></li>
+<li><p>Por ejemplo, una compañía de seguros de vida podría querer usar datos sobre la ingesta de grasa y carbohidratos de una persona en particular para predecir cuánto tiempo es probable que viva.</p></li>
+<li><p>Un aspecto importante de la predicción es que requiere que <strong>generalicemos</strong> a partir de los datos que ya tenemos a alguna otra situación, a menudo en el futuro.</p></li>
+<li><p>En general, los investigadores deben asumir que su muestra particular es <strong>representativa</strong> de una <strong>población</strong> más grande.</p></li>
+<li><p>Esto requiere que obtengan la muestra de una manera que proporcione una imagen <strong>imparcial</strong> de la población.</p></li>
+<li><p>Por ejemplo, si el estudio PURE solo hubiera reclutado participantes vegetarianos, probablemente no querríamos generalizar los resultados a los no vegetarianos.</p></li>
+</ul>
+</section>
+<section id="las-grandes-ideas-de-las-estadisticas">
+<h1>Las grandes ideas de las estadísticas<a class="headerlink" href="#las-grandes-ideas-de-las-estadisticas" title="Permalink to this heading">#</a></h1>
+<p>Existen una serie de ideas muy básicas que atraviesan casi todos los aspectos del pensamiento estadístico.</p>
+<ol class="arabic simple">
+<li><p>Aprendiendo de los datos</p></li>
+<li><p>Agregación</p></li>
+<li><p>Incertidumbre</p></li>
+<li><p>Muestreo de una población</p></li>
+<li><p>Causalidad y estadísticas</p></li>
+</ol>
+<p>A continuación, examinamos cada uno de ellos con más detalle.</p>
+<section id="aprendiendo-de-los-datos">
+<h2>Aprendiendo de los datos<a class="headerlink" href="#aprendiendo-de-los-datos" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Una forma de pensar en las estadísticas es como un conjunto de herramientas que nos permiten aprender de los datos.</p></li>
+<li><p>En cualquier situación, comenzamos con un conjunto de ideas o hipótesis sobre lo que podría ser el caso.</p></li>
+<li><p>En el estudio PURE, los investigadores pueden haber comenzado con la expectativa de que comer más grasa llevaría a tasas de mortalidad más altas, dado el dogma negativo prevaleciente sobre las grasas saturadas.</p></li>
+<li><p>Más adelante en el curso, introduciremos la idea del conocimiento previo, que se supone refleja el conocimiento que llevamos a una situación.</p></li>
+<li><p>Las estadísticas nos proporcionan una forma de describir cómo los nuevos datos pueden utilizarse mejor para actualizar nuestras creencias.</p></li>
+</ul>
+</section>
+<section id="agregacion">
+<h2>Agregación<a class="headerlink" href="#agregacion" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Otra forma de pensar en las estadísticas es como “la ciencia de desechar datos”.</p></li>
+<li><p>En el ejemplo del estudio PURE anterior, tomamos más de 100,000 números y los condensamos en diez.</p></li>
+<li><p>Es este tipo de agregación uno de los conceptos más importantes en estadística.</p></li>
+<li><p>Las estadísticas nos proporcionan formas de caracterizar la estructura de los agregados de datos, y con fundamentos teóricos que explican por qué esto generalmente funciona bien.</p></li>
+<li><p>Sin embargo, también es importante tener en cuenta que la agregación puede ir demasiado lejos.</p></li>
+<li><p>A veces, un resumen puede proporcionar una imagen engañosa de los datos.</p></li>
+</ul>
+</section>
+<section id="incertidumbre">
+<h2>Incertidumbre<a class="headerlink" href="#incertidumbre" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El mundo es un lugar incierto.</p></li>
+<li><p>Ahora sabemos que fumar cigarrillos causa cáncer de pulmón, pero esta causalidad es probabilística.</p></li>
+<li><p>Un hombre de 68 años que fumó dos paquetes al día durante los últimos 50 años y continúa fumando tiene un 15% de riesgo de contraer cáncer de pulmón.</p></li>
+<li><p>Esto es mucho más alto que la posibilidad de cáncer de pulmón en un no fumador.</p></li>
+<li><p>Sin embargo, también significa que habrá muchas personas que fumen toda su vida y nunca contraigan cáncer de pulmón.</p></li>
+<li><p>Las estadísticas nos proporcionan las herramientas para caracterizar la incertidumbre, tomar decisiones bajo incertidumbre y hacer predicciones cuya incertidumbre podemos cuantificar.</p></li>
+<li><p>A menudo se ve a los periodistas escribir que los investigadores científicos han “probado” alguna hipótesis.</p></li>
+<li><p>Pero el análisis estadístico nunca puede “probar” una hipótesis, en el sentido de demostrar que debe ser cierta.</p></li>
+<li><p>Las estadísticas pueden proporcionarnos evidencia, pero siempre es tentativa y está sujeta a la incertidumbre que siempre está presente en el mundo real.</p></li>
+</ul>
+</section>
+<section id="muestreo-de-una-poblacion">
+<h2>Muestreo de una población<a class="headerlink" href="#muestreo-de-una-poblacion" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El concepto de agregación implica que podemos obtener ideas útiles al colapsar los datos.</p></li>
+<li><p>¿Pero cuántos datos necesitamos?</p></li>
+<li><p>La idea de muestreo dice que podemos resumir una población entera basándonos solo en una pequeña cantidad de muestras de la población.</p></li>
+<li><p>Siempre y cuando esas muestras se obtengan de la manera correcta.</p></li>
+</ul>
+<p><img alt="" src="../_images/sampling.png" /></p>
+<ul class="simple">
+<li><p>Por ejemplo, el estudio PURE inscribió una muestra de alrededor de 135,000 personas.</p></li>
+<li><p>Pero su objetivo era proporcionar ideas sobre los miles de millones de humanos que componen la población de la cual se tomaron esas personas.</p></li>
+<li><p>La forma en que se obtiene la muestra del estudio es crítica, ya que determina cuán ampliamente podemos generalizar los resultados.</p></li>
+<li><p>Otro conocimiento fundamental sobre el muestreo es que, aunque las muestras más grandes son siempre mejores (en términos de su capacidad para representar con precisión a toda la población), hay rendimientos decrecientes a medida que la muestra se hace más grande.</p></li>
+<li><p>De hecho, la tasa a la que disminuye el beneficio de muestras más grandes sigue una regla matemática simple, creciendo como la raíz cuadrada del tamaño de la muestra.</p></li>
+<li><p>De manera que para duplicar la calidad de nuestros datos necesitamos cuadruplicar el tamaño de nuestra muestra.</p></li>
+</ul>
+</section>
+<section id="causalidad-y-estadistica">
+<h2>Causalidad y estadística<a class="headerlink" href="#causalidad-y-estadistica" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El estudio PURE pareció proporcionar pruebas bastante fuertes de una   relación positiva entre comer grasa saturada y vivir más tiempo.</p></li>
+<li><p>Sin embargo, esto no nos dice lo que realmente queremos saber: si comemos     más grasa saturada, ¿eso nos hará vivir más tiempo?</p></li>
+<li><p>Esto se debe a que no sabemos si existe una relación causal directa    entre comer grasa saturada y vivir más tiempo.</p></li>
+<li><p>Los datos son consistentes con tal relación, pero son  igualmente consistentes con algún otro factor que cause tanto una mayor  ingesta de grasa saturada como una vida más larga.</p></li>
+</ul>
+<p><img alt="" src="../_images/causality.png" /></p>
+</section>
+<section id="id2">
+<h2>Causalidad y estadística<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Por ejemplo, es probable que las personas que son más ricas coman más     grasa saturada y las personas más ricas tienden a vivir más tiempo.</p></li>
+<li><p>Su vida más larga no se debe necesariamente a la ingesta de grasa.</p></li>
+<li><p>En lugar de eso, podría deberse a una mejor atención médica, reducción del estrés   psicológico, mejor calidad de los alimentos, u otros factores.</p></li>
+<li><p>Los investigadores del estudio PURE intentaron tener en cuenta estos factores.</p></li>
+<li><p>Pero no podemos estar seguros de que sus esfuerzos hayan eliminado completamente los     efectos de otras variables.</p></li>
+<li><p>El hecho de que otros factores puedan explicar la relación entre     la ingesta de grasa saturada y la muerte es un ejemplo de la afirmación de que     “la correlación no implica causalidad”.</p></li>
+</ul>
+<p><img alt="" src="../_images/causality.png" /></p>
+<ul class="simple">
+<li><p>Aunque la investigación observacional (como el estudio PURE) no puede   demostrar de manera concluyente relaciones causales, generalmente pensamos que  la causalidad puede demostrarse utilizando estudios que controlan y manipulan experimentalmente  un factor específico.</p></li>
+<li><p>En medicina, tal estudio se conoce como un ensayo controlado aleatorizado (ECA).</p></li>
+<li><p>Supongamos que queremos hacer un ECA para examinar si aumentar la ingesta de grasa saturada     aumenta la esperanza de vida.</p></li>
+<li><p>Para hacer esto, tomaríamos una muestra de personas y luego las asignaríamos     a un grupo de tratamiento o a un grupo de control.</p></li>
+<li><p>Grupo de tratamiento: personas a las que se les indica que aumenten su ingesta de grasa saturada.</p></li>
+<li><p>Grupo de control: personas a las que se les indica que sigan comiendo igual que antes.</p></li>
+<li><p>Es esencial que asignemos a las personas a estos grupos     de forma aleatoria.</p></li>
+<li><p>De lo contrario, las personas que eligen el tratamiento podrían ser diferentes de alguna manera    que las personas que eligen el grupo de control.</p></li>
+<li><p>Por ejemplo, podrían ser más propensas a participar también en otros comportamientos saludables.</p></li>
+<li><p>Luego seguiríamos a los participantes con el tiempo y veríamos cuántas     personas en cada grupo murieron.</p></li>
+<li><p>Debido a que aleatorizamos a los participantes en los grupos de tratamiento o control,     podemos estar razonablemente seguros de que no hay otras     diferencias entre los grupos que podrían confundir el efecto del tratamiento.</p></li>
+<li><p>Sin embargo, aún no podemos estar seguros porque a veces la aleatorización     produce grupos de tratamiento versus control que varían de alguna manera importante.</p></li>
+<li><p>Los investigadores a menudo intentan abordar estos factores confusos mediante análisis estadísticos,     pero eliminar la influencia de un factor confuso de los datos puede ser muy difícil.</p></li>
+<li><p>Un número de ECA han examinado la cuestión de si cambiar la ingesta de grasa saturada     resulta en una mejor salud y una vida más larga.</p></li>
+<li><p>Estos ensayos se han centrado en reducir la grasa saturada debido a la fuerte creencia     entre los investigadores de nutrición de que la grasa saturada es mortal.</p></li>
+<li><p>¡La mayoría de estos investigadores probablemente habrían argumentado que no era ético  hacer que las personas comieran más grasa saturada!</p></li>
+<li><p>Sin embargo, los ECA han mostrado un patrón muy consistente: en general, no hay un efecto apreciable  en las tasas de mortalidad al reducir la ingesta de grasa saturada.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-0-Schedule_week_1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="1-2-Estad%C3%ADstica_descriptiva.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lectura 1-2:  Estadística Descriptiva</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pensamiento-estadistico-e-intuicion">Pensamiento Estadístico e Intuición</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Pensamiento Estadístico e Intuición</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-puede-hacer-la-estadistica-por-nosotros">¿Qué puede hacer la estadística por nosotros?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#las-grandes-ideas-de-las-estadisticas">Las grandes ideas de las estadísticas</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendiendo-de-los-datos">Aprendiendo de los datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agregacion">Agregación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incertidumbre">Incertidumbre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestreo-de-una-poblacion">Muestreo de una población</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#causalidad-y-estadistica">Causalidad y estadística</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Causalidad y estadística</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1139 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 1-3: Visualización de datos con Python &#8212; Flujo en Redes 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_1/1-3-Visualizations';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lectura 1-2: Estadística Descriptiva" href="1-2-Estad%C3%ADstica_descriptiva.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">Flujo en Redes 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    <no title>
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Lectures</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_1/1-3-Visualizations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_1/1-3-Visualizations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_1/1-3-Visualizations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 1-3: Visualización de datos con Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 1-3: Visualización de datos con Python</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">Matplotlib</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-dispersion-basico">Gráfico de dispersión - básico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-costumizando-el-grafico">Scatterplot - costumizando el gráfico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">Gráfico de barras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma">Histograma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-lineas-simple">Gráfico de líneas simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframes-soporta-algunas-visualizaciones-directamente">¡Pandas DataFrames soporta algunas visualizaciones directamente!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-dispersion">Diagrama de dispersión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Histograma</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-visualizaciones-estadisticas-avanzadas">Seaborn - visualizaciones estadísticas avanzadas</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-separados-por-clases-grupos-de-datos">Boxplot separados por clases/grupos de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots-combinacion-de-boxplot-e-histograma-densidad-kernel">Violin plots (combinación de boxplot e histograma/densidad kernel)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regplot"><code class="docutils literal notranslate"><span class="pre">regplot</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lmplot"><code class="docutils literal notranslate"><span class="pre">lmplot</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-correlacion-y-mapa-de-calor">Matriz de correlación y mapa de calor</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-1-3-visualizacion-de-datos-con-python">
+<h1>Lectura 1-3: Visualización de datos con Python<a class="headerlink" href="#lectura-1-3-visualizacion-de-datos-con-python" title="Permalink to this heading">#</a></h1>
+<p>Este cuaderno enseña los fundamentos de dos de las librerías de visualización más populares en el universo Python - <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> y <code class="docutils literal notranslate"><span class="pre">Seaborn</span></code>. Vamos a mostrar, cómo el uso de código mínimo, puede crear varios tipos de parcelas -</p>
+<ul class="simple">
+<li><p>scatterplot,</p></li>
+<li><p>boxplot,</p></li>
+<li><p>histograma,</p></li>
+<li><p>gráfico de violín,</p></li>
+<li><p>gráficos de barras,</p></li>
+<li><p>mapa de calor</p></li>
+<li><p>Gráfico lineal de series temporales</p></li>
+</ul>
+</section>
+<section id="matplotlib">
+<h1>Matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this heading">#</a></h1>
+<section id="grafico-de-dispersion-basico">
+<h2>Gráfico de dispersión - básico<a class="headerlink" href="#grafico-de-dispersion-basico" title="Permalink to this heading">#</a></h2>
+<p>Empezamos definiendo algunos datos. Supongamos que recopilamos información sobre la edad (en años), la altura (en cm) y el peso (en kilogramos) de unos cuantos pacientes que acuden a una clínica.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">people</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ann&#39;</span><span class="p">,</span><span class="s1">&#39;Brandon&#39;</span><span class="p">,</span><span class="s1">&#39;Chen&#39;</span><span class="p">,</span><span class="s1">&#39;David&#39;</span><span class="p">,</span><span class="s1">&#39;Emily&#39;</span><span class="p">,</span><span class="s1">&#39;Farook&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;Gagan&#39;</span><span class="p">,</span><span class="s1">&#39;Hamish&#39;</span><span class="p">,</span><span class="s1">&#39;Imran&#39;</span><span class="p">,</span><span class="s1">&#39;Julio&#39;</span><span class="p">,</span><span class="s1">&#39;Katherine&#39;</span><span class="p">,</span><span class="s1">&#39;Lily&#39;</span><span class="p">]</span>
+<span class="n">age</span> <span class="o">=</span> <span class="p">[</span><span class="mi">21</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">28</span><span class="p">,</span><span class="mi">52</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mi">15</span><span class="p">]</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">72</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">48</span><span class="p">]</span>
+<span class="n">height</span> <span class="o">=</span> <span class="p">[</span><span class="mi">160</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">170</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">173</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">175</span><span class="p">,</span><span class="mi">159</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">171</span><span class="p">,</span><span class="mi">155</span><span class="p">,</span><span class="mi">158</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos preguntarnos, ¿existe alguna relación entre estas características? Podemos trazar la edad frente a la altura o la altura frente al peso con una cantidad mínima de código.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0a393c8a64dd455652d9b83e9663faf92fa9a642dd1848390c44ad969f4ffddf.png" src="../_images/0a393c8a64dd455652d9b83e9663faf92fa9a642dd1848390c44ad969f4ffddf.png" />
+</div>
+</div>
+</section>
+<section id="scatterplot-costumizando-el-grafico">
+<h2>Scatterplot - costumizando el gráfico<a class="headerlink" href="#scatterplot-costumizando-el-grafico" title="Permalink to this heading">#</a></h2>
+<p>El gráfico anterior está bien, pero parece básico. Podemos añadirle algunos detalles con un código sencillo.</p>
+<ul class="simple">
+<li><p>Tamaño de la figura</p></li>
+<li><p>Título principal (y tamaño de la fuente)</p></li>
+<li><p>Etiquetas X e Y (y tamaño de la fuente)</p></li>
+<li><p>Marcas X e Y (y tamaño de la fuente)</p></li>
+<li><p>Cuadrícula</p></li>
+<li><p>Texto de etiquetado</p></li>
+<li><p>Leyenda</p></li>
+<li><p>Líneas verticales (u horizontales)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set figure size</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Add a main title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Plot of Age vs. Height (in cms)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontstyle</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+
+<span class="c1"># X- and Y-label with fontsize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Age (years)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Height (cms)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Turn on grid</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span> <span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Set Y-axis limit</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="c1"># X- and Y-axis ticks customization with fontsize and placement</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Main plotting function with choice of color, marker size, and marker edge color</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">age</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">height</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adding bit of text to the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">105</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="s2">&quot;Height increaes up to around </span><span class="se">\n</span><span class="s2">20 years and then tapers off&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> 
+         <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">linespacing</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="mi">185</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="s2">&quot;Nobody has a height beyond 180 cm&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Adding a vertical line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">ymin</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span><span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Adding a horizontal line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span><span class="n">xmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmax</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span><span class="n">linestyles</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Adding a legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Height in cms&#39;</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="c1"># Final show method</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/810f9e1336dfb2335e0792b7c4a9cf877e14e084efe9479621a72c4bfd440d19.png" src="../_images/810f9e1336dfb2335e0792b7c4a9cf877e14e084efe9479621a72c4bfd440d19.png" />
+</div>
+</div>
+</section>
+<section id="grafico-de-barras">
+<h2>Gráfico de barras<a class="headerlink" href="#grafico-de-barras" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;People&#39;s weight in kgs&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontstyle</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+<span class="c1"># Main plot function &#39;bar&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">people</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;People&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Weight (in kgs)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bbb44855227b6318b4d410b416a46f84f81e9bc4437c857de27334c85894b0bc.png" src="../_images/bbb44855227b6318b4d410b416a46f84f81e9bc4437c857de27334c85894b0bc.png" />
+</div>
+</div>
+</section>
+<section id="histograma">
+<h2>Histograma<a class="headerlink" href="#histograma" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># Main plot function &#39;hist&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of patient weight&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Weight in kgs&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b41eb27c7484850900f48129a468fa2483f32a7258c1715de06fdef68f8c4a3c.png" src="../_images/b41eb27c7484850900f48129a468fa2483f32a7258c1715de06fdef68f8c4a3c.png" />
+</div>
+</div>
+</section>
+<section id="grafico-de-lineas-simple">
+<h2>Gráfico de líneas simple<a class="headerlink" href="#grafico-de-lineas-simple" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">days</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
+<span class="n">candidate_A</span> <span class="o">=</span> <span class="mi">50</span><span class="o">+</span><span class="n">days</span><span class="o">*</span><span class="mf">0.07</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">candidate_B</span> <span class="o">=</span> <span class="mi">50</span><span class="o">-</span><span class="n">days</span><span class="o">*</span><span class="mf">0.1</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Determine the minimum and maximum of stock prices</span>
+<span class="n">ymin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">candidate_A</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">candidate_B</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">ymax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">candidate_A</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="n">candidate_B</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set style</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;fivethirtyeight&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Time series plot of poll percentage over a month</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">fontstyle</span><span class="o">=</span><span class="s1">&#39;italic&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Days&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Poll percentage (%)&quot;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span> <span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">*</span><span class="mf">0.98</span><span class="p">,</span><span class="n">ymax</span><span class="o">*</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Main plotting function - plot (note markersize, lw (linewidth) arguments)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="n">candidate_A</span><span class="p">,</span><span class="s1">&#39;o-&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span><span class="n">candidate_B</span><span class="p">,</span><span class="s1">&#39;^-&#39;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Poll percentage of candidate A (%)&#39;</span><span class="p">,</span> <span class="s1">&#39;Poll percentage of candidate B (%)&#39;</span><span class="p">],</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ee191a4b7ac4954eb210b3f5f7d9dd2daf84e70a336f105e04fc17ad81f72347.png" src="../_images/ee191a4b7ac4954eb210b3f5f7d9dd2daf84e70a336f105e04fc17ad81f72347.png" />
+</div>
+</div>
+</section>
+<section id="boxplot">
+<h2>Boxplot<a class="headerlink" href="#boxplot" title="Permalink to this heading">#</a></h2>
+<p><img alt="boxplot" src="https://miro.medium.com/max/1838/1*2c21SkzJMf3frPXPAR_gZA.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
+<span class="c1"># Note how to convert default numerical x-axis ticks to the list of string by passing two lists </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">candidate_A</span><span class="p">,</span><span class="n">candidate_B</span><span class="p">],</span><span class="n">showmeans</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="s1">&#39;Candidate A&#39;</span><span class="p">,</span><span class="s1">&#39;Candidate B&#39;</span><span class="p">])</span>
+<span class="c1">#plt.yticks(fontsize=15)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/33626535b8a310923503189d1202141bbafa412586c8ad8b89c3ec1f8b2349f4.png" src="../_images/33626535b8a310923503189d1202141bbafa412586c8ad8b89c3ec1f8b2349f4.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="pandas-dataframes-soporta-algunas-visualizaciones-directamente">
+<h1>¡Pandas DataFrames soporta algunas visualizaciones directamente!<a class="headerlink" href="#pandas-dataframes-soporta-algunas-visualizaciones-directamente" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
+
+<span class="c1"># convert to pandas dataframe include the class</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>malic_acid</th>
+      <th>ash</th>
+      <th>alcalinity_of_ash</th>
+      <th>magnesium</th>
+      <th>total_phenols</th>
+      <th>flavanoids</th>
+      <th>nonflavanoid_phenols</th>
+      <th>proanthocyanins</th>
+      <th>color_intensity</th>
+      <th>hue</th>
+      <th>od280/od315_of_diluted_wines</th>
+      <th>proline</th>
+      <th>class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>14.23</td>
+      <td>1.71</td>
+      <td>2.43</td>
+      <td>15.6</td>
+      <td>127.0</td>
+      <td>2.80</td>
+      <td>3.06</td>
+      <td>0.28</td>
+      <td>2.29</td>
+      <td>5.64</td>
+      <td>1.04</td>
+      <td>3.92</td>
+      <td>1065.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13.20</td>
+      <td>1.78</td>
+      <td>2.14</td>
+      <td>11.2</td>
+      <td>100.0</td>
+      <td>2.65</td>
+      <td>2.76</td>
+      <td>0.26</td>
+      <td>1.28</td>
+      <td>4.38</td>
+      <td>1.05</td>
+      <td>3.40</td>
+      <td>1050.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13.16</td>
+      <td>2.36</td>
+      <td>2.67</td>
+      <td>18.6</td>
+      <td>101.0</td>
+      <td>2.80</td>
+      <td>3.24</td>
+      <td>0.30</td>
+      <td>2.81</td>
+      <td>5.68</td>
+      <td>1.03</td>
+      <td>3.17</td>
+      <td>1185.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>14.37</td>
+      <td>1.95</td>
+      <td>2.50</td>
+      <td>16.8</td>
+      <td>113.0</td>
+      <td>3.85</td>
+      <td>3.49</td>
+      <td>0.24</td>
+      <td>2.18</td>
+      <td>7.80</td>
+      <td>0.86</td>
+      <td>3.45</td>
+      <td>1480.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13.24</td>
+      <td>2.59</td>
+      <td>2.87</td>
+      <td>21.0</td>
+      <td>118.0</td>
+      <td>2.80</td>
+      <td>2.69</td>
+      <td>0.39</td>
+      <td>1.82</td>
+      <td>4.32</td>
+      <td>1.04</td>
+      <td>2.93</td>
+      <td>735.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Just to set the Matplotlib style to default</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParamsDefault</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="diagrama-de-dispersion">
+<h2>Diagrama de dispersión<a class="headerlink" href="#diagrama-de-dispersion" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="s1">&#39;color_intensity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c1b30ead0f5f03996a5119dcf33510232f9b3e82f9bae7fe7389c76ed9fa77fc.png" src="../_images/c1b30ead0f5f03996a5119dcf33510232f9b3e82f9bae7fe7389c76ed9fa77fc.png" />
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Histograma<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Alcohol percentage&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8bf9c78d95e5d235add7c0532f0610ff5e3a7baf755ba117f2f233cb93d753ee.png" src="../_images/8bf9c78d95e5d235add7c0532f0610ff5e3a7baf755ba117f2f233cb93d753ee.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="seaborn-visualizaciones-estadisticas-avanzadas">
+<h1>Seaborn - visualizaciones estadísticas avanzadas<a class="headerlink" href="#seaborn-visualizaciones-estadisticas-avanzadas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="boxplot-separados-por-clases-grupos-de-datos">
+<h2>Boxplot separados por clases/grupos de datos<a class="headerlink" href="#boxplot-separados-por-clases-grupos-de-datos" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e4fdb03e04f3c8c1d3e4533f21de72436eaa78e14da6d1ed5aeb94ff61e463fa.png" src="../_images/e4fdb03e04f3c8c1d3e4533f21de72436eaa78e14da6d1ed5aeb94ff61e463fa.png" />
+</div>
+</div>
+</section>
+<section id="violin-plots-combinacion-de-boxplot-e-histograma-densidad-kernel">
+<h2>Violin plots (combinación de boxplot e histograma/densidad kernel)<a class="headerlink" href="#violin-plots-combinacion-de-boxplot-e-histograma-densidad-kernel" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8b224ac99bb8d2bc2e71719e7072486e4be4d04f398df89072764ad17d3f12ed.png" src="../_images/8b224ac99bb8d2bc2e71719e7072486e4be4d04f398df89072764ad17d3f12ed.png" />
+</div>
+</div>
+</section>
+<section id="regplot">
+<h2><code class="docutils literal notranslate"><span class="pre">regplot</span></code><a class="headerlink" href="#regplot" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>calcula y traza el ajuste de regresión lineal junto con el intervalo de confianza</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;color_intensity&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e65a9c37dc298378cbae1a96cce38db8e556f96a2d8749b3e32ecd46ccd1a540.png" src="../_images/e65a9c37dc298378cbae1a96cce38db8e556f96a2d8749b3e32ecd46ccd1a540.png" />
+</div>
+</div>
+</section>
+<section id="lmplot">
+<h2><code class="docutils literal notranslate"><span class="pre">lmplot</span></code><a class="headerlink" href="#lmplot" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>combinación de <code class="docutils literal notranslate"><span class="pre">regplot</span></code> con grid para visualizar a través de varios grupos/clases</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;alcohol&#39;</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;color_intensity&#39;</span><span class="p">,</span><span class="n">hue</span><span class="o">=</span><span class="s1">&#39;class&#39;</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c463d089fe33314281a203aba6fa50aa7f418b39654c8e697f88901b1cf2f32d.png" src="../_images/c463d089fe33314281a203aba6fa50aa7f418b39654c8e697f88901b1cf2f32d.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="matriz-de-correlacion-y-mapa-de-calor">
+<h1>Matriz de correlación y mapa de calor<a class="headerlink" href="#matriz-de-correlacion-y-mapa-de-calor" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_mat</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_mat</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(14, 14)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">corr_mat</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">corr_mat</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1.    -0.328  0.438 -0.05   0.518 -0.209 -0.719 -0.847  0.489 -0.499
+   0.266 -0.617 -0.788 -0.634]
+ [-0.328  1.     0.094  0.212 -0.31   0.271  0.289  0.237 -0.156  0.137
+   0.546 -0.072  0.072  0.644]
+ [ 0.438  0.094  1.     0.164  0.289 -0.055 -0.335 -0.411  0.293 -0.221
+   0.249 -0.561 -0.369 -0.192]
+ [-0.05   0.212  0.164  1.     0.443  0.287  0.129  0.115  0.186  0.01
+   0.259 -0.075  0.004  0.224]
+ [ 0.518 -0.31   0.289  0.443  1.    -0.083 -0.321 -0.351  0.362 -0.197
+   0.019 -0.274 -0.277 -0.441]
+ [-0.209  0.271 -0.055  0.287 -0.083  1.     0.214  0.196 -0.256  0.236
+   0.2    0.055  0.066  0.393]
+ [-0.719  0.289 -0.335  0.129 -0.321  0.214  1.     0.865 -0.45   0.612
+  -0.055  0.434  0.7    0.498]
+ [-0.847  0.237 -0.411  0.115 -0.351  0.196  0.865  1.    -0.538  0.653
+  -0.172  0.543  0.787  0.494]
+ [ 0.489 -0.156  0.293  0.186  0.362 -0.256 -0.45  -0.538  1.    -0.366
+   0.139 -0.263 -0.503 -0.311]
+ [-0.499  0.137 -0.221  0.01  -0.197  0.236  0.612  0.653 -0.366  1.
+  -0.025  0.296  0.519  0.33 ]
+ [ 0.266  0.546  0.249  0.259  0.019  0.2   -0.055 -0.172  0.139 -0.025
+   1.    -0.522 -0.429  0.316]
+ [-0.617 -0.072 -0.561 -0.075 -0.274  0.055  0.434  0.543 -0.263  0.296
+  -0.522  1.     0.565  0.236]
+ [-0.788  0.072 -0.369  0.004 -0.277  0.066  0.7    0.787 -0.503  0.519
+  -0.429  0.565  1.     0.313]
+ [-0.634  0.644 -0.192  0.224 -0.441  0.393  0.498  0.494 -0.311  0.33
+   0.316  0.236  0.313  1.   ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_df</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;plasma&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/189f87cdbd5792c5f95abb0264c2971145318cd11368bc4dde528dd5a57e7663.png" src="../_images/189f87cdbd5792c5f95abb0264c2971145318cd11368bc4dde528dd5a57e7663.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1-2-Estad%C3%ADstica_descriptiva.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 1-2:  Estadística Descriptiva</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 1-3: Visualización de datos con Python</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">Matplotlib</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-dispersion-basico">Gráfico de dispersión - básico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-costumizando-el-grafico">Scatterplot - costumizando el gráfico</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras">Gráfico de barras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograma">Histograma</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-lineas-simple">Gráfico de líneas simple</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot">Boxplot</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframes-soporta-algunas-visualizaciones-directamente">¡Pandas DataFrames soporta algunas visualizaciones directamente!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagrama-de-dispersion">Diagrama de dispersión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Histograma</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-visualizaciones-estadisticas-avanzadas">Seaborn - visualizaciones estadísticas avanzadas</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boxplot-separados-por-clases-grupos-de-datos">Boxplot separados por clases/grupos de datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#violin-plots-combinacion-de-boxplot-e-histograma-densidad-kernel">Violin plots (combinación de boxplot e histograma/densidad kernel)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regplot"><code class="docutils literal notranslate"><span class="pre">regplot</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lmplot"><code class="docutils literal notranslate"><span class="pre">lmplot</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matriz-de-correlacion-y-mapa-de-calor">Matriz de correlación y mapa de calor</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
