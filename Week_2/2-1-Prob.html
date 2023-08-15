@@ -1,0 +1,1789 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 2-1: Probabilidad y estadística &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_2/2-1-Prob';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones" href="2-0-Schedule_week_2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html"><strong>Semana 1. Introducción al análisis estadístico</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="2-0-Schedule_week_2.html"><strong>Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_2/2-1-Prob.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_2/2-1-Prob.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_2/2-1-Prob.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 2-1: Probabilidad y estadística</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 2-1: Probabilidad y estadística</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidad-y-estadistica">Probabilidad y estadística</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-probabilidad">¿Qué es la probabilidad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-de-probabilidad">Conceptos de probabilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidad">Probabilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-las-probabilidades">Interpretación de las probabilidades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-de-la-resta">La regla de la resta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-combinatorios">Métodos combinatorios</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidades-condicionales">Probabilidades condicionales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidades-condicionales-ejemplo">Probabilidades condicionales: Ejemplo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-bayes-y-probabilidades-totales">Teorema de Bayes y probabilidades totales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-aleatoria">Variable aleatoria</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-de-variable-aleatoria-r-v">Definiciones de Variable Aleatoria (R.V)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-aleatorias-discretas">Variables aleatorias discretas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-aleatoria-continua">Variable aleatoria continua</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-de-variables-aleatorias">Definiciones de Variables Aleatorias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agunas-propiedades">Agunas propiedades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuantiles">Cuantiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-distribuciones">Algunas distribuciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-binomial">Distribución Binomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribucion-normal">La distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-de-la-distribucion-normal">Definición formal de la distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-utiles">Propiedades Útiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">La distribución normal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Ejemplo:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-distribucion-acumulativa-de-la-distribucion-normal">Función de distribución acumulativa de la distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-68-95-99-7-de-una-distribucion-normal">La regla 68-95-99.7 de una distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simetria-de-la-distribucion-normal">Simetría de la distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidades-conjuntas">Probabilidades conjuntas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-continuo">Caso Continuo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-aleatorias-independientes">Variables Aleatorias Independientes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-esperado">Valor esperado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza">Varianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades">Propiedades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-los-grandes-numeros">Ley de los Grandes Números</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-del-limite-central">Teorema del límite central</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-central-del-limite-2">Teorema central del límite (2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-importante-el-teorema-central-del-limite">¿Por qué es importante el Teorema Central del Límite?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-teorema-central-del-limite">Ejemplo: Teorema central del límite</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-2-1-probabilidad-y-estadistica">
+<h1>Lectura 2-1: Probabilidad y estadística<a class="headerlink" href="#lectura-2-1-probabilidad-y-estadistica" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>La probabilidad es el lenguaje de la <strong>incertidumbre</strong> que constituye también la base de la inferencia estadística .</p></li>
+<li><p>Constituye una parte importante de los cimientos de la estadística, ya que nos proporciona las herramientas matemáticas para describir <em><strong>sucesos inciertos</strong></em>.</p></li>
+<li><p>El estudio de la probabilidad surgió en parte debido al interés por comprender los juegos de azar, como las cartas o los dados.</p></li>
+<li><p>Estos juegos proporcionan ejemplos útiles de muchos conceptos estadísticos, porque cuando repetimos estos juegos la probabilidad de que se produzcan diferentes resultados sigue siendo (casi) la misma.</p></li>
+</ul>
+<p><img alt="gambling" src="../_images/gambling.png" /></p>
+</section>
+<section id="probabilidad-y-estadistica">
+<h1>Probabilidad y estadística<a class="headerlink" href="#probabilidad-y-estadistica" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>El problema estudiado en probabilidad es: dado un proceso generador de datos, ¿cuáles son las propiedades de los resultados?</p></li>
+<li><p>El problema estudiado en la inferencia estadística, la minería de datos y el aprendizaje automático es: dados los resultados, ¿qué podemos decir sobre el proceso que genera los datos observados?</p></li>
+</ul>
+<p><img alt="" src="../_images/probandstats.png" /></p>
+<section id="que-es-la-probabilidad">
+<h2>¿Qué es la probabilidad?<a class="headerlink" href="#que-es-la-probabilidad" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Pensamos en la probabilidad como un número que describe la posibilidad de que ocurra algún acontecimiento, que oscila entre cero (imposibilidad) y uno (certeza).</p></li>
+<li><p>Las probabilidades también pueden expresarse en porcentajes: cuando la previsión meteorológica predice un veinte por ciento de posibilidades de que llueva hoy.</p></li>
+<li><p>En cada caso, estos números expresan la probabilidad de que se produzca ese acontecimiento concreto, que va de absolutamente imposible a absolutamente seguro.</p></li>
+</ul>
+</section>
+<section id="conceptos-de-probabilidad">
+<h2>Conceptos de probabilidad<a class="headerlink" href="#conceptos-de-probabilidad" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Un <strong>experimento aleatorio</strong> consiste en medir un proceso cuyo resultado es incierto.</p></li>
+<li><p>Ejemplos: lanzar una moneda al aire, lanzar un dado de 6 caras o probar una nueva ruta al trabajo para ver si es más rápida que la antigua.</p></li>
+<li><p>El conjunto de todos los resultados posibles de un experimento aleatorio es el <strong>espacio muestral</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> (puede ser discreto o continuo).</p></li>
+</ul>
+<ul class="simple">
+<li><p>Para lanzar una moneda <span class="math notranslate nohighlight">\(\Omega = \{cara, cruz\)</span>}$,</p></li>
+<li><p>para el dado de 6 caras <span class="math notranslate nohighlight">\(\Omega=\{1,2,3,4,5,6\}\)</span>,</p></li>
+<li><p>y para la cantidad de tiempo que se tarda en llegar al trabajo <span class="math notranslate nohighlight">\(\Omega\)</span> son todos los números reales posibles mayores que cero.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Un <strong>evento</strong> <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span> corresponde a un subconjunto de esas salidas.</p></li>
+<li><p>Por ejemplo, <span class="math notranslate nohighlight">\(E = \{ 2,4,6 \}\)</span> es el suceso de observar un número par al lanzar un dado.</p></li>
+</ul>
+</section>
+<section id="probabilidad">
+<h2>Probabilidad<a class="headerlink" href="#probabilidad" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ahora podemos esbozar las características formales de una probabilidad, que fueron definidas por primera vez por el matemático ruso Andrei Kolmogorov.</p></li>
+</ul>
+<p><img alt="" src="../_images/kolmogorov.jpeg" /></p>
+<ul class="simple">
+<li><p>Una probabilidad <span class="math notranslate nohighlight">\(\mathbb{P}\)</span> es una función de valor real definida sobre <span class="math notranslate nohighlight">\(\Omega\)</span> que satisface las siguientes propiedades:</p></li>
+</ul>
+<p><strong>Propiedades</strong></p>
+<ol class="arabic simple">
+<li><p>Para cualquier suceso <span class="math notranslate nohighlight">\(E \subseteq \Omega\)</span> , <span class="math notranslate nohighlight">\(0 \leq \mathbb{P}(E) \leq 1\)</span>.</p></li>
+<li><p>La probabilidad del espacio muestral es 1: <span class="math notranslate nohighlight">\(\mathbb{P}(\Omega) =1\)</span>.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(E_{1},E_{2},\dots,E_{k} \in \Omega\)</span> son conjuntos disjuntos</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}(\bigcup_{i=1}^{k}E_{i}) = \sum_{i}^{k}P(E_{i})\]</div>
+<p>En cualquier caso, las probabilidades no pueden ser negativas ni mayores que 1.</p>
+</section>
+<section id="interpretacion-de-las-probabilidades">
+<h2>Interpretación de las probabilidades<a class="headerlink" href="#interpretacion-de-las-probabilidades" title="Permalink to this heading">#</a></h2>
+<p>Existen dos interpretaciones comunes de las probabilidades: frecuencias y grados de creencia (o probabilidades bayesianas).</p>
+<p><strong>Probabilidad frecuentista</strong></p>
+<ul class="simple">
+<li><p>En la interpretación frecuentista, se define a la probabilidad de un suceso <span class="math notranslate nohighlight">\(\mathbb{P}(E)\)</span> como el límite de su frecuencia relativa en muchos ensayos.</p></li>
+<li><p>Por ejemplo, si decimos que la probabilidad de que salga cara es 1/2, queremos decir que si lanzamos la moneda muchas veces, la proporción de veces que sale cara tiende a 1/2 a medida que aumenta el número de lanzamientos.</p></li>
+<li><p>Cuando el espacio muestral <span class="math notranslate nohighlight">\(\Omega\)</span> es finito, podemos decir que
+$<span class="math notranslate nohighlight">\(\mathbb{P}(E) = \frac{\text{casos favorables}} {\text{casos totales}} = \frac{|E|}{|\Omega|}\)</span>$</p></li>
+</ul>
+<p><strong>La probabilidad como grado de creencia</strong></p>
+<ul class="simple">
+<li><p>La interpretación del grado de creencia (también conocida como interpretación bayesiana o interpretación subjetiva) es que <span class="math notranslate nohighlight">\(\mathbb{P}(E)\)</span> mide el grado de creencia de un observador de que <span class="math notranslate nohighlight">\(E\)</span> es cierto.</p></li>
+<li><p>Si yo le preguntara <em><strong>“¿Qué probabilidad hay de que EE.UU. vuelva a la Luna en 2026?”</strong></em>, usted podría responder a esta pregunta basándose en sus conocimientos y creencias.</p></li>
+<li><p>Aunque no haya frecuencias relevantes para calcular una probabilidad frecuentista.</p></li>
+<li><p>En cualquiera de las dos interpretaciones, exigimos que se cumplan las propiedades 1 a 3.</p></li>
+<li><p>La diferencia de interpretación no importará mucho hasta que nos ocupemos de la inferencia estadística.</p></li>
+<li><p>En este caso, las distintas interpretaciones dan lugar a dos escuelas de inferencia: la frecuentista y la bayesiana.</p></li>
+</ul>
+</section>
+<section id="la-regla-de-la-resta">
+<h2>La regla de la resta<a class="headerlink" href="#la-regla-de-la-resta" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La probabilidad de que un suceso <span class="math notranslate nohighlight">\(E\)</span> no ocurra es uno menos la probabilidad de que el suceso ocurra:
+$<span class="math notranslate nohighlight">\(\mathbb{P}(\neg E) = 1 - \mathbb{P}(E)\)</span>$</p></li>
+<li><p>Por ejemplo, si la probabilidad de sacar un uno en un solo lanzamiento de dado es 1/6, entonces la probabilidad de sacar cualquier cosa que no sea un uno es 5/6.</p></li>
+</ul>
+</section>
+<section id="metodos-combinatorios">
+<h2>Métodos combinatorios<a class="headerlink" href="#metodos-combinatorios" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Hay algunos hechos de la teoría del recuento que son útiles para calcular probabilidades.</p></li>
+<li><p>Dados <span class="math notranslate nohighlight">\(n\)</span> objetos, el número de maneras de ordenar estos objetos es <span class="math notranslate nohighlight">\(n!=n(n-1)(n-2)\cdots3\cdot2\cdot1\)</span>.</p></li>
+<li><p>Por convención, definimos $<span class="math notranslate nohighlight">\(0!=1\)</span>$.</p></li>
+<li><p>También definimos $<span class="math notranslate nohighlight">\({n \choose k} = \frac{n!}{k!(n-k)!}\)</span>$ léase “n elige k”, que es el número de formas distintas de elegir k objetos de n.</p></li>
+<li><p>Por ejemplo, si tenemos una clase de 20 personas y queremos seleccionar un comité de 3 estudiantes, entonces hay $<span class="math notranslate nohighlight">\({20 \choose 3} = \frac{20!}{3!17!}=1140\)</span>$ posibles comités.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># Using the factorial method</span>
+
+<span class="n">result1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">20</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1140.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the built-in `comb()` function (available from Python 3.8 onwards</span>
+
+<span class="n">comb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">comb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1140
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Observamos las siguientes propiedades:</p>
+<p>-<span class="math notranslate nohighlight">\({n \choose 0} = {n \choose n}=1\)</span></p>
+<p>y</p>
+<p>-<span class="math notranslate nohighlight">\({n \choose k} = {n \choose n-k}\)</span></p>
+</li>
+</ul>
+</section>
+</section>
+<section id="probabilidades-condicionales">
+<h1>Probabilidades condicionales<a class="headerlink" href="#probabilidades-condicionales" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>La <strong>probabilidad condicional</strong> para <span class="math notranslate nohighlight">\(Y\)</span> dado <span class="math notranslate nohighlight">\(X\)</span> se define como:
+$<span class="math notranslate nohighlight">\(\mathbb{P}(Y|X) = \frac{\mathbb{P}(X,Y)}{\mathbb{P}(X)}\)</span>$</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}(Y|X)\)</span> puede interpretarse como la fracción de veces que ocurre <span class="math notranslate nohighlight">\(Y\)</span> cuando se sabe que ocurre <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(Y\)</span> son independientes <span class="math notranslate nohighlight">\(\mathbb{P}(Y|X)=\mathbb{P}(Y)\)</span>.</p></li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<ul class="simple">
+<li><p>En el experimento de lanzar un dado justo, sea G el suceso de obtener un resultado mayor que 2 (<span class="math notranslate nohighlight">\(G=\{3,4,5,6\}\)</span>) y O el suceso de obtener un número impar (<span class="math notranslate nohighlight">\(O=\{1,3,5\}\)</span>).</p></li>
+<li><p>¿Cuál es el valor de <span class="math notranslate nohighlight">\(\mathbb{P}(G|O)\)</span>?</p></li>
+</ul>
+<ul class="simple">
+<li><p>Utilizando la definición  <span class="math notranslate nohighlight">\(\mathbb{P}(X)=\frac{\text{casos favorables}}{\text{casos totales}}\)</span>:
+<span class="math notranslate nohighlight">\(\mathbb{P}(G)=4/6\)</span>, <span class="math notranslate nohighlight">\(\mathbb{P}(O)=3/6\)</span>, y
+<span class="math notranslate nohighlight">\(\mathbb{P}(G|O)= 2/3.\)</span></p></li>
+<li><p>Obsérvese que una vez que conocemos O, el número de casos favorables para G se
+reducido a <span class="math notranslate nohighlight">\(\{3,5\}\)</span> y el número total de casos a <span class="math notranslate nohighlight">\(\{1,3,5\}\)</span>.</p></li>
+<li><p>Ahora, según la definición anterior
+<span class="math notranslate nohighlight">\(\mathbb{P}(G|O) = \frac{\mathbb{P}(G,O)}{\mathbb{P}(O)}\)</span>.</p></li>
+<li><p>Donde <span class="math notranslate nohighlight">\(\mathbb{P}(G,O) = 2/6\)</span> (los casos favorables corresponden a la
+intersección entre G y O <span class="math notranslate nohighlight">\(\{3,5\}\)</span>).</p></li>
+<li><p>Entonces
+<span class="math notranslate nohighlight">\(\mathbb{P}(G|O) = \frac{\mathbb{P}(G,O)}{\mathbb{P}(O)}=\frac{2/6}{3/6}=2/3\)</span>.</p></li>
+</ul>
+<div class="admonition tip alert alert-warning">
+<p class="first admonition-title" style="font-weight: bold;">Atención</p>
+<p class="last">
+<ul class="simple">
+<li><p>En general no es el caso que <span class="math notranslate nohighlight">\(\mathbb{P}(Y|X) = \mathbb{P}(X|Y)\)</span>.</p></li>
+<li><p>La gente confunde esto todo el tiempo.</p></li>
+<li><p>Por ejemplo, la probabilidad de tener manchas dado que se tiene sarampión es 1, pero la probabilidad de tener sarampión dado que se tienen manchas no es 1.</p></li>
+<li><p>En este caso, la diferencia entre <span class="math notranslate nohighlight">\(\mathbb{P}(Y|X)\)</span> y <span class="math notranslate nohighlight">\(\mathbb{P}(X|Y)\)</span> es obvia, pero hay casos en los que no lo es tanto.</p></p></li>
+</ul>
+</div>
+</section>
+<section id="probabilidades-condicionales-ejemplo">
+<h1>Probabilidades condicionales: Ejemplo<a class="headerlink" href="#probabilidades-condicionales-ejemplo" title="Permalink to this heading">#</a></h1>
+<ul>
+<li><p>Una prueba médica para detectar una enfermedad D tiene resultados “positivos” y
+“negativos”, las probabilidades son</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>D</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\neg\)</span> D</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>positive</p></td>
+<td class="text-center"><p>0.009</p></td>
+<td class="text-center"><p>0.099</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>negative</p></td>
+<td class="text-center"><p>0.001</p></td>
+<td class="text-center"><p>0.891</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>A partir de la definición de probabilidad condicional</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}(\text{positive}|D) = \frac{\mathbb{P}(\text{positive},D)}{\mathbb{P}(D)}  = \frac{0.009}{0.009+0.001} = 0.9\]</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the variables</span>
+<span class="n">numerator</span> <span class="o">=</span> <span class="mf">0.009</span>
+<span class="n">denominator</span> <span class="o">=</span> <span class="mf">0.009</span> <span class="o">+</span> <span class="mf">0.001</span>
+
+<span class="c1"># Calculate and assign the result</span>
+<span class="n">pos_d</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pos_d</span><span class="p">)</span>  <span class="c1"># Prints: 0.9</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9
+</pre></div>
+</div>
+</div>
+</div>
+<p>y
+$<span class="math notranslate nohighlight">\(\mathbb{P}(\text{negative}|\neg D) = \frac{\mathbb{P}(\text{negative},\neg D)}{\mathbb{P}(\neg D)}  = \frac{0.891}{0.891+0.0991} \approx 0.9\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numerator</span> <span class="o">=</span> <span class="mf">0.891</span>
+<span class="n">denominator</span> <span class="o">=</span> <span class="mf">0.891</span> <span class="o">+</span> <span class="mf">0.0991</span>
+
+<span class="c1"># Calculate and assign the result</span>
+<span class="n">neg_notd</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">neg_notd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8999091000909
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Aparentemente, la prueba es bastante precisa.</p></li>
+<li><p>Las personas enfermas dan positivo el  90% de las veces y las sanas dan negativo el 90% de las veces.</p></li>
+<li><p>Supongamos que te haces la prueba y obtienes un positivo.</p></li>
+<li><p>¿Cuál es la probabilidad de que tenga la enfermedad? La mayoría de la gente responde <span class="math notranslate nohighlight">\(0.90\)</span>.</p></li>
+<li><p>La respuesta correcta es
+$<span class="math notranslate nohighlight">\(\mathbb{P}(D|\text{positive}) = \frac{\mathbb{P}(D,\text{positive})}{\mathbb{P}(\text{positive})} = \frac{0.009}{0.009+0.099} \approx 0.08\)</span>$</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the variables</span>
+<span class="n">numerator</span> <span class="o">=</span> <span class="mf">0.009</span>
+<span class="n">denominator</span> <span class="o">=</span> <span class="mf">0.009</span> <span class="o">+</span> <span class="mf">0.099</span>
+
+<span class="c1"># Calculate and assign the result</span>
+<span class="n">d_pos</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d_pos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.08333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>La lección aquí es que necesitas calcular la respuesta numéricamente.</p></li>
+<li><p>No confíes en tu intuición.</p></li>
+</ul>
+</section>
+<section id="teorema-de-bayes-y-probabilidades-totales">
+<h1>Teorema de Bayes y probabilidades totales<a class="headerlink" href="#teorema-de-bayes-y-probabilidades-totales" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>La probabilidad condicional <span class="math notranslate nohighlight">\(\mathbb{P}(Y|X)\)</span> y <span class="math notranslate nohighlight">\(\mathbb{P}(X|Y)\)</span>   pueden expresarse en función de la otra mediante el teorema de Bayes.
+$<span class="math notranslate nohighlight">\(\mathbb{P}(Y|X)=\frac{\mathbb{P}(X|Y)\mathbb{P}(Y)}{\mathbb{P}(X)}\)</span>$</p></li>
+<li><p>Entonces sea <span class="math notranslate nohighlight">\(\{ Y_1,Y_2,\dots, Y_k \}\)</span> un conjunto de sucesos mutuamente excluyentes  del espacio muestral de un Variable aleatoria <span class="math notranslate nohighlight">\(X\)</span> ,  el denominador del teorema de Bayes
+de Bayes puede expresarse como
+$<span class="math notranslate nohighlight">\(\mathbb{P}(X)= \sum_{i=1}^{k} \mathbb{P}(X,Y_i) = \sum_{i=1}^{k} \mathbb{P}(X|Y_i)\mathbb{P}(Y_i)\)</span>$</p></li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<ul class="simple">
+<li><p>Divido mis correos electrónicos en tres categorías: <span class="math notranslate nohighlight">\(A_1\)</span>=“‘spam’’, <span class="math notranslate nohighlight">\(A_2\)</span>=“‘bajaprioridad’’, <span class="math notranslate nohighlight">\(A_3\)</span>=“‘prioridad alta’’.</p></li>
+<li><p>Sabemos que <span class="math notranslate nohighlight">\(\mathbb{P}(A_1)=0,7\)</span>, <span class="math notranslate nohighlight">\(\mathbb{P}(A_2)=0,2\)</span> y <span class="math notranslate nohighlight">\(\mathbb{P}(A_3)=0.1\)</span>, claramente <span class="math notranslate nohighlight">\(0.7+0.2+0.1=1\)</span>.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(B\)</span> el suceso de que el correo contenga la palabra “gratis”.</p></li>
+<li><p>Sabemos que <span class="math notranslate nohighlight">\(\mathbb{P}(B|A_1)=0,9\)</span> <span class="math notranslate nohighlight">\(\mathbb{P}(B|A_2)=0,01\)</span> y  <span class="math notranslate nohighlight">\(\mathbb{P}(B|A_3)=0.01\)</span> claramente <span class="math notranslate nohighlight">\(0.9+0.01+0.01 \neq 1\)</span></p></li>
+<li><p>¿Cuál es la probabilidad de que un correo electrónico con la palabra “gratis” sea “spam”?</p></li>
+<li><p>Usando Bayes:
+$<span class="math notranslate nohighlight">\(\mathbb{P}(A_1|B) = \frac{\mathbb{P}(B|A_1)\times \mathbb{P}(A_1)}{\mathbb{P}(B)} = \frac{0.9 \times 0.7}{\mathbb{P}(B)} = \frac{0.63}{\mathbb{P}(B)}\)</span>$</p></li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p>Utilizando probabilidades totales:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+      \mathbb{P}(B) &amp; = &amp; \mathbb{P}(B|A_1)\times\mathbb{P}(A_1)+\mathbb{P}(B|A_2)\times\mathbb{P}(A_2)+\mathbb{P}(B|A_3)\times\mathbb{P}(A_3) \\
+      &amp; = &amp; 0.9 \times 0.7 + 0.01 \times 0.2 + 0.01 \times 0.1 = 0.633
+     
+    \end{aligned}\end{split}\]</div>
+<p>Finalmente,</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}(A_1|B) = \frac{0.63}{0.633} = 0.995\]</div>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the variables</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">0.7</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">a3</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">b_a1</span> <span class="o">=</span> <span class="mf">0.9</span>
+<span class="n">b_a2</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">b_a3</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="c1"># Calculate the weighted sum</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b_a1</span><span class="o">*</span><span class="n">a1</span> <span class="o">+</span> <span class="n">b_a2</span><span class="o">*</span><span class="n">a2</span> <span class="o">+</span> <span class="n">b_a3</span><span class="o">*</span><span class="n">a3</span>
+
+<span class="c1"># Calculate the proportion of a1 (weighted by b_a1) in the weighted sum b</span>
+<span class="n">a1_b</span> <span class="o">=</span> <span class="n">b_a1</span><span class="o">*</span><span class="n">a1</span> <span class="o">/</span> <span class="n">b</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a1_b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.995260663507109
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variable-aleatoria">
+<h1>Variable aleatoria<a class="headerlink" href="#variable-aleatoria" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Una <strong>variable aleatoria</strong> es un mapeo (o función) $<span class="math notranslate nohighlight">\(X: \Omega \rightarrow \mathbb{R}\)</span><span class="math notranslate nohighlight">\( que asigna un valor real \)</span>X(e)<span class="math notranslate nohighlight">\( a cualquier suceso de \)</span>\Omega$.</p></li>
+<li><p>Ejemplo: Lanzamos una moneda al aire 10 veces. El resultado de cada lanzamiento es cara <span class="math notranslate nohighlight">\(H\)</span> o cruz <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(X(e)\)</span> el número de caras en la secuencia de resultados.</p>
+<ul>
+<li><p>Si <span class="math notranslate nohighlight">\(e=HHTHHTHHTT\)</span>, entonces <span class="math notranslate nohighlight">\(X(e)=6\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Una variable aleatoria puede ser en muchos casos la función identidad.</p></li>
+<li><p>Por ejemplo, si lanzamos un dado de 6 caras una vez y <span class="math notranslate nohighlight">\(X(e)\)</span> es el valor resultante del dado, entonces <span class="math notranslate nohighlight">\(X(e)=e\)</span>, para <span class="math notranslate nohighlight">\(e \in \{1,2,3,4,5,6\}\)</span>.</p></li>
+<li><p>En estos casos, la noción de que una variable aleatoria es una función puede ser confusa (se parece más a un conjunto), pero siempre podemos
+reconstruir la función de asignación como función de identidad.</p></li>
+<li><p>Es importante entender que podemos tener fácilmente diferentes variables aleatorias de un mismo espacio muestral.</p></li>
+<li><p>Ejemplo: lanzamos un dado dos veces, <span class="math notranslate nohighlight">\(X(e)\)</span> es la suma de las dos tiradas resultantes y <span class="math notranslate nohighlight">\(Y(e)\)</span> es el producto de estos dos números.</p></li>
+<li><p>Para el suceso <span class="math notranslate nohighlight">\(e=\{4,5\}\)</span>, <span class="math notranslate nohighlight">\(X(e)=9\)</span> and <span class="math notranslate nohighlight">\(Y(e)=20\)</span>.</p></li>
+</ul>
+<section id="ejemplo">
+<h2>Ejemplo<a class="headerlink" href="#ejemplo" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Lanzamos una moneda al aire 2 veces. Sea <span class="math notranslate nohighlight">\(X\)</span> el número de caras obtenidas.</p></li>
+<li><p>La variable aleatoria y su distribución se resumen como:</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(e\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\mathbb{P}(e)\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(X(e)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>TT</p></td>
+<td class="text-center"><p>1/4</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>TH</p></td>
+<td class="text-center"><p>1/4</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>HT</p></td>
+<td class="text-center"><p>1/4</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>HH</p></td>
+<td class="text-center"><p>1/4</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+</tbody>
+</table>
+<hr class="docutils" />
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\mathbb{P}(X = x)\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>0</p></td>
+<td class="text-center"><p>1/4</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1/2</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>2</p></td>
+<td class="text-center"><p>1/4</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="definiciones-de-variable-aleatoria-r-v">
+<h2>Definiciones de Variable Aleatoria (R.V)<a class="headerlink" href="#definiciones-de-variable-aleatoria-r-v" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Sea <span class="math notranslate nohighlight">\(X\)</span> un R.V , definimos <strong>función de distribución acumulativa</strong>
+(CDF) o <span class="math notranslate nohighlight">\(F_{X}: \mathbb{R} \rightarrow [0,1]\)</span> como:
+$<span class="math notranslate nohighlight">\(F_{X}(x)=\mathbb{P}(X\leq x)\)</span>$</p></li>
+<li><p>Para el ejemplo anterior de lanzar una moneda justa dos veces y contar el número de caras, la FDA es la siguiente:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F_X(x) =
+         \begin{cases}
+         0 &amp; x&lt;0 \\
+         1/4 &amp; 0 \leq x &lt; 1 \\
+         3/4 &amp; 1 \leq x &lt; 2 \\
+         1 &amp; x \geq 2.
+         \end{cases}\end{split}\]</div>
+</li>
+</ul>
+<p><img alt="" src="../_images/cdf_coin.png" /></p>
+<ul class="simple">
+<li><p>Las FDA pueden ser muy confusas.</p></li>
+<li><p>Observe que la función es continua a la derecha, no decreciente, y que está definida para todo x, aunque la variable aleatoria sólo toma los valores 0,1 y 2.</p></li>
+<li><p>Notación: cuando <span class="math notranslate nohighlight">\(X\)</span> es una variable aleatoria, <span class="math notranslate nohighlight">\(x\)</span> denota un valor particular de la variable aleatoria.</p></li>
+</ul>
+</section>
+<section id="variables-aleatorias-discretas">
+<h2>Variables aleatorias discretas<a class="headerlink" href="#variables-aleatorias-discretas" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Una V.A <span class="math notranslate nohighlight">\(X\)</span> es <strong>discreta</strong> si asigna las salidas a un conjunto contable.</p></li>
+<li><p>Definimos la <strong>función de probabilidad</strong> o <strong>función de masa de probabilidad (FMP)</strong> de una variable aleatoria discreta <span class="math notranslate nohighlight">\(X\)</span> como <span class="math notranslate nohighlight">\(f_{X}(x)=\mathbb{P}(X=x)\)</span>.</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(f_{X}(x) \geq 0 \forall x \in \mathbb{R}\)</span>, y <span class="math notranslate nohighlight">\(\sum_{i}f_{X}(x_{i})=1\)</span></p></li>
+<li><p>La Función acumlada de probabilidad de <span class="math notranslate nohighlight">\(X\)</span> se relaciona con <span class="math notranslate nohighlight">\(f_{X}\)</span> de la siguiente manera:
+$<span class="math notranslate nohighlight">\(F_{X}= \mathbb{P}(X\leq x)= \sum_{x_{i} \leq x} f_{X}(x_{i})\)</span>$</p></li>
+</ul>
+<p>El PMF para el ejemplo anterior es:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}f_X(x) =
+     \begin{cases}
+     1/4 &amp; x=0 \\
+     1/2 &amp; x=1 \\
+     1/4 &amp; x=2 \\
+     0 &amp;  \text{otherwise.}
+     \end{cases}\end{split}\]</div>
+</section>
+<section id="variable-aleatoria-continua">
+<h2>Variable aleatoria continua<a class="headerlink" href="#variable-aleatoria-continua" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Una V.A. <span class="math notranslate nohighlight">\(X\)</span> es continua si</p></li>
+<li><p>existe una función <span class="math notranslate nohighlight">\(f_{X}\)</span> tal que <span class="math notranslate nohighlight">\(f_{X}(x) \geq 0\)</span>    para todo <span class="math notranslate nohighlight">\(x\)</span>, y: $<span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty}f_{X}(x)dX=1\)</span>$</p></li>
+<li><p>Para todo <span class="math notranslate nohighlight">\(a \leq b\)</span>:
+$<span class="math notranslate nohighlight">\(\mathbb{P}(a &lt; X &lt; b) = \int_{a}^{b} f_{X}(x)dx\)</span>$</p></li>
+<li><p>La función <span class="math notranslate nohighlight">\(f_{X}\)</span> se llama función de densidad de probabilidad (FDP).</p></li>
+<li><p>La FDP se relaciona con la Función de distribución acumulada de la siguiente manera:
+$<span class="math notranslate nohighlight">\(F_{X}(x)=\int_{-\infty}^{x}f_{X}(t)dt\)</span>$</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(f_{X}(x) = F'_X(x)\)</span> en todos los puntos <span class="math notranslate nohighlight">\(x\)</span> donde <span class="math notranslate nohighlight">\(F_{X}\)</span> es  diferenciable.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Ejemplo: Supongamos que <span class="math notranslate nohighlight">\(X\)</span> tiene una FDP $<span class="math notranslate nohighlight">\(f_X(x) =
+       \begin{cases}
+       1 &amp; \text{for }0\leq x \leq 1 \\
+       0 &amp;  \text{otherwise.}
+       \end{cases}\)</span>$</p></li>
+<li><p>Claramente, <span class="math notranslate nohighlight">\(f_X(x) \geq 0\)</span> y <span class="math notranslate nohighlight">\(\int f_X(x) = 1\)</span>.</p></li>
+<li><p>Una variable aleatoria con esta densidad se dice que tiene una distribución Uniforme (0,1).</p></li>
+<li><p>Con ello se pretende captar la idea de elegir un punto al azar entre 0 y 1.</p></li>
+<li><p>La FDA viene dada por $<span class="math notranslate nohighlight">\(F_X(x) =
+     \begin{cases}
+     0 &amp; x&lt;0 \\
+     x &amp;  0\leq x \leq 1 \\
+     1 &amp;  x&gt;1.
+     \end{cases}\)</span>$</p></li>
+</ul>
+<p><img alt="" src="../_images/cdf_uniform.png" /></p>
+<ul class="simple">
+<li><p>Las variables aleatorias continuas pueden llevar a confusión.</p></li>
+<li><p>En primer lugar, tenga en cuenta que si <span class="math notranslate nohighlight">\(X\)</span> es continua, entonces <span class="math notranslate nohighlight">\(\mathbb{P}(X = x) = 0\)</span>   para cada <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>No trate de pensar en <span class="math notranslate nohighlight">\(f(x)\)</span> como <span class="math notranslate nohighlight">\(\mathbb{P}(X = x)\)</span>.</p></li>
+<li><p>Esto sólo es válido para variables aleatorias discretas.</p></li>
+<li><p>Obtenemos probabilidades de una PDF mediante la integración.</p></li>
+</ul>
+</section>
+<section id="definiciones-de-variables-aleatorias">
+<h2>Definiciones de Variables Aleatorias<a class="headerlink" href="#definiciones-de-variables-aleatorias" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Una FDP puede ser mayor que 1 (a diferencia de una función de masa).</p></li>
+<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(f(x) = 5\)</span> para <span class="math notranslate nohighlight">\(x \in [0,1/5]\)</span> y <span class="math notranslate nohighlight">\(0\)</span> en caso contrario.</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(f(x) \geq 0\)</span> y <span class="math notranslate nohighlight">\(\int f(x)dx = 1\)</span>, por lo que se trata de una FDP bien definida aunque  <span class="math notranslate nohighlight">\(f(x) = 5\)</span> en algunos puntos.</p></li>
+<li><p>Una FDP también puede interpretarse como la tasa de cambio en la función de distribución acumulada (FDA).</p></li>
+<li><p>Así, cuando la probabilidad acumulada aumenta rápidamente, la densidad puede superar fácilmente 1.</p></li>
+<li><p>Pero si calculamos el área bajo la función de densidad, nunca superará 1.</p></li>
+</ul>
+<p><img alt="" src="../_images/pdfcdf.png" /></p>
+<p>Fuente:
+<a class="reference external" href="http://reliawiki.org/index.php/Basic_Statistical_Background">http://reliawiki.org/index.php/Basic_Statistical_Background</a></span></p>
+</section>
+<section id="agunas-propiedades">
+<h2>Agunas propiedades<a class="headerlink" href="#agunas-propiedades" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}( x &lt; X \leq y) = F(y) - F(x)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}(X &gt; x) = 1 - F(x)\)</span></p></li>
+<li><p>si <span class="math notranslate nohighlight">\(X\)</span>  es continua: $<span class="math notranslate nohighlight">\(\begin{aligned}
+ F(b) - F(a) = \mathbb{P}(a &lt; X &lt; b) = \mathbb{P} ( a \leq X &lt; b)  \\
+   = \mathbb{P} ( a &lt; X \leq b) = \mathbb{P} ( a \leq X \leq b)
+\end{aligned}\)</span>$</p></li>
+</ol>
+</section>
+<section id="cuantiles">
+<h2>Cuantiles<a class="headerlink" href="#cuantiles" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(X\)</span> una V.A. con FDA <span class="math notranslate nohighlight">\(F\)</span>. La FDA inversa o función cuantil  se define como $<span class="math notranslate nohighlight">\(F^{-1}(q)= inf \left\{ x: \ F(x) &gt; q \right\}\)</span>$</p></li>
+<li><p>Para <span class="math notranslate nohighlight">\(q \in [0,1]\)</span>, si <span class="math notranslate nohighlight">\(F\)</span> es estrictamente creciente y continua,  <span class="math notranslate nohighlight">\(F^{-1}(q)\)</span> es el único valor real tal que <span class="math notranslate nohighlight">\(F(x)=q\)</span>.</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(F^{-1}(1/4)\)</span> es el primer cuartil, <span class="math notranslate nohighlight">\(F^{-1}(1/2)\)</span>  la mediana (o segundo cuartil) y <span class="math notranslate nohighlight">\(F^{-1}(3/4)\)</span> el tercer cuartil.</p></li>
+</ul>
+<p><img alt="" src="../_images/Probit_plot.png" /></p>
+</section>
+<section id="algunas-distribuciones">
+<h2>Algunas distribuciones<a class="headerlink" href="#algunas-distribuciones" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p>Probability Function</p></th>
+<th class="head text-center"><p>Parameters</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>Binomial</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(f_x= {n \choose x}p^{x}(1-p)^{n-x}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(n,p\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Normal</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\mu, \sigma\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Poisson</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(f_x=\frac{1}{x!}\lambda^{x}\exp^{-\lambda}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Exponential</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(f_x= \lambda \exp^{-\lambda x}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\lambda\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>Gamma</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(f_x= \frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha -1}\exp^{-\lambda x}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(\lambda , \alpha\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>Chi-square</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(f_x=\frac{1}{2^{k/2} \Gamma(k/2)} x^{(\frac{k}{2} -1)} \exp^{-x/2}\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(k\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="distribucion-binomial">
+<h2>Distribución Binomial<a class="headerlink" href="#distribucion-binomial" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La distribución binomial es una distribución discreta que permite calcular la probabilidad de un número determinado de aciertos en un número determinado de ensayos.</p></li>
+<li><p>En cada ensayo hay éxito o fracaso y nada en medio (conocidos como “ensayos de Bernoulli”) dada una probabilidad conocida de éxito en cada ensayo.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(n\)</span> el número de ensayos, <span class="math notranslate nohighlight">\(x\)</span> el número de aciertos y <span class="math notranslate nohighlight">\(p\)</span> la probabilidad de acierto, la función de masa de probabilidad de la distribución Binomial es la siguiente:
+$<span class="math notranslate nohighlight">\(f_x(n,p)= {n \choose x}p^{x}(1-p)^{n-x}\)</span>$</p></li>
+<li><p>El coeficiente binomial <span class="math notranslate nohighlight">\({n \choose x}\)</span> describe el número de formas distintas en que se pueden elegir <span class="math notranslate nohighlight">\(x\)</span> elementos de un total de <span class="math notranslate nohighlight">\(n\)</span> elementos.</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>Ejemplo<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ejemplo: el 20 de enero de 2018, el jugador de baloncesto Steph Curry acertó solo 2 de 4 tiros libres en un partido contra los Houston Rockets.</p></li>
+<li><p>Sabemos que la probabilidad global de Curry de acertar tiros libres en toda la temporada fue de 0,91.</p></li>
+<li><p>¿Cuál es la probabilidad de que acierte sólo el 50% de sus tiros libres en un partido?</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[f_2(4,0.91) = {4 \choose 2}0.91^{2}(1-0.91)^{4-2}=0.040\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>      <span class="c1"># number of trials</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>      <span class="c1"># number of successes</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.91</span>   <span class="c1"># probability of success in one trial</span>
+
+<span class="c1"># Calculate binomial probability</span>
+<span class="n">prob</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>  <span class="c1"># This should output 0.04024566 or something very close to it</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.040245659999999996
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="la-distribucion-normal">
+<h2>La distribución normal<a class="headerlink" href="#la-distribucion-normal" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La distribución normal o gaussiana es extremadamente importante en estadística, en parte porque aparece todo el tiempo en la naturaleza.</p></li>
+<li><p>Está controlada por dos parámetros, una media <span class="math notranslate nohighlight">\(\mu\)</span> y una desviación típica <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+<p><img alt="" src="../_images/gaussian.jpg" /></p>
+<ul class="simple">
+<li><p>Como veremos en el siguiente ejemplo , la distribución normal se observa siempre que se suman muchas variaciones pequeñas e independientes para obtener un valor.</p></li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<ul class="simple">
+<li><p>Supongamos que usted y mil de sus amigos más íntimos se alinean en la línea media de un campo de fútbol.</p></li>
+<li><p>Cada uno tiene una moneda en la mano. Cuando suena el silbato, empezáis a lanzar las monedas.</p></li>
+<li><p>Cada vez que una moneda sale cara, esa persona da un paso hacia la portería de la izquierda.</p></li>
+<li><p>Cada vez que una moneda sale cruz, esa persona da un paso hacia la meta de la derecha.</p></li>
+<li><p>Cada persona lanza la moneda 16 veces, sigue los movimientos implícitos y luego se queda quieta.</p></li>
+<li><p>Ahora medimos la distancia de cada persona desde la línea de mitad de camino.</p></li>
+<li><p>¿Puedes predecir qué proporción de las mil personas que están paradas se encuentra en la línea de medio campo? ¿Y qué proporción hay a 5 metros a la izquierda de la línea?</p></li>
+<li><p>Es difícil decir dónde acabará cada persona, pero se puede decir con gran seguridad cuál será el conjunto de posiciones.</p></li>
+<li><p>Las distancias se distribuirán de forma aproximadamente normal, o gaussiana.</p></li>
+<li><p>Esto es así aunque la distribución subyacente sea binomial.</p></li>
+<li><p>Esto es así porque hay muchas más formas posibles de realizar una secuencia de pasos izquierda-derecha que sume cero.</p></li>
+<li><p>Hay un poco menos de formas de realizar una secuencia que termine un paso a la izquierda o a la derecha de cero, y así sucesivamente, con el número de secuencias posibles disminuyendo en la curva de campana característica de la distribución normal.</p></li>
+</ul>
+<p>Soccer 1</p>
+<p><img alt="" src="../_images/soccer1.png" /></p>
+<p>Soccer 2</p>
+<p><img alt="" src="../_images/soccer2.png" /></p>
+<p>Soccer 3</p>
+<p><img alt="" src="../_images/soccer3.png" /></p>
+<p>Soccer 4</p>
+<p><img alt="" src="../_images/soccer4.png" /></p>
+<p>Soccer 5</p>
+<p><img alt="" src="../_images/soccer5.png" /></p>
+<ul class="simple">
+<li><p>Los paseos aleatorios por el campo de fútbol convergen hacia una distribución normal.</p></li>
+<li><p>Cuantos más pasos se dan, más se aproxima la coincidencia entre la distribución empírica real de las posiciones y la distribución normal ideal, superpuesta en el último gráfico del panel inferior.</p></li>
+</ul>
+</section>
+<section id="definicion-formal-de-la-distribucion-normal">
+<h2>Definición formal de la distribución normal<a class="headerlink" href="#definicion-formal-de-la-distribucion-normal" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> tiene una distribución Normal o Gaussiana de parámetros <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span>, <span class="math notranslate nohighlight">\(X \sim N(\mu,\sigma^2)\)</span> si</p>
+<div class="math notranslate nohighlight">
+\[f_x=\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}}\]</div>
+</li>
+<li><p>Donde <span class="math notranslate nohighlight">\(\mu \in \mathbb{R}\)</span> es el “centro” o la “media” de la distribución y <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span> es la “desviación típica”.</p></li>
+<li><p>La media desplaza la distribución a lo largo del eje x.</p></li>
+<li><p>La desviación típica afecta a la forma, de modo que cuanto mayor sea <span class="math notranslate nohighlight">\(\sigma\)</span>, más amplia será la forma.</p></li>
+<li><p>Cuando <span class="math notranslate nohighlight">\(\mu = 0\)</span> y <span class="math notranslate nohighlight">\(\sigma =1\)</span> tenemos una <strong>Distribución Normal Estándar</strong> denotada por <span class="math notranslate nohighlight">\(Z\)</span>.</p></li>
+<li><p>Nos referimos a la FDP por <span class="math notranslate nohighlight">\(\phi(z)\)</span> y a la FDA de una Normal Estándar por <span class="math notranslate nohighlight">\(\Phi(z)\)</span>.</p></li>
+<li><p>Se tabulan los valores de <span class="math notranslate nohighlight">\(\Phi(z)= \mathbb{P}(Z \leq z)\)</span>.</p></li>
+</ul>
+<p><img alt="" src="../_images/gaussianTable.jpg" /></p>
+<ul class="simple">
+<li><p>Vamos a tratar de entender los principales componentes de <span class="math notranslate nohighlight">\(\phi(z)\)</span> como se muestra en .
+$<span class="math notranslate nohighlight">\(\phi(z) = \frac{1}{\sqrt{2\pi}} \exp^{-\frac{1}{2}x^2}\)</span>$</p></li>
+<li><p>Aquí hay un gráfico de sólo el exponente <span class="math notranslate nohighlight">\(-\frac{1}{2}x^2\)</span>.</p></li>
+</ul>
+<p><img alt="" src="../_images/gauss_exp.png" /></p>
+<ul class="simple">
+<li><p>Como puedes ver, se trata de una simple parábola.</p></li>
+</ul>
+<p>Cuando elevamos <span class="math notranslate nohighlight">\(\exp\)</span> a la potencia de <span class="math notranslate nohighlight">\(-\frac{1}{2}x^2\)</span> obtenemos el siguiente gráfico.</p>
+<p><img alt="" src="../_images/gauss_exp2.png" /></p>
+<ul class="simple">
+<li><p>Tomando la exponencial de una parábola negativa es lo que nos da la curva de campana.</p></li>
+<li><p>Tal cual, el área bajo la curva es <span class="math notranslate nohighlight">\(\sqrt{2\pi}\)</span>, por lo que se incluye la constante <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2\pi}}\)</span> para que sea igual a 1.</p></li>
+<li><p>Por último, el <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> en el exponente asegura que la varianza es igual a 1.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Para generalizar a cualquier distribución normal, simplemente incluimos los parámetros <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span>
+$<span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2\pi}\sigma}\exp^{-\frac{1}{2}\frac{(x-\mu)^2}{\sigma^{2}}}\)</span>$</p></li>
+<li><p>Observa que <span class="math notranslate nohighlight">\(\sigma\)</span> escala la constante, pero que la acción real ocurre en el exponente.</p></li>
+<li><p>El punto más alto de la densidad es desplazado por <span class="math notranslate nohighlight">\(\mu\)</span>, y luego dividido por  <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+</section>
+<section id="propiedades-utiles">
+<h2>Propiedades Útiles<a class="headerlink" href="#propiedades-utiles" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Si <span class="math notranslate nohighlight">\(X \sim N(\mu, \sigma^2)\)</span>, entonces   <span class="math notranslate nohighlight">\(Z=(X-\mu)/\sigma \sim N(0,1)\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(Z \sim N(0,1)\)</span>, then <span class="math notranslate nohighlight">\(X=\mu+\sigma Z \sim N(\mu, \sigma^2)\)</span></p></li>
+<li><p>Deje <span class="math notranslate nohighlight">\(X_{i} \sim N(\mu_{i},\sigma_{i}^{2})\)</span> ,<span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>  ser una variable aleatoria independiente, entonces:
+$<span class="math notranslate nohighlight">\(\sum_{i=1}^{n}X_{i}\sim N( \sum_{i=1}^{n}\mu_{i}, \sum_{i=1}^{n}\sigma_{i}^{2})\)</span>$</p></li>
+</ol>
+<p><strong>Ejemplo</strong></p>
+<ul class="simple">
+<li><p>En python podemos acceder a la función de densidad de probabilidad (PDF), la función de distribución acumulativa (CDF), la función de cuantiles y la generación de números aleatorios de las distribuciones.</p></li>
+<li><p>Para una distribución Normal, los comandos en Python son</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm.pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : PDF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm.cdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : CDF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm.ppf(q,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : Cuantiles</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm.rvs(loc,</span> <span class="pre">scale,</span> <span class="pre">size)</span></code> : Generación de números aleatorios</p></li>
+</ul>
+</li>
+</ul>
+<p>Ejemplo sea <span class="math notranslate nohighlight">\(X\sim N(3,5)\)</span>, calcular <span class="math notranslate nohighlight">\(\mathbb{P}(X &gt; 1)\)</span><br />
+<span class="math notranslate nohighlight">\(\mathbb{P}(X &gt;1) = 1-\mathbb{P}(X&lt;1) = 1-\mathbb{P}(Z &lt; \frac{1-3}{\sqrt{5}})=1-\Phi(-0.8944)= 0.81\)</span></p>
+<p>En python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># For the first snippet</span>
+<span class="n">value1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">prob1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  
+
+<span class="c1"># For the second snippet</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">value2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">prob2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8144533152386513
+0.8144533152386513
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>La distribución normal<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Si se deduce de la propiedad 1 que si <span class="math notranslate nohighlight">\(X\sim N(\mu,\sigma^2)\)</span>, entonces:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+      \mathbb{P}(a&lt;X&lt;b) &amp; = \mathbb{P}\left(\frac{a-\mu}{\sigma}&lt;Z&lt;\frac{b-\mu}{\sigma}\right) \\
+       &amp; = \Phi \left(\frac{b-\mu}{\sigma}\right)-\Phi \left(\frac{a-\mu}{\sigma}\right)
+     
+    \end{aligned}\end{split}\]</div>
+</li>
+</ul>
+<section id="id3">
+<h3>Ejemplo:<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>Sea <span class="math notranslate nohighlight">\(X\sim N(15,5)\)</span>, calcular <span class="math notranslate nohighlight">\(\mathbb{P}(13&lt;X&lt;18)\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\mathbb{P}(13&lt;X&lt;18)=\Phi \left(\frac{18-15}{5}\right)-\Phi \left(\frac{13-15}{5}\right)=\Phi(0.6)-\Phi(-0.4)\)</span>=0.381</p>
+<p>En python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># For the first snippet</span>
+<span class="n">value1</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">value2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.4</span>
+<span class="n">prob1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  <span class="c1"># Should be close to 0.3811686</span>
+
+<span class="c1"># For the second snippet</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">value3</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">value4</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">prob2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value4</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  <span class="c1"># Should also be close to 0.3811686</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.38116862386025063
+0.38116862386025063
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="funcion-de-distribucion-acumulativa-de-la-distribucion-normal">
+<h2>Función de distribución acumulativa de la distribución normal<a class="headerlink" href="#funcion-de-distribucion-acumulativa-de-la-distribucion-normal" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Como se ha comentado anteriormente, cuando tratamos con la probabilidad sobre valores continuos estamos principalmente interesados en la probabilidad sobre un rango.</p></li>
+<li><p>Para algunos propósitos, es conveniente pensar en una distribución en términos de probabilidad total de un evento que ocurre en el rango de <span class="math notranslate nohighlight">\(-\infty\)</span> a z.</p></li>
+<li><p>Para la distribución normal estándar obtenemos la siguiente FDA:
+$<span class="math notranslate nohighlight">\(\Phi(z)= \mathbb{P}(Z \leq z) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^{z} \exp^{\frac{-t^2}{2}}dt\)</span>$</p></li>
+<li><p>Aquí está un gráfico de la FDA normal estándar.</p></li>
+</ul>
+<p><img alt="" src="../_images/normalcdf.png" /></p>
+<ul class="simple">
+<li><p>El eje y muestra la probabilidad acumulada, por lo que la función es siempre creciente.</p></li>
+<li><p>La FDA expresa simplemente el área bajo la curva (es decir, la integral de <span class="math notranslate nohighlight">\(-\infty\)</span> a <span class="math notranslate nohighlight">\(z\)</span>) de la FDP.</p></li>
+<li><p>Con <span class="math notranslate nohighlight">\(z = 0\)</span>, estamos en la media de la normal estándar, por lo que los valores tienen la misma probabilidad de ser menores o mayores que <span class="math notranslate nohighlight">\(z\)</span>.</p></li>
+<li><p>Esto significa que la FDA en <span class="math notranslate nohighlight">\(z = 0\)</span> debe ser <span class="math notranslate nohighlight">\(0,5\)</span>, ya que hemos acumulado la mitad de la probabilidad disponible.</p></li>
+</ul>
+<p><img alt="" src="../_images/cdfpdf.png" /></p>
+</section>
+<section id="la-regla-68-95-99-7-de-una-distribucion-normal">
+<h2>La regla 68-95-99.7 de una distribución normal<a class="headerlink" href="#la-regla-68-95-99-7-de-una-distribucion-normal" title="Permalink to this heading">#</a></h2>
+<p><img alt="" src="../_images/gaussian.png" /></p>
+<p>Deje <span class="math notranslate nohighlight">\(X\)</span> ser una variable aleatoria <span class="math notranslate nohighlight">\(\sim N(\mu,\sigma^2)\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}( \mu - \sigma \leq X \leq \mu+ \sigma) \approx 0.6827\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}( \mu - 2 \sigma \leq X \leq \mu+ 2 \sigma) \approx 0.9545\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbb{P}( \mu - 3 \sigma \leq X \leq \mu+ 3 \sigma) \approx 0.9973\)</span></p></li>
+</ul>
+<p>En Python para <span class="math notranslate nohighlight">\(X\sim N(0,1)\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># For the first range (-1 to 1)</span>
+<span class="n">prob1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  
+
+<span class="c1"># For the second range (-2 to 2)</span>
+<span class="n">prob2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  
+
+<span class="c1"># For the third range (-3 to 3)</span>
+<span class="n">prob3</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob3</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6826894921370859
+0.9544997361036416
+0.9973002039367398
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="simetria-de-la-distribucion-normal">
+<h2>Simetría de la distribución normal<a class="headerlink" href="#simetria-de-la-distribucion-normal" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La PDF de una normal es simétrica alrededor de <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(\phi(z)= \phi(-z)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Phi(z)=1-\Phi(-z)\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Density for 1</span>
+<span class="n">density1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">density1</span><span class="p">)</span>  
+
+<span class="c1"># Density for -1 </span>
+<span class="n">density2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">density2</span><span class="p">)</span> 
+
+<span class="c1"># Cumulative probability for 0.95</span>
+<span class="n">prob1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  
+
+<span class="c1"># Tail probability for -0.95 (1 - CDF for -0.95)</span>
+<span class="n">prob2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.24197072451914337
+0.24197072451914337
+0.8289438736915182
+0.8289438736915182
+</pre></div>
+</div>
+</div>
+</div>
+<p>Trazado de la PDF de normales con distinta varianza en Python</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Generating sequence</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Calculate densities for different standard deviations</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">[</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="p">[</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">[</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f18d90b8466d8c8345879088d174f0da8d01b18d1268ab3e577fea88a3caa412.png" src="../_images/f18d90b8466d8c8345879088d174f0da8d01b18d1268ab3e577fea88a3caa412.png" />
+</div>
+</div>
+</section>
+<section id="probabilidades-conjuntas">
+<h2>Probabilidades conjuntas<a class="headerlink" href="#probabilidades-conjuntas" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>La noción de función de probabilidad (masa o densidad) puede <strong>extenderse</strong> a más de una V.A.</p></li>
+<li><p>Dado un par de variables aleatorias discretas <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(Y\)</span>, defina la función de masa conjunta por <span class="math notranslate nohighlight">\(f(x,y) = \mathbb{P}(X = x\)</span> y<span class="math notranslate nohighlight">\(Y = y)\)</span> o <span class="math notranslate nohighlight">\(f(x,y) = \mathbb{P}(X = x\)</span> ,<span class="math notranslate nohighlight">\(Y = y)\)</span></p></li>
+<li><p>Escribimos <span class="math notranslate nohighlight">\(f\)</span> como <span class="math notranslate nohighlight">\(f_{X,Y}\)</span> cuando queremos ser más explícitos.</p></li>
+<li><p>Ejemplo: He aquí una distribución bivariante para dos variables aleatorias <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span>, cada una de las cuales toma los valores 0 ó 1:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y=0\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y=1\)</span></p></th>
+<th class="head text-center"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X=0\)</span></p></td>
+<td class="text-center"><p>1/9</p></td>
+<td class="text-center"><p>2/9</p></td>
+<td class="text-center"><p>1/3</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(X=1\)</span></p></td>
+<td class="text-center"><p>2/9</p></td>
+<td class="text-center"><p>4/9</p></td>
+<td class="text-center"><p>2/3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p></p></td>
+<td class="text-center"><p>1/3</p></td>
+<td class="text-center"><p>2/3</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li><p>Así, <span class="math notranslate nohighlight">\(f(1, 1) = \mathbb{P}(X = 1, Y = 1) = 4/9\)</span>.</p></li>
+</ul>
+</section>
+<section id="caso-continuo">
+<h2>Caso Continuo<a class="headerlink" href="#caso-continuo" title="Permalink to this heading">#</a></h2>
+<p>En el caso continuo, llamamos a una función <span class="math notranslate nohighlight">\(f(x,y)\)</span> una FDP para las variables aleatorias <span class="math notranslate nohighlight">\((X, Y)\)</span> si</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(f(x, y) \geq 0\)</span> para todo <span class="math notranslate nohighlight">\((x, y)\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} f(x,y)dxdy=1\)</span> y,</p></li>
+<li><p>para cualquier conjunto
+<span class="math notranslate nohighlight">\(A \subset \mathbb{R}\times\mathbb{R}, \mathbb{P}((X,Y) \in A)=\int \int_{A}f(x,y)dxdy\)</span>.</p></li>
+</ol>
+<p>En el caso discreto o continuo definimos la FCD conjunta como <span class="math notranslate nohighlight">\(F_{X,Y} = \mathbb{P}(X \leq x, Y \leq y)\)</span>.</p>
+</section>
+<section id="variables-aleatorias-independientes">
+<h2>Variables Aleatorias Independientes<a class="headerlink" href="#variables-aleatorias-independientes" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Dos variables aleatorias <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(Y\)</span> son independientes si, para cada <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(B\)</span>,
+$<span class="math notranslate nohighlight">\(\mathbb{P}(X \in A, Y \in B)=\mathbb{P}(X \in A)\times \mathbb{P}(Y \in B)\)</span>$</p></li>
+<li><p>Para el caso discreto eso significa que <span class="math notranslate nohighlight">\(\mathbb{P}(X, Y) =\mathbb{P}(X)\times \mathbb{P}(Y)\)</span> y para el caso continuo tenemos que <span class="math notranslate nohighlight">\(f_{X,Y}(x, y) = f_{X}(x)\times f_{Y}(y)\)</span> para todos los valores <span class="math notranslate nohighlight">\(x\)</span> e <span class="math notranslate nohighlight">\(y\)</span>.</p></li>
+</ul>
+</section>
+<section id="valor-esperado">
+<h2>Valor esperado<a class="headerlink" href="#valor-esperado" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(X\)</span> un V.R., definimos su <strong>expectativa</strong>, o <strong>media</strong>, o  <strong>momento de primer orden</strong> como:
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}(X) = \begin{cases}
+\sum_{x}(x\times f(x)) &amp; \text{if } X \text{ is discrete} \\
+\int_{-\infty}^{\infty} x f(x) \, dx &amp; \text{if } X \text{ is continuous}
+\end{cases}
+\)</span>$</p></li>
+<li><p>El valor esperado es la media ponderada de todos los valores posibles que puede tomar una variable aleatoria.</p></li>
+<li><p>Piense en <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span> como la media <span class="math notranslate nohighlight">\(\sum_{i=1}^{n}X_i/n\)</span> de un gran número de resultados de las variables IID <span class="math notranslate nohighlight">\(X_1, \dots,X_n\)</span>.</p></li>
+<li><p>Para el caso de lanzar una moneda dos veces con <span class="math notranslate nohighlight">\(X\)</span> el número de caras:
+$$\begin{aligned}
+\mathbb{E}(X) &amp; = &amp; (0 \times f(0)) + (1 \times f(1)) + (2 \times f(2)) \nonumber \
+&amp; = &amp; (0 \times (1/4)) + (1 \times (1/2)) + (2 \times (1/4)) =1  \nonumber \</p></li>
+</ul>
+<p>\end{aligned}$$</p>
+<ul>
+<li><p>Sean las variables aleatorias <span class="math notranslate nohighlight">\(X_1, X_2, \dots , X_n\)</span> y las constantes   <span class="math notranslate nohighlight">\(a_1, a_2, \dots, a_n\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\left(\sum_{i}a_i X_i \right) = \sum_{i} a_{i} \mathbb{E}(X_i)\]</div>
+</li>
+</ul>
+</section>
+<section id="varianza">
+<h2>Varianza<a class="headerlink" href="#varianza" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La varianza mide la “dispersión” de una distribución.</p></li>
+<li><p>Lex <span class="math notranslate nohighlight">\(X\)</span> sea una R.V de media <span class="math notranslate nohighlight">\(\mu\)</span>, os la varianza de <span class="math notranslate nohighlight">\(X\)</span>
+denotada como <span class="math notranslate nohighlight">\(\sigma^2\)</span>, <span class="math notranslate nohighlight">\(\sigma^{2}_{X}\)</span> o <span class="math notranslate nohighlight">\(\mathbb{V}(X)\)</span> como:
+\begin{equation}
+\mathbb{V}(X) = \mathbb{E}(X - \mu)^2 =<br />
+\begin{cases}
+\sum_{i=1}^{n} f_{x}(x_{i})(x_{i} - \mu)^2 &amp;\text{if } X \text{ is discrete} \
+\int (x- \mu)^{2}f_X(x)dx &amp;\text{if } X \text{ is continuous}
+\end{cases}
+\end{equation}</p></li>
+<li><p>La <strong>desviación estándar</strong> <span class="math notranslate nohighlight">\(\sigma\)</span> se define como
+<span class="math notranslate nohighlight">\(\sqrt{\mathbb{V}(X)}\)</span></p></li>
+</ul>
+</section>
+<section id="propiedades">
+<h2>Propiedades<a class="headerlink" href="#propiedades" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathbb{V}(X)=  \mathbb{E}(X^2)- \mathbb{E}(X)^2 =  \mathbb{E}(X^2)-\mu^2\)</span></p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(a\)</span> y <span class="math notranslate nohighlight">\(b\)</span> son constantes, entonces
+<span class="math notranslate nohighlight">\(\mathbb{V}(aX+b)=a^2\mathbb{V}(X)\)</span></p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(X_1,\dots,X_n\)</span> son independientes y <span class="math notranslate nohighlight">\(a_1,\dots,a_n\)</span> son
+constantes, entonces
+$<span class="math notranslate nohighlight">\(\mathbb{V}\left(\sum_{i=1}^{n}a_i X_i \right) = \sum_{i=1}^{n} a_{i}^{2} \mathbb{V}(X_{i})\)</span>$</p></li>
+</ul>
+<p><strong>Expectativa y varianza de distribuciones conocidas</strong></p>
+<p><img alt="" src="../_images/expectations.png" /></p>
+</section>
+<section id="ley-de-los-grandes-numeros">
+<h2>Ley de los Grandes Números<a class="headerlink" href="#ley-de-los-grandes-numeros" title="Permalink to this heading">#</a></h2>
+<p><strong>Forma débil</strong></p>
+<ul class="simple">
+<li><p>Este teorema dice que la media de una muestra grande es cercana a la
+media de la distribución.</p></li>
+<li><p>Sean <span class="math notranslate nohighlight">\(X_{1},X_{2},\dots X_{n}\)</span> variables aleatorias IID de media <span class="math notranslate nohighlight">\(\mu\)</span>
+y varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+<li><p>La media <span class="math notranslate nohighlight">\(\overline{X_{n}} =\frac{\sum_{i=1}^{n}X_{i}}{n}\)</span> converge
+en probabilidad a <span class="math notranslate nohighlight">\(\mu\)</span>,
+<span class="math notranslate nohighlight">\(\overline{X_{n}} \overset{P}{\rightarrow} \mu\)</span></p></li>
+<li><p>Esto equivale a decir que para todo <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>
+$<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb{P}(|\overline{X_{n}} - \mu| &lt; \epsilon)=1\)</span>$</p></li>
+<li><p>Entonces la distribución de <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> más concentrada alrededor de
+<span class="math notranslate nohighlight">\(\mu\)</span> como <span class="math notranslate nohighlight">\(n\)</span> crece.</p></li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<ul>
+<li><p>Sea el experimento de lanzar una moneda donde la probabilidad de que salga
+cara es <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Para una V.A distribuida Bernoulli <span class="math notranslate nohighlight">\(\mathbb{E}(X)=p\)</span>.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> la fracción de caras después de <span class="math notranslate nohighlight">\(n\)</span> lanzamientos.</p></li>
+<li><p>La ley de los grandes números nos dice que <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>$  converge</p>
+<p>en  probabilidad a <span class="math notranslate nohighlight">\(p\)</span>.</p>
+</li>
+<li><p>Esto no implica que <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> sea numéricamente igual a
+<span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Pero si <span class="math notranslate nohighlight">\(n\)</span> es suficientemente grande, la distribución de <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>
+se centrará en torno a <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ul>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Visualicemos la ejecución del experimento de lanzar la moneda dos veces con $n=1,000$ y $p=0,5$ en el siguiente gráfico.
+</pre></div>
+</div>
+<p><img alt="" src="../_images/large_numbers.png" /></p>
+<ul class="simple">
+<li><p>En el eje x mostramos el número de lanzamientos y a lo largo del eje y, mostramos la media acumulada, o nuestro número medio de caras obtenidas.</p></li>
+<li><p>Al principio hay mucha variación en las puntuaciones medias.</p></li>
+<li><p>Sin embargo, a medida que avanza hacia 1,000 tiradas, las carreras convergerán hacia la probabilidad esperada de 0.5.</p></li>
+<li><p>Cuantos más eventos aleatorios independientes tengas, menos variabilidad habrá en torno a los resultados teóricamente esperados.</p></li>
+</ul>
+</section>
+<section id="teorema-del-limite-central">
+<h2>Teorema del límite central<a class="headerlink" href="#teorema-del-limite-central" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Mientras que la ley de los grandes números nos dice que <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> se aproxima a <span class="math notranslate nohighlight">\(\mu\)</span> a medida que <span class="math notranslate nohighlight">\(n\)</span> crece.</p></li>
+<li><p>Esto no es suficiente para decir nada acerca de la distribución de <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>.</p></li>
+<li><p>Sean <span class="math notranslate nohighlight">\(X_{1},X_{2},\dots X_{n}\)</span> variables aleatorias IID de media <span class="math notranslate nohighlight">\(\mu\)</span> y varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(\overline{X_{n}}=\frac{\sum_{i=1}^{n} X_i}{n}\)</span>
+$<span class="math notranslate nohighlight">\(Z_{n} \equiv \frac{\overline{X_{n}}-\mu}{\sqrt{\mathbb{V}(\overline{X_{n}})}}=\frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}}  \rightsquigarrow Z\)</span><span class="math notranslate nohighlight">\(
+  where \)</span>Z\sim N(0,1)$</p></li>
+<li><p>Esto equivale a:
+$<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb{P}(Z_{n} \leq z) = \Phi(z) = \int_{-\infty}^{z}\frac{1}{\sqrt{2\pi}}e^{-x^2/2}dx\)</span>$</p></li>
+<li><p>El teorema nos permite aproximar la distribución de <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> a una distribución gaussiana cuando <span class="math notranslate nohighlight">\(n\)</span> es grande.</p></li>
+<li><p>Aunque no conozcamos la distribución de <span class="math notranslate nohighlight">\(X_{i}\)</span>$, podemos aproximar la distribución de su media.</p></li>
+</ul>
+</section>
+<section id="teorema-central-del-limite-2">
+<h2>Teorema central del límite (2)<a class="headerlink" href="#teorema-central-del-limite-2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El ejemplo anterior sobre el campo de fútbol era una clara manifestación del teorema central del límite (TLC).</p></li>
+<li><p>En ese caso estábamos sumando varias variables aleatorias independientes procedentes de una distribución no normal (Binomial).</p></li>
+<li><p>El TLC también es válido para la suma de variables aleatorias, porque la suma es simplemente <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> multiplicada por una constante.</p></li>
+</ul>
+<p>Anotaciones alternativas que muestran que <span class="math notranslate nohighlight">\(Z_{n}\)</span> converge a una Normal</p>
+<div class="math notranslate nohighlight">
+\[ Z_n  \approx N(0,1)     \nonumber \]</div>
+<div class="math notranslate nohighlight">
+\[ \overline{X_{n}}  \approx  N \left(\mu, \frac{\sigma^2}{n} \right)   \nonumber \]</div>
+<div class="math notranslate nohighlight">
+\[ \overline{X_{n}}-\mu  \approx  N \left(0, \frac{\sigma^2}{n} \right)   \nonumber \]</div>
+<div class="math notranslate nohighlight">
+\[ \sqrt{n}(\overline{X_{n}}-\mu)  \approx  N (0,\sigma^2) \nonumber \]</div>
+<div class="math notranslate nohighlight">
+\[ \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}}  \approx  N (0,1) \nonumber \]</div>
+<p><a class="reference external" href="https://youtu.be/EvHiee7gs9Y">Asiste este pequeño video para ilustrar el TCL</a></p>
+</section>
+<section id="por-que-es-importante-el-teorema-central-del-limite">
+<h2>¿Por qué es importante el Teorema Central del Límite?<a class="headerlink" href="#por-que-es-importante-el-teorema-central-del-limite" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Para los experimentadores, el CLT es un concepto extremadamente importante.</p></li>
+<li><p>Para muchas cuestiones prácticas, no podemos obtener mediciones de toda una población de interés.</p></li>
+<li><p>Así que tenemos que seleccionar una muestra de la que extraer conclusiones.</p></li>
+<li><p>¿Cómo podemos estar seguros de que las conclusiones que extraemos sobre la muestra se generalizan a toda la población?</p></li>
+<li><p>El teorema central del límite nos permite hacer afirmaciones sobre la distribución de nuestras <strong>medias muestrales</strong>.</p></li>
+<li><p><em><strong>Ésta será una idea fundamental para la inferencia estadística</strong></em>.</p></li>
+</ul>
+<section id="ejemplo-teorema-central-del-limite">
+<h3>Ejemplo: Teorema central del límite<a class="headerlink" href="#ejemplo-teorema-central-del-limite" title="Permalink to this heading">#</a></h3>
+<ul>
+<li><p>Supongamos que el número de errores <span class="math notranslate nohighlight">\(X\)</span> de un programa informático en una semana sigue una distribución de Poisson con parámetro <span class="math notranslate nohighlight">\(\lambda=5\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(X \sim Poisson(\lambda)\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}(X)=\lambda\)</span> y <span class="math notranslate nohighlight">\(\mathbb{V}(X)=\lambda\)</span>.</p></li>
+<li><p>Esto significa que, en media, un programa informático comete 5 errores en una semana.</p></li>
+<li><p>Si tenemos 125 programas independientes <span class="math notranslate nohighlight">\(X_{1},\dots,X_{125}\)</span> nos gustaría aproximar la probabilidad de que el número medio de errores de todos estos programas durante una semana sea inferior a 5.5:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}(\overline{X_{n}} &lt; 5.5)\]</div>
+</li>
+<li><p>Usando el CLT tenemos que:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P}(\overline{X_{n}} &lt; 5.5) = \mathbb{P} \left( \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} &lt; \frac{5.5 -\mu}{\frac{\sigma} {\sqrt{n}}} \right) \]</div>
+<div class="math notranslate nohighlight">
+\[ \approx \mathbb{P}\left( Z &lt; \frac{5.5 - 5}{\frac{\sqrt{5}}{\sqrt{125}}} \right) \]</div>
+<div class="math notranslate nohighlight">
+\[ = \mathbb{P}( Z &lt; 2.5) = 0.9938\]</div>
+<ul class="simple">
+<li><p>En python:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">125</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="c1"># First calculation</span>
+<span class="n">result_1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_1</span><span class="p">)</span>
+
+<span class="c1"># Alternatively</span>
+<span class="n">result_2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9937903346742238
+0.9937903346742238
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="conclusiones">
+<h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Hemos visitado los principales conceptos de la probabilidad, el lenguaje de la incertidumbre.</p></li>
+<li><p>Las variables aleatorias, las FPDd, las FMP, las FPA, son elementos fundamentales para la inferencia estadística.</p></li>
+<li><p>La ley de los grandes números y el teorema central del límite nos permitirán hacer afirmaciones probabilísticas sobre la población aunque sólo trabajemos con muestras.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="2-0-Schedule_week_2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</strong></p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 2-1: Probabilidad y estadística</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidad-y-estadistica">Probabilidad y estadística</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-la-probabilidad">¿Qué es la probabilidad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptos-de-probabilidad">Conceptos de probabilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidad">Probabilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-las-probabilidades">Interpretación de las probabilidades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-de-la-resta">La regla de la resta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-combinatorios">Métodos combinatorios</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidades-condicionales">Probabilidades condicionales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidades-condicionales-ejemplo">Probabilidades condicionales: Ejemplo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-bayes-y-probabilidades-totales">Teorema de Bayes y probabilidades totales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-aleatoria">Variable aleatoria</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo">Ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-de-variable-aleatoria-r-v">Definiciones de Variable Aleatoria (R.V)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-aleatorias-discretas">Variables aleatorias discretas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-aleatoria-continua">Variable aleatoria continua</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definiciones-de-variables-aleatorias">Definiciones de Variables Aleatorias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#agunas-propiedades">Agunas propiedades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cuantiles">Cuantiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-distribuciones">Algunas distribuciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-binomial">Distribución Binomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Ejemplo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribucion-normal">La distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-de-la-distribucion-normal">Definición formal de la distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades-utiles">Propiedades Útiles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">La distribución normal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Ejemplo:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-distribucion-acumulativa-de-la-distribucion-normal">Función de distribución acumulativa de la distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-regla-68-95-99-7-de-una-distribucion-normal">La regla 68-95-99.7 de una distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simetria-de-la-distribucion-normal">Simetría de la distribución normal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilidades-conjuntas">Probabilidades conjuntas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caso-continuo">Caso Continuo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variables-aleatorias-independientes">Variables Aleatorias Independientes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#valor-esperado">Valor esperado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza">Varianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#propiedades">Propiedades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ley-de-los-grandes-numeros">Ley de los Grandes Números</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-del-limite-central">Teorema del límite central</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-central-del-limite-2">Teorema central del límite (2)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-importante-el-teorema-central-del-limite">¿Por qué es importante el Teorema Central del Límite?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-teorema-central-del-limite">Ejemplo: Teorema central del límite</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
