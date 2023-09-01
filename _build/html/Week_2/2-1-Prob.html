@@ -66,6 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Week_2/2-1-Prob';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 3-1: Inferencia estadística" href="../Week_3/3-1-Inference.html" />
     <link rel="prev" title="Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones" href="2-0-Schedule_week_2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -153,7 +154,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html"><strong>Semana 1. Introducción al análisis estadístico</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
 
 
@@ -176,8 +177,21 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="2-0-Schedule_week_2.html"><strong>Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
 
 
 
@@ -502,7 +516,7 @@ document.write(`
 <li><p>El conjunto de todos los resultados posibles de un experimento aleatorio es el <strong>espacio muestral</strong> <span class="math notranslate nohighlight">\(\Omega\)</span> (puede ser discreto o continuo).</p></li>
 </ul>
 <ul class="simple">
-<li><p>Para lanzar una moneda <span class="math notranslate nohighlight">\(\Omega = \{cara, cruz\)</span>}$,</p></li>
+<li><p>Para lanzar una moneda <span class="math notranslate nohighlight">\(\Omega = \{cara, cruz\}\)</span> ,</p></li>
 <li><p>para el dado de 6 caras <span class="math notranslate nohighlight">\(\Omega=\{1,2,3,4,5,6\}\)</span>,</p></li>
 <li><p>y para la cantidad de tiempo que se tarda en llegar al trabajo <span class="math notranslate nohighlight">\(\Omega\)</span> son todos los números reales posibles mayores que cero.</p></li>
 </ul>
@@ -563,7 +577,7 @@ $<span class="math notranslate nohighlight">\(\mathbb{P}(\neg E) = 1 - \mathbb{P
 <ul class="simple">
 <li><p>Hay algunos hechos de la teoría del recuento que son útiles para calcular probabilidades.</p></li>
 <li><p>Dados <span class="math notranslate nohighlight">\(n\)</span> objetos, el número de maneras de ordenar estos objetos es <span class="math notranslate nohighlight">\(n!=n(n-1)(n-2)\cdots3\cdot2\cdot1\)</span>.</p></li>
-<li><p>Por convención, definimos $<span class="math notranslate nohighlight">\(0!=1\)</span>$.</p></li>
+<li><p>Por convención, definimos $<span class="math notranslate nohighlight">\(0!=1\)</span>$</p></li>
 <li><p>También definimos $<span class="math notranslate nohighlight">\({n \choose k} = \frac{n!}{k!(n-k)!}\)</span>$ léase “n elige k”, que es el número de formas distintas de elegir k objetos de n.</p></li>
 <li><p>Por ejemplo, si tenemos una clase de 20 personas y queremos seleccionar un comité de 3 estudiantes, entonces hay $<span class="math notranslate nohighlight">\({20 \choose 3} = \frac{20!}{3!17!}=1140\)</span>$ posibles comités.</p></li>
 </ul>
@@ -574,7 +588,7 @@ $<span class="math notranslate nohighlight">\(\mathbb{P}(\neg E) = 1 - \mathbb{P
 <span class="c1"># Using the factorial method</span>
 
 <span class="n">result1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">20</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -586,15 +600,18 @@ $<span class="math notranslate nohighlight">\(\mathbb{P}(\neg E) = 1 - \mathbb{P
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the built-in `comb()` function (available from Python 3.8 onwards</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using the built-in `comb()` function (available from Python 3.8 onwards)</span>
 
 <span class="n">comb</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">comb</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">comb</span><span class="p">)</span>
+<span class="n">per</span> <span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">perm</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">per</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1140
+6840
 </pre></div>
 </div>
 </div>
@@ -684,7 +701,7 @@ intersección entre G y O <span class="math notranslate nohighlight">\(\{3,5\}\)
 <span class="n">pos_d</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
 
 <span class="c1"># Print the result</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pos_d</span><span class="p">)</span>  <span class="c1"># Prints: 0.9</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pos_d</span><span class="p">)</span>  <span class="c1">#</span>
 </pre></div>
 </div>
 </div>
@@ -1062,7 +1079,7 @@ $<span class="math notranslate nohighlight">\(f_x(n,p)= {n \choose x}p^{x}(1-p)^
 
 <span class="c1"># Calculate binomial probability</span>
 <span class="n">prob</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>  <span class="c1"># This should output 0.04024566 or something very close to it</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1086,7 +1103,7 @@ $<span class="math notranslate nohighlight">\(f_x(n,p)= {n \choose x}p^{x}(1-p)^
 <p><strong>Ejemplo</strong></p>
 <ul class="simple">
 <li><p>Supongamos que usted y mil de sus amigos más íntimos se alinean en la línea media de un campo de fútbol.</p></li>
-<li><p>Cada uno tiene una moneda en la mano. Cuando suena el silbato, empezáis a lanzar las monedas.</p></li>
+<li><p>Cada uno tiene una moneda en la mano. Cuando suena el silbato, empiezan a lanzar las monedas.</p></li>
 <li><p>Cada vez que una moneda sale cara, esa persona da un paso hacia la portería de la izquierda.</p></li>
 <li><p>Cada vez que una moneda sale cruz, esa persona da un paso hacia la meta de la derecha.</p></li>
 <li><p>Cada persona lanza la moneda 16 veces, sigue los movimientos implícitos y luego se queda quieta.</p></li>
@@ -1095,8 +1112,6 @@ $<span class="math notranslate nohighlight">\(f_x(n,p)= {n \choose x}p^{x}(1-p)^
 <li><p>Es difícil decir dónde acabará cada persona, pero se puede decir con gran seguridad cuál será el conjunto de posiciones.</p></li>
 <li><p>Las distancias se distribuirán de forma aproximadamente normal, o gaussiana.</p></li>
 <li><p>Esto es así aunque la distribución subyacente sea binomial.</p></li>
-<li><p>Esto es así porque hay muchas más formas posibles de realizar una secuencia de pasos izquierda-derecha que sume cero.</p></li>
-<li><p>Hay un poco menos de formas de realizar una secuencia que termine un paso a la izquierda o a la derecha de cero, y así sucesivamente, con el número de secuencias posibles disminuyendo en la curva de campana característica de la distribución normal.</p></li>
 </ul>
 <p>Soccer 1</p>
 <p><img alt="" src="../_images/soccer1.png" /></p>
@@ -1112,6 +1127,46 @@ $<span class="math notranslate nohighlight">\(f_x(n,p)= {n \choose x}p^{x}(1-p)^
 <li><p>Los paseos aleatorios por el campo de fútbol convergen hacia una distribución normal.</p></li>
 <li><p>Cuantos más pasos se dan, más se aproxima la coincidencia entre la distribución empírica real de las posiciones y la distribución normal ideal, superpuesta en el último gráfico del panel inferior.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span><span class="p">,</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">graficar_aproximacion</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="c1"># Parámetros para la normal</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">p</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+
+    <span class="c1"># Rango de x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">binom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">binom</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+
+    <span class="c1"># Graficar binomial</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Binomial&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Graficar normal</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">),</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aproximación Binomial-Normal para n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> y p=</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Probabilidad&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Ajustar valores de n y p para ver la aproximación</span>
+<span class="n">graficar_aproximacion</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">graficar_aproximacion</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">graficar_aproximacion</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cca2ec90d4af12428eb35018c77776f04c2ebf5b113f4ef598f41b2b29b3b9e6.png" src="../_images/cca2ec90d4af12428eb35018c77776f04c2ebf5b113f4ef598f41b2b29b3b9e6.png" />
+<img alt="../_images/4123fe5651bb79a3055cb2e219b6f4a070c23757010a4bddfa74c973fd905321.png" src="../_images/4123fe5651bb79a3055cb2e219b6f4a070c23757010a4bddfa74c973fd905321.png" />
+<img alt="../_images/f7cfe4220597bd070340c9f89a46ba83555e7d1acafaed3b2f3fa997162fface.png" src="../_images/f7cfe4220597bd070340c9f89a46ba83555e7d1acafaed3b2f3fa997162fface.png" />
+</div>
+</div>
 </section>
 <section id="definicion-formal-de-la-distribucion-normal">
 <h2>Definición formal de la distribución normal<a class="headerlink" href="#definicion-formal-de-la-distribucion-normal" title="Permalink to this heading">#</a></h2>
@@ -1164,8 +1219,8 @@ $<span class="math notranslate nohighlight">\(\sum_{i=1}^{n}X_{i}\sim N( \sum_{i
 <li><p>En python podemos acceder a la función de densidad de probabilidad (PDF), la función de distribución acumulativa (CDF), la función de cuantiles y la generación de números aleatorios de las distribuciones.</p></li>
 <li><p>Para una distribución Normal, los comandos en Python son</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">norm.pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : PDF</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">norm.cdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : CDF</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm.pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : Esta es la función de densidad de probabilidad (PDF).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">norm.cdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : Esta es la función de distribución acumulativa (CDF).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">norm.ppf(q,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> : Cuantiles</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">norm.rvs(loc,</span> <span class="pre">scale,</span> <span class="pre">size)</span></code> : Generación de números aleatorios</p></li>
 </ul>
@@ -1182,14 +1237,14 @@ $<span class="math notranslate nohighlight">\(\sum_{i=1}^{n}X_{i}\sim N( \sum_{i
 <span class="c1"># For the first snippet</span>
 <span class="n">value1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">prob1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>
 
 <span class="c1"># For the second snippet</span>
 <span class="n">mean</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">sd</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">value2</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">prob2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1234,7 +1289,7 @@ $<span class="math notranslate nohighlight">\(\sum_{i=1}^{n}X_{i}\sim N( \sum_{i
 <span class="n">value3</span> <span class="o">=</span> <span class="mi">18</span>
 <span class="n">value4</span> <span class="o">=</span> <span class="mi">13</span>
 <span class="n">prob2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value3</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">value4</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sd</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  <span class="c1"># Should also be close to 0.3811686</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1281,15 +1336,15 @@ $<span class="math notranslate nohighlight">\(\Phi(z)= \mathbb{P}(Z \leq z) = \f
 
 <span class="c1"># For the first range (-1 to 1)</span>
 <span class="n">prob1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>
 
 <span class="c1"># For the second range (-2 to 2)</span>
 <span class="n">prob2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>
 
 <span class="c1"># For the third range (-3 to 3)</span>
 <span class="n">prob3</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob3</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">prob3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1315,19 +1370,19 @@ $<span class="math notranslate nohighlight">\(\Phi(z)= \mathbb{P}(Z \leq z) = \f
 
 <span class="c1"># Density for 1</span>
 <span class="n">density1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">density1</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">density1</span><span class="p">)</span>
 
-<span class="c1"># Density for -1 </span>
+<span class="c1"># Density for -1</span>
 <span class="n">density2</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">density2</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">density2</span><span class="p">)</span>
 
 <span class="c1"># Cumulative probability for 0.95</span>
 <span class="n">prob1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mf">0.95</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">prob1</span><span class="p">)</span>
 
 <span class="c1"># Tail probability for -0.95 (1 - CDF for -0.95)</span>
 <span class="n">prob2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mf">0.95</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>  
+<span class="nb">print</span><span class="p">(</span><span class="n">prob2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1496,14 +1551,12 @@ $<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb
 <span class="math notranslate nohighlight">\(\mu\)</span> como <span class="math notranslate nohighlight">\(n\)</span> crece.</p></li>
 </ul>
 <p><strong>Ejemplo</strong></p>
-<ul>
+<ul class="simple">
 <li><p>Sea el experimento de lanzar una moneda donde la probabilidad de que salga
 cara es <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
 <li><p>Para una V.A distribuida Bernoulli <span class="math notranslate nohighlight">\(\mathbb{E}(X)=p\)</span>.</p></li>
 <li><p>Sea <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> la fracción de caras después de <span class="math notranslate nohighlight">\(n\)</span> lanzamientos.</p></li>
-<li><p>La ley de los grandes números nos dice que <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>$  converge</p>
-<p>en  probabilidad a <span class="math notranslate nohighlight">\(p\)</span>.</p>
-</li>
+<li><p>La ley de los grandes números nos dice que <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>  converge  probabilidad a <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
 <li><p>Esto no implica que <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> sea numéricamente igual a
 <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
 <li><p>Pero si <span class="math notranslate nohighlight">\(n\)</span> es suficientemente grande, la distribución de <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>
@@ -1512,6 +1565,50 @@ se centrará en torno a <span class="math notranslate nohighlight">\(p\)</span>.
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Visualicemos la ejecución del experimento de lanzar la moneda dos veces con $n=1,000$ y $p=0,5$ en el siguiente gráfico.
 </pre></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">lanzar_moneda</span><span class="p">():</span>
+    <span class="c1"># 0 es cara, 1 es sello</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">simulacion</span><span class="p">(</span><span class="n">num_lanzamientos</span><span class="p">):</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">caras</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_lanzamientos</span><span class="p">):</span>
+        <span class="n">resultado</span> <span class="o">=</span> <span class="n">lanzar_moneda</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">resultado</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">caras</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">caras</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">resultados</span>
+
+<span class="k">def</span> <span class="nf">graficar_simulacion</span><span class="p">(</span><span class="n">resultados</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">resultados</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Proporción de caras tras N lanzamientos&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Valor esperado (0.5)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Número de lanzamientos&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Proporción de caras&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ley de los Grandes Números: Lanzamiento de moneda&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">num_lanzamientos</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="n">simulacion</span><span class="p">(</span><span class="n">num_lanzamientos</span><span class="p">)</span>
+    <span class="n">graficar_simulacion</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/357bfe94fbdb2bf105abcf5b4fbab9461d57795c11261c9de8afb586f252c41f.png" src="../_images/357bfe94fbdb2bf105abcf5b4fbab9461d57795c11261c9de8afb586f252c41f.png" />
+</div>
+</div>
+<p>Este código usa la biblioteca numpy para el lanzamiento aleatorio de la moneda y matplotlib para graficar los resultados. Si ejecutas el código, verás que a medida que el número de lanzamientos aumenta, la proporción de caras se acerca al valor esperado del 50%.</p>
 <p><img alt="" src="../_images/large_numbers.png" /></p>
 <ul class="simple">
 <li><p>En el eje x mostramos el número de lanzamientos y a lo largo del eje y, mostramos la media acumulada, o nuestro número medio de caras obtenidas.</p></li>
@@ -1532,8 +1629,48 @@ $<span class="math notranslate nohighlight">\(Z_{n} \equiv \frac{\overline{X_{n}
 <li><p>Esto equivale a:
 $<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb{P}(Z_{n} \leq z) = \Phi(z) = \int_{-\infty}^{z}\frac{1}{\sqrt{2\pi}}e^{-x^2/2}dx\)</span>$</p></li>
 <li><p>El teorema nos permite aproximar la distribución de <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> a una distribución gaussiana cuando <span class="math notranslate nohighlight">\(n\)</span> es grande.</p></li>
-<li><p>Aunque no conozcamos la distribución de <span class="math notranslate nohighlight">\(X_{i}\)</span>$, podemos aproximar la distribución de su media.</p></li>
+<li><p>Aunque no conozcamos la distribución de <span class="math notranslate nohighlight">\(X_{i}\)</span>, podemos aproximar la distribución de su media.</p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">sample_means</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Obtiene una lista con las medias de num_samples muestras, cada una de tamaño sample_size.&quot;&quot;&quot;</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">):</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">)</span>  <span class="c1"># distribución uniforme entre 0 y 1</span>
+        <span class="n">means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">means</span>
+
+<span class="k">def</span> <span class="nf">plot_hist</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Grafica un histograma de las medias.&quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Distribución de las medias de </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s1"> muestras de tamaño </span><span class="si">{</span><span class="n">sample_size</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Media de la muestra&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Densidad&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">sample_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+    <span class="n">num_samples</span> <span class="o">=</span> <span class="mi">1000</span>
+
+    <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="n">sample_sizes</span><span class="p">:</span>
+        <span class="n">means</span> <span class="o">=</span> <span class="n">sample_means</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>
+        <span class="n">plot_hist</span><span class="p">(</span><span class="n">means</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/834eec3c97795beee97c2ed76dcf61c69fcc9af8337a0f8b6064ea1efc158477.png" src="../_images/834eec3c97795beee97c2ed76dcf61c69fcc9af8337a0f8b6064ea1efc158477.png" />
+<img alt="../_images/65ac4b3beee7eedeaa03e1fcd8f697383ae77e4fd6e6da4caeef8ed958d18a5f.png" src="../_images/65ac4b3beee7eedeaa03e1fcd8f697383ae77e4fd6e6da4caeef8ed958d18a5f.png" />
+<img alt="../_images/62bec508954f0f8a965b305d9d4dc665546ff8f0e93cc970ae50b6647dee9fae.png" src="../_images/62bec508954f0f8a965b305d9d4dc665546ff8f0e93cc970ae50b6647dee9fae.png" />
+<img alt="../_images/0af6cdf46d5397033dc825da6191ea737627c3f6883a1ca011e70156dd264865.png" src="../_images/0af6cdf46d5397033dc825da6191ea737627c3f6883a1ca011e70156dd264865.png" />
+<img alt="../_images/20783fd044f887b8d3ce92b90d29d2a21bdfb7b57bc46fa9f87cb3742dd10afa.png" src="../_images/20783fd044f887b8d3ce92b90d29d2a21bdfb7b57bc46fa9f87cb3742dd10afa.png" />
+</div>
+</div>
 </section>
 <section id="teorema-central-del-limite-2">
 <h2>Teorema central del límite (2)<a class="headerlink" href="#teorema-central-del-limite-2" title="Permalink to this heading">#</a></h2>
@@ -1544,21 +1681,19 @@ $<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb
 </ul>
 <p>Anotaciones alternativas que muestran que <span class="math notranslate nohighlight">\(Z_{n}\)</span> converge a una Normal</p>
 <div class="math notranslate nohighlight">
-\[ Z_n  \approx N(0,1)     \nonumber \]</div>
-<div class="math notranslate nohighlight">
-\[ \overline{X_{n}}  \approx  N \left(\mu, \frac{\sigma^2}{n} \right)   \nonumber \]</div>
-<div class="math notranslate nohighlight">
-\[ \overline{X_{n}}-\mu  \approx  N \left(0, \frac{\sigma^2}{n} \right)   \nonumber \]</div>
-<div class="math notranslate nohighlight">
-\[ \sqrt{n}(\overline{X_{n}}-\mu)  \approx  N (0,\sigma^2) \nonumber \]</div>
-<div class="math notranslate nohighlight">
-\[ \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}}  \approx  N (0,1) \nonumber \]</div>
+\[\begin{split}\begin{aligned}
+  Z_n  &amp;\approx &amp;N(0,1)     \nonumber \\
+  \overline{X_{n}} &amp; \approx &amp; N \left(\mu, \frac{\sigma^2}{n} \right)   \nonumber \\
+  \overline{X_{n}}-\mu &amp; \approx &amp; N \left(0, \frac{\sigma^2}{n} \right)   \nonumber \\
+  \sqrt{n}(\overline{X_{n}}-\mu) &amp; \approx &amp; N (0,\sigma^2) \nonumber \\
+  \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} &amp; \approx &amp; N (0,1) \nonumber \\
+\end{aligned}\end{split}\]</div>
 <p><a class="reference external" href="https://youtu.be/EvHiee7gs9Y">Asiste este pequeño video para ilustrar el TCL</a></p>
 </section>
 <section id="por-que-es-importante-el-teorema-central-del-limite">
 <h2>¿Por qué es importante el Teorema Central del Límite?<a class="headerlink" href="#por-que-es-importante-el-teorema-central-del-limite" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Para los experimentadores, el CLT es un concepto extremadamente importante.</p></li>
+<li><p>Para los experimentadores, el TCL es un concepto extremadamente importante.</p></li>
 <li><p>Para muchas cuestiones prácticas, no podemos obtener mediciones de toda una población de interés.</p></li>
 <li><p>Así que tenemos que seleccionar una muestra de la que extraer conclusiones.</p></li>
 <li><p>¿Cómo podemos estar seguros de que las conclusiones que extraemos sobre la muestra se generalizan a toda la población?</p></li>
@@ -1567,22 +1702,41 @@ $<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb
 </ul>
 <section id="ejemplo-teorema-central-del-limite">
 <h3>Ejemplo: Teorema central del límite<a class="headerlink" href="#ejemplo-teorema-central-del-limite" title="Permalink to this heading">#</a></h3>
-<ul>
+<ul class="simple">
 <li><p>Supongamos que el número de errores <span class="math notranslate nohighlight">\(X\)</span> de un programa informático en una semana sigue una distribución de Poisson con parámetro <span class="math notranslate nohighlight">\(\lambda=5\)</span>.</p></li>
 <li><p>Si <span class="math notranslate nohighlight">\(X \sim Poisson(\lambda)\)</span>, <span class="math notranslate nohighlight">\(\mathbb{E}(X)=\lambda\)</span> y <span class="math notranslate nohighlight">\(\mathbb{V}(X)=\lambda\)</span>.</p></li>
 <li><p>Esto significa que, en media, un programa informático comete 5 errores en una semana.</p></li>
-<li><p>Si tenemos 125 programas independientes <span class="math notranslate nohighlight">\(X_{1},\dots,X_{125}\)</span> nos gustaría aproximar la probabilidad de que el número medio de errores de todos estos programas durante una semana sea inferior a 5.5:</p>
+<li><p>Si tenemos 125 programas independientes <span class="math notranslate nohighlight">\(X_{1},\dots,X_{125}\)</span> nos gustaría aproximar la probabilidad de que el número medio de errores de todos estos programas durante una semana sea inferior a 5.5:</p></li>
+</ul>
+<p><strong>Solución</strong></p>
+<p>Denotemos <span class="math notranslate nohighlight">\( S \)</span> como la suma de errores de los 125 programas en una semana:
+$<span class="math notranslate nohighlight">\( S = X_1 + X_2 + \dots + X_{125} \)</span>$</p>
+<p>Dado que <span class="math notranslate nohighlight">\( X \sim Poisson(\lambda) \)</span>, sabemos que:
+$<span class="math notranslate nohighlight">\( \mathbb{E}(X) = \lambda \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \mathbb{V}(X) = \lambda \)</span>$</p>
+<p>Por lo tanto, para la suma <span class="math notranslate nohighlight">\( S \)</span> de los 125 programas:
+$<span class="math notranslate nohighlight">\( \mathbb{E}(S) = 125 \times \lambda = 125 \times 5 = 625 \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \mathbb{V}(S) = 125 \times \lambda = 125 \times 5 = 625 \)</span>$</p>
+<p>Usando el Teorema del Límite Central, la suma <span class="math notranslate nohighlight">\( S \)</span> puede ser aproximada por una distribución normal con:
+$<span class="math notranslate nohighlight">\( \mu = \mathbb{E}(S) = 625 \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \sigma^2 = \mathbb{V}(S) = 625 \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \sigma = \sqrt{625} = 25 \)</span>$</p>
+<p>Queremos encontrar la probabilidad de que el número medio de errores de estos 125 programas sea inferior a 5.5. Es decir, queremos <span class="math notranslate nohighlight">\( P(\frac{S}{125} &lt; 5.5) \)</span>, lo que es lo mismo que <span class="math notranslate nohighlight">\( P(S &lt; 5.5 \times 125) = P(S &lt; 687.5) \)</span>.</p>
+<p>Para normalizar <span class="math notranslate nohighlight">\( S \)</span>:
+$<span class="math notranslate nohighlight">\( Z = \frac{S - \mu}{\sigma} = \frac{S - 625}{25} \)</span>$</p>
+<p>Ahora, queremos encontrar <span class="math notranslate nohighlight">\( P(Z &lt; \frac{687.5 - 625}{25}) \)</span>:
+$<span class="math notranslate nohighlight">\( P(Z &lt; 2.5) \)</span>$</p>
+<p>Finalmente, utilizamos la tabla de la distribución normal estándar (o un software) para encontrar esta probabilidad.</p>
 <div class="math notranslate nohighlight">
 \[\mathbb{P}(\overline{X_{n}} &lt; 5.5)\]</div>
-</li>
-<li><p>Usando el CLT tenemos que:</p></li>
+<ul class="simple">
+<li><p>Usando el CLT tenemos que:
+\begin{align*}
+\mathbb{P}(\overline{X_{n}} &lt; 5.5) &amp;= \mathbb{P} \left( \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} &lt; \frac{5.5 -\mu}{\frac{\sigma}{\sqrt{n}}} \right) \
+&amp;\approx \mathbb{P}\left( Z &lt; \frac{5.5 - 5}{\frac{\sqrt{5}}{\sqrt{125}}} \right) \
+&amp;= \mathbb{P}( Z &lt; 2.5) = 0.9938
+\end{align*}</p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[ \mathbb{P}(\overline{X_{n}} &lt; 5.5) = \mathbb{P} \left( \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} &lt; \frac{5.5 -\mu}{\frac{\sigma} {\sqrt{n}}} \right) \]</div>
-<div class="math notranslate nohighlight">
-\[ \approx \mathbb{P}\left( Z &lt; \frac{5.5 - 5}{\frac{\sqrt{5}}{\sqrt{125}}} \right) \]</div>
-<div class="math notranslate nohighlight">
-\[ = \mathbb{P}( Z &lt; 2.5) = 0.9938\]</div>
 <ul class="simple">
 <li><p>En python:</p></li>
 </ul>
@@ -1618,7 +1772,7 @@ $<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb
 <h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Hemos visitado los principales conceptos de la probabilidad, el lenguaje de la incertidumbre.</p></li>
-<li><p>Las variables aleatorias, las FPDd, las FMP, las FPA, son elementos fundamentales para la inferencia estadística.</p></li>
+<li><p>Las variables aleatorias, las FPD, las FMP, las FPA, son elementos fundamentales para la inferencia estadística.</p></li>
 <li><p>La ley de los grandes números y el teorema central del límite nos permitirán hacer afirmaciones probabilísticas sobre la población aunque sólo trabajemos con muestras.</p></li>
 </ul>
 </section>
@@ -1661,8 +1815,17 @@ $<span class="math notranslate nohighlight">\(\lim_{n\rightarrow \infty} \mathbb
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</strong></p>
+        <p class="prev-next-title">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../Week_3/3-1-Inference.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lectura 3-1: Inferencia estadística</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   

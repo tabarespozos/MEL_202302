@@ -1,0 +1,1694 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 3-1: Inferencia estadística &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_3/3-1-Inference';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 3-2: Pruebas de Hipotesis" href="3-2-Hypothesis.html" />
+    <link rel="prev" title="Lectura 2-1: Probabilidad y estadística" href="../Week_2/2-1-Prob.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_3/3-1-Inference.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_3/3-1-Inference.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_3/3-1-Inference.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 3-1: Inferencia estadística</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 3-1: Inferencia estadística</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#poblaciones-y-muestras">Poblaciones y muestras</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-muestreo">Métodos de muestreo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgos">Sesgos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgo-de-seleccion-de-la-muestra">Sesgo de selección de la muestra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgo-de-respuesta">Sesgo de respuesta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestras-aleatorias">Muestras aleatorias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestreo-aleatorio-estratificado">Muestreo aleatorio estratificado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-de-la-inferencia-estadistica">Definición formal de la inferencia estadística</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-frecuentista">Enfoque Frecuentista</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-puntual">Estimación puntual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-las-muestras">Distribución de las muestras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-estandar">Error estándar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-media-muestral">La media muestral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-error-tipico-de-la-media-muestral">El error típico de la media muestral</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comentarios">Comentarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-de-la-muestra">Varianza de la muestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-de-la-poblacion">Varianza de la población</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribucion-muestral-de-la-media-muestral">La distribución muestral de la media muestral</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Comentarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-puntual-de-una-proporcion">Estimación puntual de una proporción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia">Consistencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-maxima-verosimilitud">Estimación de máxima verosimilitud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-estimacion-de-maxima-verosimilitud">Definición Estimación de Máxima Verosimilitud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Estimación de máxima verosimilitud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">Intervalo de confianza</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discusion">Discusión</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza-de-la-media-muestral">Intervalo de confianza de la media muestral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-t">Distribución T</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-t-algunas-curiosidades">Distribución T: algunas curiosidades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza-de-la-distribucion-t">Intervalo de confianza de la distribución T</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza-para-una-proporcion-de-poblacion">Intervalo de confianza para una proporción de población</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-boostrap">El Boostrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-ejemplo-de-analisis">Un ejemplo de analisis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-3-1-inferencia-estadistica">
+<h1>Lectura 3-1: Inferencia estadística<a class="headerlink" href="#lectura-3-1-inferencia-estadistica" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="poblaciones-y-muestras">
+<h1>Poblaciones y muestras<a class="headerlink" href="#poblaciones-y-muestras" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>El objetivo principal de la inferencia estadística es investigar propiedades sobre una <strong>población</strong> objetivo.</p></li>
+<li><p>Una <strong>población</strong> es el conjunto de individuos que nos interesa estudiar.</p></li>
+<li><p>Puede ser cualquier cosa, desde todos los seres humanos hasta un tipo específico de célula.</p></li>
+<li><p>Los elementos individuales de la población a veces se denominan  <strong>unidades</strong>.</p>
+<ul>
+<li><p>Ejemplo: ¿Cuál es la altura promedio de todas las personas en Uruguay? Aquí la población son todos los habitantes de Uruguay.</p></li>
+</ul>
+</li>
+<li><p>Para sacar conclusiones sobre una <strong>población</strong>, generalmente no es posible reunir todos los datos sobre ella.</p></li>
+<li><p>El caso especial en que se recopilan datos de toda la población es  un <strong>censo</strong>.</p></li>
+<li><p>En la inferencia estadística intentamos sacar conclusiones razonables sobre  una población basándonos en la evidencia proporcionada por los <strong>datos de la muestra</strong>.</p></li>
+<li><p>Una <strong>estadística muestral</strong> o simplemente <strong>estadística</strong> es una medida cuantitativa calculada a partir de una muestra.</p>
+<ul>
+<li><p>Ejemplos: la media, la desviación típica, el mínimo, el máximo.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<ul class="simple">
+<li><p>Realizar una <strong>encuesta</strong> por muestreo puede ayudar a determinar el porcentaje de personas de una población que tienen una característica determinada.</p></li>
+<li><p>Nielsen Media Research realiza una <strong>encuesta</strong> para poder obtener una   estimación de la proporción de hogares estadounidenses que sintonizan  un determinado programa de televisión.</p></li>
+<li><p>La proporción real que Nielsen obtendría de una encuesta se denomina “parámetro de población”.</p></li>
+<li><p>Nielsen utiliza la proporción en la <strong>muestra</strong> como una <strong>estimación</strong> de  este parámetro.</p></li>
+<li><p>Dicha estimación a partir de una muestra se denomina <strong>estadística</strong>.</p></li>
+</ul>
+<section id="metodos-de-muestreo">
+<h2>Métodos de muestreo<a class="headerlink" href="#metodos-de-muestreo" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Nuestro objetivo en el muestreo es determinar el valor de una estadística para toda una población de interés, utilizando sólo un pequeño subconjunto de la población.</p></li>
+<li><p>Lo hacemos principalmente para ahorrar tiempo y esfuerzo.</p></li>
+<li><p>Una buena muestra es <strong>representativa</strong>: se parece a una pequeña versión de la población.</p></li>
+<li><p>En la práctica, no podemos saber si una muestra es representativa, ya que no podemos obtener todos los datos de la población.</p></li>
+<li><p>Pero sí podemos saber si un <strong>método de muestreo</strong> es bueno o no.</p></li>
+<li><p>Un método de muestreo es <strong>sesgado</strong> si produce muestras tales que la estimación de la muestra es mayor o menor, por término medio, que el parámetro de la población que se está estimando.</p></li>
+<li><p>Los problemas o <strong>sesgos</strong> de un método de muestreo pueden tener dos orígenes:</p></li>
+</ul>
+</section>
+<section id="sesgos">
+<h2>Sesgos<a class="headerlink" href="#sesgos" title="Permalink to this heading">#</a></h2>
+<section id="sesgo-de-seleccion-de-la-muestra">
+<h3>Sesgo de selección de la muestra<a class="headerlink" href="#sesgo-de-seleccion-de-la-muestra" title="Permalink to this heading">#</a></h3>
+<p>El sesgo de selección de la muestra se produce cuando las muestras tienden a dar lugar a estimaciones de los parámetros de la población que son sistemáticamente demasiado altas o demasiado bajas. Puede producirse de las siguientes formas:</p>
+<ul class="simple">
+<li><p><strong>Sesgo de tamaño</strong>: utilización de un método que da a las unidades más grandes una mayor chance  de estar en la muestra.</p></li>
+<li><p><strong>Sesgo de respuesta voluntaria</strong>: dejar que las personas se ofrezcan voluntarias para estar en la  muestra.</p></li>
+<li><p><strong>Sesgo de conveniencia</strong>: las unidades se eligen por conveniencia.</p></li>
+<li><p><strong>Sesgo de muestreo por juicio</strong>: selección de las unidades de muestreo basada en juicio de “expertos”. Problema: los expertos pueden pasar por alto importantes de una población.</p></li>
+<li><p><strong>Sesgo del marco de muestreo</strong>: un marco de muestreo es la “lista” de todas las unidades de población de las que se selecciona la muestra. La construcción de un  marco de muestreo inadecuado es una causa de sesgo.</p></li>
+</ul>
+</section>
+<section id="sesgo-de-respuesta">
+<h3>Sesgo de respuesta<a class="headerlink" href="#sesgo-de-respuesta" title="Permalink to this heading">#</a></h3>
+<p>Estos tipos de sesgo se derivan del método de obtención de la respuesta.</p>
+<ul class="simple">
+<li><p><strong>Sesgo de falta de respuesta</strong>: a menudo, las personas se niegan a responder a una encuesta.   Estas personas pueden ser diferentes de las que aceptan participar.</p></li>
+<li><p><strong>Sesgo de respuesta incorrecta o de medición</strong>: el sesgo puede deberse a una mentira intencionada o a un error de medición. resultado de una mentira intencionada, o provenir de dispositivos de medición inexactos, incluidos los recuerdos inexactos de las personas entrevistadas en los datos autodeclarados.</p></li>
+<li><p><strong>Sesgo de cuestionario</strong>: las opiniones de las personas pueden variar en función del tono de voz del entrevistador, el orden en que se formulan las preguntas y la redacción de las mismas, etc.</p></li>
+</ul>
+</section>
+</section>
+<section id="muestras-aleatorias">
+<h2>Muestras aleatorias<a class="headerlink" href="#muestras-aleatorias" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La idea clave para construir una buena muestra es <strong>aleatorizar</strong>, es decir, dejar que el azar elija las unidades de muestreo.</p></li>
+<li><p>La selección de la muestra por azar es el único método que garantiza la imparcialidad.</p></li>
+<li><p>Todas las muestras posibles de un tamaño fijo dado tienen la misma probabilidad.</p></li>
+<li><p>Se indexan todos los individuos de la población y se extraen aleatoriamente con igual probabilidad hasta alcanzar el tamaño de la muestra.</p></li>
+</ul>
+</section>
+<section id="muestreo-aleatorio-estratificado">
+<h2>Muestreo aleatorio estratificado<a class="headerlink" href="#muestreo-aleatorio-estratificado" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Dividimos la población en subgrupos basados en características compartidas (por ejemplo, país, ciudad) que no se solapan y que cubren todo el marco de muestreo.</p></li>
+<li><p>Estos subgrupos se denominan estratos.</p></li>
+<li><p>Se toma una muestra aleatoria simple para cada estrato proporcional a su tamaño.</p></li>
+<li><p>Garantiza que cada estrato esté debidamente representado en la muestra.</p></li>
+</ul>
+<p><img alt="" src="../_images/sample_strat.png" /></p>
+</section>
+<section id="definicion-formal-de-la-inferencia-estadistica">
+<h2>Definición formal de la inferencia estadística<a class="headerlink" href="#definicion-formal-de-la-inferencia-estadistica" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El proceso de extraer conclusiones sobre una población a partir de datos muestrales se conoce como <strong>inferencia estadística</strong>.</p></li>
+<li><p>Desde un punto de vista general, el objetivo de la inferencia es <strong>inferir</strong> la distribución que genera los datos observados.</p>
+<ul>
+<li><p>Ejemplo: Dada una muestra <span class="math notranslate nohighlight">\(X_1, \dots, X_n \sim F\)</span>, ¿cómo inferimos <span class="math notranslate nohighlight">\(F\)</span>?</p></li>
+</ul>
+</li>
+<li><p>Sin embargo, en la mayoría de los casos sólo nos interesa inferir alguna propiedad de <span class="math notranslate nohighlight">\(F\)</span> (por ejemplo, su valor <strong>medio</strong>).</p></li>
+<li><p>Los modelos estadísticos que suponen que la distribución puede modelizarse con un conjunto finito de parámetros <span class="math notranslate nohighlight">\(\theta= (\theta_{1},\theta_{2},\dots,\theta_{k})\)</span> se denominan <strong>modelos paramétricos</strong>.</p></li>
+<li><p>Ejemplo: si suponemos que los datos proceden de una distribución normal <span class="math notranslate nohighlight">\(N(\mu,\sigma^2)\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span> serían los parámetros del modelo.</p></li>
+</ul>
+</section>
+<section id="enfoque-frecuentista">
+<h2>Enfoque Frecuentista<a class="headerlink" href="#enfoque-frecuentista" title="Permalink to this heading">#</a></h2>
+<p>Los métodos estadísticos que se presentarán en esta clase se conocen como <strong>métodos frecuentistas (o clásicos)</strong>. Se basan en los siguientes
+postulados :</p>
+<ul class="simple">
+<li><p>La probabilidad se refiere a frecuencias relativas límite. Las probabilidades son propiedades objetivas del mundo real.</p></li>
+<li><p>Los parámetros son constantes fijas y desconocidas. Como no fluctúan, no se pueden hacer afirmaciones útiles sobre la probabilidad de los parámetros.</p></li>
+<li><p>Los procedimientos estadísticos deben diseñarse para que tengan propiedades de frecuencia a largo plazo bien definidas. Por ejemplo, un intervalo de confianza del 95% debe atrapar el valor verdadero del parámetro con una frecuencia límite de al menos el 95%.</p></li>
+</ul>
+<p>Existe otro enfoque de la inferencia denominado <strong>inferencia bayesiana</strong>, que se basa en postulados diferentes, que en una sección asincronica les compartiré.</p>
+</section>
+<section id="estimacion-puntual">
+<h2>Estimación puntual<a class="headerlink" href="#estimacion-puntual" title="Permalink to this heading">#</a></h2>
+<p>Definición puntual:</p>
+<ul class="simple">
+<li><p>Sean <span class="math notranslate nohighlight">\(X_1, \dots, X_n\)</span>  <span class="math notranslate nohighlight">\(n\)</span>  puntos de datos IID de alguna distribución <span class="math notranslate nohighlight">\(F\)</span>.</p></li>
+<li><p>Un estimador puntual <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span> de un parámetro <span class="math notranslate nohighlight">\(\theta\)</span> es una función de <span class="math notranslate nohighlight">\(X_1, \dots, X_n\)</span>: $<span class="math notranslate nohighlight">\(\hat{\theta}_n=g(X_1, \dots, X_n)\)</span>$</p></li>
+<li><p>El <strong>bias</strong> de un estimador se define como:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{bias}(\hat{\theta}_n)=\mathbb{E}(\hat{\theta}_n)-\theta\]</div>
+<ul class="simple">
+<li><p>Un estimador es no sesgado si <span class="math notranslate nohighlight">\(\mathbb{E}(\hat{\theta}_n)=\theta\)</span> or <span class="math notranslate nohighlight">\(\text{bias}(\hat{\theta}_n)=0\)</span></p></li>
+</ul>
+</section>
+<section id="distribucion-de-las-muestras">
+<h2>Distribución de las muestras<a class="headerlink" href="#distribucion-de-las-muestras" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Si tomamos múltiples muestras, el valor de nuestra estimación estadística
+<span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span> también variará de una muestra a otra.</p></li>
+<li><p>Nos referimos a esta distribución de nuestro estimador a través de las muestras como la  <strong>distribución muestral</strong> .</p></li>
+<li><p>La distribución de muestreo puede considerarse como la distribución de <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span> para todas las muestras posibles de la misma población de tamaño <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>La distribución de muestreo describe la variabilidad de la estimación puntual en torno al parámetro poblacional verdadero de una muestra a otra.</p></li>
+<li><p><em><strong>Debemos tener en cuenta que se trata de un concepto imaginario, ya que en situaciones reales no podemos obtener todas las muestras posibles.</strong></em></p></li>
+<li><p>De hecho, en la mayoría de los casos sólo trabajaremos con una única muestra.</p></li>
+</ul>
+</section>
+<section id="error-estandar">
+<h2>Error estándar<a class="headerlink" href="#error-estandar" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>La desviación estándar de <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span> se denomina <strong>error estándar</strong>  <span class="math notranslate nohighlight">\(se\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[se(\hat{\theta}_n)=\sqrt{\mathbb{V}(\hat{\theta}_n})\]</div>
+<ul class="simple">
+<li><p>El error típico nos habla de la variabilidad del estimador entre todas las muestras posibles del mismo tamaño.</p></li>
+<li><ul>
+<li><p>Es una medida de la incertidumbre de la estimación puntual.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="la-media-muestral">
+<h2>La media muestral<a class="headerlink" href="#la-media-muestral" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Sea  <span class="math notranslate nohighlight">\(X_1,X_2,\dots,X_n\)</span> una muestra aleatoria de una población de media <span class="math notranslate nohighlight">\(\mu\)</span> y varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+<li><p>Supongamos que estamos interesados en estimar la <strong>media poblacional</strong> <span class="math notranslate nohighlight">\(\mu\)</span> (por ejemplo, la estatura media de los Colombianos).</p></li>
+<li><p>Una estadística muestral que podemos obtener de los datos es la <strong>media muestral</strong> <span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\overline{X_{n}}=\frac{1}{n}\sum_{i=1}^{n} X_i\]</div>
+<ul class="simple">
+<li><p>La media muestral es un <strong>estimador puntual</strong> de la media  <span class="math notranslate nohighlight">\(\overline{X_{n}} = \hat{\mu}\)</span>.</p></li>
+<li><p>Podemos demostrar que la media muestral es un estimador no sesgado de <span class="math notranslate nohighlight">\(\mu\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}(\overline{X_{n}}) = \mathbb{E}(\frac 1n \sum_{i=1}^{n} X_i)  =  \frac 1n \times \mathbb{E}(\sum_{i=1}^{n} X_i) = \frac 1n (n \times \mu) = \mu\]</div>
+</section>
+<section id="el-error-tipico-de-la-media-muestral">
+<h2>El error típico de la media muestral<a class="headerlink" href="#el-error-tipico-de-la-media-muestral" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Error típico de la media muestral <span class="math notranslate nohighlight">\(se(\overline{X_{n}}) = \sqrt{\mathbb{V}(\overline{X_{n}})}\)</span> puede ser calculada como:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathbb{V}(\overline{X_{n}})=\mathbb{V}(\frac 1n \sum_{i=1}^{n} X_i) = \frac{1}{n^2} \mathbb{V}(\sum_{i=1}^{n} X_i) = \frac{n}{n^2} \mathbb{V}(X_i)=\frac{\sigma^2}{n}\]</div>
+<ul class="simple">
+<li><p>Entonces, $<span class="math notranslate nohighlight">\(se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}\)</span>$</p></li>
+<li><p>La fórmula del error típico de la media implica que la  calidad de nuestra medición implica dos cantidades: la variabilidad población <span class="math notranslate nohighlight">\(\sigma\)</span>, y el tamaño de nuestra muestra <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
+<section id="comentarios">
+<h3>Comentarios<a class="headerlink" href="#comentarios" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>No tenemos control sobre la variabilidad de la población, pero sí sobre el tamaño de la muestra.</p></li>
+<li><p>Por lo tanto, si deseamos mejorar nuestras estadísticas muestrales (reduciendo su variabilidad muestral), deberíamos utilizar muestras más grandes.</p></li>
+<li><p>Sin embargo, la fórmula también nos dice algo muy fundamental sobre  muestreo estadístico.</p>
+<ul>
+<li><p>Que la utilidad de las muestras más grandes disminuye con la raíz cuadrada del tamaño de la muestra.</p></li>
+<li><p>Esto significa que duplicar el tamaño de la muestra no duplicará la calidad de las estadísticas, sino que la mejorará en un factor de <span class="math notranslate nohighlight">\(\sqrt{2}\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="varianza-de-la-muestra">
+<h2>Varianza de la muestra<a class="headerlink" href="#varianza-de-la-muestra" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Un problema común al calcular <span class="math notranslate nohighlight">\(se(\overline{X_{n}})\)</span> es que, en  general, no conocemos <span class="math notranslate nohighlight">\(\sigma\)</span> de la población.</p></li>
+<li><p>En esos casos podemos estimar <span class="math notranslate nohighlight">\(\sigma\)</span> utilizando la <strong>varianza muestral</strong> <span class="math notranslate nohighlight">\(s\)</span>:
+$<span class="math notranslate nohighlight">\(s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2\)</span>$</p></li>
+<li><p>Se trata de un estimador insesgado de la varianza.</p></li>
+<li><p>El error estándar de la media muestral cuando se desconoce la varianza poblacional es desconocida se puede estimar de la siguiente manera:
+$<span class="math notranslate nohighlight">\(\hat{se}(\overline{X_{n}}) = \frac{s}{\sqrt{n}}\)</span>$</p></li>
+</ul>
+</section>
+<section id="varianza-de-la-poblacion">
+<h2>Varianza de la población<a class="headerlink" href="#varianza-de-la-poblacion" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>También existe la varianza poblacional, definida de la siguiente manera:</p>
+<div class="math notranslate nohighlight">
+\[\sigma^{2}= \frac{1}{N} \sum_{i}^{N}(X_{i}-\overline{X_{N}})^2\]</div>
+</li>
+<li><p>La varianza poblacional sólo debe calcularse a partir de datos  población (todos los individuos).</p></li>
+<li><p>Tenga en cuenta que estamos utilizando <span class="math notranslate nohighlight">\(N\)</span> en lugar de <span class="math notranslate nohighlight">\(n\)</span> para denotar toda la    población en lugar de una muestra.</p></li>
+<li><p>Si se calcula a partir de una muestra, sería un estimador <strong>sesgado</strong>   de la varianza de la población.</p></li>
+</ul>
+</section>
+<section id="la-distribucion-muestral-de-la-media-muestral">
+<h2>La distribución muestral de la media muestral<a class="headerlink" href="#la-distribucion-muestral-de-la-media-muestral" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ya hemos dicho que la distribución muestral es un concepto imaginario.</p></li>
+<li><p>Imaginemos la distribución muestral de la media muestral.</p></li>
+<li><p>Imaginemos que se extraen (con reposición) todas las muestras posibles de tamaño <span class="math notranslate nohighlight">\(n\)</span> de una población.</p></li>
+<li><p>A continuación, calcule para cada muestra el estadístico muestral, que en este caso es la media muestral.</p></li>
+<li><p>La distribución de frecuencias de esas medias muestrales sería la distribución muestral de la media (para muestras de tamaño <span class="math notranslate nohighlight">\(n\)</span> extraídas de esa población concreta).</p></li>
+<li><p>En el siguiente ejemplo calcularemos la distribución muestral para un ejemplo de juguete en el que se conoce la población.</p></li>
+<li><p>Supongamos que nuestra población entera es una familia de 5 hermanos y nuestra propiedad de interés es la edad medida en años.</p></li>
+<li><p>Nuestra población consta de los 5 valores siguientes: 2, 3, 4, 5 y 6.</p></li>
+<li><p>Calculemos la media poblacional <span class="math notranslate nohighlight">\(\mu\)</span> y la desviación estándar poblacional  desviación típica <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Given population</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+
+<span class="c1"># Calculate mean</span>
+<span class="n">pop_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pop</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop_mean</span><span class="p">)</span>
+
+<span class="c1"># Calculate standard deviation</span>
+<span class="n">pop_sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pop_sd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+1.4142135623730951
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Ahora, vamos a extraer las 25 posibles muestras (con reemplazo) de tamaño <span class="math notranslate nohighlight">\(2\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Given population from the previous example</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">samp_size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Generate all possible samples with repetition</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">samp_size</span><span class="p">))</span>
+
+<span class="c1"># Convert to DataFrame (similar to tibble in R)</span>
+<span class="n">df_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;item_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">samp_size</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_1  item_2
+0        2       2
+1        2       3
+2        2       4
+3        2       5
+4        2       6
+5        3       2
+6        3       3
+7        3       4
+8        3       5
+9        3       6
+10       4       2
+11       4       3
+12       4       4
+13       4       5
+14       4       6
+15       5       2
+16       5       3
+17       5       4
+18       5       5
+19       5       6
+20       6       2
+21       6       3
+22       6       4
+23       6       5
+24       6       6
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Podemos calcular la media muestral de cada muestra utilizando usando pandas:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate row-wise mean and add it as a new column</span>
+<span class="n">df_samples</span><span class="p">[</span><span class="s1">&#39;sample_mean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    item_1  item_2  sample_mean
+0        2       2          2.0
+1        2       3          2.5
+2        2       4          3.0
+3        2       5          3.5
+4        2       6          4.0
+5        3       2          2.5
+6        3       3          3.0
+7        3       4          3.5
+8        3       5          4.0
+9        3       6          4.5
+10       4       2          3.0
+11       4       3          3.5
+12       4       4          4.0
+13       4       5          4.5
+14       4       6          5.0
+15       5       2          3.5
+16       5       3          4.0
+17       5       4          4.5
+18       5       5          5.0
+19       5       6          5.5
+20       6       2          4.0
+21       6       3          4.5
+22       6       4          5.0
+23       6       5          5.5
+24       6       6          6.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># Given population</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="c1"># Create histogram using seaborn</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df_samples</span><span class="p">[</span><span class="s1">&#39;sample_mean&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;pop&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2519a1200cc9e3dcc50aedb1ed25e4e4e13e912835d79b6b89a01d3258bb3deb.png" src="../_images/2519a1200cc9e3dcc50aedb1ed25e4e4e13e912835d79b6b89a01d3258bb3deb.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Puede que haya observado que el histograma tiene un pico en el centro y es  simétrico.</p></li>
+<li><p><em><strong>Esto es una consecuencia del ¡¡¡Teorema Central del Límite!!!</strong></em></p></li>
+<li><p>Podemos ver que la distribución de la población es muy diferente de la distribución muestral:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="c1"># Creando el histograma</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">data</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Valor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probabilidad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histograma Equiprobable&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># Ajustar el eje y para que vaya de 0 a 1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eb5496b2bd29bd3f1532268a925634af292b9e642b18fb0ee5ae135634e31feb.png" src="../_images/eb5496b2bd29bd3f1532268a925634af292b9e642b18fb0ee5ae135634e31feb.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Calculemos la media y la desviación típica de la media muestral:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the mean and standard deviation of the sample means</span>
+<span class="n">mean_of_sample_means</span> <span class="o">=</span> <span class="n">df_samples</span><span class="p">[</span><span class="s1">&#39;sample_mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">std_of_sample_means</span> <span class="o">=</span> <span class="n">df_samples</span><span class="p">[</span><span class="s1">&#39;sample_mean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Media de las medias muestrales: </span><span class="si">{</span><span class="n">mean_of_sample_means</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Desviación estándar de las medias muestrales: </span><span class="si">{</span><span class="n">std_of_sample_means</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Media de las medias muestrales: 4.00
+Desviación estándar de las medias muestrales: 1.02
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Podemos ver que la media de la distribución muestral de la media <span class="math notranslate nohighlight">\(\mu_{\overline{X}}\)</span> es igual a la media poblacional <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>También podemos calcular el error típico teórico <span class="math notranslate nohighlight">\(se=\sigma/\sqrt{n}\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Given population and sample size</span>
+<span class="n">pop</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">samp_size</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Calculate standard deviation of population</span>
+<span class="n">pop_sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">pop</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Calculate standard error</span>
+<span class="n">standard_error</span> <span class="o">=</span> <span class="n">pop_sd</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">samp_size</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Desviación estándar de las medias muestrales: </span><span class="si">{</span><span class="n">standard_error</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Desviación estándar de las medias muestrales: 1.00
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h3>Comentarios<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>El teorema del límite central nos indica las condiciones en las que la  distribución muestral de la media es normal o, al menos, aproximadamente normal.</p>
+<ul>
+<li><p>Si la población de la que se toma la muestra se distribuye normalmente, entonces la distribución muestral de la media será normal, independientemente del tamaño de la muestra.</p></li>
+<li><p>Si la población de la que se toma la muestra no es normal, la distribución muestral de la media seguirá siendo aproximadamente normal si el tamaño de la muestra es suficiente.</p></li>
+</ul>
+</li>
+<li><p>¿Qué tamaño es suficiente? Algunos autores dicen que 30 ó 40. Pero si la  distribución de la población es extremadamente no normal (es decir, muy sesgada)  necesitará más.</p></li>
+</ul>
+</section>
+</section>
+<section id="estimacion-puntual-de-una-proporcion">
+<h2>Estimación puntual de una proporción<a class="headerlink" href="#estimacion-puntual-de-una-proporcion" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Supongamos que queremos estimar la fracción de personas que votarán por  un determinado candidato.</p></li>
+<li><p>Nuestro parámetro poblacional <span class="math notranslate nohighlight">\(p\)</span> corresponde a la verdadera fracción de  votantes de este candidato.</p></li>
+<li><p>Podemos modelizar una muestra de votantes independientes <span class="math notranslate nohighlight">\(X_1, \dots, X_n\)</span>, como variables aleatorias con distribución Bernoulli y parámetro <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Interpretamos <span class="math notranslate nohighlight">\(X_i=0\)</span> como un voto negativo y <span class="math notranslate nohighlight">\(X_i=1\)</span> como un voto positivo.</p></li>
+<li><p>La proporción muestral <span class="math notranslate nohighlight">\(\hat{p}_{n}=\frac 1n \sum_{i}X_{i}\)</span> es nuestro estimador de <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Entonces <span class="math notranslate nohighlight">\(\mathbb{E}(\hat{p}_{n})= \frac 1n \sum_i \mathbb{E}(X_i)=p\)</span>, y <span class="math notranslate nohighlight">\(\hat{p}_n\)</span> es no sesgada</p></li>
+<li><p>El error estándar <span class="math notranslate nohighlight">\(se\)</span> sería</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[se = \sqrt{\mathbb{V}(\hat{p}_n)}= \sqrt{p(1-p)/n}\]</div>
+<ul class="simple">
+<li><p>El error estándar estimado <span class="math notranslate nohighlight">\(\hat{se}\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{se} =\sqrt{\hat{p}(1-\hat p)/n}\]</div>
+<ul class="simple">
+<li><p>Por el Teorema Central del Límite, la distribución muestral de la proporción muestral converge a una distribución normal:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\hat{p}_{n} \approx N(p, \hat{se}^2)\]</div>
+<ul class="simple">
+<li><p>Esto se debe a que la proporción muestral es en realidad la media muestral de una población binaria.</p></li>
+</ul>
+</section>
+<section id="consistencia">
+<h2>Consistencia<a class="headerlink" href="#consistencia" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Se espera que un buen estimador sea insesgado y tenga un error estándar mínimo.</p></li>
+<li><p>Antes se prestaba mucha atención a la insesgadez, pero hoy en día se considera menos importante.</p></li>
+<li><p>Muchos de los estimadores que utilizaremos son sesgados.</p>
+<ul>
+<li><p>Un requisito razonable para un estimador es que converja al verdadero valor del parámetro a medida que recogemos más y más datos.</p></li>
+</ul>
+</li>
+<li><p>Un estimador puntual <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span> de un parámetro <span class="math notranslate nohighlight">\(\theta\)</span> es <strong>consistente</strong> si converge al valor verdadero cuando el número de datos de la muestra tiende a infinito.</p></li>
+</ul>
+<p><strong>Teorema:</strong></p>
+<p>Si para un estimador <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span>, con <span class="math notranslate nohighlight">\(bias \rightarrow 0\)</span> y en <span class="math notranslate nohighlight">\(se \rightarrow 0\)</span> cuando <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span>, <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span>,es un estimador consistente de <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<ul class="simple">
+<li><p>Por ejemplo, para la media muestral <span class="math notranslate nohighlight">\(\mathbb{E}(\overline{X_{n}})=\mu\)</span>,
+lo que implica que el <span class="math notranslate nohighlight">\(bias =0\)</span>.</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(se(\overline{X_{n}}) = \frac{\sigma}{\sqrt{n}}\)</span> converge a cero cuando <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\overline{X_{n}}\)</span> es un estimador consistente de la media.</p></li>
+<li><p>Para el caso del experimento de Bernoulli se tiene que  <span class="math notranslate nohighlight">\(\mathbb{E}(\hat{p})=p \Rightarrow bias=0\)</span> y  <span class="math notranslate nohighlight">\(se = \sqrt{p(1-p)/n} \rightarrow 0\)</span> cuando <span class="math notranslate nohighlight">\(n\rightarrow \infty\)</span>.</p></li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(\hat{p}\)</span> es un estimador consistente de <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+</ul>
+</section>
+<section id="estimacion-de-maxima-verosimilitud">
+<h2>Estimación de máxima verosimilitud<a class="headerlink" href="#estimacion-de-maxima-verosimilitud" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Los estimadores que hemos presentado hasta ahora (por ejemplo, la media muestral, la proporción muestral) son intuitivos, fáciles de calcular y coherentes.</p></li>
+<li><p>La estimación de máxima verosimilitud (MLE) es un marco más general para estimar los <strong>parámetros</strong> de cualquier <strong>modelo paramétrico</strong>.</p></li>
+<li><p>En los EMV, suponemos que los datos de la muestra son generados por una determinada distribución de probabilidad (continua o discreta) parametrizada por <span class="math notranslate nohighlight">\(\theta\)</span> e intentamos encontrar el valor de <span class="math notranslate nohighlight">\(\theta\)</span> que maximiza la  probabilidad conjunta de los datos bajo esa distribución.**</p>
+<ul>
+<li><p><strong>Idea:</strong> encontrar los valores de los parámetros del modelo estadístico supuesto que hacen más probables los datos observados.</p></li>
+</ul>
+</li>
+<li><p>Por ejemplo, podemos suponer que cada punto de datos es generado por <span class="math notranslate nohighlight">\(N(\mu,\sigma^2)\)</span>, entonces calculamos la FDP conjunta (o FMP) de nuestros datos y encontrar los valores de los parámetros para <span class="math notranslate nohighlight">\(\mu\)</span> y <span class="math notranslate nohighlight">\(\sigma\)</span> que  maximizan esa densidad conjunta (o masa).</p></li>
+<li><p>Los estudiantes que aprenden estadística suelen preguntarse: ¿cómo podemos saber que la distribución que generó los datos está en algún modelo  paramétrico?</p></li>
+<li><p>Hay casos en los que los conocimientos previos sugieren que un  modelo paramétrico proporciona una aproximación razonable.</p>
+<ul>
+<li><p>Ejemplo 1: los experimentos binarios independientes (por ejemplo, lanzar una moneda o votar a un candidato) pueden representarse adecuadamente con distribuciones Bernoulli o Binomial.</p></li>
+<li><p>Ejemplo 2: se sabe por experiencia previa que el recuento de accidentes de tráfico sigue aproximadamente una distribución de Poisson.</p></li>
+</ul>
+</li>
+<li><p>En muchos otros casos son preferibles los métodos no paramétricos, pero están fuera del alcance de este curso.</p></li>
+</ul>
+</section>
+<section id="definicion-estimacion-de-maxima-verosimilitud">
+<h2>Definición Estimación de Máxima Verosimilitud<a class="headerlink" href="#definicion-estimacion-de-maxima-verosimilitud" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Sea <span class="math notranslate nohighlight">\(X_1,\dots,X_n\)</span> IID con FDP (o FMP) <span class="math notranslate nohighlight">\(f(x;\theta)\)</span>.</p></li>
+<li><p>Dado que suponemos que nuestras muestras de datos son variables aleatorias independientes, la densidad conjunta (o masa) sería el producto de cada FDP (o FMD): $<span class="math notranslate nohighlight">\(\mathcal{L}_{n}(\theta)=\prod_{i=1}^nf(X_i;\theta)\)</span>$</p></li>
+<li><p>Nos referimos a esta densidad conjunta (o masa) como la <strong>función de verosimilitud</strong>.</p></li>
+<li><p>La función de verosimilitud no es más que la densidad (o masa) conjunta de los  datos, excepto que la tratamos como una función del parámetro  <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+<li><p>En EMV, convertimos la tarea de estimación en un problema de optimización:</p>
+<div class="math notranslate nohighlight">
+\[ \max_{\theta} \quad \mathcal{L}_{n}(\theta) \]</div>
+</li>
+</ul>
+<ul class="simple">
+<li><p>El estimador de máxima verosimilitud MLE, denotado por <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span>, es el valor de <span class="math notranslate nohighlight">\(\theta\)</span> que  máximiza <span class="math notranslate nohighlight">\(\mathcal{L}_{n}(\theta)\)</span>.</p></li>
+</ul>
+<ul>
+<li><p>En muchos casos la verosimilitud logarítmica es más fácil de optimizar
+<span class="math notranslate nohighlight">\(l_n(\theta)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[l_n(\theta) = \log(\mathcal{L}_{n}(\theta))=\log(\prod_{i=1}^nf(X_i;\theta))= \sum_{i=1}^{n}\log(f(X_i;\theta))\]</div>
+</li>
+<li><p>Dado que el logaritmo es una función monótona, el máximo de se produce  en el mismo valor de <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(l_n\)</span> es diferenciable podemos hallar <span class="math notranslate nohighlight">\(\hat{\theta}_n\)</span>     poniendo las derivadas a cero:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\partial l_n}{\partial \theta} = 0\]</div>
+<ul class="simple">
+<li><p>el EMV  tiene muchas buenas propiedades matemáticas que van más allá del discutir en este curso.</p></li>
+<li><p>Algunas propiedades que vale la pena conocer son que la MLE es <strong>consistente</strong> y es <strong>asintóticamente normal</strong> (es decir, su distribución muestral converge a una gaussiana).</p></li>
+</ul>
+<p><strong>Ejemplo 1:</strong></p>
+<p>Supongamos que <span class="math notranslate nohighlight">\(X_1,\dots, X_n \sim\)</span> Bernoulli <span class="math notranslate nohighlight">\((p)\)</span>.</p>
+<ul class="simple">
+<li><p>La función de masa de probabilidad es <span class="math notranslate nohighlight">\(f(x;p)= p^x(1- p)^{1-x}\)</span> para <span class="math notranslate nohighlight">\(x = 0,1\)</span>. El parámetro desconocido es <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
+<li><p>Entonces,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{n}(p)=\prod_{i=1}^nf(X_i;p) = \prod_{i=1}^np^{X_i}(1-p)^{1-X_i}=p^S(1-p)^{n-S}\]</div>
+<p>Donde,  <span class="math notranslate nohighlight">\(S=\sum_{i}X_i\)</span>. Así,</p>
+<div class="math notranslate nohighlight">
+\[l_n(\theta) = S\log p+ (n-S)\log(1-p).\]</div>
+<ul class="simple">
+<li><p>Tomar la derivada de <span class="math notranslate nohighlight">\(l_n(\theta)\)</span>, establecerlo igual a 0 para encontrar que el EMV es <span class="math notranslate nohighlight">\(\hat{p}_n =S/n\)</span>, que es la proporción de la muestra.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Esto se puede comprobar pegando la siguiente fórmula en  WolframAlpha:</p></li>
+</ul>
+<p><img alt="" src="../_images/wolfram_p.png" /></p>
+<p><strong>Ejemplo 2:</strong></p>
+<p>Sea <span class="math notranslate nohighlight">\(X_1,\dots, X_n \sim N(\mu,\sigma^2)\)</span>.</p>
+<ul class="simple">
+<li><p>El parámetro es <span class="math notranslate nohighlight">\(\theta=(\mu,\sigma)\)</span> y la función de verosimilitud
+(ignorando algunas constantes) es:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \mathcal{L}_{n}(\mu,\sigma) =\prod_{i=1}^n \frac{1}{\sigma} \exp \left( - \frac{1}{2\sigma^2} (X_i -\mu)^2 \right)\]</div>
+<div class="math notranslate nohighlight">
+\[= \frac{1}{\sigma^n}\exp \left( - \frac{1}{2\sigma^2} \sum_{i=1}^n(X_i -\mu)^2 \right) \]</div>
+<div class="math notranslate nohighlight">
+\[ = \frac{1}{\sigma^n}\exp \left( - \frac{nS^2}{2\sigma^2} \right)\exp \left( - \frac{n(\overline{X}-\mu)^2}{2\sigma^2} \right)\]</div>
+<ul class="simple">
+<li><p>Donde <span class="math notranslate nohighlight">\(\overline{X}=\frac{1}{n}\sum_{i=1}^nX_i\)</span> es la media muestraly <span class="math notranslate nohighlight">\(S^2 = \frac{1}{n}\sum_{i=1}^n(X_i-\overline{X}^2)\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>La última igualdad se deduce del hecho de que
+$<span class="math notranslate nohighlight">\(\sum_{i=1}^n(X_i -\mu)^2=nS^2+n(\overline{X}-\mu)^2\)</span>$</p></li>
+</ul>
+<p>que puede verificarse escribiendo</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^n(X_i -\mu)^2 = \sum_{i=1}^n(X_i - \overline{X} + \overline{X} -\mu)^2\]</div>
+<p>y luego ampliar el cuadrado.</p>
+<ul class="simple">
+<li><p>La probabilidad logarítmica es:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[l_n(\mu,\sigma) = -n\log \sigma - \frac{nS^2}{2\sigma^2} - \frac{n(\overline{X}-\mu)^2}{2\sigma^2}\]</div>
+<ul class="simple">
+<li><p>Resolver las ecuaciones
+$<span class="math notranslate nohighlight">\(\frac{\partial l_n(\mu,\sigma)}{\partial \mu} = 0\)</span>$</p></li>
+</ul>
+<p>y</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial l_n(\mu,\sigma)}{\partial \sigma} = 0\]</div>
+<ul class="simple">
+<li><p>Concluimos que <span class="math notranslate nohighlight">\(\hat{\mu} = \overline{X}\)</span> y <span class="math notranslate nohighlight">\(\hat{\sigma}=S\)</span>.</p></li>
+<li><p>Puede comprobarse que se trata efectivamente de máximos globales de la
+probabilidad.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>Estimación de máxima verosimilitud<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Verifiquemos esto usando WolframAlpha:</p></li>
+</ul>
+<p><img alt="" src="../_images/wolfram_mu.png" /></p>
+<ul class="simple">
+<li><p>Ahora, si sustituimos <span class="math notranslate nohighlight">\(\mu\)</span> por <span class="math notranslate nohighlight">\(\overline{X}\)</span>, la última expresión de <span class="math notranslate nohighlight">\(l_n\)</span> se anula.</p></li>
+<li><p>el valor de <span class="math notranslate nohighlight">\(\sigma\)</span> se puede obtener de la siguiente manera:</p></li>
+</ul>
+<p><img alt="" src="../_images/wolfram_s.png" /></p>
+</section>
+<section id="intervalo-de-confianza">
+<h2>Intervalo de confianza<a class="headerlink" href="#intervalo-de-confianza" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Sabemos que el valor de un estimador puntual <strong>varía</strong> de una muestra a otra a muestra.</p></li>
+<li><p>Es más razonable encontrar un intervalo que probablemente atrape el valor real del parámetro a largo plazo.</p></li>
+<li><p>La forma general de un intervalo de confianza en la siguiente:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\text{Confidence Interval} = \text{Sample Statistic} \ \pm \ \text{Margin Error}\]</div>
+<ul class="simple">
+<li><p>Cuanto más amplio es el intervalo, mayor es la incertidumbre sobre el valor del parámetro.</p></li>
+</ul>
+<p><strong>Definición</strong></p>
+<ul class="simple">
+<li><p>Un <strong>intervalo de confianza</strong> para un parámetro poblacional desconocido <span class="math notranslate nohighlight">\(\theta\)</span> con un <strong>nivel de confianza</strong> <span class="math notranslate nohighlight">\(1-\alpha\)</span>, es un intervalo <span class="math notranslate nohighlight">\(C_n = (a,b)\)</span> donde:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P}(\theta \in C_n) = 1-\alpha\]</div>
+<ul class="simple">
+<li><p>Donde <span class="math notranslate nohighlight">\(a= a(X_1, \dots, X_n)\)</span> y <span class="math notranslate nohighlight">\(b=b(X_1,\dots,X_n)\)</span> son funciones de los datos.</p></li>
+<li><p>El valor <span class="math notranslate nohighlight">\(\alpha\)</span> se conoce como el <strong>nivel de significación</strong>, generalmente <span class="math notranslate nohighlight">\(0.05\)</span>, lo que equivale a trabajar con un nivel de confianza del de confianza del <span class="math notranslate nohighlight">\(95\%\)</span>.</p></li>
+<li><p>La significación estadística ayuda a cuantificar si un resultado se debe probablemente al azar o a algún factor de interés.</p></li>
+<li><p>Básicamente, un resultado estadísticamente significativo es un resultado que no es atribuible al azar.</p></li>
+</ul>
+<section id="discusion">
+<h3>Discusión<a class="headerlink" href="#discusion" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Hay mucha <strong>confusión</strong> sobre cómo interpretar un intervalo de confianza.</p></li>
+<li><p>Un intervalo de confianza no es una declaración de probabilidad sobre <span class="math notranslate nohighlight">\(\theta\)</span> ya que <span class="math notranslate nohighlight">\(\theta\)</span> es una cantidad fija en la inferencia frecuentista, no una variable aleatoria.</p></li>
+<li><p>Una forma de interpretarlos es decir que si repetimos el <strong>mismo experimento</strong> muchas veces, el intervalo contendrá el valor del parámetro <span class="math notranslate nohighlight">\((1-\alpha)\%\)</span> de las veces.</p></li>
+<li><p>Esta interpretación es correcta, pero rara vez repetimos el mismo experimento varias veces.</p></li>
+<li><p>Una interpretación mejor: un día que recojo datos creo un <span class="math notranslate nohighlight">\(95\%\)</span>  para un parámetro <span class="math notranslate nohighlight">\(\theta_1\)</span>. Luego, el día 2, hago lo mismo para un parámetro <span class="math notranslate nohighlight">\(\theta_2\)</span> y así repetidamente <span class="math notranslate nohighlight">\(n\)</span> veces. El <span class="math notranslate nohighlight">\(95\%\)</span> de mis intervalos contendrán los valores reales de los parámetros.</p></li>
+<li><p>En una sección asincronica hablaremos de los métodos bayesianos en los que tratamos <span class="math notranslate nohighlight">\(\theta\)</span> como si fuera una variable aleatoria y hacemos afirmaciones de probabilidad sobre <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<section id="intervalo-de-confianza-de-la-media-muestral">
+<h2>Intervalo de confianza de la media muestral<a class="headerlink" href="#intervalo-de-confianza-de-la-media-muestral" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Queremos encontrar un intervalo <span class="math notranslate nohighlight">\(C_n = (\mu_1,\mu_2)\)</span> con un nivel de confianza <span class="math notranslate nohighlight">\(1-\alpha\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{P}(\mu_1 \leq \mu \leq \mu_2 ) = 1-\alpha\]</div>
+</li>
+<li><p>Entonces <span class="math notranslate nohighlight">\(z_a = \Phi^{-1}(1-a)\)</span>, con <span class="math notranslate nohighlight">\(a \in [0,1]\)</span> donde <span class="math notranslate nohighlight">\(\Phi^{-1}\)</span> es la función cuantil de una normal estandarizada.</p></li>
+<li><p>Esto equivale a decir que <span class="math notranslate nohighlight">\(z_a\)</span> es el valor tal que <span class="math notranslate nohighlight">\(1-\Phi(z_a)=\mathbb{P}(Z \geq z_a)=a\)</span>.</p></li>
+<li><p>Por simetría de la distribución normal: <span class="math notranslate nohighlight">\(z_{\alpha/2}=-z_{(1-\alpha/2)}\)</span>.</p></li>
+</ul>
+<p><img alt="" src="../_images/conf_int_1.png" /></p>
+<p><img alt="" src="../_images/conf_int_2.png" /></p>
+<p><img alt="" src="../_images/conf_int_3.png" /></p>
+<p><strong>Intervalo de confianza de la media muestral</strong></p>
+<ul class="simple">
+<li><p>El intervalo de confianza para <span class="math notranslate nohighlight">\(\mu \)</span> es:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[C_n = (\overline{X_{n}}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}} , \overline{X_{n}} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}})\]</div>
+<ul>
+<li><p>Entonces <span class="math notranslate nohighlight">\(z_{\alpha/2} \)</span> nos dice cuántas veces tenemos que multiplicar el <strong>error estándar</strong> para construir el intervalo.</p></li>
+<li><p>Cuanto menor sea el valor de <span class="math notranslate nohighlight">\(\alpha \)</span>, mayor será el valor de <span class="math notranslate nohighlight">\(z_{\alpha/2} \)</span> y, por tanto, más amplio será el intervalo.</p></li>
+<li><p>Prueba:</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{P}(\mu \in C_n) = \mathbb{P}(\overline{X_{n}}-z_{\alpha/2}\frac{\sigma}{\sqrt{n}} &lt; \mu &lt; \overline{X_{n}} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}) \]</div>
+<div class="math notranslate nohighlight">
+\[ =  \mathbb{P}(-z_{\alpha/2} &lt; \frac{\overline{X_{n}}-\mu}{\frac{\sigma}{\sqrt{n}}} &lt;  z_{\alpha/2}) \]</div>
+<div class="math notranslate nohighlight">
+\[= \mathbb{P}(-z_{\alpha/2} &lt; Z &lt; z_{\alpha/2}) \]</div>
+<div class="math notranslate nohighlight">
+\[ = 1-\alpha \]</div>
+</li>
+<li><p>Dado que <span class="math notranslate nohighlight">\(z_{\alpha/2} = \Phi^{-1}(1-\alpha/2) \)</span> podemos usar la función cuantil de la normal para calcular intervalos de confianza en python.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define variables</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="c1"># Calculate standard error</span>
+<span class="n">se</span> <span class="o">=</span> <span class="n">sigma</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Calculate margin of error</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">se</span>
+
+<span class="c1"># Calculate confidence interval</span>
+<span class="n">left</span> <span class="o">=</span> <span class="n">xbar</span> <span class="o">-</span> <span class="n">error</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">xbar</span> <span class="o">+</span> <span class="n">error</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">left</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">right</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.123477459423419
+5.876522540576581
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribucion-t">
+<h2>Distribución T<a class="headerlink" href="#distribucion-t" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>En la práctica, si no conocemos <span class="math notranslate nohighlight">\(\mu\)</span> es poco probable que conozcamos   <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+<li><p>Cuando se supone que los datos son normales y estimamos <span class="math notranslate nohighlight">\(\sigma\)</span> utilizando <span class="math notranslate nohighlight">\(s\)</span>, los intervalos de confianza para la media muestral se construyen mejor utilizando  la distribución <strong>T-student</strong>, especialmente cuando el tamaño de la muestra es  pequeño.</p></li>
+<li><p>Un V.A. tiene distribución <span class="math notranslate nohighlight">\(t\)</span> con <span class="math notranslate nohighlight">\(k\)</span> grados de libertad cuando tiene  la siguiente FDP:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[f(t)=\frac{\Gamma(\frac{k+1}{2})}{\sqrt{k\pi}\Gamma(\frac k2)(1+\frac{t^2}{k})^{(k+1)/2}}\]</div>
+<ul class="simple">
+<li><p>Cuando <span class="math notranslate nohighlight">\(k=1\)</span> se llama distribución <strong>Cauchy</strong>.</p></li>
+<li><p>Cuando <span class="math notranslate nohighlight">\(k\rightarrow \infty\)</span> converge a una distribución normal estandarizada.</p></li>
+<li><p>La distribución <span class="math notranslate nohighlight">\(t\)</span> tiene colas más anchas que la distribución normal cuando  tiene pocos grados de libertad (es decir, es más propensa a producir   valores que caen lejos de su media).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">t</span>
+
+<span class="c1"># Define the x values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Calculate the pdf values for the normal and t distributions</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">350</span><span class="p">)</span>
+
+<span class="c1"># Plot the distributions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;t, df=1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;t, df=10&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;t, df=350&quot;</span><span class="p">)</span>
+
+<span class="c1"># Add legend and show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7b670de47752d984cf70820a7cf923ed0575c41e517e9c10543138e917771b53.png" src="../_images/7b670de47752d984cf70820a7cf923ed0575c41e517e9c10543138e917771b53.png" />
+</div>
+</div>
+</section>
+<section id="distribucion-t-algunas-curiosidades">
+<h2>Distribución T: algunas curiosidades<a class="headerlink" href="#distribucion-t-algunas-curiosidades" title="Permalink to this heading">#</a></h2>
+<p><img alt="" src="../_images/William_Sealy_Gosset.jpg" /></p>
+<ul class="simple">
+<li><p>La distribución T fue desarrollada por el estadístico inglés William Sealy Gosset bajo el seudónimo de “Student”.</p></li>
+<li><p>Gosset trabajaba en la fábrica de cerveza Guinness de Dublín (Irlanda) y se interesó por los problemas de las muestras pequeñas.</p></li>
+<li><p>Por ejemplo, las propiedades químicas de la cebada, donde el tamaño de las muestras   podían ser tan pequeñas como tres.</p></li>
+<li><p>El empleador de Gosset prefería que sus empleados ocultaran su identidad cuando publicaban artículos científicos.</p></li>
+<li><p>Otra versión es que Guinness no quería que sus competidores supieran que utilizaba la prueba t para determinar la calidad de la materia prima .</p></li>
+</ul>
+</section>
+<section id="intervalo-de-confianza-de-la-distribucion-t">
+<h2>Intervalo de confianza de la distribución T<a class="headerlink" href="#intervalo-de-confianza-de-la-distribucion-t" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(s^{2}= \frac{1}{n-1} \sum_{i}^{n}(X_{i}-\overline{X_{n}})^2\)</span> tenemos:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[T=\frac{\overline{X_{n}}-\mu}{\frac{s}{\sqrt{n}}}\sim t_{n-1}\]</div>
+<ul class="simple">
+<li><p>Sea <span class="math notranslate nohighlight">\(t_{n-1,a}=\mathbb{P}(T&gt;a)\)</span>, equivalente a la función cuantil <span class="math notranslate nohighlight">\(qt\)</span> evaluated at <span class="math notranslate nohighlight">\((1-a)\)</span>.</p></li>
+<li><p>El intervalo de confianza resultante es:
+$<span class="math notranslate nohighlight">\(C_n = (\overline{X_{n}}-t_{n-1,\alpha/2}\frac{s}{\sqrt{n}} , \overline{X_{n}} + t_{n-1,\alpha/2}\frac{s}{\sqrt{n}})\)</span>$</p></li>
+<li><p>Dado que las colas de la distribución <span class="math notranslate nohighlight">\(t\)</span> son más anchas cuando <span class="math notranslate nohighlight">\(n\)</span> es pequeño, los intervalos de confianza resultantes son más amplios.</p></li>
+</ul>
+<p>Calculemos un intervalo de confianza para la media de <code class="docutils literal notranslate"><span class="pre">Longitud.Pétalos</span></code> de los datos del <strong>Iris</strong> con una confianza del <span class="math notranslate nohighlight">\(95\%\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+
+<span class="c1"># Load the iris dataset</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="c1"># Calculate sample properties</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">])</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">])</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Note the ddof=1 to get sample standard deviation</span>
+<span class="n">se</span> <span class="o">=</span> <span class="n">s</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Compute the t-critical value and margin of error</span>
+<span class="n">t_critical</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">error</span> <span class="o">=</span> <span class="n">t_critical</span> <span class="o">*</span> <span class="n">se</span>
+
+<span class="c1"># Calculate the confidence interval</span>
+<span class="n">left</span> <span class="o">=</span> <span class="n">xbar</span> <span class="o">-</span> <span class="n">error</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">xbar</span> <span class="o">+</span> <span class="n">error</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sample Mean:&quot;</span><span class="p">,</span> <span class="n">xbar</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Left boundary:&quot;</span><span class="p">,</span> <span class="n">left</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Right boundary:&quot;</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample Mean: 3.7580000000000027
+Left boundary: 3.4731853701995132
+Right boundary: 4.0428146298004926
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>De otra manera:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+
+<span class="n">confidence_level</span> <span class="o">=</span> <span class="mf">0.95</span>
+<span class="n">degrees_freedom</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">])</span>
+<span class="n">sample_standard_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">],</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">]))</span>
+
+<span class="n">confidence_interval</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="n">confidence_level</span><span class="p">,</span> <span class="n">degrees_freedom</span><span class="p">,</span> <span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_standard_error</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95% Confidence Interval:&quot;</span><span class="p">,</span> <span class="n">confidence_interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95% Confidence Interval: (3.4731853701995132, 4.0428146298004926)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="intervalo-de-confianza-para-una-proporcion-de-poblacion">
+<h2>Intervalo de confianza para una proporción de población<a class="headerlink" href="#intervalo-de-confianza-para-una-proporcion-de-poblacion" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Supongamos que queremos calcular la proporción de sujetos que votarán por un candidato y también queremos un intervalo de confianza para la  proporción estimada.</p></li>
+<li><p>Como se ha mostrado anteriormente, la distribución muestral de una proporción muestral sigue una distribución normal.</p></li>
+<li><p>El intervalo de confianza <span class="math notranslate nohighlight">\(C_n\)</span> para una proporción es:
+$<span class="math notranslate nohighlight">\(C_n = \left(\hat{p}-z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat p)}{n}} , \hat{p} + z_{\alpha/2}\sqrt{\frac{\hat{p}(1-\hat p)}{n}}\right)\)</span>$</p></li>
+</ul>
+<ul>
+<li><p><strong>Ejemplo:</strong></p></li>
+<li><p><span class="math notranslate nohighlight">\(1.219\)</span> encuestados indicaron que votarían al  candidato A en una encuesta de <span class="math notranslate nohighlight">\(3.532\)</span> personas.</p></li>
+<li><p>Calcule un intervalo de confianza del 95% para la proporción de votantes:</p>
+<div class="math notranslate nohighlight">
+\[\hat{p}=\frac{1219}{3235}=0.345\]</div>
+</li>
+<li><p>y <span class="math notranslate nohighlight">\(z_{\alpha/2}=1.96\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">z_score</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.025</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z_score</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.959963984540054
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[C_n = 0.345 \pm 1.96\sqrt{\frac{0.345(1-0.345)}{3532}} = (0.329,0.361)\]</div>
+<ul class="simple">
+<li><p>En python:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.stats.proportion</span> <span class="k">as</span> <span class="nn">sm_proportion</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1219</span>  <span class="c1"># number of successes</span>
+<span class="n">nobs</span> <span class="o">=</span> <span class="mi">3532</span>   <span class="c1"># number of trials</span>
+
+<span class="c1"># Conduct one-sample proportion test and extract confidence interval</span>
+<span class="n">conf_int</span> <span class="o">=</span> <span class="n">sm_proportion</span><span class="o">.</span><span class="n">proportion_confint</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;95% Confidence Interval:&quot;</span><span class="p">,</span> <span class="n">conf_int</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>95% Confidence Interval: (0.3294516581314085, 0.3608088175197806)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="el-boostrap">
+<h2>El Boostrap<a class="headerlink" href="#el-boostrap" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Hemos utilizado nuestro conocimiento de la distribución muestral de la media para calcular el error típico de la media.</p></li>
+<li><p>Pero, ¿qué ocurre si no podemos suponer que las estimaciones se distribuyen normalmente o no conocemos su distribución?</p></li>
+<li><p>La idea del bootstrap es utilizar los propios datos para estimar una respuesta.</p></li>
+<li><p>El método bootstrap fue concebido por Bradley Efron, del Departamento de Estadística de Stanford, que es uno de los estadísticos más influyentes del mundo.</p></li>
+<li><p>La idea que subyace al bootstrap es que tomamos muestras repetidamente del conjunto de datos real.</p></li>
+<li><p>Tomamos muestras con reemplazo, de modo que el mismo punto de datos suele estar representado varias veces en una de las muestras.</p></li>
+<li><p>A continuación, calculamos nuestra estadística de interés en cada una de las muestras bootstrap y utilizamos la distribución de esas estimaciones como nuestra distribución de muestreo.</p></li>
+<li><p>En cierto sentido, tratamos nuestra muestra particular como si fuera toda la población y, a continuación, muestreamos repetidamente con reemplazo para generar nuestras muestras para el análisis.</p></li>
+<li><p>Esto supone que nuestra muestra particular es un reflejo exacto de la población, lo que probablemente sea razonable para muestras más grandes, pero puede fallar cuando las muestras son más pequeñas.</p></li>
+<li><p>Esta técnica puede utilizarse para estimar el error estándar de cualquier estadística y obtener un intervalo de confianza (IC) para la misma.</p></li>
+</ul>
+<p><img alt="" src="../_images/bootstrapSEM-1.png" /></p>
+<ul class="simple">
+<li><p>El histograma muestra la distribución de las medias entre las muestras bootstrap, mientras que la línea roja muestra la distribución normal basada en la media muestral y el error estándar.</p></li>
+<li><p>A partir de la figura, podemos ver que la distribución de las medias a través de muestras bootstrap se aproxima bastante a la estimación teórica basada en el supuesto de normalidad.</p></li>
+<li><p>No tiene mucho sentido utilizar bootstrap para la media muestral porque conocemos la forma teórica de la distribución muestral.</p></li>
+<li><p>El bootstrap se utilizaría más a menudo para generar errores estándar e intervalos de confianza para estimaciones estadísticas (por ejemplo, la mediana, la desviación estándar).</p></li>
+<li><p>Bootstrap es especialmente útil cuando la CI no tiene una forma cerrada
+o tiene una muy complicada.</p></li>
+</ul>
+<p>La siguiente función implementa intervalos de confianza Bootstrap para una función genérica de Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">myboot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">nRuns</span><span class="p">,</span> <span class="n">sampleSize</span><span class="p">,</span> <span class="n">alpha</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">nRuns</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nRuns</span><span class="p">):</span>
+        <span class="n">samp_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sampleSize</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">samp_i</span><span class="p">)</span>
+
+    <span class="n">point_est</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Using ddof=1 to get the sample standard deviation</span>
+    <span class="n">l_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">u_CI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;Point Estimate&quot;</span><span class="p">:</span> <span class="n">point_est</span><span class="p">,</span>
+        <span class="s2">&quot;Standard error&quot;</span><span class="p">:</span> <span class="n">se</span><span class="p">,</span>
+        <span class="s2">&quot;Lower CI limit&quot;</span><span class="p">:</span> <span class="n">l_CI</span><span class="p">,</span>
+        <span class="s2">&quot;Upper CI limit&quot;</span><span class="p">:</span> <span class="n">u_CI</span>
+    <span class="p">}</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">myboot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;95% Confidence Interval: (</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;Lower CI limit&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;Upper CI limit&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Point Estimate&#39;: 4.0, &#39;Standard error&#39;: 0.6427897157069477, &#39;Lower CI limit&#39;: 2.6, &#39;Upper CI limit&#39;: 5.2}
+95% Confidence Interval: (2.60, 5.20)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Los límites inferior y superior del IC se obtienen a partir de los cuantiles de muestra <span class="math notranslate nohighlight">\(\alpha/2\)</span> y Cuantiles de muestra <span class="math notranslate nohighlight">\((1-\alpha/2)\)</span>.</p></li>
+<li><p>Los límites inferior y superior del IC se obtienen a partir de los cuantiles de muestra <span class="math notranslate nohighlight">\(\alpha/2\)</span> y Cuantiles de muestra <span class="math notranslate nohighlight">\((1-\alpha/2)\)</span>.</p></li>
+<li><p>Calculemos un CI Bootstrap para la mediana de Pétalo.Longitud utilizando <span class="math notranslate nohighlight">\(6000\)</span> ejecuciones, un tamaño de muestra de 64, y un nivel de significación de <span class="math notranslate nohighlight">\(0.05\)</span>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Load the iris dataset</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s1">&#39;iris&#39;</span><span class="p">)</span>
+<span class="n">petal_length</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s1">&#39;petal_length&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># Use the myboot function</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">myboot</span><span class="p">(</span><span class="n">petal_length</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">,</span> <span class="mi">6000</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Point Estimate&#39;: 4.35, &#39;Standard error&#39;: 0.29367249385071176, &#39;Lower CI limit&#39;: 3.75, &#39;Upper CI limit&#39;: 4.7}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusiones">
+<h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Hemos introducido muchos conceptos importantes en la inferencia estadística, en particular, el enfoque frecuentista.</p></li>
+<li><p>Hemos estudiado los estimadores y sus distribuciones muestrales.</p></li>
+<li><p>Hemos introducido una técnica general para calcular estimadores denominada máxima verosimilitud.</p></li>
+<li><p>Hemos estudiado cómo medir la incertidumbre de un estimador utilizando un intervalo de confianza.</p></li>
+<li><p>Hemos introducido un método de aproximación de intervalos de confianza mediante   medio de simulaciones denominado bootstrap.</p></li>
+</ul>
+<section id="un-ejemplo-de-analisis">
+<h3>Un ejemplo de analisis<a class="headerlink" href="#un-ejemplo-de-analisis" title="Permalink to this heading">#</a></h3>
+<p>Se llama meta-análisis a un procedimiento basado en técnicas estadísticas, mediante el que se analizan datos de diferentes estudios realizados sobre el mismo tema (revisión sistemática). El esquema básico consiste en elegir un grupo de artículos científicos en donde se haya medido el mismo parámetro (efecto medio, proporción… ) y estudiar la variabilidad existente entre unos resultados y otros.</p>
+<p>En el gráfico siguiente se considera un meta-análisis del efecto de los antidepresivos más comunes, siendo el parámetro considerado el llamado odds-ratio entre la efectividad de cada antidepresivo contra placebo.</p>
+<p>Si  <span class="math notranslate nohighlight">\(p_1\)</span> es la probabilidad de que el antidepresivo sea efectivo, y  <span class="math notranslate nohighlight">\(p_2\)</span> la del placebo, el odds-ratio -“razón de momios” o “razón de posibilidades”- es:</p>
+<div class="math notranslate nohighlight">
+\[ \dfrac{p_1/(1-p_1)}{p_2/(1-p_2)}.\]</div>
+<p>De manera general, el odds-ratio entre dos sucesos expresa las posibilidades de uno frente al otro. Si, por ejemplo, las odds de que llueva son de dos a uno,  <span class="math notranslate nohighlight">\((2/1)=2\)</span> , quiere decir que es dos veces más probable que llueva que no llueva; con lo cual, la probabilidad de lluvia sería  2/3  y de no lluvia 1/3. Si, de un grupo de 100 personas,  85  presentan síntomas de una enfermedad, la probabilidad de enfermedad será  85/100  mientras que las odds serán de  85  a 15 , es decir 5.7.</p>
+<p>Las odds exceden de la unidad siempre que haya más posibilidades del suceso de “arriba” (numerador) frente al de “abajo” (denominador). Con respecto al intervalo de confianza, es importante ver si incluye o no el valor 1 . Si lo incluye, significa que la asociación no es estadísticamente significativa, y que los resultados sólo pueden deberse a la casualidad. Si no lo incluye, indicaría mayor probabilidad de ocurrencia de un suceso frente al otro. El  1  equivale a la misma probabilidad (llover o no llover, o, en este caso, efecto de un antidepresivo frente al efecto de un placebo).</p>
+<p><img alt="" src="../_images/ex_inferencia.png" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Week_2/2-1-Prob.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 2-1: Probabilidad y estadística</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3-2-Hypothesis.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lectura 3-2: Pruebas de Hipotesis</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 3-1: Inferencia estadística</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#poblaciones-y-muestras">Poblaciones y muestras</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#metodos-de-muestreo">Métodos de muestreo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgos">Sesgos</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgo-de-seleccion-de-la-muestra">Sesgo de selección de la muestra</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sesgo-de-respuesta">Sesgo de respuesta</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestras-aleatorias">Muestras aleatorias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#muestreo-aleatorio-estratificado">Muestreo aleatorio estratificado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-formal-de-la-inferencia-estadistica">Definición formal de la inferencia estadística</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-frecuentista">Enfoque Frecuentista</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-puntual">Estimación puntual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-de-las-muestras">Distribución de las muestras</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-estandar">Error estándar</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-media-muestral">La media muestral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-error-tipico-de-la-media-muestral">El error típico de la media muestral</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comentarios">Comentarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-de-la-muestra">Varianza de la muestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#varianza-de-la-poblacion">Varianza de la población</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-distribucion-muestral-de-la-media-muestral">La distribución muestral de la media muestral</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Comentarios</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-puntual-de-una-proporcion">Estimación puntual de una proporción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consistencia">Consistencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-maxima-verosimilitud">Estimación de máxima verosimilitud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-estimacion-de-maxima-verosimilitud">Definición Estimación de Máxima Verosimilitud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Estimación de máxima verosimilitud</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">Intervalo de confianza</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discusion">Discusión</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza-de-la-media-muestral">Intervalo de confianza de la media muestral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-t">Distribución T</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-t-algunas-curiosidades">Distribución T: algunas curiosidades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza-de-la-distribucion-t">Intervalo de confianza de la distribución T</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza-para-una-proporcion-de-poblacion">Intervalo de confianza para una proporción de población</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-boostrap">El Boostrap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#un-ejemplo-de-analisis">Un ejemplo de analisis</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>📝 Ejercicio &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Ejercicios/2_2_Ejercicio_clase';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html"><strong>Semana 1. Introducción al análisis estadístico</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html"><strong>Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Ejercicios/2_2_Ejercicio_clase.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FEjercicios/2_2_Ejercicio_clase.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Ejercicios/2_2_Ejercicio_clase.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>📝 Ejercicio</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ejercicio">
+<h1>📝 Ejercicio<a class="headerlink" href="#ejercicio" title="Permalink to this heading">#</a></h1>
+<p><strong>1.</strong>  En el último trimestre, el 15% de los correos electrónicos enviados por el equipo de marketing fueron abiertos por los clientes. Si se selecciona un correo electrónico al azar:</p>
+<ul class="simple">
+<li><p>¿Cuál es la probabilidad de que haya sido abierto?</p></li>
+<li><p>¿Cuál es la probabilidad de que no haya sido abierto?</p></li>
+</ul>
+<p><strong>2.</strong> Estás organizando una serie de charlas para una conferencia empresarial. Hay 4 ponentes: Juan, María, Lucas y Sofía. ¿De cuántas maneras diferentes pueden presentarse si cada uno dará una charla distinta?</p>
+<p><strong>3.</strong> De un equipo de 8 ingenieros de datos, necesitas formar equipos de 4 para trabajar en diferentes proyectos. ¿Cuántos posibles equipos puedes formar?</p>
+<p><strong>4.</strong> En tu tienda en línea, el 20% de los visitantes que ven un video promocional compran un producto. Solo el 5% de los que no ven el video hacen una compra. Si un visitante ha comprado un producto, ¿cuál es la probabilidad de que haya visto el video?</p>
+<p><strong>5.</strong> Imagina que estás usando un nuevo software que detecta errores en los códigos. Si el software identifica un error, hay un 90% de probabilidad de que realmente sea un error. Sin embargo, solo el 3% del código total tiene errores. Si el software detecta un error, ¿cuál es la probabilidad de que realmente lo sea?</p>
+<p><strong>6.</strong> Tienes 10 características posibles para implementar en tu nuevo software, pero solo tienes recursos para implementar 5 de ellas en la primera versión. ¿Cuántas combinaciones diferentes de características puedes considerar?</p>
+<p><strong>7.</strong> Estás evaluando contraseñas de 4 caracteres donde se pueden usar números del 0 al 9. Si se pueden repetir números, ¿cuántas contraseñas diferentes es posible generar?</p>
+<p><strong>8.</strong> De todos los empleados que asistieron a una capacitación de habilidades blandas, el 70% obtuvo una mejora en su desempeño en los siguientes meses. De los que no asistieron, solo el 40% mostró una mejora. Si un empleado aleatorio mostró mejoras, ¿cuál es la probabilidad de que haya asistido a la capacitación?</p>
+<p><strong>9.</strong> Estás probando dos versiones diferentes de un anuncio. El anuncio A tiene una tasa de clics (CTR) del 5%, y el anuncio B, del 7%. Si el 60% de las impresiones son del anuncio A y el resto del anuncio B, y un usuario hizo clic en un anuncio, ¿cuál es la probabilidad de que haya sido el anuncio B?</p>
+<p><strong>10.</strong> Las puntuaciones de satisfacción de los empleados en una empresa están normalmente distribuidas con una media de 70 y una desviación estándar de 15. ¿Cuál es la probabilidad de que un empleado seleccionado al azar tenga una puntuación mayor que 85?</p>
+<p><strong>11.</strong> Un restaurante estudia el tiempo que los clientes pasan cenando y encuentra que sigue una distribución normal con una media de 45 minutos y una desviación estándar de 10 minutos. ¿Cuál es el tiempo que supera el 90% de los clientes?</p>
+<p><strong>12.</strong> Las ventas de una empresa en particular se distribuyen uniformemente entre 50 y 150 unidades diarias. Si un día venden 100 unidades, ¿qué porcentaje de días venderán más que eso?</p>
+<p><strong>13.</strong> Si las llamadas al centro de atención al cliente tienen una media de duración de 6 minutos con una desviación estándar de 2 minutos, y asumimos que las duraciones siguen una distribución normal, ¿cuál es la probabilidad de que una llamada dure menos de 4 minutos?</p>
+<p><strong>14.</strong> Dada una distribución discreta de fallos en un equipo: Fallos (0, 1, 2, 3) con probabilidades (0.7, 0.15, 0.1, 0.05) respectivamente, ¿cuál es la varianza de fallos?</p>
+<p><strong>15.</strong> Un software de gestión de proyectos mide el tiempo que un empleado tarda en completar una tarea. Si se sabe que el tiempo se distribuye normalmente con una media de 3 horas y una desviación estándar de 30 minutos, ¿cuál es la probabilidad de que una tarea se complete en menos de 2.5 horas?</p>
+<p><strong>16.</strong> Un gerente observa que el número de ventas de un producto particular tiene una distribución discreta con las siguientes ventas (1, 2, 3, 4) y probabilidades (0.1, 0.3, 0.4, 0.2). Si se vende el producto a $100 cada uno, ¿cuál es el ingreso esperado por venta?</p>
+<p><strong>17.</strong> Una empresa de logística desea conocer el tiempo de entrega de sus paquetes. Si se sabe que el tiempo de entrega sigue una distribución uniforme entre 1 y 5 días, ¿cuál es la probabilidad de que un paquete se entregue exactamente en 3 días?</p>
+<p><strong>18.</strong> Las ventas diarias de una tienda online están normalmente distribuidas con una media de 500 y una desviación estándar de 50. Si un día particular tienen 550 ventas, ¿qué porcentaje de días tendrán ventas menores que eso?</p>
+<p><strong>19.</strong> Un departamento de calidad mide la cantidad de defectos de una línea de ensamblaje cada hora. Si los defectos pueden ser 0, 1, 2 con probabilidades 0.7, 0.2 y 0.1, ¿cuál es la probabilidad de que en 3 horas consecutivas no haya defectos?</p>
+<p><strong>20.</strong> Una tienda observa que el tiempo que los clientes pasan comprando sigue una distribución normal con una media de 40 minutos y una desviación estándar de 10 minutos. ¿Cuál es la probabilidad de que un cliente pase más de 1 hora comprando?</p>
+<p><strong>21.</strong> Un servicio de streaming estudia la cantidad de horas que sus usuarios pasan viendo contenido. Encuentran que sigue una distribución uniforme entre 1 y 3 horas diarias. ¿Qué porcentaje de usuarios verá contenido durante más de 2 horas pero menos de 2.5 horas?</p>
+<p><strong>22.</strong> Una empresa de software libera una actualización y monitorea los errores reportados por sus usuarios. Si los errores reportados pueden ser 0, 1, 2, 3 con probabilidades 0.6, 0.2, 0.15 y 0.05, ¿cuál es la varianza de errores reportados?</p>
+<p><strong>23.</strong> Una empresa de consultoría encuentra que el número de proyectos que completan en un mes sigue una distribución discreta con valores (2, 3, 4, 5) y probabilidades (0.1, 0.4, 0.4, 0.1). Si cobran $5000 por proyecto, ¿cuál es el ingreso esperado por mes?</p>
+<p><strong>24.</strong> Una cadena de restaurantes desea conocer el tiempo de espera de sus clientes. Si se sabe que el tiempo de espera sigue una distribución uniforme entre 5 y 15 minutos, ¿cuál es la probabilidad de que un cliente espere más de 10 minutos pero menos de 12 minutos?</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Ejercicios"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1340 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 3-2: Pruebas de Hipotesis &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_3/3-2-Hypothesis';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lectura 3-1: Inferencia estadística" href="3-1-Inference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_3/3-2-Hypothesis.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_3/3-2-Hypothesis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_3/3-2-Hypothesis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 3-2: Pruebas de Hipotesis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 3-2: Pruebas de Hipotesis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-camaras-corporales">Ejemplo 1: cámaras corporales</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-babies">Example 2: Babies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-bebes">Ejemplo 2: Bebés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculando-una-region-critica">Calculando una región crítica</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-general-de-nhst">Descripción general de NHST</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mas-sobre-los-valores-p">Más sobre los valores P</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-bilaterales">Pruebas bilaterales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Pruebas bilaterales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-dos-muestras-no-emparejadas">Pruebas de dos muestras no emparejadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-dos-muestras-emparejadas">Pruebas de dos muestras emparejadas</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#errores">errores</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-un-resultado-significativo">¿Qué significa un resultado significativo?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hay-muchas-otras-pruebas">Hay muchas otras pruebas.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-3-2-pruebas-de-hipotesis">
+<h1>Lectura 3-2: Pruebas de Hipotesis<a class="headerlink" href="#lectura-3-2-pruebas-de-hipotesis" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Una <strong>prueba de hipótesis</strong> nos permite medir si alguna <strong>propiedad</strong> supuesta sobre una población se contrasta con una muestra estadística.</p></li>
+<li><p>Por hipótesis nos referimos a un subconjunto de valores para nuestro parámetro de población objetivo <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li>
+<li><p>En el contexto de los experimentos, las pruebas estadísticas de hipótesis nulas (NHST por sus siglas en ingles) nos ayuda a determinar si es poco probable que las diferencias observadas entre los grupos de tratamiento y control hayan ocurrido por casualidad.</p></li>
+<li><p>Las pruebas de hipótesis se pueden aplicar a todo tipo de parámetros poblacionales (por ejemplo, media, varianza, mediana).</p></li>
+<li><p>En la clase nos centraremos en probar la <strong>media poblacional</strong> <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+</ul>
+<p>Estudiaremos los siguientes tipos de pruebas paramétricas a la media:</p>
+<ol class="arabic simple">
+<li><p><strong>Prueba de una muestra</strong>: contrastamos la media de la muestra con un valor preespecificado.</p></li>
+<li><p><strong>Prueba de dos muestras no apareadas</strong>: comparamos las medias muestrales de dos grupos independientes (control versus tratamiento).</p></li>
+<li><p><strong>Prueba de dos muestras pareadas</strong>: aquí comparamos las medias de dos grupos dependientes donde tenemos dos valores para las mismas muestras. Por ejemplo: en experimentos de parejas emparejadas.</p></li>
+</ol>
+<ul class="simple">
+<li><p>Todas estas pruebas pueden ser unilaterales o bilaterales.</p></li>
+<li><p>De la misma manera que para los intervalos de confianza, usaremos distribuciones Normal y T-student para modelar la distribución muestral de las medias muestrales.</p></li>
+<li><p>Advertencia: existen muchos conceptos contrarios a la intuición en torno a NHST (por ejemplo, hipótesis nula, valores p).</p></li>
+<li><p>Así, primero introduciremos estos conceptos con dos ejemplos tomados de Poldrack (2019) y Marchini.</p></li>
+<li><p>Luego los formalizaremos con más detalle.</p></li>
+</ul>
+</section>
+<section id="ejemplo-1-camaras-corporales">
+<h1>Ejemplo 1: cámaras corporales<a class="headerlink" href="#ejemplo-1-camaras-corporales" title="Permalink to this heading">#</a></h1>
+<p>Se cree que las cámaras corporales reducen el uso de la fuerza y mejoran el comportamiento de los agentes de policía.</p>
+<ul class="simple">
+<li><p>El gobierno de Washington, DC y el Departamento de Policía Metropolitana de DC realizaron un ECA sobre la eficacia de las cámaras corporales en 2015/2016.</p></li>
+<li><p>Los agentes fueron asignados al azar para llevar o no una cámara corporal.</p></li>
+<li><p>Luego se realizó un seguimiento de su comportamiento a lo largo del tiempo para determinar si las cámaras dieron como resultado un menor uso de la fuerza y menos quejas civiles sobre el comportamiento de los oficiales.</p></li>
+</ul>
+<p><img alt="" src="../_images/camera.png" /></p>
+<p>Digamos que queremos probar específicamente la hipótesis de si el uso de la fuerza disminuye con el uso de cámaras.</p>
+<ul class="simple">
+<li><p>El ensayo controlado aleatorizado (RCT por sus siglas en ingles)  nos proporciona los datos para probar la hipótesis, es decir, las tasas de uso de la fuerza por parte de los agentes asignados a la cámara o a los grupos de control.</p></li>
+<li><p>El siguiente paso obvio es observar los datos y determinar si proporcionan evidencia convincente a favor o en contra de esta hipótesis.</p></li>
+<li><p>Es decir: ¿cuál es la probabilidad de que las cámaras corporales reduzcan el uso de la fuerza, teniendo en cuenta los datos y todo lo que sabemos?</p></li>
+<li><p>Resulta que <strong>no</strong> así funciona la prueba de hipótesis nula.</p></li>
+</ul>
+<ul class="simple">
+<li><p>En lugar de ello, primero tomamos nuestra hipótesis de interés (es decir, que las cámaras corporales reducen el uso de la fuerza) y le damos la vuelta, creando una <strong>hipótesis nula</strong>.</p></li>
+<li><p>En este caso, la hipótesis nula sería que las cámaras no reducen el uso de la fuerza. Es importante destacar que entonces asumimos que la hipótesis nula es verdadera.</p></li>
+<li><p>Luego analizamos los datos y determinamos qué tan probables serían si la hipótesis nula fuera cierta.</p></li>
+<li><p>Si los datos son suficientemente improbables bajo la hipótesis nula, podemos rechazar la nula a favor de la <strong>hipótesis alternativa</strong>, que es nuestra hipótesis de interés.</p></li>
+<li><p>Si no hay evidencia suficiente para rechazar la nulidad, entonces decimos que retenemos (o “no rechazamos”) la nula.</p></li>
+<li><p>Luego nos atenemos a nuestra suposición inicial de que la nula es verdadera.</p></li>
+</ul>
+<p><strong>Ejemplo 2: Bebés</strong></p>
+<p>Por experiencias anteriores, sabemos que el peso al nacer de los bebés en Inglaterra tiene una media de 3000 g y una desviación estándar de 500 g. Creemos que tal vez los bebés en Australia tengan un peso medio al nacer superior a 3000 gy nos gustaría probar esta hipótesis. Tomamos una muestra de bebés de Australia, medimos su peso al nacer y vemos si la media de la muestra es significativamente mayor que 3000 g. La principal hipótesis que más nos interesa es la <strong>hipótesis de la investigación</strong>, denominada <span class="math notranslate nohighlight">\(H_1 \)</span>, de que el peso medio al nacer de los bebés australianos es superior a 3000 g.</p>
+<p>La otra hipótesis es la hipótesis nula, denotada <span class="math notranslate nohighlight">\(H_0\)</span>, de que el peso medio al nacer es igual a 3000 g. Podemos escribir esto de forma compacta como:</p>
+<div class="math notranslate nohighlight">
+\[ H_0: \mu = 3000g \]</div>
+<div class="math notranslate nohighlight">
+\[ H_1: \mu &gt; 3000g \]</div>
+<p>Primero se escribe la hipótesis nula seguida de la hipótesis de investigación. La hipótesis de investigación a menudo se denomina <strong>hipótesis alternativa</strong> aunque suele ser la primera hipótesis en la que pensamos.</p>
+<ul class="simple">
+<li><p>Normalmente, comenzamos con la hipótesis de investigación y “configuramos” la hipótesis nula para que sea directamente contraria a lo que esperamos mostrar.</p></li>
+<li><p>Luego tratamos de demostrar que, a la luz de los datos recopilados, la hipótesis nula es falsa.</p></li>
+<li><p>Hacemos esto calculando la probabilidad de los datos si la hipótesis nula es verdadera. Si esta probabilidad es muy pequeña, sugiere que la hipótesis nula es falsa.</p></li>
+<li><p>Una vez que hayamos establecido nuestra hipótesis nula y alternativa, podemos recolectar una muestra de datos.</p></li>
+<li><p>Por ejemplo, podemos imaginar que recopilamos el peso al nacer de los 44 bebés en el conjunto de datos de Babyboom.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Suponiendo que &#39;babyboom.csv&#39; es tu archivo de datos. </span>
+<span class="c1"># NOTA: Necesitarás el archivo CSV para hacer esto, ya que Python no tiene el paquete UsingR integrado.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../data/babyboom.csv&#39;</span><span class="p">)</span>
+<span class="c1"># Gráfica un histograma de la columna &#39;wt&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Weight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of Weight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7fe326d3325d36919905f48830b91878472672d077306d3ead5fe34eef3ea7a9.png" src="../_images/7fe326d3325d36919905f48830b91878472672d077306d3ead5fe34eef3ea7a9.png" />
+</div>
+</div>
+<p>La media muestral del conjunto de datos <span class="math notranslate nohighlight">\( \overline{x} \)</span> es:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3275.9545454545455
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora queremos calcular la probabilidad de obtener una muestra con una media tan grande como <span class="math notranslate nohighlight">\( 3275.955 \)</span> bajo el supuesto de la hipótesis nula <span class="math notranslate nohighlight">\( H_0 \)</span>.</p>
+<ul class="simple">
+<li><p>Del  teorema central de límite sabemos que la distribución muestral de <span class="math notranslate nohighlight">\( \overline{X} \)</span> sigue una distribución Normal cuando <span class="math notranslate nohighlight">\( n \)</span> es suficientemente grande: <span class="math notranslate nohighlight">\( \overline{X} \sim N(\mu, \sigma^ 2/n) \)</span>.</p></li>
+<li><p>Si asumimos que <span class="math notranslate nohighlight">\( H_0 \)</span> es verdadero, entonces <span class="math notranslate nohighlight">\( \mu=3000 \)</span>. El valor de <span class="math notranslate nohighlight">\( n \)</span> es 44 y el valor de <span class="math notranslate nohighlight">\( \sigma \)</span> se conoce en este caso y es igual a 500.</p></li>
+<li><p>Calculemos el error estándar <span class="math notranslate nohighlight">\( \frac{\sigma}{\sqrt{n} }\)</span>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">true_mean</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">n</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">se</span><span class="o">=</span><span class="n">sd</span><span class="o">/</span><span class="n">n</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">se</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>75.3778361444409
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora podemos calcular la probabilidad de obtener una muestra con una media tan grande como <span class="math notranslate nohighlight">\( 3275,955 \)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1"># Cálculo del valor-p</span>
+<span class="n">pvalue</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xbar</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">true_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">se</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue</span><span class="p">)</span>
+
+<span class="c1"># O alternativamente:</span>
+<span class="n">Z_score</span> <span class="o">=</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">true_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">se</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Z_score</span><span class="p">)</span>
+
+<span class="n">pvalue_alternative</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">Z_score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue_alternative</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0001256405331706567
+3.6609507458632065
+0.0001256405331706567
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-2-babies">
+<h2>Example 2: Babies<a class="headerlink" href="#example-2-babies" title="Permalink to this heading">#</a></h2>
+<p><img alt="" src="../_images/pvalue1.png" /></p>
+</section>
+<section id="ejemplo-2-bebes">
+<h2>Ejemplo 2: Bebés<a class="headerlink" href="#ejemplo-2-bebes" title="Permalink to this heading">#</a></h2>
+<p>La probabilidad que calculamos se llama <strong>valor p</strong> de la prueba.</p>
+<ul class="simple">
+<li><p>En este caso el valor p es muy bajo.</p></li>
+<li><p>Esto dice que la probabilidad de los datos es muy baja si asumimos que la hipótesis nula es cierta.</p></li>
+<li><p>Pero, ¿qué tan baja tiene que ser esta probabilidad antes de que podamos concluir que la hipótesis nula es falsa?</p></li>
+<li><p>La convención dentro de la estadística es elegir un <strong>nivel de significancia</strong> <span class="math notranslate nohighlight">\( \alpha \)</span> antes del experimento que dicte qué tan bajo debe ser el valor p antes de rechazar la hipótesis nula.</p></li>
+<li><p>En la práctica, muchas personas utilizan un nivel de significancia del 5% y concluyen que existe evidencia significativa en contra de la hipótesis nula si el valor p es menor o igual a 0,05.</p></li>
+<li><p>Un enfoque más conservador utiliza un nivel de significancia del 1% y concluye que existe evidencia significativa en contra de la hipótesis nula si el valor p es inferior a 0,01.</p></li>
+</ul>
+<p>En nuestro ejemplo actual, el valor p es 0,00013, que es inferior a <span class="math notranslate nohighlight">\( \alpha = 0,05 \)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">pvalue</span> <span class="o">&lt;=</span> <span class="n">alpha</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>En este caso, concluiríamos que:</p>
+<ul class="simple">
+<li><p>“Existe evidencia significativa contra la hipótesis nula al nivel del 5%”.</p></li>
+<li><p>Otra forma de decir esto es que: “rechazamos la hipótesis nula al nivel del 5%”.</p></li>
+<li><p>Si el valor p de la prueba es mucho mayor, digamos 0,23, entonces concluiríamos que: “la evidencia contra la hipótesis nula no es significativa al nivel del 5%”.</p></li>
+<li><p>Otra forma de decirlo es que: “no podemos rechazar la hipótesis nula al nivel del 5%”.</p></li>
+</ul>
+<p>En el ejemplo anterior, asumimos que se conocía <span class="math notranslate nohighlight">\( \sigma \)</span>.</p>
+<ul class="simple">
+<li><p>En muchos casos <span class="math notranslate nohighlight">\( \sigma \)</span> es desconocido y debemos estimarlo usando el estimador insesgado <span class="math notranslate nohighlight">\( s \)</span> que vimos en la clase anterior.</p></li>
+<li><p>Si el tamaño de la muestra es pequeño y asumimos que los datos son normales, podemos calcular un estadístico <span class="math notranslate nohighlight">\( T= \)</span> <span class="math notranslate nohighlight">\( \frac{\overline{X_{n}}-\mu_{o}}{\frac{ s}{\sqrt{n}}} \)</span>:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calcular el estadístico de t de una muestra</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_1samp</span>
+
+<span class="n">t_statistic</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_1samp</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">],</span> <span class="n">true_mean</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t_statistic</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4665963130955246
+0.0012085244294765993
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>De la lectura anterior sabemos que <span class="math notranslate nohighlight">\( T \)</span> sigue una distribución t-student con <span class="math notranslate nohighlight">\( n-1 \)</span> grados de libertad <span class="math notranslate nohighlight">\( T \sim t_{n-1} \)</span>.</p></li>
+<li><p>Ahora podemos realizar una prueba T utilizando la distribución t de Student en lugar de una gaussiana.</p></li>
+<li><p>Puede ver que <code class="docutils literal notranslate"><span class="pre">ttest_1samp</span></code> el valor del estadístico T y el valor p de la prueba.</p></li>
+</ul>
+<p>También rechazamos la hipótesis nula en este caso con <span class="math notranslate nohighlight">\( \alpha = 0,05. \)</span></p>
+<p>Pero el valor p es mayor que antes. Esto se debe a que la distribución t tiene colas más anchas que la distribución Normal.</p>
+<p>Las colas anchas implican que hay más incertidumbre porque tuvimos que estimar <span class="math notranslate nohighlight">\( \sigma \)</span> y el tamaño de la muestra es relativamente pequeño.</p>
+</section>
+<section id="calculando-una-region-critica">
+<h2>Calculando una región crítica<a class="headerlink" href="#calculando-una-region-critica" title="Permalink to this heading">#</a></h2>
+<p>Otra forma de pensar en esta prueba es que existe una región crítica de valores tal que si el estadístico de prueba se encuentra en esta región, entonces rechazaremos <span class="math notranslate nohighlight">\( H_0 \)</span>.</p>
+<ul class="simple">
+<li><p>Si la estadística de prueba se encuentra fuera de esta región, no rechazaremos <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>En el ejemplo de los bebés, utilizando un nivel de significancia del 5%, este conjunto de valores será el 5% más extremo de los valores en la cola derecha de la distribución.</p></li>
+<li><p>Podemos calcular que el límite de esta región, llamado valor crítico:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">crit</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">crit</span>
+<span class="n">Z_score</span> <span class="o">&gt;=</span> <span class="n">crit</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="critregion" src="../_images/critregion.png" /></p>
+<p>Alternativamente, usando una distribución T:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+<span class="n">T_sta</span> <span class="o">=</span> <span class="p">(</span><span class="n">xbar</span> <span class="o">-</span> <span class="n">true_mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">crit2</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">T_sta</span> <span class="o">&gt;=</span> <span class="n">crit2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="descripcion-general-de-nhst">
+<h1>Descripción general de NHST<a class="headerlink" href="#descripcion-general-de-nhst" title="Permalink to this heading">#</a></h1>
+<p>En la <strong>Prueba de significancia de hipótesis nulas (NHST)</strong>, existen dos hipótesis principales:</p>
+<ol class="arabic simple">
+<li><p><strong>Hipótesis nula</strong> <span class="math notranslate nohighlight">\( H_{0} \)</span>:</p>
+<ul class="simple">
+<li><p>Representa lo que se ha considerado real hasta el momento o cómo esperaríamos que se vieran los datos si no hubiera ningún efecto.</p></li>
+<li><p>La hipótesis nula siempre implica algún tipo de igualdad (por ejemplo, <span class="math notranslate nohighlight">\( =, \leq, \geq \)</span>).</p></li>
+</ul>
+</li>
+<li><p><strong>Hipótesis alternativa</strong> <span class="math notranslate nohighlight">\( H_{a} \)</span>:</p>
+<ul class="simple">
+<li><p>Representa el modelo alternativo que queremos considerar o lo que esperamos si realmente hay un efecto.</p></li>
+<li><p>La hipótesis alternativa siempre implica algún tipo de desigualdad (por ejemplo, <span class="math notranslate nohighlight">\( \neq, &gt;, &lt; \)</span>).</p></li>
+</ul>
+</li>
+</ol>
+<p>Es importante tener en cuenta que la prueba de hipótesis nula opera bajo el supuesto de que la hipótesis nula es verdadera a menos que la evidencia demuestre lo contrario. La idea principal es encontrar suficiente <strong>evidencia estadística</strong> para rechazar <span class="math notranslate nohighlight">\( H_{0} \)</span> y poder concluir <span class="math notranslate nohighlight">\( H_{a} \)</span>. Si no obtenemos suficiente evidencia estadística, <strong>no rechazamos</strong> <span class="math notranslate nohighlight">\( H_{0} \)</span>.</p>
+<p>Para realizar una prueba de hipótesis, seguimos esta metodología:</p>
+<ol class="arabic simple">
+<li><p>Especifique una hipótesis nula <span class="math notranslate nohighlight">\( H_0 \)</span> y una alternativa <span class="math notranslate nohighlight">\( H_a \)</span>.</p></li>
+<li><p>Establezca un nivel de significancia de la prueba <span class="math notranslate nohighlight">\( \alpha \)</span>.</p></li>
+<li><p>Recopilar datos relevantes para la hipótesis.</p></li>
+<li><p>Ajuste un modelo a los datos y calcule un estadístico de prueba <span class="math notranslate nohighlight">\( T \)</span>.</p>
+<ul class="simple">
+<li><p>En pruebas paramétricas, <span class="math notranslate nohighlight">\( T \)</span> es un valor estandarizado (por ejemplo, una puntuación Z).</p></li>
+</ul>
+</li>
+<li><p>Evalúe la “significancia estadística” de <span class="math notranslate nohighlight">\( T \)</span>.</p></li>
+</ol>
+<p>Hay dos enfoques para el último paso:</p>
+<ul class="simple">
+<li><p><strong>Enfoque del valor P</strong>: Calcula la probabilidad de observar un valor (o valores más extremos) de la estadística suponiendo que la hipótesis nula es verdadera y compárala con <span class="math notranslate nohighlight">\( \alpha \)</span>.</p></li>
+<li><p><strong>Región crítica</strong>: Calcula una región de valores tal que si <span class="math notranslate nohighlight">\( T \)</span> se encuentra en esta región entonces rechazaremos <span class="math notranslate nohighlight">\( H_0 \)</span>.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mas-sobre-los-valores-p">
+<h1>Más sobre los valores P<a class="headerlink" href="#mas-sobre-los-valores-p" title="Permalink to this heading">#</a></h1>
+<p>Los valores p juegan un papel crucial en la prueba de hipótesis. He aquí un vistazo en profundidad a ellos:</p>
+<ul class="simple">
+<li><p>Un valor p es la probabilidad de obtener un resultado <strong>al menos tan extremo</strong> como lo observado en los datos, asumiendo que la hipótesis nula es verdadera.</p></li>
+<li><p>“Extremo” se refiere a valores que se alejan de lo que predice la hipótesis nula y se acercan más a lo que sugiere la hipótesis alternativa.</p></li>
+<li><p>Es importante considerar todos los valores más extremos al calcular un valor p, especialmente porque la probabilidad de cualquier valor específico es cero para distribuciones continuas.</p></li>
+<li><p>La idea principal detrás de los valores p es determinar qué tan inusual sería nuestro resultado si la hipótesis nula fuera precisa. Cualquier resultado más extremo que nuestra observación sería aún más extraño.</p></li>
+<li><p>En esencia, contamos todas estas posibilidades inusuales al calcular la probabilidad de nuestro resultado bajo la hipótesis nula.</p></li>
+</ul>
+<section id="pruebas-bilaterales">
+<h2>Pruebas bilaterales<a class="headerlink" href="#pruebas-bilaterales" title="Permalink to this heading">#</a></h2>
+<p>En el ejemplo anterior queríamos probar la hipótesis de la investigación de que el peso medio al nacer de los bebés australianos era superior a 3000 g. Esto sugiere que teníamos información previa de que el peso medio al nacer de los bebés australianos definitivamente no era inferior a 3000 g. Si este no fuera el caso, entonces nuestra hipótesis de investigación sería que el peso medio al nacer de los bebés australianos fue diferente de 3000 g. Esto permite la posibilidad de que el peso medio al nacer sea menor o mayor que 3000 g. Este es un ejemplo de una prueba <strong>bilateral</strong> a diferencia del ejemplo anterior que era una prueba <strong>unilateral</strong>. En este caso bilateral escribiríamos nuestras hipótesis como:</p>
+<div class="math notranslate nohighlight">
+\[H_0 : \mu=3000g \]</div>
+<div class="math notranslate nohighlight">
+\[H_1 : \mu\neq3000g \]</div>
+<p>Como antes, calcularíamos nuestro estadístico de prueba como 3,66 para la distribución Normal y 3,47 para la T-student.</p>
+<p>En este caso permitimos la posibilidad de que el valor medio sea inferior a 3000 g estableciendo nuestra región crítica como el 2,5% más bajo y el 2,5% más alto de la distribución.</p>
+<p>De esta manera, el área total de la región crítica sigue siendo 0,05 y, por tanto, el nivel de significancia <span class="math notranslate nohighlight">\(\alpha\)</span> de nuestra prueba sigue siendo del 5%. Los valores críticos para una prueba Z son:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Suponiendo que ya tienes un valor para alpha</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span> 
+
+<span class="c1"># Calculando los valores críticos</span>
+<span class="n">crit_left</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">crit_left</span><span class="p">)</span>
+
+<span class="n">crit_right</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">crit_right</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.9599639845400545
+1.959963984540054
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por tanto, si nuestro estadístico de prueba es menor que -1,96 o mayor que 1,96 rechazaríamos la hipótesis nula. En este ejemplo, el valor del estadístico de prueba se encuentra en la región crítica, por lo que rechazamos la hipótesis nula en el nivel del 5%.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Suponiendo que ya has definido Z_score, crit_left y crit_right anteriormente</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">Z_score</span> <span class="o">&lt;=</span> <span class="n">crit_left</span> <span class="ow">or</span> <span class="n">Z_score</span> <span class="o">&gt;=</span> <span class="n">crit_right</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2>Pruebas bilaterales<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p><img alt="" src="Images/critregion2side.png" /></p>
+<p>Para el caso de la distribución T nuestra región crítica es:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+
+<span class="c1"># Suponiendo que ya tienes valores definidos para alpha y n</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span> 
+<span class="n">n</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+<span class="c1"># Calculando los valores críticos para la distribución t</span>
+<span class="n">crit2_left</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">crit2_left</span><span class="p">)</span>
+
+<span class="n">crit2_right</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">crit2_right</span><span class="p">)</span>
+
+<span class="c1"># Verificando si T_sta cae fuera del intervalo</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">T_sta</span> <span class="o">&lt;=</span> <span class="n">crit2_left</span> <span class="ow">or</span> <span class="n">T_sta</span> <span class="o">&gt;=</span> <span class="n">crit2_right</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.0166921941428138
+2.0166921941428133
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como <span class="math notranslate nohighlight">\(T\)</span> está en la región de rechazo, rechazamos la hipótesis nula.</p>
+<p>Alternativamente, podríamos calcular un intervalo de confianza para la media muestral con confianza <span class="math notranslate nohighlight">\((1-\alpha)\%\)</span>. El intervalo de confianza se convierte en la <strong>región de aceptación</strong> y rechazamos <span class="math notranslate nohighlight">\(H_0\)</span> si <span class="math notranslate nohighlight">\(\mu_0 =3000\)</span> no está atrapado por el intervalo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">se_t</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="o">**</span><span class="mf">0.5</span>
+
+<span class="c1"># Calculando el intervalo de confianza para la media poblacional</span>
+<span class="n">left_conf</span> <span class="o">=</span> <span class="n">xbar</span> <span class="o">-</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">se_t</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">left_conf</span><span class="p">)</span>
+
+<span class="n">right_conf</span> <span class="o">=</span> <span class="n">xbar</span> <span class="o">+</span> <span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">se_t</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">right_conf</span><span class="p">)</span>
+
+<span class="c1"># Suponiendo que ya tienes un valor para mu0</span>
+<span class="n">mu0</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># tu valor para mu0 aquí</span>
+
+<span class="c1"># Verificando si mu0 está dentro del intervalo</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">true_mean</span> <span class="o">&gt;=</span> <span class="n">left_conf</span> <span class="ow">or</span> <span class="n">true_mean</span> <span class="o">&lt;=</span> <span class="n">right_conf</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3115.4180054328244
+3436.4910854762666
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dado que <span class="math notranslate nohighlight">\(\mu_0 =3000\)</span> no está en mi región de aceptación, rechazamos la hipótesis nula en el nivel de significancia de 0,05.</p>
+<p>Para calcular un valor p en una prueba bilateral, debemos considerar las colas izquierda y derecha:</p>
+<div class="math notranslate nohighlight">
+\[
+p.valor = \Phi(-Z)+(1-\Phi(Z))=2\Phi(-|Z|)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Cálculo del valor-p usando el primer método</span>
+<span class="n">pvalue</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">Z_score</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">Z_score</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue</span><span class="p">)</span>
+
+<span class="c1"># Cálculo del valor-p usando el método compacto</span>
+<span class="n">pvalue_compact</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">Z_score</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue_compact</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00025128106634134345
+0.0002512810663413735
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observe que este valor p es mayor que el de la prueba unilateral. Esto refleja el hecho de que un valor extremo es menos sorprendente ya que podría haber ocurrido en cualquier dirección.</p>
+<p><img alt="Imagen de twosidepval" src="../_images/twosidepval.png" /></p>
+<p>Aquí <span class="math notranslate nohighlight">\(p.value\)</span> es menor que <span class="math notranslate nohighlight">\(\alpha\)</span>, por lo que rechazamos <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<p><img alt="Imagen de twosidepval_fail" src="../_images/twosidepval_fail.png" /></p>
+<p>Aquí <span class="math notranslate nohighlight">\(p.value\)</span> es mayor que <span class="math notranslate nohighlight">\(\alpha\)</span>, por lo que no podemos rechazar <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<p>Ahora, calculemos el valor p para la prueba T:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cálculo del valor-p usando el primer método</span>
+<span class="n">pvalue</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">T_sta</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">T_sta</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue</span><span class="p">)</span>
+
+<span class="c1"># Cálculo del valor-p usando el método compacto</span>
+<span class="n">pvalue_compact</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">T_sta</span><span class="p">),</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pvalue_compact</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0012085244294766013
+0.0012085244294765933
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Realizar la prueba t</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_1samp</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">],</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;T-Statistic:&quot;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-Value:&quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-Statistic: 3.4665963130955246
+P-Value: 0.0012085244294765993
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto nos proporcionará el estadístico de prueba, el valor p, el intervalo de confianza y otra información relevante para determinar si rechazamos la hipótesis nula.</p>
+</section>
+<section id="pruebas-de-dos-muestras-no-emparejadas">
+<h2>Pruebas de dos muestras no emparejadas<a class="headerlink" href="#pruebas-de-dos-muestras-no-emparejadas" title="Permalink to this heading">#</a></h2>
+<p>El conjunto de datos “babyboom” tiene una columna que especifica el sexo de cada bebé.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>boy     26
+girl    18
+Name: gender, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Supongamos que nuestra hipótesis de investigación es que el peso medio al nacer de los niños es diferente (bilateral) del peso medio al nacer de las niñas:</p>
+<div class="math notranslate nohighlight">
+\[H_0: \mu_{boys}=\mu_{girls} \text{ o } \mu_{boys}-\mu_{girls}=0\]</div>
+<div class="math notranslate nohighlight">
+\[H_1: \mu_{boys}\neq\mu_{girls} \text{ o } \mu_{boys}-\mu_{girls}\neq0\]</div>
+</li>
+<li><p>A esta prueba la llamamos prueba de dos muestras (una muestra con los nacimientos de niños y otra de niñas).</p></li>
+<li><p>Las dos muestras son independientes o no apareadas (tenemos diferente número de observaciones para niños y niñas).</p></li>
+<li><p>Este tipo de pruebas son muy importantes para datos experimentales y estudios observacionales (es decir, una muestra es el grupo de control y la otra es el grupo de tratamiento).</p></li>
+<li><p>La teoría asintótica nos dice que la diferencia entre dos medias muestrales (cuando los tamaños de muestra son suficientemente grandes) tiene una distribución muestral Normal:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\overline{X}_{1}-\overline{X}_{2} \sim N\left(0, \frac{\sigma_1^{2}}{n_1} + \frac{\sigma_2^{ 2}}{n_2}\right)\]</div>
+<ul class="simple">
+<li><p>Cuando se desconocen las desviaciones estándar de cada grupo (<span class="math notranslate nohighlight">\(\sigma_1\)</span>, <span class="math notranslate nohighlight">\(\sigma_2\)</span>) podemos estimarlas como siempre (<span class="math notranslate nohighlight">\(s_1\)</span>,<span class="math notranslate nohighlight">\(s_2\)</span>) y construir las siguientes estadísticas <span class="math notranslate nohighlight">\(T\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[T = \frac{ \overline{X}_{1}-\overline{X}_{2}}{\sqrt{\frac{s_1^{2}}{n_1} + \frac{s_2^{ 2}}{n_2}}}\]</div>
+<ul class="simple">
+<li><p>El estadístico <span class="math notranslate nohighlight">\(T\)</span> se distribuye según una distribución t-student.</p></li>
+<li><p>Cuando los grupos son del mismo tamaño y tienen igual varianza, los grados de libertad para la prueba <span class="math notranslate nohighlight">\(T\)</span> son <span class="math notranslate nohighlight">\(n_1+n_2-2\)</span>.</p></li>
+<li><p>En este caso, el diagrama de caja muestra que el grupo de “niñas” es más variable que el grupo de “niños”.</p></li>
+<li><p>También sabemos que el número de observaciones en cada grupo es diferente.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1">#crear un boxplot para cada genero de la base de datos df</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;wt&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;hls&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Box plot of weight by gender&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>  <span class="c1"># Esto es para remover el título automático que Pandas pone</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Gender&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Weight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a55aee26d29d447f50a8329a9c166240180df4a664ac0be35bf012a4aed958da.png" src="../_images/a55aee26d29d447f50a8329a9c166240180df4a664ac0be35bf012a4aed958da.png" />
+</div>
+</div>
+<ul>
+<li><p>Necesitamos utilizar una fórmula más compleja para los grados de libertad, a la que a menudo se hace referencia como “prueba t de Welch”:</p>
+<div class="math notranslate nohighlight">
+\[d.f. = \frac{\left(\frac{s_1^{2}}{n_1} + \frac{s_2^{2}}{n_2}\right)^2}{\frac{(s_1^2/n_1)^ 2}{n_1-1}+\frac{(s_2^2/n_2)^2}{n_2-1}}\]</div>
+</li>
+<li><p>Para este ejemplo d.f. = 27,631, que es inferior a lo que obtendríamos restando 2 del tamaño de la muestra.</p></li>
+<li><p>Recuerde que cuanto menor es el d.f, más anchas son las colas en la distribución t-student.</p></li>
+<li><p>Esto consiste esencialmente en imponer una penalización a la prueba por diferencias en el tamaño o la varianza de la muestra.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind</span>
+<span class="c1"># Separar los datos por género</span>
+<span class="n">group_girl</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;girl&#39;</span><span class="p">][</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span>
+<span class="n">group_boy</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;gender&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;boy&#39;</span><span class="p">][</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span>
+
+<span class="c1"># Realizar la prueba t para dos muestras independientes</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">group_girl</span><span class="p">,</span> <span class="n">group_boy</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># &#39;equal_var=False&#39; realiza la prueba t de Welch</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;T-Statistic:&quot;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-Value:&quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean in group girl:&quot;</span><span class="p">,</span> <span class="n">group_girl</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean in group boy:&quot;</span><span class="p">,</span> <span class="n">group_boy</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-Statistic: -1.4210557069307492
+P-Value: 0.16648882032684822
+Mean in group girl: 3132.4444444444443
+Mean in group boy: 3375.3076923076924
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>En este caso, no logramos rechazar <span class="math notranslate nohighlight">\(H_0\)</span> en el nivel de significancia <span class="math notranslate nohighlight">\(5\%\)</span>.</p></li>
+</ul>
+</section>
+<section id="pruebas-de-dos-muestras-emparejadas">
+<h2>Pruebas de dos muestras emparejadas<a class="headerlink" href="#pruebas-de-dos-muestras-emparejadas" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>Otro tipo muy útil de prueba de dos muestras es la prueba T pareada.</p></li>
+<li><p>Esta prueba se utiliza para comparar las medias entre dos <strong>grupos relacionados</strong> de muestras.</p></li>
+<li><p>Aquí tenemos dos valores (es decir, un par de valores) para las mismas muestras.</p></li>
+<li><p>Este tipo de datos surge cuando comparamos una variable de respuesta después y antes de un tratamiento para cada sujeto.</p></li>
+<li><p>También surge en experimentos de parejas emparejadas.</p></li>
+<li><p>El análisis de la prueba t pareada se realiza de la siguiente manera:</p>
+<ol class="arabic simple">
+<li><p>Calcula la diferencia <span class="math notranslate nohighlight">\(d\)</span> entre cada par de valores.</p></li>
+<li><p>Calcula la media <span class="math notranslate nohighlight">\(\overline{d}\)</span> y la desviación estándar <span class="math notranslate nohighlight">\(s_d\)</span> de estas diferencias.</p></li>
+<li><p>Compara <span class="math notranslate nohighlight">\(\overline{d}\)</span> con 0 de la misma manera que en las pruebas anteriores.</p></li>
+</ol>
+</li>
+<li><p>Las estadísticas de la prueba <span class="math notranslate nohighlight">\(T\)</span> se calculan de la siguiente manera para la prueba pareada:</p>
+<div class="math notranslate nohighlight">
+\[T = \frac{\overline{d}}{s_d/\sqrt{n}}\]</div>
+</li>
+<li><p>Los grados de libertad (df) son simplemente <span class="math notranslate nohighlight">\(n-1\)</span>.</p></li>
+</ul>
+<p>Como ejemplo, 20 ratones recibieron un tratamiento X durante 3 meses.</p>
+<ul>
+<li><p>Queremos saber si el tratamiento X tiene impacto en el peso de los ratones.</p></li>
+<li><p>Se ha medido el peso de los 20 ratones antes y después del tratamiento.</p></li>
+<li><p>Probemos las siguientes hipótesis:</p>
+<div class="math notranslate nohighlight">
+\[H_0: \overline{d}=0\]</div>
+<div class="math notranslate nohighlight">
+\[H_1: \overline{d}\neq0\]</div>
+</li>
+</ul>
+<p>Podemos ejecutar una prueba t pareada en Python de la siguiente manera:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_rel</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Peso de los ratones antes del tratamiento</span>
+<span class="n">before</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">200.1</span><span class="p">,</span> <span class="mf">190.9</span><span class="p">,</span> <span class="mf">192.7</span><span class="p">,</span> <span class="mi">213</span><span class="p">,</span> <span class="mf">241.4</span><span class="p">,</span> <span class="mf">196.9</span><span class="p">,</span> <span class="mf">172.2</span><span class="p">,</span>
+                   <span class="mf">185.5</span><span class="p">,</span> <span class="mf">205.2</span><span class="p">,</span> <span class="mf">193.7</span><span class="p">])</span>
+
+<span class="c1"># Peso de los ratones después del tratamiento</span>
+<span class="n">after</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">392.9</span><span class="p">,</span> <span class="mf">393.2</span><span class="p">,</span> <span class="mf">345.1</span><span class="p">,</span> <span class="mi">393</span><span class="p">,</span> <span class="mi">434</span><span class="p">,</span> <span class="mf">427.9</span><span class="p">,</span> <span class="mi">422</span><span class="p">,</span>
+                  <span class="mf">383.9</span><span class="p">,</span> <span class="mf">392.3</span><span class="p">,</span> <span class="mf">352.2</span><span class="p">])</span>
+
+<span class="c1"># Realizar la prueba t pareada</span>
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">ttest_rel</span><span class="p">(</span><span class="n">after</span><span class="p">,</span> <span class="n">before</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;T-Statistic:&quot;</span><span class="p">,</span> <span class="n">t_stat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;P-Value:&quot;</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean of the differences:&quot;</span><span class="p">,</span> <span class="n">after</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">before</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T-Statistic: 20.8831333638503
+P-Value: 6.200298210361319e-09
+Mean of the differences: 194.48999999999995
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="errores">
+<h1>errores<a class="headerlink" href="#errores" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Tenemos dos tipos de errores cuando realizamos una prueba de hipótesis.</p></li>
+<li><p>Error tipo I: es cuando rechazamos la hipótesis nula cuando era cierta (también llamado “falsa alarma”).</p></li>
+<li><p>Error tipo II: es cuando la hipótesis nula es falsa pero no tenemos evidencia estadística para rechazarla (también llamado “miss”).</p></li>
+</ul>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Retain <span class="math notranslate nohighlight">\(H_0\)</span></p></th>
+<th class="head"><p>Reject <span class="math notranslate nohighlight">\(H_{0}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(H_0\)</span> true</p></td>
+<td><p>✅</p></td>
+<td><p>type I error</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(H_1\)</span> true</p></td>
+<td><p>type II error</p></td>
+<td><p>✅</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Jerzy Neyman y Egon Pearson, dos estadísticos muy influyentes del siglo XX, acuñaron dos términos para describir la probabilidad de estos dos tipos de errores a largo plazo:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(P(\text{Error tipo I}) = \alpha\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\text{Error tipo II}) = \beta\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Neyman y Pearson" src="../_images/neymanpearson.jpg" /></p>
+<ul class="simple">
+<li><p>Si configuramos <span class="math notranslate nohighlight">\(\alpha\)</span> en .05, entonces a largo plazo deberíamos cometer un error de Tipo I el 5% de las veces.</p></li>
+<li><p>El valor estándar para un nivel aceptable de <span class="math notranslate nohighlight">\(\beta\)</span> es .2.</p></li>
+<li><p>Es decir, estamos dispuestos a aceptar que el 20% de las veces no lograremos detectar un efecto verdadero cuando realmente existe.</p></li>
+<li><p>El concepto de <strong>poder estadístico</strong> es el complemento del error Tipo II:
+$<span class="math notranslate nohighlight">\(
+   \text{potencia} = 1 - \beta
+   \)</span>$</p></li>
+<li><p>El poder de una prueba es la probabilidad de encontrar un resultado positivo dado que existe (Poldrack, 2019).</p></li>
+<li><p>Para mitigar los errores de tipo I, generalmente utilizamos valores más pequeños de <span class="math notranslate nohighlight">\(\alpha\)</span>.</p></li>
+<li><p>Para mitigar los errores de tipo II (o aumentar la potencia del test) generalmente trabajamos con muestras más grandes.</p></li>
+<li><p>Existe una compensación entre los errores de tipo I y tipo II.</p></li>
+<li><p>Existen herramientas para analizar la potencia de un test que van más allá del alcance de este curso.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="que-significa-un-resultado-significativo">
+<h1>¿Qué significa un resultado significativo?<a class="headerlink" href="#que-significa-un-resultado-significativo" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Existe una gran confusión sobre lo que realmente significan los valores p.</p></li>
+<li><p>Supongamos que hacemos un experimento comparando las medias entre condiciones y encontramos una diferencia con un valor de p de .01.</p>
+<ul>
+<li><p>¿Significa que la probabilidad de que la hipótesis nula sea cierta es .01?</p>
+<ul>
+<li><p>No. Recuerde que en NHST, el valor p es la probabilidad de los datos dada la hipótesis nula: <span class="math notranslate nohighlight">\(P(\text{data}|H_0)\)</span>.</p></li>
+<li><p>No garantiza conclusiones sobre la probabilidad de la hipótesis nula dados los datos: <span class="math notranslate nohighlight">\(P(H_0|\text{data})\)</span>.</p></li>
+</ul>
+</li>
+<li><p>¿Significa que la probabilidad de que estés tomando la decisión equivocada es de .01?</p>
+<ul>
+<li><p>No. Esto sería <span class="math notranslate nohighlight">\(P(H_0|\text{data})\)</span>, pero recuerde como arriba que los valores p son probabilidades de datos bajo <span class="math notranslate nohighlight">\(H_0\)</span>, no probabilidades de hipótesis.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>¿Significa que ha encontrado un efecto prácticamente importante?</p>
+<ul>
+<li><p>No. Existe una distinción esencial entre significación estadística y significación práctica.</p></li>
+<li><p>La pérdida de una onza (es decir, el peso de unas cuantas patatas fritas) puede ser estadísticamente significativa pero no prácticamente significativa.</p></li>
+</ul>
+</li>
+<li><p>Muchos científicos piensan que la NHST tiene fallas y que ha sido la causa de serios problemas en la ciencia (Poldrack, 2019).</p>
+<ul>
+<li><p>Por ejemplo, la Asociación Estadounidense de Estadística (ASA) publicó una “Declaración sobre la importancia estadística y los valores P” que indica el uso y la interpretación adecuados del valor p (Wasserstein, 2016).</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="hay-muchas-otras-pruebas">
+<h1>Hay muchas otras pruebas.<a class="headerlink" href="#hay-muchas-otras-pruebas" title="Permalink to this heading">#</a></h1>
+<p>Hay una gran cantidad de otras pruebas que no enseñaremos en este curso:</p>
+<ul class="simple">
+<li><p>Pruebas de proporciones.</p></li>
+<li><p>La prueba exacta de Fisher.</p></li>
+<li><p>Análisis de Varianza (ANOVA).</p></li>
+<li><p>Las pruebas de independencia Chi-cuadrado.</p></li>
+<li><p>La prueba de rangos con signo de Wilcoxon.</p></li>
+<li><p>La prueba de Kolmogorov-Smirnov.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusiones">
+<h1>Conclusiones<a class="headerlink" href="#conclusiones" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>En esta clase hemos introducido dos conceptos estadísticos importantes: diseño de experimentos y NHST.</p></li>
+<li><p>Los experimentos son un enfoque poderoso para determinar las relaciones causa-efecto.</p></li>
+<li><p>Es muy importante identificar y controlar las variables de confusión en el diseño de experimentos.</p></li>
+<li><p>La prueba de hipótesis es una familia de técnicas para probar hipótesis utilizando datos.</p></li>
+<li><p>NHST debe usarse con cuidado y siempre debemos recordar que los valores p no miden la probabilidad de una hipótesis determinada.</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3-1-Inference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 3-1: Inferencia estadística</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 3-2: Pruebas de Hipotesis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-camaras-corporales">Ejemplo 1: cámaras corporales</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-babies">Example 2: Babies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-bebes">Ejemplo 2: Bebés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculando-una-region-critica">Calculando una región crítica</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descripcion-general-de-nhst">Descripción general de NHST</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mas-sobre-los-valores-p">Más sobre los valores P</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-bilaterales">Pruebas bilaterales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Pruebas bilaterales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-dos-muestras-no-emparejadas">Pruebas de dos muestras no emparejadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-dos-muestras-emparejadas">Pruebas de dos muestras emparejadas</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#errores">errores</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#que-significa-un-resultado-significativo">¿Qué significa un resultado significativo?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hay-muchas-otras-pruebas">Hay muchas otras pruebas.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

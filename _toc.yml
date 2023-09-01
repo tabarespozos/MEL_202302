@@ -16,3 +16,9 @@ parts:
   - file: Week_2/2-0-Schedule_week_2
   - file: Week_2/2-1-Prob
 
+- caption: Semana 3
+  chapters:
+  - file: Week_3/3-0-Schedule_week_3
+  - file: Week_3/3-1-Inference
+  - file: Week_3/3-2-Hypothesis
+ 
