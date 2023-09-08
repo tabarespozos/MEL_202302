@@ -1,0 +1,2154 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 5-1: Inferencia en RLS &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_5/5-2-Hypothesis_Confidence';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="5-0-Schedule_week_5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-1%20Correlaciones.html">Lectura 4-1: Correlaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-2-Simple_linear_regression.html">Lectura 4-2: Regresión lineal simple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-3-SLR_supuestos.html">Lectura 4-3: Supuestos de la regresión lineal simple</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 5</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 5-1: Inferencia en RLS</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_5/5-2-Hypothesis_Confidence.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_5/5-2-Hypothesis_Confidence.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_5/5-2-Hypothesis_Confidence.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 5-1: Inferencia en RLS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 5-1: Inferencia en RLS</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-hipotesis-de-dos-caras-sobre-el-coeficiente-de-pendiente">Pruebas de hipótesis de dos caras sobre el coeficiente de pendiente</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-general-del-t-estadistico">Forma general del <span class="math notranslate nohighlight">\(t\)</span>-estadístico</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comprobacion-de-hipotesis-sobre-beta-1">Comprobación de hipótesis sobre <span class="math notranslate nohighlight">\(\beta_1\)</span>.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-usando-la-base-de-datos-caschols">Ejemplo usando la base de datos CASchols</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-los-coeficientes-de-regresion">Intervalos de confianza para los coeficientes de regresión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#un-intervalo-de-confianza-para-beta-i">Un intervalo de confianza para <span class="math notranslate nohighlight">\(\beta_i\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulacion-intervalos-de-confianza">Simulación: Intervalos de confianza</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-cuando-x-es-una-variable-binaria">Regresión cuando X es una variable binaria</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heteroscedasticidad-y-homoscedasticidad">Heteroscedasticidad y homoscedasticidad</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-ejemplo-real-de-heteroscedasticidad">Un ejemplo real de heteroscedasticidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deberia-preocuparnos-la-heteroscedasticidad">¿Debería preocuparnos la heteroscedasticidad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-errores-estandar-robustos-a-la-heteroscedasticidad">Cálculo de errores estándar robustos a la heteroscedasticidad</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-gauss-markov">Teorema de Gauss-Markov</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulacion-estimador-blue">Simulación: Estimador BLUE</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-del-estadistico-t-en-regresion-cuando-el-tamano-de-la-muestra-es-pequeno">Uso del estadístico t en regresión cuando el tamaño de la muestra es pequeño</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-5-1-inferencia-en-rls">
+<h1>Lectura 5-1: Inferencia en RLS<a class="headerlink" href="#lectura-5-1-inferencia-en-rls" title="Permalink to this heading">#</a></h1>
+<p>Esta lectura continúa nuestro tratamiento del modelo de regresión lineal simple. En las siguientes subsecciones se analiza cómo podemos utilizar nuestros conocimientos sobre la distribución muestral del estimador OLS para hacer afirmaciones sobre su incertidumbre.</p>
+<p>Estas subsecciones cubren los siguientes temas:</p>
+<ul class="simple">
+<li><p>Pruebas de hipótesis relativas a los coeficientes de regresión.</p></li>
+<li><p>Intervalos de confianza para coeficientes de regresión.</p></li>
+<li><p>Regresión cuando <span class="math notranslate nohighlight">\(X\)</span> es una variable categórica.</p></li>
+<li><p>Heteroscedasticidad y homoscedasticidad.</p></li>
+</ul>
+</section>
+<section id="pruebas-de-hipotesis-de-dos-caras-sobre-el-coeficiente-de-pendiente">
+<h1>Pruebas de hipótesis de dos caras sobre el coeficiente de pendiente<a class="headerlink" href="#pruebas-de-hipotesis-de-dos-caras-sobre-el-coeficiente-de-pendiente" title="Permalink to this heading">#</a></h1>
+<p>Utilizando el hecho de que <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> se distribuye aproximadamente de forma normal en muestras grandes, la prueba de hipótesis sobre el verdadero valor <span class="math notranslate nohighlight">\(\beta_1\)</span> se puede hacer como ya hicimos.</p>
+<section id="forma-general-del-t-estadistico">
+<h2>Forma general del <span class="math notranslate nohighlight">\(t\)</span>-estadístico<a class="headerlink" href="#forma-general-del-t-estadistico" title="Permalink to this heading">#</a></h2>
+<p>Recuerde de las clases de Inferencia que un estadístico general <span class="math notranslate nohighlight">\(t\)</span> tiene la forma</p>
+<div class="math notranslate nohighlight">
+\[ t = \frac{\text{estimated value} - \text{hypothesized value}}{\text{standard error of the estimator}}.\]</div>
+</section>
+</section>
+<section id="comprobacion-de-hipotesis-sobre-beta-1">
+<h1>Comprobación de hipótesis sobre <span class="math notranslate nohighlight">\(\beta_1\)</span>.<a class="headerlink" href="#comprobacion-de-hipotesis-sobre-beta-1" title="Permalink to this heading">#</a></h1>
+<p>Para probar la hipótesis <span class="math notranslate nohighlight">\(H_0: \beta_1 = \beta_{1,0}\)</span>, tenemos que realizar los siguientes pasos:</p>
+<ol class="arabic simple">
+<li><p>Calcule el error típico de <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span>, <span class="math notranslate nohighlight">\(SE(\hat{\beta}_1)\)</span></p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+SE(\hat{\beta}_1) = \sqrt{ \hat{\sigma}^2_{\hat{\beta}_1} } \ , \ \
+  \hat{\sigma}^2_{\hat{\beta}_1} = \frac{1}{n} \times \frac{\frac{1}{n-2} \sum_{i=1}^n (X_i - \overline{X})^2 \hat{u_i}^2 }{ \left[ \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X})^2 \right]^2}.
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Calcular el <span class="math notranslate nohighlight">\(t\)</span>-estadístico</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+t = \frac{\hat{\beta}_1 - \beta_{1,0}}{ SE(\hat{\beta}_1) }.
+\]</div>
+<ol class="arabic simple" start="3">
+<li><p>Dada una alternativa de dos caras (<span class="math notranslate nohighlight">\(H_1:\beta_1 \neq \beta_{1,0}\)</span>) rechazamos al nivel de <span class="math notranslate nohighlight">\(5\%\)</span> si <span class="math notranslate nohighlight">\(|t^{act}| &gt; 1.96\)</span> o, lo que es lo mismo, si el valor <span class="math notranslate nohighlight">\(p\)</span> es inferior a <span class="math notranslate nohighlight">\(0.05\)</span>.<br />
+Recordemos la definición del valor <span class="math notranslate nohighlight">\(p\)</span>:</p></li>
+</ol>
+<p>\begin{align*}
+p \text{-value} &amp;= \text{Pr}_{H_0} \left[ \left| \frac{ \hat{\beta}<em>1 - \beta</em>{1,0} }{ SE(\hat{\beta}_1) } \right| &gt; \left|        \frac{ \hat{\beta}<em>1^{act} - \beta</em>{1,0} }{ SE(\hat{\beta}<em>1) } \right| \right] \
+&amp;= \text{Pr}</em>{H_0} (|t| &gt; |t^{act}|) \
+&amp;\approx 2 \cdot \Phi(-|t^{act}|)
+\end{align*}</p>
+<p>La última transformación se debe a la aproximación normal para muestras grandes.</p>
+</section>
+<section id="ejemplo-usando-la-base-de-datos-caschols">
+<h1>Ejemplo usando la base de datos CASchols<a class="headerlink" href="#ejemplo-usando-la-base-de-datos-caschols" title="Permalink to this heading">#</a></h1>
+<p>A continuación se muestra un ejemplo de como usar la base de datos CASchools para realizar un análisis de regresión lineal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">CASchools</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;CASchools.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CASchools</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>district</th>
+      <th>school</th>
+      <th>county</th>
+      <th>grades</th>
+      <th>students</th>
+      <th>teachers</th>
+      <th>calworks</th>
+      <th>lunch</th>
+      <th>computer</th>
+      <th>expenditure</th>
+      <th>income</th>
+      <th>english</th>
+      <th>read</th>
+      <th>math</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>75119</td>
+      <td>Sunol Glen Unified</td>
+      <td>Alameda</td>
+      <td>KK-08</td>
+      <td>195</td>
+      <td>10.900000</td>
+      <td>0.510200</td>
+      <td>2.040800</td>
+      <td>67</td>
+      <td>6384.911133</td>
+      <td>22.690001</td>
+      <td>0.000000</td>
+      <td>691.599976</td>
+      <td>690.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>61499</td>
+      <td>Manzanita Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>240</td>
+      <td>11.150000</td>
+      <td>15.416700</td>
+      <td>47.916698</td>
+      <td>101</td>
+      <td>5099.380859</td>
+      <td>9.824000</td>
+      <td>4.583333</td>
+      <td>660.500000</td>
+      <td>661.900024</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>61549</td>
+      <td>Thermalito Union Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>1550</td>
+      <td>82.900002</td>
+      <td>55.032299</td>
+      <td>76.322601</td>
+      <td>169</td>
+      <td>5501.954590</td>
+      <td>8.978000</td>
+      <td>30.000002</td>
+      <td>636.299988</td>
+      <td>650.900024</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>61457</td>
+      <td>Golden Feather Union Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>243</td>
+      <td>14.000000</td>
+      <td>36.475399</td>
+      <td>77.049202</td>
+      <td>85</td>
+      <td>7101.831055</td>
+      <td>8.978000</td>
+      <td>0.000000</td>
+      <td>651.900024</td>
+      <td>643.500000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>61523</td>
+      <td>Palermo Union Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>1335</td>
+      <td>71.500000</td>
+      <td>33.108601</td>
+      <td>78.427002</td>
+      <td>171</td>
+      <td>5235.987793</td>
+      <td>9.080333</td>
+      <td>13.857677</td>
+      <td>641.799988</td>
+      <td>639.900024</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Adicionamos dos nuevas columnas con las que haremos nuestro analisis de regresión</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute STR and append it to CASchools</span>
+<span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;STR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;students&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;teachers&#39;</span><span class="p">]</span>
+
+<span class="c1"># compute TestScore and append it to CASchools</span>
+<span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;math&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">CASchools</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>district</th>
+      <th>school</th>
+      <th>county</th>
+      <th>grades</th>
+      <th>students</th>
+      <th>teachers</th>
+      <th>calworks</th>
+      <th>lunch</th>
+      <th>computer</th>
+      <th>expenditure</th>
+      <th>income</th>
+      <th>english</th>
+      <th>read</th>
+      <th>math</th>
+      <th>STR</th>
+      <th>score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>75119</td>
+      <td>Sunol Glen Unified</td>
+      <td>Alameda</td>
+      <td>KK-08</td>
+      <td>195</td>
+      <td>10.900000</td>
+      <td>0.510200</td>
+      <td>2.040800</td>
+      <td>67</td>
+      <td>6384.911133</td>
+      <td>22.690001</td>
+      <td>0.000000</td>
+      <td>691.599976</td>
+      <td>690.000000</td>
+      <td>17.889909</td>
+      <td>690.799988</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>61499</td>
+      <td>Manzanita Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>240</td>
+      <td>11.150000</td>
+      <td>15.416700</td>
+      <td>47.916698</td>
+      <td>101</td>
+      <td>5099.380859</td>
+      <td>9.824000</td>
+      <td>4.583333</td>
+      <td>660.500000</td>
+      <td>661.900024</td>
+      <td>21.524664</td>
+      <td>661.200012</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>61549</td>
+      <td>Thermalito Union Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>1550</td>
+      <td>82.900002</td>
+      <td>55.032299</td>
+      <td>76.322601</td>
+      <td>169</td>
+      <td>5501.954590</td>
+      <td>8.978000</td>
+      <td>30.000002</td>
+      <td>636.299988</td>
+      <td>650.900024</td>
+      <td>18.697225</td>
+      <td>643.600006</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>61457</td>
+      <td>Golden Feather Union Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>243</td>
+      <td>14.000000</td>
+      <td>36.475399</td>
+      <td>77.049202</td>
+      <td>85</td>
+      <td>7101.831055</td>
+      <td>8.978000</td>
+      <td>0.000000</td>
+      <td>651.900024</td>
+      <td>643.500000</td>
+      <td>17.357143</td>
+      <td>647.700012</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>61523</td>
+      <td>Palermo Union Elementary</td>
+      <td>Butte</td>
+      <td>KK-08</td>
+      <td>1335</td>
+      <td>71.500000</td>
+      <td>33.108601</td>
+      <td>78.427002</td>
+      <td>171</td>
+      <td>5235.987793</td>
+      <td>9.080333</td>
+      <td>13.857677</td>
+      <td>641.799988</td>
+      <td>639.900024</td>
+      <td>18.671329</td>
+      <td>640.850006</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Observe el comportamiento de las dos variables nuevas, ¿qué puede concluir?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;STR&#39;</span><span class="p">],</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatterplot of Test Score and STR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;STR (X)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Test Score (Y)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/faee4208a220d756a2a5c6e0c736500ef7ddf6151692b7cd76894dd4eeb93fee.png" src="../_images/faee4208a220d756a2a5c6e0c736500ef7ddf6151692b7cd76894dd4eeb93fee.png" />
+</div>
+</div>
+<p>Para obtener los coeficiente y otras informaciones del modelo de regresion usaremos la libreria statsmodel, la cual nos permite obtener un resumen de la regresion lineal.</p>
+<p>Usando la funcion OLS de la libreria statsmodel, podemos obtener el modelo de regresion lineal, para ello debemos pasarle los valores de la variable dependiente y la variable independiente. Posteriormente se aplica el metodo fit() para obtener el modelo de regresion lineal.</p>
+<p>Seguido se aplica el metodo summary() para obtener el resumen del modelo de regresion lineal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="c1"># estimate the model and assign the result to linear_model</span>
+<span class="n">linear_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;score ~ STR&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">CASchools</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># print the standard output of the estimated OLS RegressionResults object to the console</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  score   R-squared:                       0.051
+Model:                            OLS   Adj. R-squared:                  0.049
+Method:                 Least Squares   F-statistic:                     22.58
+Date:                Mon, 07 Aug 2023   Prob (F-statistic):           2.78e-06
+Time:                        12:08:59   Log-Likelihood:                -1822.2
+No. Observations:                 420   AIC:                             3648.
+Df Residuals:                     418   BIC:                             3657.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    698.9329      9.467     73.825      0.000     680.323     717.543
+STR           -2.2798      0.480     -4.751      0.000      -3.223      -1.337
+==============================================================================
+Omnibus:                        5.390   Durbin-Watson:                   0.129
+Prob(Omnibus):                  0.068   Jarque-Bera (JB):                3.589
+Skew:                          -0.012   Prob(JB):                        0.166
+Kurtosis:                       2.548   Cond. No.                         207.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;STR&#39;</span><span class="p">],</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Scatterplot of Test Score and STR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;STR (X)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">720</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Test Score (Y)&#39;</span><span class="p">)</span>
+
+<span class="c1"># add the regression line</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Linear fit&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/777b011dd988c0e1146e0125a2ebdfb030cf519847f78816d06bcdf0f0a41a5f.png" src="../_images/777b011dd988c0e1146e0125a2ebdfb030cf519847f78816d06bcdf0f0a41a5f.png" />
+</div>
+</div>
+<p>Como puede ver, desde el resumen podemos obtener las informaciones relevantes para desarrollar el test de hipótesis.</p>
+<p>Podemos acceder a informaciòn como el valor de la estadística de prueba, el p-value, el valor crítico, el intervalo de confianza, etc. A continuación, se muestra un ejemplo de cómo acceder a la información de la estadística de prueba y el p-value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># get the coefficient estimates</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">params</span>
+
+<span class="c1"># get the standard errors</span>
+<span class="n">standard_errors</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">bse</span>
+
+<span class="c1"># get the t-values</span>
+<span class="n">t_values</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">tvalues</span>
+
+<span class="c1"># get the p-values</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">pvalues</span>
+
+<span class="c1"># organize the results into a data frame</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Coefficient&#39;</span><span class="p">:</span> <span class="n">coefficients</span><span class="p">,</span>
+    <span class="s1">&#39;Standard Error&#39;</span><span class="p">:</span> <span class="n">standard_errors</span><span class="p">,</span>
+    <span class="s1">&#39;t Value&#39;</span><span class="p">:</span> <span class="n">t_values</span><span class="p">,</span>
+    <span class="s1">&#39;p Value&#39;</span><span class="p">:</span> <span class="n">p_values</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           Coefficient  Standard Error    t Value        p Value
+Intercept   698.932949        9.467491  73.824516  6.569846e-242
+STR          -2.279808        0.479826  -4.751327   2.783308e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>La segunda columna del resumen de los coeficientes informa <span class="math notranslate nohighlight">\(SE(\hat\beta_0)\)</span> y <span class="math notranslate nohighlight">\(SE(\hat\beta_1)\)</span>. Además, en la tercera columna <code class="docutils literal notranslate"><span class="pre">'valor</span> <span class="pre">t'</span></code>, encontramos <span class="math notranslate nohighlight">\(t\)</span>-estadísticos <span class="math notranslate nohighlight">\(t^{act}\)</span> adecuados para las pruebas de las hipótesis separadas <span class="math notranslate nohighlight">\(H_0: \beta_0=0\)</span> y <span class="math notranslate nohighlight">\(H_0: \beta_1=0\)</span>. Además, la salida nos proporciona valores <span class="math notranslate nohighlight">\(p\)</span> correspondientes a ambas pruebas contra las alternativas de dos caras <span class="math notranslate nohighlight">\(H_1:\beta_0\neq0\)</span> respectivamente <span class="math notranslate nohighlight">\(H_1:\beta_1\neq0\)</span> en la cuarta columna de la tabla.</p>
+<p>Veamos más detenidamente la prueba de
+$<span class="math notranslate nohighlight">\(H_0: \beta_1=0 \ \ \ vs. \ \ \ H_1: \beta_1 \neq 0.\)</span>$</p>
+<p>Tenemos $<span class="math notranslate nohighlight">\( t^{act} = \frac{-2.279808 - 0}{0.4798255} \approx - 4.75. \)</span>$</p>
+<p>¿Qué nos dice esto sobre la significación del coeficiente estimado? Rechazamos la hipótesis nula en el <span class="math notranslate nohighlight">\(5\%\)</span> nivel de significación desde <span class="math notranslate nohighlight">\(|t^{act}| &gt; 1,96\)</span>. Es decir, el estadístico de prueba observado cae en la región de rechazo como <span class="math notranslate nohighlight">\(p\text{-valor} = 2,78\cdot 10^{-6} &lt; 0.05\)</span>. Llegamos a la conclusión de que el coeficiente es significativamente diferente de cero. En otras palabras, rechazamos la hipótesis de que el tamaño de la clase <em>no influye</em> en las puntuaciones de los alumnos en los exámenes al nivel <span class="math notranslate nohighlight">\(5\%\)</span>.</p>
+<p>Observe que, aunque la diferencia es insignificante en este caso, como veremos más adelante, <code class="docutils literal notranslate"><span class="pre">summary()</span></code> no realiza la aproximación normal, sino que calcula los valores <span class="math notranslate nohighlight">\(p\)</span> utilizando la distribución <span class="math notranslate nohighlight">\(t\)</span>. Generalmente, los grados de libertad de la distribución <span class="math notranslate nohighlight">\(t\)</span> asumida se determinan de la siguiente manera:</p>
+<div class="math notranslate nohighlight">
+\[ \text{DF} = n - k - 1 \]</div>
+<p>donde <span class="math notranslate nohighlight">\(n\)</span> es el número de observaciones utilizadas para estimar el modelo y <span class="math notranslate nohighlight">\(k\)</span> es el número de regresores, excluyendo el intercepto. En nuestro caso, tenemos <span class="math notranslate nohighlight">\(n=420\)</span> observaciones y el único regresor es <span class="math notranslate nohighlight">\(STR\)</span>, por lo que <span class="math notranslate nohighlight">\(k=1\)</span>. La forma más sencilla de determinar los grados de libertad del modelo es</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">df_resid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>418.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por lo tanto, para la distribución de muestreo supuesta de <span class="math notranslate nohighlight">\(\hat\beta_1\)</span> tenemos</p>
+<div class="math notranslate nohighlight">
+\[\hat\beta_1 \sim t_{418}\]</div>
+<p>tal que el valor <span class="math notranslate nohighlight">\(p\)</span> para una prueba de significación a dos caras puede obtenerse ejecutando el siguiente código:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="n">p_value</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mf">4.751327</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">418</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7833096733167458e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>El resultado es muy parecido al valor proporcionado por <code class="docutils literal notranslate"><span class="pre">summary()</span></code>. Sin embargo, dado que <span class="math notranslate nohighlight">\(n\)</span> es suficientemente grande, se podría utilizar la densidad normal estándar para calcular el valor <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="n">p_value</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="mf">4.751327</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0208601573163653e-06
+</pre></div>
+</div>
+</div>
+</div>
+<p>En efecto, la diferencia es insignificante. Estos resultados nos dicen que, si <span class="math notranslate nohighlight">\(H_0: \beta_1 = 0\)</span> es cierto y repitiéramos todo el proceso de recopilación de observaciones y estimación del modelo, ¡observar un <span class="math notranslate nohighlight">\(\hat\beta_1 \geq |-2,28|\)</span> es muy improbable!</p>
+<p>Utilizando <code class="docutils literal notranslate"><span class="pre">Python</span></code> podemos visualizar cómo se hace tal afirmación cuando se utiliza la aproximación normal. Esto refleja los principios representados en la figura 5.1 del libro. No deje que el siguiente trozo de código le disuada: el código es algo más largo que los ejemplos habituales y tiene un aspecto poco atractivo, pero hay mucha repetición ya que se añaden sombreados de color y anotaciones en ambas colas de la distribución normal. Recomendamos ejecutar el código paso a paso para ver cómo se aumenta el gráfico con las anotaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">tact</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.75</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the standard normal distribution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Shade the critical regions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">t</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">1.96</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">t</span> <span class="o">&gt;=</span> <span class="mf">1.96</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add arrows and texts indicating critical regions and the p-value</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;arrowstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;arrowstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">4.75</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;arrowstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">4.75</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;arrowstyle&#39;</span><span class="p">:</span> <span class="s1">&#39;-&gt;&#39;</span><span class="p">})</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.13</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$0.025=\frac{\alpha}</span><span class="si">{2}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.13</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$0.025=\frac{\alpha}</span><span class="si">{2}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.13</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$-|t_</span><span class="si">{act}</span><span class="s1">|$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.13</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$|t_</span><span class="si">{act}</span><span class="s1">|$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Set title and labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Calculating the p-value of a Two-sided Test when $t_</span><span class="si">{act}</span><span class="s1">=-4.75$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+
+<span class="c1"># Hide the right and top spines</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Only show ticks on the left and bottom spines</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bb921beea7ffba5db7fbf2c7a34392d9af29fb51e7cd91963d391fb294b595e7.png" src="../_images/bb921beea7ffba5db7fbf2c7a34392d9af29fb51e7cd91963d391fb294b595e7.png" />
+</div>
+</div>
+<p><strong>Estimador: Propiedades deseables</strong></p>
+<ol class="arabic simple">
+<li><p>Imparcial</p></li>
+<li><p>Consistencia</p></li>
+</ol>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(plim\hat{\beta_n}=\beta\)</span></p></li>
+<li><p>Basándonos en la ley de los grandes números, podemos deducir la coherencia</p></li>
+<li><p>Más observaciones significa más precisión, más proximidad al valor real.</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>Eficiencia</p></li>
+</ol>
+<ul class="simple">
+<li><p>Varianza mínima en comparación con otro estimador.</p></li>
+<li><p>OLS es BLUE (mejor estimador lineal insesgado) significa que OLS es el más eficiente entre la clase de estimadores lineales insesgados  <span class="xref myst">Teorema de Gauss-Markov</span></p></li>
+<li><p>Si los supuestos de distribución son correctos, la máxima verosimilitud es asintótica.</p></li>
+</ul>
+</section>
+<section id="intervalos-de-confianza-para-los-coeficientes-de-regresion">
+<h1>Intervalos de confianza para los coeficientes de regresión<a class="headerlink" href="#intervalos-de-confianza-para-los-coeficientes-de-regresion" title="Permalink to this heading">#</a></h1>
+<p>Como ya sabemos, las estimaciones de los coeficientes de regresión <span class="math notranslate nohighlight">\(\beta_0\)</span> y <span class="math notranslate nohighlight">\(\beta_1\)</span> están sujetas a la incertidumbre de muestreo. Por lo tanto, <em>nunca</em> estimaremos exactamente el verdadero valor de estos parámetros a partir de los datos de la muestra en una aplicación empírica. Sin embargo, podemos construir intervalos de confianza para el intercepto y el parámetro de la pendiente.</p>
+<p>Un intervalo de confianza de <span class="math notranslate nohighlight">\(95\%\)</span> para <span class="math notranslate nohighlight">\(\beta_i\)</span> tiene dos definiciones equivalentes:</p>
+<ul class="simple">
+<li><p>El intervalo es el conjunto de valores para los que no se puede rechazar una prueba de hipótesis al nivel de <span class="math notranslate nohighlight">\(5\%\)</span>.</p></li>
+<li><p>El intervalo tiene una probabilidad de <span class="math notranslate nohighlight">\(95\%\)</span> de contener el valor verdadero de <span class="math notranslate nohighlight">\(\beta_i\)</span>. Así, en el <span class="math notranslate nohighlight">\(95\%\)</span> de todas las muestras que podrían extraerse, el intervalo de confianza cubrirá el verdadero valor de <span class="math notranslate nohighlight">\(\beta_i\)</span>.</p></li>
+</ul>
+<p>También decimos que el intervalo tiene un nivel de confianza del <span class="math notranslate nohighlight">\(95\%\)</span>. La idea del intervalo de confianza se resume a continuación.</p>
+</section>
+<section id="un-intervalo-de-confianza-para-beta-i">
+<h1>Un intervalo de confianza para <span class="math notranslate nohighlight">\(\beta_i\)</span><a class="headerlink" href="#un-intervalo-de-confianza-para-beta-i" title="Permalink to this heading">#</a></h1>
+<p>Imagine que puede extraer todas las muestras aleatorias posibles de un tamaño dado. El intervalo que contiene el valor verdadero <span class="math notranslate nohighlight">\(\beta_i\)</span> en el <span class="math notranslate nohighlight">\(95\%\)</span> de todas las muestras viene dado por la expresión:
+$<span class="math notranslate nohighlight">\(
+\text{CI}_{0.95}^{\beta_i} = \left[ \hat{\beta}_i - 1.96 \times SE(\hat{\beta}_i) \, , \, \hat{\beta}_i + 1.96 \times SE(\hat{\beta}_i) \right].
+\)</span>$</p>
+<ul class="simple">
+<li><p>De forma equivalente, este intervalo puede considerarse como el conjunto de hipótesis nulas que no se rechazan en una prueba de hipótesis bilateral de <span class="math notranslate nohighlight">\(5\%\)</span>.</p></li>
+</ul>
+<section id="simulacion-intervalos-de-confianza">
+<h2>Simulación: Intervalos de confianza<a class="headerlink" href="#simulacion-intervalos-de-confianza" title="Permalink to this heading">#</a></h2>
+<p>Para comprender mejor los intervalos de confianza, realizaremos otro estudio de simulación. Por ahora, supongamos que tenemos la siguiente muestra de <span class="math notranslate nohighlight">\(n=100\)</span> observaciones sobre una única variable <span class="math notranslate nohighlight">\(Y\)</span> donde</p>
+<div class="math notranslate nohighlight">
+\[ Y_i \overset{i.i.d}{\sim} \mathcal{N}(5,25), \ i = 1, \dots, 100.\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Generate the sample data</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Plot the sample data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="n">Y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/f8073f91bda46da4cba81b0b3233c2cca5e5e3b919643261e7233445900924cc.png" src="../_images/f8073f91bda46da4cba81b0b3233c2cca5e5e3b919643261e7233445900924cc.png" />
+</div>
+</div>
+<p>Suponemos que los datos son generados por el modelo</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \mu + \epsilon_i \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\mu\)</span> ies una constante desconocida y sabemos que <span class="math notranslate nohighlight">\(\epsilon_i \overset{i.i.d.}{\sim} \mathcal{N}(0,25)\)</span>. En este modelo, el estimador OLS para <span class="math notranslate nohighlight">\(\mu\)</span> viene dado por $<span class="math notranslate nohighlight">\( \hat\mu = \overline{Y} = \frac{1}{n} \sum_{i=1}^n Y_i, \)</span><span class="math notranslate nohighlight">\( es decir, la media muestral de \)</span>Y_i$. Además, se cumple que</p>
+<div class="math notranslate nohighlight">
+\[ SE(\hat\mu) = \frac{\sigma_{\epsilon}}{\sqrt{n}} = \frac{5}{\sqrt{100}} \]</div>
+<p>Un intervalo de confianza <span class="math notranslate nohighlight">\(95\%\)</span> de gran muestra para <span class="math notranslate nohighlight">\(\mu\)</span> viene dado entonces por</p>
+<p>\begin{equation}
+CI^{\mu}_{0.95} = \left[\hat\mu - 1.96 \times \frac{5}{\sqrt{100}} \ , \ \hat\mu + 1.96 \times \frac{5}{\sqrt{100}}  \right]. (#eq:KI)
+\end{equation}</p>
+<p>Es bastante fácil calcular a mano este intervalo en <code class="docutils literal notranslate"><span class="pre">Python</span></code>. El siguiente fragmento de código genera un vector con nombre que contiene los límites del intervalo:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Calculate the lower and upper confidence interval</span>
+<span class="n">CIlower</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">CIupper</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Display the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CIlower: </span><span class="si">{</span><span class="n">CIlower</span><span class="si">}</span><span class="s2">, CIupper: </span><span class="si">{</span><span class="n">CIupper</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CIlower: 2.0773357829044055, CIupper: 8.275399996834429
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sabiendo que <span class="math notranslate nohighlight">\(\mu = 5\)</span> vemos que, para nuestros datos de ejemplo, el intervalo de confianza cubre el valor verdadero.</p>
+<p>A diferencia de los ejemplos del mundo real, podemos utilizar <code class="docutils literal notranslate"><span class="pre">python</span></code> para comprender mejor los intervalos de confianza muestreando repetidamente los datos, estimando <span class="math notranslate nohighlight">\(\mu\)</span> y calculando el intervalo de confianza para <span class="math notranslate nohighlight">\(\mu\)</span> como en (eq:KI).</p>
+<p>El procedimiento es el siguiente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Initialize lists of lower and upper interval boundaries</span>
+<span class="n">lower</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">upper</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop for sampling, estimation, and CI calculation</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">lower</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">upper</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.96</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Join lists of interval bounds in an array</span>
+<span class="n">CIs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>De acuerdo con la definición de intervalo de confianza, esperamos que la fracción de los <span class="math notranslate nohighlight">\(10000\)</span> intervalos simulados guardados en la matriz <code class="docutils literal notranslate"><span class="pre">('CIs')</span></code> que contienen el valor verdadero <span class="math notranslate nohighlight">\(\mu=5\)</span> sea aproximadamente <span class="math notranslate nohighlight">\(95\%\)</span>. Podemos comprobarlo fácilmente utilizando operadores lógicos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">CIs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">&lt;=</span> <span class="n">CIs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>La simulación muestra que la fracción de intervalos que cubren <span class="math notranslate nohighlight">\(\mu=5\)</span>, es decir, aquellos intervalos para los que no se puede rechazar <span class="math notranslate nohighlight">\(H_0: \mu = 5\)</span> es cercana al valor teórico de <span class="math notranslate nohighlight">\(95\%\)</span>.</p>
+<p>Dibujemos un gráfico de los primeros <span class="math notranslate nohighlight">\(100\)</span> intervalos de confianza simulados e indiquemos los que <em>no</em> cubren el verdadero valor de <span class="math notranslate nohighlight">\(\mu\)</span>. Lo hacemos mediante líneas horizontales que representan los intervalos de confianza superpuestos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># identify intervals not covering mu</span>
+<span class="c1"># (4 intervals out of 100)</span>
+<span class="n">ID</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="p">((</span><span class="n">CIs</span><span class="p">[:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">5</span> <span class="o">&lt;=</span> <span class="n">CIs</span><span class="p">[:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">])))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># initialize the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sample&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\mu$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confidence Intervals&#39;</span><span class="p">)</span>
+
+<span class="c1"># set up color vector</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gray&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ID</span> <span class="k">else</span> <span class="s1">&#39;red&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+
+<span class="c1"># draw reference line at mu=5</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1"># add horizontal bars representing the CIs</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="n">CIs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xmax</span><span class="o">=</span><span class="n">CIs</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e0ade59339532e1ff48ce0d33c9a0aafe5ea318dcc40c553e4127c8bf65288ab.png" src="../_images/e0ade59339532e1ff48ce0d33c9a0aafe5ea318dcc40c553e4127c8bf65288ab.png" />
+</div>
+</div>
+<p>Para las primeras muestras de <span class="math notranslate nohighlight">\(100\)</span>, la hipótesis nula verdadera se rechaza en cuatro casos, por lo que estos intervalos no cubren <span class="math notranslate nohighlight">\(\mu=5\)</span>. Hemos indicado los intervalos que conducen a un rechazo de la roja nula.</p>
+<p>Volvamos ahora al ejemplo de las puntuaciones de los tests y el tamaño de las clases. Una forma fácil de obtener intervalos de confianza de <span class="math notranslate nohighlight">\(95\%\)</span> para <span class="math notranslate nohighlight">\(\beta_0\)</span> y <span class="math notranslate nohighlight">\(\beta_1\)</span> es utilizar la función <code class="docutils literal notranslate"><span class="pre">('conf_int()')</span></code>. Sólo tenemos que proporcionar un objeto modelo ajustado como entrada a esta función. El nivel de confianza se establece en <span class="math notranslate nohighlight">\(95\%\)</span> por defecto, pero puede modificarse estableciendo el argumento <code class="docutils literal notranslate"><span class="pre">('alpha')</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                    0           1
+Intercept  680.323124  717.542775
+STR         -3.222980   -1.336636
+</pre></div>
+</div>
+</div>
+</div>
+<p>Comprobemos si el cálculo se realiza como esperamos para <span class="math notranslate nohighlight">\(\beta_1\)</span>, el coeficiente sobre <code class="docutils literal notranslate"><span class="pre">'STR</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">stats</span>
+
+<span class="c1"># Get the model parameters and standard errors</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">params</span>
+<span class="n">stderr</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">bse</span>
+
+<span class="c1"># Compute the confidence intervals manually</span>
+<span class="n">confidence_interval</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="n">params</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">df_resid</span><span class="p">)</span> <span class="o">*</span> <span class="n">stderr</span><span class="p">,</span>
+                                    <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="n">params</span> <span class="o">+</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.975</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">df_resid</span><span class="p">)</span> <span class="o">*</span> <span class="n">stderr</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">confidence_interval</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                lower       upper
+Intercept  680.323124  717.542775
+STR         -3.222980   -1.336636
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los límites superior e inferior coinciden. Hemos utilizado el <span class="math notranslate nohighlight">\(0,975\)</span>-cuantil de la distribución <span class="math notranslate nohighlight">\(t_{418}\)</span> para obtener el resultado exacto reportado por <code class="docutils literal notranslate"><span class="pre">(&quot;conf_int&quot;)</span></code>.  Obviamente, este intervalo <em>no</em> contiene el valor cero que, como ya hemos visto en el apartado anterior, conduce al rechazo de la hipótesis nula <span class="math notranslate nohighlight">\(\beta_{1,0} = 0\)</span>.</p>
+</section>
+</section>
+<section id="regresion-cuando-x-es-una-variable-binaria">
+<h1>Regresión cuando X es una variable binaria<a class="headerlink" href="#regresion-cuando-x-es-una-variable-binaria" title="Permalink to this heading">#</a></h1>
+<p>En lugar de utilizar un regresor continuo <span class="math notranslate nohighlight">\(X\)</span>, podríamos estar interesados en ejecutar la regresión</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 D_i + u_i \tag{5.2} \]</div>
+<p>donde <span class="math notranslate nohighlight">\(D_i\)</span> es una variable binaria, una denominada <em>variable ficticia</em>. Por ejemplo, podemos definir <span class="math notranslate nohighlight">\(D_i\)</span> como sigue:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} D_i = \begin{cases}
+1 \ \ \text{if $STR$ in $i^{th}$ school district &lt; 20} \\
+        0 \ \ \text{if $STR$ in $i^{th}$ school district $\geq$ 20} \\
+      \end{cases} \tag{5.3} \end{split}\]</div>
+<p>El modelo de regresión ahora es
+$<span class="math notranslate nohighlight">\( TestScore_i = \beta_0 + \beta_1 D_i + u_i. \tag{5.4} \)</span>$</p>
+<p>Veamos cómo quedan estos datos en un gráfico de dispersión:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Create the dummy variable as defined above</span>
+<span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;STR&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">20</span>
+
+<span class="c1"># Compute the average score when D=1 (low STR)</span>
+<span class="n">mean_score_for_D_1</span> <span class="o">=</span> <span class="n">CASchools</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Compute the average score when D=0 (high STR)</span>
+<span class="n">mean_score_for_D_0</span> <span class="o">=</span> <span class="n">CASchools</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Add the average for each group</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">mean_score_for_D_0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">mean_score_for_D_1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Test Score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Dummy Regression&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/80931c106e1cbb8dd8cc371b348126470820ba7a0437b555be240fd60bf2024f.png" src="../_images/80931c106e1cbb8dd8cc371b348126470820ba7a0437b555be240fd60bf2024f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Assuming CASchools is a pandas DataFrame</span>
+<span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;STR&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">20</span>
+
+<span class="c1"># estimate the dummy regression</span>
+<span class="n">dummy_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;score ~ D&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">CASchools</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;Steelblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">dummy_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;D[i]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Test Score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Dummy Regression&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3376cc48e12b940cd061fd7c20e5b643e3c58061f0dbdb057c8fd92c163d8473.png" src="../_images/3376cc48e12b940cd061fd7c20e5b643e3c58061f0dbdb057c8fd92c163d8473.png" />
+</div>
+</div>
+<p>Con <span class="math notranslate nohighlight">\(D\)</span> como regresor, no es útil pensar en <span class="math notranslate nohighlight">\(\beta_1\)</span> como parámetro de la pendiente, ya que <span class="math notranslate nohighlight">\(D_i \in \{0,1\}\)</span>, es decir, sólo observamos dos valores discretos en lugar de un continuo de valores del regresor. No existe una línea continua que represente la función de expectativa condicional <span class="math notranslate nohighlight">\(E(TestScore_i | D_i)\)</span> ya que esta función sólo está definida para las posiciones <span class="math notranslate nohighlight">\(x\)</span> <span class="math notranslate nohighlight">\(0\)</span> y <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>Por lo tanto, la interpretación de los coeficientes de este modelo de regresión es la siguiente:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E(Y_i | D_i = 0) = \beta_0\)</span>, so <span class="math notranslate nohighlight">\(\beta_0\)</span> es la puntuación esperada en los exámenes en los distritos donde <span class="math notranslate nohighlight">\(D_i=0\)</span> donde <span class="math notranslate nohighlight">\(STR\)</span> es superior a <span class="math notranslate nohighlight">\(20\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(Y_i | D_i = 1) = \beta_0 + \beta_1\)</span> o, utilizando el resultado anterior, <span class="math notranslate nohighlight">\(\beta_1 = E(Y_i | D_i = 1) - E(Y_i | D_i = 0)\)</span>. Así, <span class="math notranslate nohighlight">\(\beta_1\)</span> es <em>la diferencia en las expectativas específicas de grupo</em>, es decir, la diferencia en la puntuación esperada en el examen entre los distritos con <span class="math notranslate nohighlight">\(STR &lt; 20\)</span> y aquellos con <span class="math notranslate nohighlight">\(STR \geq 20\)</span>.</p></li>
+</ul>
+<p>A continuación utilizaremos <code class="docutils literal notranslate"><span class="pre">Python</span></code> para estimar el modelo de regresión ficticio definido por las ecuaciones (<a href="#mjx-eqn-5.2">5.2</a>) and (<a href="#mjx-eqn-5.3">5.3</a>) .</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dummy_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>          <td>score</td>      <th>  R-squared:         </th> <td>   0.035</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.032</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   15.07</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Mon, 07 Aug 2023</td> <th>  Prob (F-statistic):</th> <td>0.000120</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:33:03</td>     <th>  Log-Likelihood:    </th> <td> -1825.9</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   420</td>      <th>  AIC:               </th> <td>   3656.</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   418</td>      <th>  BIC:               </th> <td>   3664.</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>  650.0768</td> <td>    1.393</td> <td>  466.666</td> <td> 0.000</td> <td>  647.339</td> <td>  652.815</td>
+</tr>
+<tr>
+  <th>D[T.True]</th> <td>    7.1694</td> <td>    1.847</td> <td>    3.882</td> <td> 0.000</td> <td>    3.540</td> <td>   10.799</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td> 3.120</td> <th>  Durbin-Watson:     </th> <td>   0.107</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.210</td> <th>  Jarque-Bera (JB):  </th> <td>   2.483</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.052</td> <th>  Prob(JB):          </th> <td>   0.289</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 2.638</td> <th>  Cond. No.          </th> <td>    2.81</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>Se puede ver que la puntuación prevista en los distritos con <span class="math notranslate nohighlight">\(STR &lt; 20\)</span> (<span class="math notranslate nohighlight">\(D_i = 1\)</span>) se predice en <span class="math notranslate nohighlight">\(650,1 + 7,17 = 657,27\)</span>, mientras que se espera que los distritos con <span class="math notranslate nohighlight">\(STR &lt; 20\)</span> (<span class="math notranslate nohighlight">\(D_i = 0\)</span>) tengan una puntuación media de sólo <span class="math notranslate nohighlight">\(650,1\)</span>.</p>
+<p>Las predicciones específicas de grupo pueden añadirse al gráfico ejecutando el siguiente fragmento de código.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add group specific predictions to the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CASchools</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">],</span> <span class="n">dummy_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Group Specific Predictions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Remaining plot elements</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;D[i]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Test Score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Dummy Regression&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e562d9a6dd97515498a9d1185cc9e7112984c716a1bcaf2bdd351a51068185d5.png" src="../_images/e562d9a6dd97515498a9d1185cc9e7112984c716a1bcaf2bdd351a51068185d5.png" />
+</div>
+</div>
+<p>Aquí utilizamos la función <code class="docutils literal notranslate"><span class="pre">('predict()')</span></code> para obtener estimaciones de las medias específicas de cada grupo. Los puntos rojos representan estas medias de grupos de muestra. En consecuencia, <span class="math notranslate nohighlight">\(\hat{\beta}_1 = 7,17\)</span> puede verse como la diferencia en las medias de grupo.</p>
+<p><code class="docutils literal notranslate"><span class="pre">('summary(dummy_model)')</span></code> también responde a la pregunta de si existe una diferencia estadísticamente significativa en las medias de los grupos. Esto, a su vez, apoyaría la hipótesis de que los estudiantes rinden de forma diferente cuando se les enseña en clases pequeñas. Podemos evaluar esto mediante una prueba de dos colas de la hipótesis <span class="math notranslate nohighlight">\(H_0: \beta_1 = 0\)</span>. Convenientemente, el estadístico <span class="math notranslate nohighlight">\(t\)</span> y el correspondiente valor <span class="math notranslate nohighlight">\(p\)</span> para esta prueba se calculan mediante <code class="docutils literal notranslate"><span class="pre">('summary()')</span></code>.</p>
+<p>Dado que <code class="docutils literal notranslate"><span class="pre">('valor</span> <span class="pre">t')</span></code> <span class="math notranslate nohighlight">\(= 3,88 &gt; 1,96\)</span> rechazamos la hipótesis nula al nivel de significación de <span class="math notranslate nohighlight">\(5\%\)</span>. Se llega a la misma conclusión cuando se utiliza el valor <span class="math notranslate nohighlight">\(p\)</span>, que informa de la significación hasta el nivel de 0,00012%$.</p>
+<p>Como se hace con <code class="docutils literal notranslate"><span class="pre">(&quot;linear_model&quot;)</span></code>, podemos utilizar alternativamente la función <code class="docutils literal notranslate"><span class="pre">('conf_int()')</span></code> para calcular un intervalo de confianza de <span class="math notranslate nohighlight">\(95\%\)</span> para la verdadera diferencia de medias y ver si el valor de la hipótesis es un elemento de este conjunto de confianza.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute confidence intervals for coefficients in the dummy regression model</span>
+<span class="n">conf_intervals</span> <span class="o">=</span> <span class="n">dummy_model</span><span class="o">.</span><span class="n">conf_int</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conf_intervals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                    0           1
+Intercept  647.338594  652.815002
+D[T.True]    3.539562   10.799309
+</pre></div>
+</div>
+</div>
+</div>
+<p>Rechazamos la hipótesis de que no hay diferencia entre las medias de grupo en el <span class="math notranslate nohighlight">\(5\%\)</span> nivel de significación ya que <span class="math notranslate nohighlight">\(\beta_{1,0} = 0\)</span> se encuentra fuera de <span class="math notranslate nohighlight">\([3,54, 10,8]\)</span>, el <span class="math notranslate nohighlight">\(95\%\)</span> intervalo de confianza para el coeficiente de <span class="math notranslate nohighlight">\(D\)</span>.</p>
+</section>
+<section id="heteroscedasticidad-y-homoscedasticidad">
+<h1>Heteroscedasticidad y homoscedasticidad<a class="headerlink" href="#heteroscedasticidad-y-homoscedasticidad" title="Permalink to this heading">#</a></h1>
+<p>Todas las inferencias realizadas en los capítulos anteriores se basan en el supuesto de que la varianza del error no varía a medida que cambian los valores de los regresores. Pero esto no suele ser así en las aplicaciones empíricas.</p>
+<ul class="simple">
+<li><p>El término de error de nuestro modelo de regresión es homocedastico si la varianza de la distribución condicional de <span class="math notranslate nohighlight">\(u_i\)</span> dada <span class="math notranslate nohighlight">\(X_i\)</span>, <span class="math notranslate nohighlight">\(Var(u_i|X_i=x)\)</span>, es constante <em>para todas</em> las observaciones de nuestra muestra:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(u_i|X_i=x) = \sigma^2 \quad \forall \quad i=1,\dots,n.
+\]</div>
+<ul class="simple">
+<li><p>Si en cambio hay dependencia de la varianza condicional de <span class="math notranslate nohighlight">\(u_i\)</span> con <span class="math notranslate nohighlight">\(X_i\)</span>, se dice que el término de error es heteroscedástico. Entonces escribimos
+$<span class="math notranslate nohighlight">\(
+\text{Var}(u_i|X_i=x) = \sigma_i^2 \quad \forall \quad i=1,\dots,n.
+\)</span>$</p></li>
+<li><p>La homocedasticidad es un <em>caso especial</em> de la heteroscedasticidad.</p></li>
+</ul>
+<p>Para comprender mejor la heteroscedasticidad, generamos algunos datos bivariantes heteroscedásticos, estimamos un modelo de regresión lineal y utilizamos gráficos de caja para representar las distribuciones condicionales de los residuos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="c1"># set seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># set up vector of x coordinates</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span> <span class="n">repeats</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># initialize vector of errors</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">),</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># set up y</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">720</span> <span class="o">-</span> <span class="mf">3.3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">e</span>
+
+<span class="c1"># create a DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
+
+<span class="c1"># Estimate the model</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span> <span class="c1"># adding a constant</span>
+<span class="n">mod</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Create scatter plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add the regression line to the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkred&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set labels and title</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Student-Teacher Ratio&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Test Score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;An Example of Heteroskedasticity&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create boxplots</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/77f7269a143863360c428ca71f6fdf5151734667292d075fd6a279f853e6f550.png" src="../_images/77f7269a143863360c428ca71f6fdf5151734667292d075fd6a279f853e6f550.png" />
+</div>
+</div>
+<p>Para estos datos artificiales está claro que las varianzas de error condicional difieren. En concreto, observamos que la varianza de las puntuaciones de los exámenes (y, por tanto, la varianza de los errores cometidos) <em>aumenta</em> con la relación alumno-profesor.</p>
+<section id="un-ejemplo-real-de-heteroscedasticidad">
+<h2>Un ejemplo real de heteroscedasticidad<a class="headerlink" href="#un-ejemplo-real-de-heteroscedasticidad" title="Permalink to this heading">#</a></h2>
+<p>Piense en el valor económico de la educación: si no existiera un valor económico añadido esperado al recibir educación universitaria, probablemente usted no estaría leyendo este guión ahora mismo. Un punto de partida para verificar empíricamente tal relación es disponer de datos sobre individuos que trabajan. Más concretamente, necesitamos datos sobre los salarios y la educación de los trabajadores para estimar un modelo como el siguiente</p>
+<div class="math notranslate nohighlight">
+\[ wage_i = \beta_0 + \beta_1 \cdot education_i + u_i. \]</div>
+<p>¿Qué se puede suponer de esta relación? Es probable que, por término medio, los trabajadores con más estudios ganen más que los trabajadores con menos estudios, por lo que esperamos estimar una línea de regresión con pendiente ascendente. Asimismo, parece posible que los ingresos de los trabajadores mejor formados tengan una mayor dispersión que los de los trabajadores poco cualificados: una formación sólida no es garantía de un salario alto, por lo que incluso los trabajadores altamente cualificados aceptan empleos con bajos ingresos. Sin embargo, es más probable que cumplan los requisitos para los empleos bien remunerados que los trabajadores con menos estudios, para quienes las oportunidades en el mercado laboral son mucho más limitadas.</p>
+<p>Para comprobarlo empíricamente podemos utilizar datos reales sobre los ingresos por hora y el número de años de educación de los empleados. Estos datos pueden encontrarse en <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">ttcode('CPSSWEducation')</span></code>. Este conjunto de datos forma parte del paquete <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">ttcode('AER')</span></code> y procede de la Current Population Survey (CPS) que realiza periódicamente el <a class="reference external" href="http://www.bls.gov/">Bureau of Labor Statistics</a> en los Estados Unidos.</p>
+<p>Los siguientes trozos de código muestran cómo importar los datos en <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">ttcode('R')</span></code> y cómo producir un gráfico como el de la Figura 5.3 del libro.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="n">CPSSWEducation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;CPSSWEducation.csv&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">CPSSWEducation</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># estimate a simple regression model</span>
+<span class="n">labor_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;earnings ~ education&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">CPSSWEducation</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># plot observations and add the regression line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">CPSSWEducation</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">],</span> <span class="n">CPSSWEducation</span><span class="p">[</span><span class="s1">&#39;earnings&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CPSSWEducation</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">],</span> <span class="n">labor_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fit&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Education&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Earnings&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Unnamed: 0          age     earnings    education
+count  2950.000000  2950.000000  2950.000000  2950.000000
+mean   1475.500000    29.497627    16.742717    13.550169
+std     851.735972     0.500079     9.402076     2.314100
+min       1.000000    29.000000     2.136752     6.000000
+25%     738.250000    29.000000    10.576923    12.000000
+50%    1475.500000    29.000000    14.615385    13.000000
+75%    2212.750000    30.000000    20.192308    16.000000
+max    2950.000000    30.000000    97.500000    18.000000
+</pre></div>
+</div>
+<img alt="../_images/3bb3857e5e51357772ab150a4693d52133b823bcbad9f5d6a7f586a179690d41.png" src="../_images/3bb3857e5e51357772ab150a4693d52133b823bcbad9f5d6a7f586a179690d41.png" />
+</div>
+</div>
+<p>El gráfico revela que la media de la distribución de los ingresos aumenta con el nivel de estudios. Esto también se ve corroborado por un análisis formal: el modelo de regresión estimado almacenado en <code class="docutils literal notranslate"><span class="pre">labor_model</span></code> muestra que existe una relación positiva entre los años de educación y los ingresos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">labor_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               earnings   R-squared:                       0.130
+Model:                            OLS   Adj. R-squared:                  0.130
+Method:                 Least Squares   F-statistic:                     441.9
+Date:                Mon, 07 Aug 2023   Prob (F-statistic):           1.58e-91
+Time:                        12:58:28   Log-Likelihood:                -10590.
+No. Observations:                2950   AIC:                         2.118e+04
+Df Residuals:                    2948   BIC:                         2.120e+04
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -3.1344      0.959     -3.268      0.001      -5.015      -1.253
+education      1.4669      0.070     21.021      0.000       1.330       1.604
+==============================================================================
+Omnibus:                     1621.825   Durbin-Watson:                   1.979
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            19204.850
+Skew:                           2.365   Prob(JB):                         0.00
+Kurtosis:                      14.570   Cond. No.                         82.1
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>La ecuación de regresión estimada establece que, por término medio, un año adicional de educación aumenta los ingresos por hora de un trabajador en aproximadamente <span class="math notranslate nohighlight">\(\$ 1,47\)</span>. Una vez más, utilizamos (‘conf_int()’)` para obtener un intervalo de confianza de <span class="math notranslate nohighlight">\(95\%\)</span> para ambos coeficientes de regresión.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute a 95% confidence interval for the coefficients in the model</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">labor_model</span><span class="o">.</span><span class="n">conf_int</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                  0         1
+Intercept -5.015248 -1.253495
+education  1.330098  1.603753
+</pre></div>
+</div>
+</div>
+</div>
+<p>Dado que el intervalo es <span class="math notranslate nohighlight">\([1,33, 1,60]\)</span>, podemos rechazar la hipótesis de que el coeficiente de <code class="docutils literal notranslate"><span class="pre">educación</span></code> es cero al nivel de <span class="math notranslate nohighlight">\(5\%\)</span>.</p>
+<p>Además, el gráfico indica que existe heteroscedasticidad: si suponemos que la línea de regresión es una representación razonablemente buena de la función media condicional <span class="math notranslate nohighlight">\(E(ingresos_i\vert educación_i)\)</span>, la dispersión de los ingresos por hora en torno a esa función aumenta claramente con el nivel de educación, es decir, aumenta la varianza de la distribución de los ingresos. En otras palabras: la varianza de los errores (los errores cometidos al explicar los ingresos por la educación) aumenta con la educación, de modo que los errores de regresión son heteroscedásticos.</p>
+<p>Este ejemplo demuestra que el supuesto de homocedasticidad es dudoso en las aplicaciones económicas. ¿Deberíamos preocuparnos por la heteroscedasticidad? Sí, debería. Como se explica en la siguiente sección, la heteroscedasticidad puede tener graves consecuencias negativas en las pruebas de hipótesis, si la ignoramos.</p>
+</section>
+<section id="deberia-preocuparnos-la-heteroscedasticidad">
+<h2>¿Debería preocuparnos la heteroscedasticidad?<a class="headerlink" href="#deberia-preocuparnos-la-heteroscedasticidad" title="Permalink to this heading">#</a></h2>
+<p>Para responder a la pregunta de si debemos preocuparnos por la presencia de heteroscedasticidad, consideremos la varianza de <span class="math notranslate nohighlight">\(\hat\beta_1\)</span> bajo el supuesto de homoscedasticidad. En este caso tenemos</p>
+<div class="math notranslate nohighlight">
+\[ \sigma^2_{\hat\beta_1} = \frac{\sigma^2_u}{n \cdot \sigma^2_X} \tag{5.5} \]</div>
+<p>la cual es una versión simplificada de la ecuación general para las estimaciones</p>
+<div class="math notranslate nohighlight">
+\[ \overset{\sim}{\sigma}^2_{\hat\beta_1} = \frac{SER^2}{\sum_{i=1}^n (X_i - \overline{X})^2} \ \ \text{where} \ \ SER=\frac{1}{n-2} \sum_{i=1}^n \hat u_i^2. \]</div>
+<p>Así, <code class="docutils literal notranslate"><span class="pre">('summary()')</span></code> estima el error estándar <em>sólo de homoscedasticidad</em>.</p>
+<div class="math notranslate nohighlight">
+\[ \sqrt{ \overset{\sim}{\sigma}^2_{\hat\beta_1} } = \sqrt{ \frac{SER^2}{\sum_{i=1}^n(X_i - \overline{X})^2} }. \]</div>
+<p>De hecho, se trata de un estimador de la desviación típica del estimador <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> que es <em>inconsistente</em> con el valor verdadero <span class="math notranslate nohighlight">\(\sigma^2_{\hat\beta_1}\)</span>  cuando hay heteroscedasticidad.  La implicación es que las estadísticas <span class="math notranslate nohighlight">\(t\)</span> calculadas según las distribuciones del muestreo no siguen una distribución normal estándar, incluso en muestras grandes. Este problema puede invalidar la inferencia al utilizar las herramientas tratadas anteriormente para la comprobación de hipótesis: ¡deberíamos ser cautos al hacer afirmaciones sobre la significación de los coeficientes de regresión basándonos en los estadísticos <span class="math notranslate nohighlight">\(t\)</span> calculados por <code class="docutils literal notranslate"><span class="pre">'summary()</span></code> o los intervalos de confianza producidos por <code class="docutils literal notranslate"><span class="pre">'conf_int()</span></code> si es dudoso que se cumpla el supuesto de homocedasticidad!</p>
+<p>Ahora vamos a calcular el error estándar de homoscedasticidad para <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> en el modelo de regresión <code class="docutils literal notranslate"><span class="pre">('labor_model')</span></code> a mano y ver que coincide con el valor producido por <code class="docutils literal notranslate"><span class="pre">('summary()')</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Store model summary in &#39;model&#39;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">labor_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+
+<span class="c1"># Extract the standard error of the regression from model summary</span>
+<span class="n">SER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">labor_model</span><span class="o">.</span><span class="n">mse_resid</span><span class="p">)</span>
+
+<span class="c1"># Compute the variation in &#39;education&#39;</span>
+<span class="n">V</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">CPSSWEducation</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">CPSSWEducation</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">])</span>
+
+<span class="c1"># Compute the standard error of the slope parameter&#39;s estimator and print it</span>
+<span class="n">SE_beta_1_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">SER</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">V</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SE_beta_1_hat</span><span class="p">)</span>
+
+<span class="c1"># Use logical operators to see if the value computed by hand matches the one provided</span>
+<span class="c1"># in mod$coefficients. Round estimates to four decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">labor_model</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="s1">&#39;education&#39;</span><span class="p">],</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">SE_beta_1_hat</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.06979463619979433
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>De hecho, los valores estimados son iguales.</p>
+</section>
+<section id="calculo-de-errores-estandar-robustos-a-la-heteroscedasticidad">
+<h2>Cálculo de errores estándar robustos a la heteroscedasticidad<a class="headerlink" href="#calculo-de-errores-estandar-robustos-a-la-heteroscedasticidad" title="Permalink to this heading">#</a></h2>
+<p>La estimación consistente de <span class="math notranslate nohighlight">\(\sigma_{\hat{\beta}_1}\)</span> bajo heteroscedasticidad se garantiza cuando se utiliza el siguiente estimador <em>robusto</em>.</p>
+<div class="math notranslate nohighlight">
+\[ SE(\hat{\beta}_1) = \sqrt{ \frac{1}{n} \cdot \frac{ \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X})^2 \hat{u}_i^2 }{ \left[ \frac{1}{n} \sum_{i=1}^n (X_i - \overline{X})^2  \right]^2} } \tag{5.6} \]</div>
+<p>Las estimaciones del error típico calculadas de este modo también se denominan <a class="reference external" href="https://en.wikipedia.org/wiki/Heteroscedasticity-consistent_standard_errors">Eicker-Huber-White standard errors</a>.</p>
+<p>Puede resultar bastante engorroso realizar este cálculo a mano. Por suerte, existen ciertas funciones de Python que sirven para este propósito.</p>
+<p>\begin{align}
+SE(\hat{\beta}<em>1)</em>{HC1} = \sqrt{ \frac{1}{n} \cdot \frac{ \frac{1}{n-2} \sum_{i=1}^n (X_i - \overline{X})^2 \hat{u}<em>i^2 }{ \left[ \frac{1}{n} \sum</em>{i=1}^n (X_i - \overline{X})^2  \right]^2}} (#eq:hc1)
+\end{align}</p>
+<p>Calculemos ahora estimaciones robustas de errores estándar para los coeficientes en <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">ttcode('linear_model')</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># compute heteroskedasticity-robust standard errors</span>
+<span class="n">robust_linear_model</span> <span class="o">=</span> <span class="n">labor_model</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;HC1&#39;</span><span class="p">)</span>
+<span class="n">robust_linear_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>        <td>earnings</td>     <th>  R-squared:         </th> <td>   0.130</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.130</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   415.8</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Mon, 07 Aug 2023</td> <th>  Prob (F-statistic):</th> <td>1.45e-86</td> 
+</tr>
+<tr>
+  <th>Time:</th>                 <td>13:10:11</td>     <th>  Log-Likelihood:    </th> <td> -10590.</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>  2950</td>      <th>  AIC:               </th> <td>2.118e+04</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>  2948</td>      <th>  BIC:               </th> <td>2.120e+04</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>         <td>HC1</td>       <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+      <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th> <td>   -3.1344</td> <td>    0.926</td> <td>   -3.385</td> <td> 0.001</td> <td>   -4.950</td> <td>   -1.319</td>
+</tr>
+<tr>
+  <th>education</th> <td>    1.4669</td> <td>    0.072</td> <td>   20.390</td> <td> 0.000</td> <td>    1.326</td> <td>    1.608</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>1621.825</td> <th>  Durbin-Watson:     </th> <td>   1.979</td> 
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th>  <td> 0.000</td>  <th>  Jarque-Bera (JB):  </th> <td>19204.850</td>
+</tr>
+<tr>
+  <th>Skew:</th>           <td> 2.365</td>  <th>  Prob(JB):          </th> <td>    0.00</td> 
+</tr>
+<tr>
+  <th>Kurtosis:</th>       <td>14.570</td>  <th>  Cond. No.          </th> <td>    82.1</td> 
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors are heteroscedasticity robust (HC1)</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the variance-covariance matrix of the parameter estimates</span>
+<span class="n">vcov</span> <span class="o">=</span> <span class="n">robust_linear_model</span><span class="o">.</span><span class="n">cov_params</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vcov</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.85726285 -0.06573674]
+ [-0.06573674  0.00517569]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>En este código:</p>
+<ul class="simple">
+<li><p>El método get_robustcov_results se ejecuta en el modelo ajustado para calcular los errores estándar robustos. El argumento cov_type especifica el tipo de errores estándar robustos a calcular. En este caso, HC1 corresponde al estimador robusto de matriz de covarianza de heteroscedasticidad.</p></li>
+<li><p>El método cov_params se ejecuta en el objeto devuelto para obtener la matriz de varianza-covarianza de las estimaciones de los parámetros, que se imprime en la consola.</p></li>
+</ul>
+<p>La salida de <code class="docutils literal notranslate"><span class="pre">vcov</span></code> es la matriz de varianza-covarianza de las estimaciones de coeficientes. Nos interesa la raíz cuadrada de los elementos diagonales de esta matriz, es decir, las estimaciones del error estándar.</p>
+<hr class="docutils" />
+<p>Cuando tenemos k &gt; 1 regresores, escribir las ecuaciones de un modelo de regresión resulta muy complicado. Una forma más cómoda de denotar y estimar los llamados modelos de regresión múltiple (Luego lo veremos) es utilizar el álgebra matricial. Esta es la razón por la que funciones como <code class="docutils literal notranslate"><span class="pre">vcovHC()</span></code> producen matrices. En el modelo de regresión lineal simple, las varianzas y covarianzas de los estimadores pueden reunirse en la matriz simétrica de varianzas-covarianzas:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{Var}
+  \begin{pmatrix}
+    \hat\beta_0 \\
+    \hat\beta_1
+  \end{pmatrix} =
+\begin{pmatrix}
+  \text{Var}(\hat\beta_0) &amp; \text{Cov}(\hat\beta_0,\hat\beta_1) \\
+\text{Cov}(\hat\beta_0,\hat\beta_1) &amp; \text{Var}(\hat\beta_1)
+\end{pmatrix},
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Entonces, <code class="docutils literal notranslate"><span class="pre">vcovHC()</span></code> nos da <span class="math notranslate nohighlight">\(\widehat{\text{Var}}(\hat\beta_0)\)</span>, <span class="math notranslate nohighlight">\(\widehat{\text{Var}}(\hat\beta_1)\)</span> y <span class="math notranslate nohighlight">\(\widehat{\text{Cov}}(\hat\beta_0,\hat\beta_1)\)</span>, pero la mayoría de las veces nos interesan los elementos diagonales de la matriz estimada.</p></li>
+</ul>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># compute the square root of the diagonal elements in vcov</span>
+<span class="n">robust_se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">vcov</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">robust_se</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.9258849  0.07194227]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Supongamos ahora que queremos generar un resumen de coeficientes como el proporcionado por <code class="docutils literal notranslate"><span class="pre">('summary()')</span></code> pero con errores estándar <em>robustos</em> de los estimadores de coeficientes, estadísticas <span class="math notranslate nohighlight">\(t\)</span> robustas y valores <span class="math notranslate nohighlight">\(p\)</span> correspondientes para el modelo de regresión <code class="docutils literal notranslate"><span class="pre">(&quot;linear_model&quot;)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># we invoke the function `summary()` on our robust model</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">robust_linear_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               earnings   R-squared:                       0.130
+Model:                            OLS   Adj. R-squared:                  0.130
+Method:                 Least Squares   F-statistic:                     415.8
+Date:                Mon, 07 Aug 2023   Prob (F-statistic):           1.45e-86
+Time:                        13:12:48   Log-Likelihood:                -10590.
+No. Observations:                2950   AIC:                         2.118e+04
+Df Residuals:                    2948   BIC:                         2.120e+04
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     -3.1344      0.926     -3.385      0.001      -4.950      -1.319
+education      1.4669      0.072     20.390      0.000       1.326       1.608
+==============================================================================
+Omnibus:                     1621.825   Durbin-Watson:                   1.979
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):            19204.850
+Skew:                           2.365   Prob(JB):                         0.00
+Kurtosis:                      14.570   Cond. No.                         82.1
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vemos que los valores reportados en la columna <code class="docutils literal notranslate"><span class="pre">('std</span> <span class="pre">err')</span></code> son iguales a los de <code class="docutils literal notranslate"><span class="pre">('sqrt(diag(vcov))')</span></code>.</p>
+<p>¿Hasta qué punto son graves las implicaciones de utilizar sólo errores estándar de homocedasticidad en presencia de heteroscedasticidad? La respuesta es: depende. Como se ha mencionado anteriormente, corremos el riesgo de sacar conclusiones erróneas al realizar pruebas de significación.</p>
+</section>
+</section>
+<section id="teorema-de-gauss-markov">
+<h1>Teorema de Gauss-Markov<a class="headerlink" href="#teorema-de-gauss-markov" title="Permalink to this heading">#</a></h1>
+<p>Al estimar modelos de regresión, sabemos que los resultados del procedimiento de estimación son aleatorios. Sin embargo, al utilizar estimadores no sesgados, al menos por término medio, estimamos el parámetro verdadero. Por lo tanto, al comparar distintos estimadores no sesgados, es interesante saber cuál tiene la mayor precisión: siendo conscientes de que la probabilidad de estimar el valor <em>exacto</em> del parámetro de interés es de <span class="math notranslate nohighlight">\(0\)</span> en una aplicación empírica, queremos asegurarnos de que la probabilidad de obtener una estimación muy cercana al valor verdadero sea lo más alta posible. Esto significa que queremos utilizar el estimador con la varianza más baja de todos los estimadores no sesgados, siempre que nos preocupemos por la insesgadez. El teorema de Gauss-Markov establece que, en la clase de estimadores lineales insesgados condicionalmente, el estimador OLS tiene esta propiedad bajo ciertas condiciones.</p>
+<p>Supongamos que se cumplen los supuestos de la regresión lineal <em>y</em> que los errores son <em>homoskedásticos</em>. El estimador OLS es el mejor (en el sentido de la varianza más pequeña) estimador lineal insesgado condicionalmente (BLUE) en este contexto.</p>
+<p>Echemos un vistazo más de cerca a lo que esto significa:</p>
+<ul class="simple">
+<li><p>Los estimadores de <span class="math notranslate nohighlight">\(\beta_1\)</span> que son funciones lineales de <span class="math notranslate nohighlight">\(Y_1, \dots, Y_n\)</span> y que son no sesgados condicionalmente en el regresor <span class="math notranslate nohighlight">\(X_1, \dots, X_n\)</span> puede escribirse como</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \overset{\sim}{\beta}_1 = \sum_{i=1}^n a_i Y_i \]</div>
+<p>donde <span class="math notranslate nohighlight">\(a_i\)</span> son pesos que pueden depender de <span class="math notranslate nohighlight">\(X_i\)</span> pero <em>no</em> de <span class="math notranslate nohighlight">\(Y_i\)</span>.</p>
+<ul class="simple">
+<li><p>Ya sabemos que <span class="math notranslate nohighlight">\(\overset{\sim}{\beta}_1\)</span> tiene una distribución muestral: <span class="math notranslate nohighlight">\(\overset{\sim}{\beta}_1\)</span> es una función lineal de las <span class="math notranslate nohighlight">\(Y_i\)</span> que son variables aleatorias. Si ahora</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ E(\overset{\sim}{\beta}_1 | X_1, \dots, X_n) = \beta_1,\]</div>
+<p><span class="math notranslate nohighlight">\(\overset{\sim}{\beta}_1\)</span> es un estimador lineal no sesgado de <span class="math notranslate nohighlight">\(\beta_1\)</span>, condicionalmente en <span class="math notranslate nohighlight">\(X_1, \dots, X_n\)</span>.</p>
+<ul class="simple">
+<li><p>Podemos preguntarnos si <span class="math notranslate nohighlight">\(\overset{\sim}{\beta}_1\)</span> es también el <em>mejor</em> estimador de esta clase, es decir, el más eficiente de todos los estimadores lineales no sesgados condicionalmente, donde “más eficiente” significa menor varianza. Las ponderaciones <span class="math notranslate nohighlight">\(a_i\)</span> desempeñan un papel importante aquí y resulta que OLS utiliza justo las ponderaciones adecuadas para tener la propiedad BLUE.</p></li>
+</ul>
+<section id="simulacion-estimador-blue">
+<h2>Simulación: Estimador BLUE<a class="headerlink" href="#simulacion-estimador-blue" title="Permalink to this heading">#</a></h2>
+<p>Consideremos el caso de una regresión de <span class="math notranslate nohighlight">\(Y_i,\dots,Y_n\)</span> sólo sobre una constante. Aquí, se supone que <span class="math notranslate nohighlight">\(Y_i\)</span> es una muestra aleatoria de una población con media <span class="math notranslate nohighlight">\(\mu\)</span> y varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>. El estimador OLS en este modelo es simplemente la media muestral.</p>
+<p>\begin{equation}
+\hat{\beta}<em>1 = \sum</em>{i=1}^n \underbrace{\frac{1}{n}}_{=a_i} Y_i
+\end{equation}</p>
+<p>Evidentemente, cada observación se pondera por</p>
+<div class="math notranslate nohighlight">
+\[a_i = \frac{1}{n}.\]</div>
+<p>y también sabemos que <span class="math notranslate nohighlight">\(\text{Var}(\hat{\beta}_1)=\frac{\sigma^2}{n}\)</span>.</p>
+<p>Ahora hagamos una simulación que demuestra lo que ocurre con la varianza de <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> si se asignan diferentes ponderaciones <span class="math notranslate nohighlight">\(w_i = \frac{1 \pm \epsilon}{n} \)</span> a cualquiera de las mitades de la muestra <span class="math notranslate nohighlight">\(Y_1, \dots, Y_n\)</span> en lugar de utilizar <span class="math notranslate nohighlight">\(\frac{1}{n}\)</span>, las ponderaciones OLS.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="c1"># set sample size and number of repetitions</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">reps</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">1e5</span><span class="p">)</span>
+
+<span class="c1"># choose epsilon and create a vector of weights as defined above</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)))</span>
+
+<span class="c1"># draw a random sample y_1,...,y_n from the standard normal distribution,</span>
+<span class="c1"># use both estimators 1e5 times and store the result in the vectors &#39;ols&#39; and</span>
+<span class="c1"># &#39;weightedestimator&#39;</span>
+
+<span class="n">ols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">reps</span><span class="p">)</span>
+<span class="n">weightedestimator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">reps</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">reps</span><span class="p">):</span>
+
+  <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+  <span class="n">ols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+  <span class="n">weightedestimator</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># plot kernel density estimates of the estimators&#39; distributions:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">ols</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;OLS&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">weightedestimator</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Weighted&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Estimates&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Density of OLS and Weighted Estimator&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3e6c109abf7a00bb8bca822cd78f3f0da08835377869976f56fac4590a45102e.png" src="../_images/3e6c109abf7a00bb8bca822cd78f3f0da08835377869976f56fac4590a45102e.png" />
+</div>
+</div>
+<p>¿Qué conclusión podemos sacar del resultado?</p>
+<ul class="simple">
+<li><p>Ambos estimadores parecen no sesgados: las medias de sus distribuciones estimadas son cero.</p></li>
+<li><p>El estimador que utiliza ponderaciones que se desvían de las implícitas en OLS es menos eficiente que el estimador OLS: hay mayor dispersión cuando las ponderaciones son <span class="math notranslate nohighlight">\(w_i = \frac{1 \pm 0.8}{100}\)</span> en lugar de <span class="math notranslate nohighlight">\(w_i=\frac{1}{100}\)</span> como exige la solución OLS.</p></li>
+</ul>
+<p>Por tanto, los resultados de la simulación corroboran el teorema de Gauss-Markov.</p>
+</section>
+</section>
+<section id="uso-del-estadistico-t-en-regresion-cuando-el-tamano-de-la-muestra-es-pequeno">
+<h1>Uso del estadístico t en regresión cuando el tamaño de la muestra es pequeño<a class="headerlink" href="#uso-del-estadistico-t-en-regresion-cuando-el-tamano-de-la-muestra-es-pequeno" title="Permalink to this heading">#</a></h1>
+<p>Los tres supuestos OLS analizados anteriormente son la base de los resultados sobre la distribución en muestras grandes de los estimadores OLS en el modelo de regresión simple. ¿Qué puede decirse sobre la distribución de los estimadores y sus estadísticos <span class="math notranslate nohighlight">\(t\)</span> cuando el tamaño de la muestra es pequeño y se desconoce la distribución poblacional de los datos? Siempre que se cumplan los tres supuestos de mínimos cuadrados y los errores se distribuyan normalmente y sean homoscedásticos (nos referimos a estas condiciones como los supuestos de regresión normal homoscedástica), tenemos estimadores distribuidos normalmente y estadísticos de prueba distribuidos <span class="math notranslate nohighlight">\(t\)</span> en muestras pequeñas.</p>
+<p>Recuerda el <span class="xref myst">definition</span> de una variable distribuida en <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \frac{Z}{\sqrt{W/M}} \sim t_M\]</div>
+<p>donde <span class="math notranslate nohighlight">\(Z\)</span> es una variable aleatoria normal estándar, <span class="math notranslate nohighlight">\(W\)</span> se distribuye <span class="math notranslate nohighlight">\(\chi^2\)</span> con <span class="math notranslate nohighlight">\(M\)</span> grados de libertad y <span class="math notranslate nohighlight">\(Z\)</span> y <span class="math notranslate nohighlight">\(W\)</span> son independientes. Véase la sección 5.6 del libro para una discusión más detallada de la distribución de muestras pequeñas de los estadísticos <span class="math notranslate nohighlight">\(t\)</span> en los métodos de regresión.</p>
+<p>Simulemos la distribución de las estadísticas <span class="math notranslate nohighlight">\(t\)</span> de regresión basándonos en un gran número de muestras aleatorias pequeñas, digamos <span class="math notranslate nohighlight">\(n=20\)</span>, y comparemos las distribuciones simuladas con las distribuciones teóricas, que deberían ser <span class="math notranslate nohighlight">\(t_{18}\)</span>, la distribución <span class="math notranslate nohighlight">\(t\)</span> con <span class="math notranslate nohighlight">\(18\)</span> grados de libertad (recordemos que <span class="math notranslate nohighlight">\(\text{DF}=n-k-1\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">gaussian_kde</span>
+
+<span class="c1"># Initialize two lists</span>
+<span class="n">beta_0</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">beta_1</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop sampling / estimation / t statistics</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Add constant to predictor matrix</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">beta_0</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">reg</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">beta_1</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">reg</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">reg</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Plot the distributions and compare with t_18 density</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Kernel Density Estimation for beta_0</span>
+<span class="n">kde_beta_0</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">beta_0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">kde_beta_0</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;KDE of beta_0&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">18</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t_18 pdf&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;widehat(beta)_0&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Kernel Density Estimation for beta_1</span>
+<span class="n">kde_beta_1</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">beta_1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">kde_beta_1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;KDE of beta_1&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="mi">18</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t_18 pdf&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;widehat(beta)_1&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/48abd83b5f77ba745bbbceaaffea1dad4e8c5800ba9e1700ac1430372f24e0a2.png" src="../_images/48abd83b5f77ba745bbbceaaffea1dad4e8c5800ba9e1700ac1430372f24e0a2.png" />
+</div>
+</div>
+<p>Los resultados son coherentes con nuestras expectativas: las distribuciones empíricas de ambos estimadores parecen seguir bastante de cerca la distribución teórica <span class="math notranslate nohighlight">\(t_{18}\)</span>.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_5"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="5-0-Schedule_week_5.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 5-1: Inferencia en RLS</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-hipotesis-de-dos-caras-sobre-el-coeficiente-de-pendiente">Pruebas de hipótesis de dos caras sobre el coeficiente de pendiente</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-general-del-t-estadistico">Forma general del <span class="math notranslate nohighlight">\(t\)</span>-estadístico</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comprobacion-de-hipotesis-sobre-beta-1">Comprobación de hipótesis sobre <span class="math notranslate nohighlight">\(\beta_1\)</span>.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-usando-la-base-de-datos-caschols">Ejemplo usando la base de datos CASchols</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-los-coeficientes-de-regresion">Intervalos de confianza para los coeficientes de regresión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#un-intervalo-de-confianza-para-beta-i">Un intervalo de confianza para <span class="math notranslate nohighlight">\(\beta_i\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulacion-intervalos-de-confianza">Simulación: Intervalos de confianza</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#regresion-cuando-x-es-una-variable-binaria">Regresión cuando X es una variable binaria</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#heteroscedasticidad-y-homoscedasticidad">Heteroscedasticidad y homoscedasticidad</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-ejemplo-real-de-heteroscedasticidad">Un ejemplo real de heteroscedasticidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deberia-preocuparnos-la-heteroscedasticidad">¿Debería preocuparnos la heteroscedasticidad?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-errores-estandar-robustos-a-la-heteroscedasticidad">Cálculo de errores estándar robustos a la heteroscedasticidad</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-gauss-markov">Teorema de Gauss-Markov</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulacion-estimador-blue">Simulación: Estimador BLUE</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-del-estadistico-t-en-regresion-cuando-el-tamano-de-la-muestra-es-pequeno">Uso del estadístico t en regresión cuando el tamaño de la muestra es pequeño</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1541 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 4-2: Regresión lineal simple &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_4/4-2-Simple_linear_regression';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 4-3: Supuestos de la regresión lineal simple" href="4-3-SLR_supuestos.html" />
+    <link rel="prev" title="Lectura 4-1: Correlaciones" href="4-1%20Correlaciones.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="4-1%20Correlaciones.html">Lectura 4-1: Correlaciones</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 4-2: Regresión lineal simple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="4-3-SLR_supuestos.html">Lectura 4-3: Supuestos de la regresión lineal simple</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_5/5-2-Hypothesis_Confidence.html">Lectura 5-1: Inferencia en RLS</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_4/4-2-Simple_linear_regression.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_4/4-2-Simple_linear_regression.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_4/4-2-Simple_linear_regression.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 4-2: Regresión lineal simple</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 4-2: Regresión lineal simple</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelando">Modelando</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-lineal-simple">Modelo de regresión lineal simple</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-de-minimos-cuadrados">Enfoque de mínimos cuadrados</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hacer-predicciones">Hacer predicciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuales">Residuales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-la-varianza">Estimación de la varianza</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-la-variacion">Descomposición de la variación</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suma-de-cuadrados-total">Suma de cuadrados Total</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suma-de-los-cuadrados-de-la-regresion">Suma de los cuadrados de la regresión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suma-de-los-cuadrados-del-error">Suma de los cuadrados del error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficiente-de-determinacion">Coeficiente de determinación</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hacer-regresiones-en-python">Hacer regresiones en Python</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-4-2-regresion-lineal-simple">
+<h1>Lectura 4-2: Regresión lineal simple<a class="headerlink" href="#lectura-4-2-regresion-lineal-simple" title="Permalink to this heading">#</a></h1>
+<p>“Todos los modelos son erróneos, pero algunos son útiles”.</p>
+<p>— <strong>George E. P. Box</strong></p>
+</section>
+<section id="modelando">
+<h1>Modelando<a class="headerlink" href="#modelando" title="Permalink to this heading">#</a></h1>
+<p>Veamos un ejemplo sencillo de cómo afecta la velocidad de un coche a su distancia de frenado, es decir, a la distancia que recorre antes de detenerse. Para examinar esta relación, utilizaremos el conjunto de datos <code class="docutils literal notranslate"><span class="pre">cars</span></code>, que es un conjunto de datos predeterminado de <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;cars.csv&#39;</span><span class="p">)</span> <span class="c1"># Assuming a CSV source</span>
+
+<span class="c1"># View(cars)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># dim(cars)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># nrow(cars) and ncol(cars)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    speed  dist
+0       4     2
+1       4    10
+2       7     4
+3       7    22
+4       8    16
+5       9    10
+6      10    18
+7      10    26
+8      10    34
+9      11    17
+10     11    28
+11     12    14
+12     12    20
+13     12    24
+14     12    28
+15     13    26
+16     13    34
+17     13    34
+18     13    46
+19     14    26
+20     14    36
+21     14    60
+22     14    80
+23     15    20
+24     15    26
+25     15    54
+26     16    32
+27     16    40
+28     17    32
+29     17    40
+30     17    50
+31     18    42
+32     18    56
+33     18    76
+34     18    84
+35     19    36
+36     19    46
+37     19    68
+38     20    32
+39     20    48
+40     20    52
+41     20    56
+42     20    64
+43     22    66
+44     23    54
+45     24    70
+46     24    92
+47     24    93
+48     24   120
+49     25    85
+(50, 2)
+50
+2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Leyendo la documentación nos enteramos de que se trata de datos recogidos durante la década de 1920 sobre la velocidad de los carros y la consiguiente distancia que tardan en detenerse. La tarea interesante aquí es determinar la distancia que recorre un coche antes de detenerse, cuando viaja a una velocidad determinada. Para ello, primero vamos a comparar la distancia de frenado con la velocidad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic scatter plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># s represents size, equivalent to cex in R</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Speed (in Miles Per Hour)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Stopping Distance (in Feet)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Stopping Distance vs Speed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3181385e25a3d04adbb6302d60f3d3d86f9598308bded0d877b2f8dff48899fe.png" src="../_images/3181385e25a3d04adbb6302d60f3d3d86f9598308bded0d877b2f8dff48899fe.png" />
+</div>
+</div>
+<p>Definamos ahora algo de terminología. Tenemos pares de datos, <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>, para <span class="math notranslate nohighlight">\(i = 1, 2, \ldots n\)</span>, donde <span class="math notranslate nohighlight">\(n\)</span> es el tamaño de la muestra del conjunto de datos.
+Utilizamos <span class="math notranslate nohighlight">\(i\)</span> omo índice, simplemente por notación. Utilizamos <span class="math notranslate nohighlight">\(x_i\)</span> acomo variable <strong>predictora</strong> (explicativa). La variable predictora se utiliza para ayudar a <em>predecir</em> o explicar la <strong>variable de respuesta</strong> (objetivo, resultado),
+<span class="math notranslate nohighlight">\(y_i\)</span>.</p>
+<p>En el ejemplo de <code class="docutils literal notranslate"><span class="pre">carros</span></code>, nos interesa utilizar la variable predictora <code class="docutils literal notranslate"><span class="pre">velocidad</span></code> para predecir y explicar la variable de respuesta <code class="docutils literal notranslate"><span class="pre">distancia</span></code>.</p>
+<p>En términos generales, nos gustaría modelizar la relación entre <span class="math notranslate nohighlight">\(X\)</span> y <span class="math notranslate nohighlight">\(Y\)</span> utilizando la forma</p>
+<div class="math notranslate nohighlight">
+\[
+Y = f(X) + \epsilon.
+\]</div>
+<p>La función <span class="math notranslate nohighlight">\(f\)</span> describe la relación funcional entre las dos variables, y el término <span class="math notranslate nohighlight">\(\epsilon\)</span> se utiliza para tener en cuenta el error. Esto indica que si introducimos un valor dado de <span class="math notranslate nohighlight">\(X\)</span> como entrada, nuestra salida
+es un valor de <span class="math notranslate nohighlight">\(Y\)</span>, dentro de un cierto margen de error. Se puede considerar de varias maneras:</p>
+<ul class="simple">
+<li><p>Respuesta = Predicción + Error</p></li>
+<li><p>Respuesta = Señal + Ruido</p></li>
+<li><p>Respuesta = Modelo + Inexplicable</p></li>
+<li><p>Respuesta = Determinista + Aleatoria</p></li>
+<li><p>Respuesta = Explicable + Inexplicable</p></li>
+</ul>
+<p><strong>¿Qué tipo de función deberíamos utilizar para <span class="math notranslate nohighlight">\(f(X)\)</span> para los datos de <code class="docutils literal notranslate"><span class="pre">carros</span></code>?</strong></p>
+<p>Podríamos intentar modelar los datos con una línea horizontal. Es decir, el modelo para <span class="math notranslate nohighlight">\(y\)</span> no depende del valor de <span class="math notranslate nohighlight">\(x\)</span>. (Alguna función <span class="math notranslate nohighlight">\(f(X) = c\)</span>.) En el gráfico siguiente, vemos que esto no parece hacer un buen trabajo. Muchos de los puntos de datos están muy lejos de la línea naranja que representa <span class="math notranslate nohighlight">\(c\)</span>. Este es un ejemplo de <strong>subajuste</strong>. La solución obvia es hacer que la función <span class="math notranslate nohighlight">\(f(X)\)</span> dependa realmente de <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># underfit_model = lm(dist ~ 1, data = cars)</span>
+<span class="c1"># This model is basically predicting the mean of dist for every speed.</span>
+<span class="n">mean_dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">mean_dist</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0ed9f73bf772f5e8c229204a87d287fd79d0e910c4030e69e92ab89f37996e73.png" src="../_images/0ed9f73bf772f5e8c229204a87d287fd79d0e910c4030e69e92ab89f37996e73.png" />
+</div>
+</div>
+<p>También podríamos intentar modelar los datos con una función muy “movible” que intente atravesar tantos puntos de datos como sea posible. Esto tampoco parece funcionar muy bien. ¡La distancia de frenado a una velocidad de 5 mph no debería estar fuera del gráfico! (Incluso en 1920). Este es un ejemplo de sobreajuste.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># overfit_model</span>
+<span class="c1"># We use sklearn&#39;s PolynomialFeatures to create a polynomial regression</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">X_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">X_query_poly</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_query</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_query_poly</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_query</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5f1d0ab5576afc444a43a154ee9e562cbedfd2f6630d74eece7155f3883fe9ae.png" src="../_images/5f1d0ab5576afc444a43a154ee9e562cbedfd2f6630d74eece7155f3883fe9ae.png" />
+</div>
+</div>
+<p>Por último, podríamos intentar modelizar los datos con una línea bien elegida en lugar de uno de los dos extremos intentados anteriormente. La línea del gráfico siguiente parece resumir bastante bien la relación entre la distancia de frenado y la velocidad. A medida que aumenta la velocidad, aumenta la distancia necesaria para detenerse. Todavía hay alguna variación en esta línea, pero parece captar la tendencia general.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># stop_dist_model = lm(dist ~ speed, data = cars)</span>
+<span class="n">lin_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">lin_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/221b35ddf7a7c07ed4b29404c6d8def38c600ed948976c1edbf1ab41f3bc8761.png" src="../_images/221b35ddf7a7c07ed4b29404c6d8def38c600ed948976c1edbf1ab41f3bc8761.png" />
+</div>
+</div>
+<p>Teniendo esto en cuenta, nos gustaría restringir nuestra elección de <span class="math notranslate nohighlight">\(f(X)\)</span> a funciones <em>lineales</em> de <span class="math notranslate nohighlight">\(X\)</span>. Escribiremos nuestro modelo utilizando <span class="math notranslate nohighlight">\(\beta_1\)</span> para la pendiente, y <span class="math notranslate nohighlight">\(\beta_0\)</span> para el intercepto,</p>
+<div class="math notranslate nohighlight">
+\[
+Y = \beta_0 + \beta_1 X + \epsilon.
+\]</div>
+<section id="modelo-de-regresion-lineal-simple">
+<h2>Modelo de regresión lineal simple<a class="headerlink" href="#modelo-de-regresion-lineal-simple" title="Permalink to this heading">#</a></h2>
+<p>A continuación definiremos lo que denominaremos modelo de regresión lineal simple,</p>
+<div class="math notranslate nohighlight">
+\[
+Y_i = \beta_0 + \beta_1 x_i + \epsilon_i
+\]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[
+\epsilon_i \sim N(0, \sigma^2).
+\]</div>
+<p>Es decir, las <span class="math notranslate nohighlight">\(\epsilon_i\)</span> son variables aleatorias normales <em>independientes e idénticamente distribuidas</em> (iid) con media <span class="math notranslate nohighlight">\(0\)</span> y varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Este modelo tiene tres parámetros que deben estimarse: <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span> y <span class="math notranslate nohighlight">\(\sigma^2\)</span>, que son constantes fijas pero desconocidas.</p>
+<ul class="simple">
+<li><p>Aquí hemos modificado ligeramente nuestra notación. Ahora utilizamos <span class="math notranslate nohighlight">\(Y_i\)</span> y <span class="math notranslate nohighlight">\(x_i\)</span>, ya que ajustaremos este modelo a un conjunto de <span class="math notranslate nohighlight">\(n\)</span> puntos de datos, para <span class="math notranslate nohighlight">\(i = 1, 2, \ldots n\)</span>.</p></li>
+<li><p>Recordemos que utilizamos <span class="math notranslate nohighlight">\(Y\)</span> mayúscula para indicar una variable aleatoria, y <span class="math notranslate nohighlight">\(y\)</span> minúscula para denotar un valor potencial de la variable aleatoria. Como tendremos <span class="math notranslate nohighlight">\(n\)</span> observaciones, tenemos <span class="math notranslate nohighlight">\(n\)</span> variables aleatorias <span class="math notranslate nohighlight">\(Y_i\)</span> y sus
+posibles valores <span class="math notranslate nohighlight">\(y_i\)</span>.</p></li>
+<li><p>En el modelo de regresión lineal simple, se supone que las <span class="math notranslate nohighlight">\(x_i\)</span> son constantes fijas y conocidas, por lo que se anotan con minúscula. La respuesta <span class="math notranslate nohighlight">\(Y_i\)</span> sigue siendo una variable aleatoria debido al comportamiento aleatorio de la variable de error, <span class="math notranslate nohighlight">\(\epsilon_i\)</span>. Es decir, cada respuesta <span class="math notranslate nohighlight">\(Y_i\)</span> está ligada a un observable <span class="math notranslate nohighlight">\(x_i\)</span> y a un aleatorio, no observable, <span class="math notranslate nohighlight">\(\epsilon_i\)</span>.</p></li>
+<li><p>En esencia, podríamos pensar explícitamente que <span class="math notranslate nohighlight">\(Y_i\)</span> tiene una distribución diferente para cada <span class="math notranslate nohighlight">\(X_i\)</span>. En otras palabras, <span class="math notranslate nohighlight">\(Y_i\)</span> tiene una distribución condicional que depende del valor de <span class="math notranslate nohighlight">\(X_i\)</span>, escrito <span class="math notranslate nohighlight">\(x_i\)</span>. De este modo, seguimos sin hacer suposiciones de distribución de <span class="math notranslate nohighlight">\(X_i\)</span>, ya que sólo nos interesa la distribución de <span class="math notranslate nohighlight">\(Y_i\)</span> para un valor concreto <span class="math notranslate nohighlight">\(x_i\)</span>.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Y_i \mid X_i \sim N(\beta_0 + \beta_1 x_i, \sigma^2)
+\]</div>
+<p>Los aleatorios <span class="math notranslate nohighlight">\(Y_i\)</span> son función de <span class="math notranslate nohighlight">\(x_i\)</span>, por lo que podemos escribir su media como función de <span class="math notranslate nohighlight">\(x_i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{E}[Y_i \mid X_i = x_i] = \beta_0 + \beta_1 x_i.
+\]</div>
+<p>Sin embargo, su varianza permanece constante para cada <span class="math notranslate nohighlight">\(x_i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}[Y_i \mid X_i = x_i] = \sigma^2.
+\]</div>
+<p>Esto se muestra visualmente en la siguiente imagen. Vemos que para cualquier valor <span class="math notranslate nohighlight">\(x\)</span>, el valor esperado de <span class="math notranslate nohighlight">\(Y\)</span> es <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 x\)</span>. Para cada valor de <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(Y\)</span> tiene la misma varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<p><img alt="" src="Images/SLR_model.png" /></p>
+<p>A menudo, hablamos directamente de las suposiciones que hace este modelo. Se pueden abreviar ingeniosamente con <strong>LINE</strong>.</p>
+<ul class="simple">
+<li><p><strong>L</strong>ineal. La relación entre <span class="math notranslate nohighlight">\(Y\)</span> y <span class="math notranslate nohighlight">\(x\)</span> es lineal, de la forma <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 * x\)</span>.</p></li>
+<li><p><strong>I</strong>ndependientes. Los errores <span class="math notranslate nohighlight">\(\epsilon\)</span> son independientes.</p></li>
+<li><p><strong>N</strong>ormal. Los errores, <span class="math notranslate nohighlight">\(\epsilon\)</span> se distribuyen normalmente. Es decir, el “error” alrededor de la línea sigue una distribución normal.</p></li>
+<li><p><strong>V</strong>arianza igual. En cada valor de <span class="math notranslate nohighlight">\(x\)</span>, la varianza de <span class="math notranslate nohighlight">\(Y\)</span> es la misma, <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+</ul>
+<p>También suponemos que los valores de <span class="math notranslate nohighlight">\(x\)</span> son fijos, es decir, no aleatorios. No suponemos la distribución de la variable predictora.</p>
+<p>Como nota al margen, a menudo nos referiremos a la regresión lineal simple como <strong>SLR</strong>. Explicación del nombre SLR:</p>
+<ul class="simple">
+<li><p><strong>Regresión</strong> significa simplemente que estamos intentando medir la relación entre una variable de respuesta y (una o más) variables predictoras. En el caso del SLR, tanto la respuesta como el predictor son variables <em>numéricas</em>.</p></li>
+<li><p><strong>Lineal</strong> nos dice que nuestro modelo para <span class="math notranslate nohighlight">\(Y\)</span> es una combinación lineal de los predictores <span class="math notranslate nohighlight">\(X\)</span>. (En este caso sólo uno.) En este momento, esto siempre resulta en un modelo que es una línea, pero más adelante veremos cómo esto no es siempre el caso.</p></li>
+<li><p><strong>Simple</strong> se refiere al hecho de que estamos utilizando una única variable predictora. Más adelante utilizaremos múltiples variables predictoras.</p></li>
+</ul>
+<p>Así que SLR modela <span class="math notranslate nohighlight">\(Y\)</span> como una función lineal de <span class="math notranslate nohighlight">\(X\)</span>, pero ¿cómo definimos realmente una buena recta? Hay un número infinito de rectas que podríamos utilizar, así que intentaremos encontrar una con “errores pequeños”. Esa es una línea con
+tantos puntos como sea posible. La pregunta ahora es: ¿cómo encontrar esa recta? Podríamos hacer varias cosas.</p>
+<p>Podríamos encontrar la recta que tenga la menor distancia máxima desde cualquiera de los puntos a la recta. Es decir,</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\beta_0, \beta_1}{\mathrm{argmin}} \max|y_i - (\beta_0 + \beta_1 x_i)|.
+\]</div>
+<p>Podríamos encontrar la recta que minimiza la suma de todas las distancias de los puntos a la recta. Es decir,</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\beta_0, \beta_1}{\mathrm{argmin}} \sum_{i = 1}^{n}|y_i - (\beta_0 + \beta_1 x_i)|.
+\]</div>
+<p>Podríamos encontrar la recta que minimiza la suma de todas las distancias al cuadrado de los puntos a la recta. Es decir,</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\beta_0, \beta_1}{\mathrm{argmin}} \sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_i))^2.
+\]</div>
+<p>Esta última opción se denomina método de los <strong>mínimos cuadrados</strong>. Básicamente, es el método de facto para ajustar una recta a los datos. (Puede que incluso lo hayas visto antes en un curso de álgebra lineal.) Su popularidad se debe en gran parte a que es matemáticamente “fácil”. (Lo cual era importante históricamente, ya que los ordenadores son un artilugio moderno.) También es muy popular porque muchas relaciones se aproximan bien mediante una
+función lineal.</p>
+</section>
+</section>
+<section id="enfoque-de-minimos-cuadrados">
+<h1>Enfoque de mínimos cuadrados<a class="headerlink" href="#enfoque-de-minimos-cuadrados" title="Permalink to this heading">#</a></h1>
+<p>Dadas unas observaciones <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>, para <span class="math notranslate nohighlight">\(i = 1, 2, \ldots n\)</span>, queremos
+encontrar valores de <span class="math notranslate nohighlight">\(\beta_0\)</span> y <span class="math notranslate nohighlight">\(\beta_1\)</span> que minimicen</p>
+<div class="math notranslate nohighlight">
+\[
+f(\beta_0, \beta_1) = \sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_i))^2 = \sum_{i = 1}^{n}(y_i - \beta_0 - \beta_1 x_i)^2.
+\]</div>
+<p>Llamaremos a estos valores <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span> y <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span>.</p>
+<p>En primer lugar, tomamos una derivada parcial con respecto a ambos <span class="math notranslate nohighlight">\(\beta_0\)</span> y
+<span class="math notranslate nohighlight">\(\beta_1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\frac{\partial f}{\partial \beta_0} &amp;= -2 \sum_{i = 1}^{n}(y_i - \beta_0 - \beta_1 x_i) \\
+\frac{\partial f}{\partial \beta_1} &amp;= -2 \sum_{i = 1}^{n}(x_i)(y_i - \beta_0 - \beta_1 x_i)
+\end{aligned}
+\end{split}\]</div>
+<p>A continuación, fijamos cada una de las derivadas parciales igual a cero y resolvemos el
+sistema de ecuaciones resultante.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\sum_{i = 1}^{n}(y_i - \beta_0 - \beta_1 x_i) &amp;= 0 \\
+\sum_{i = 1}^{n}(x_i)(y_i - \beta_0 - \beta_1 x_i) &amp;= 0
+\end{aligned}
+\end{split}\]</div>
+<p>Al resolver el sistema de ecuaciones, un reordenamiento algebraico común da lugar a las <strong>ecuaciones normales</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+n \beta_0 + \beta_1 \sum_{i = 1}^{n} x_i &amp;= \sum_{i = 1}^{n} y_i\\
+\beta_0 \sum_{i = 1}^{n} x_i + \beta_1 \sum_{i = 1}^{n} x_i^2 &amp;= \sum_{i = 1}^{n} x_i y_i  
+\end{aligned}
+\end{split}\]</div>
+<p>Por último, terminamos de resolver el sistema de ecuaciones.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat{\beta}_1 &amp;= \frac{\sum_{i = 1}^{n} x_i y_i - \frac{(\sum_{i = 1}^{n} x_i)(\sum_{i = 1}^{n} y_i)}{n}}{\sum_{i = 1}^{n} x_i^2 - \frac{(\sum_{i = 1}^{n} x_i)^2}{n}} = \frac{S_{xy}}{S_{xx}}\\
+\hat{\beta}_0 &amp;= \bar{y} - \hat{\beta}_1 \bar{x}
+\end{aligned}
+\end{split}\]</div>
+<p>Aquí hemos definido algunas notaciones para la expresión que hemos obtenido. Observa que tienen formas alternativas con las que es mucho más fácil trabajar. (No lo haremos aquí, pero puedes intentar demostrar las igualdades a continuación por tu cuenta, por “diversión”). Utilizamos la letra mayúscula <span class="math notranslate nohighlight">\(S\)</span> para denotar la “suma” que sustituye a la letra mayúscula <span class="math notranslate nohighlight">\(\Sigma\)</span> cuando calculamos estos valores basándonos en los datos observados, <span class="math notranslate nohighlight">\((x_i ,y_i)\)</span>. Los subíndices como <span class="math notranslate nohighlight">\(xy\)</span> denotan sobre qué variables se aplica la función <span class="math notranslate nohighlight">\((z - \bar{z})\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+S_{xy} &amp;= \sum_{i = 1}^{n} x_i y_i - \frac{(\sum_{i = 1}^{n} x_i)(\sum_{i = 1}^{n} y_i)}{n}  = \sum_{i = 1}^{n}(x_i - \bar{x})(y_i - \bar{y})\\
+S_{xx} &amp;= \sum_{i = 1}^{n} x_i^2 - \frac{(\sum_{i = 1}^{n} x_i)^2}{n}  = \sum_{i = 1}^{n}(x_i - \bar{x})^2\\
+S_{yy} &amp;= \sum_{i = 1}^{n} y_i^2 - \frac{(\sum_{i = 1}^{n} y_i)^2}{n}  = \sum_{i = 1}^{n}(y_i - \bar{y})^2
+\end{aligned}
+\end{split}\]</div>
+<p>Obsérvese que estos sumatorios <span class="math notranslate nohighlight">\(S\)</span> no deben confundirse con la
+desviación típica <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<p>Utilizando las expresiones alternativas anteriores para <span class="math notranslate nohighlight">\(S_{xy}\)</span> and <span class="math notranslate nohighlight">\(S_{xx}\)</span>,  llegamos a una expresión más limpia y útil para <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\beta}_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum_{i = 1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sum_{i = 1}^{n}(x_i - \bar{x})^2}
+\]</div>
+<p>Veamos como podemos usar ´Python´ para realizar estos calculos</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculations of Sxy, Sxx, Syy, beta_0_hat, and beta_1_hat</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+<span class="n">Sxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Syy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Sxy</span><span class="p">,</span> <span class="n">Sxx</span><span class="p">,</span> <span class="n">Syy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5387.400000000001 1370.0 32538.980000000003
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, calcule <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span> y <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta_1_hat</span> <span class="o">=</span> <span class="n">Sxy</span> <span class="o">/</span> <span class="n">Sxx</span>
+<span class="n">beta_0_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">beta_1_hat</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">beta_0_hat</span><span class="p">,</span> <span class="n">beta_1_hat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-17.57909489051096 3.932408759124088
+</pre></div>
+</div>
+</div>
+</div>
+<p>¿Qué nos dicen estos valores sobre nuestro conjunto de datos?</p>
+<p>El <em>parámetro de pendiente</em> <span class="math notranslate nohighlight">\(\beta_1\)</span> nos dice que para un aumento de la velocidad de una milla por hora, la <strong>media</strong> de la distancia de frenado aumenta en <span class="math notranslate nohighlight">\(\beta_1\)</span>. Es importante especificar que estamos hablando de la media. Recordemos que <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 x\)</span> es la media de <span class="math notranslate nohighlight">\(Y\)</span>, en este caso la distancia de frenado, para un valor concreto de <span class="math notranslate nohighlight">\(x\)</span>. (En este caso la velocidad.) Así que <span class="math notranslate nohighlight">\(\beta_1\)</span> nos dice cómo se ve afectada la media de <span class="math notranslate nohighlight">\(Y\)</span> por un cambio en <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Del mismo modo, la <em>estimación</em> <span class="math notranslate nohighlight">\(\hat{\beta}_1 = 3.93\)</span> nos dice que para un aumento de la velocidad de una milla por hora, la <strong>estimación</strong> <em>media</em> de la distancia de frenado aumenta en <span class="math notranslate nohighlight">\(3.93\)</span> pies. Aquí debemos asegurarnos de especificar que estamos hablando de una cantidad estimada. Recordemos que <span class="math notranslate nohighlight">\(\hat{y}\)</span> es la media estimada de <span class="math notranslate nohighlight">\(Y\)</span>, por lo que <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> nos dice cómo se ve afectada la media estimada de <span class="math notranslate nohighlight">\(Y\)</span> por <span class="math notranslate nohighlight">\(\hat{beta}_1\)</span>.</p>
+<p>El <em>parámetro de intercepción</em> <span class="math notranslate nohighlight">\(\beta_0\)</span> nos dice la distancia <strong>media</strong> de parada para un coche que viaja a cero millas por hora. (La <em>estimación</em> <span class="math notranslate nohighlight">\(\hat{\beta}_0 =-17.58\)</span> nos dice que la <strong>estimación</strong> de la distancia media de parada para un coche que viaja a cero millas por hora es <span class="math notranslate nohighlight">\(-17.58\)</span> pies. Entonces, cuando frenas un coche que no se mueve, ¿se mueve hacia atrás? Esto no parece correcto. (La extrapolación, que veremos más adelante, es el problema aquí).</p>
+<section id="hacer-predicciones">
+<h2>Hacer predicciones<a class="headerlink" href="#hacer-predicciones" title="Permalink to this heading">#</a></h2>
+<p>Ahora podemos escribir la recta <strong>ajustada</strong> o estimada,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x.
+\]</div>
+<p>En este caso,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = -17.58 + 3.93 \times x %
+\]</div>
+<p>Ahora podemos utilizar esta línea para hacer predicciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check values</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">8</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">21</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">beta_0_hat</span> <span class="o">+</span> <span class="n">beta_1_hat</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13.880175182481747
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check speed range</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">21</span> <span class="ow">and</span> <span class="mi">21</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">beta_0_hat</span> <span class="o">+</span> <span class="n">beta_1_hat</span> <span class="o">*</span> <span class="mi">21</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>65.0014890510949
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por último, podemos hacer una predicción de la distancia de frenado de un coche que circula a 80 km/h. Esto se considera
+<a href="https://xkcd.com/605/"
+target="_blank"><strong>extrapolación</strong></a> ya que 50 no es un valor observado de <span class="math notranslate nohighlight">\(x\)</span> y está fuera del rango de datos. Deberíamos confiar menos en predicciones de este tipo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check speed range</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">50</span> <span class="ow">and</span> <span class="mi">50</span> <span class="o">&lt;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = -17.58 + 3.93 \times 50 % = 179.04
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prediction for speed 50</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">beta_0_hat</span> <span class="o">+</span> <span class="n">beta_1_hat</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>179.04134306569344
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hoy en día, los coches circulan a 80 km/h con bastante facilidad, ¡pero no en los años veinte!</p>
+<p>Este es también un problema que vimos al interpretar <span class="math notranslate nohighlight">\(\hat{\beta}_0 = -17.58\)</span>, que equivale a hacer una predicción en <span class="math notranslate nohighlight">\(x = 0\)</span>. No debemos confiar en la relación lineal estimada fuera del rango de datos que hemos observado.</p>
+</section>
+<section id="residuales">
+<h2>Residuales<a class="headerlink" href="#residuales" title="Permalink to this heading">#</a></h2>
+<p>Si pensamos en nuestro modelo como “Respuesta = Predicción + Error”, entonces podemos
+escribirlo como</p>
+<div class="math notranslate nohighlight">
+\[
+y = \hat{y} + e.
+\]</div>
+<p>Definimos entonces un <strong>residual</strong> como el valor observado menos el
+valor previsto.</p>
+<div class="math notranslate nohighlight">
+\[
+e_i = y_i - \hat{y}_i
+\]</div>
+<p>Calculemos el residuo de la predicción que hicimos para un coche que viaja a 8 millas por hora. En primer lugar, necesitamos obtener el valor observado de <span class="math notranslate nohighlight">\(y\)</span> para este valor de <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Para encontrar índices basados en una condición:</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Int64Index([4], dtype=&#39;int64&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Para obtener una fila específica por índice:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>speed     8
+dist     16
+Name: 4, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Para obtener filas basadas en una condición:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">8</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   speed  dist
+4      8    16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="c1"># Estableciendo la regresión</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Añade una constante (intercepto) al modelo</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="n">beta_0_hat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;const&#39;</span><span class="p">]</span>
+<span class="n">beta_1_hat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación, podemos calcular el residuo.</p>
+<div class="math notranslate nohighlight">
+\[
+e = 16 - 13.88 = 2.12
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">16</span><span class="o">-</span> <span class="n">beta_0_hat</span> <span class="o">-</span><span class="n">beta_1_hat</span><span class="o">*</span><span class="mi">8</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.119824817518257
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estimacion-de-la-varianza">
+<h2>Estimación de la varianza<a class="headerlink" href="#estimacion-de-la-varianza" title="Permalink to this heading">#</a></h2>
+<p>Ahora vamos a utilizar los residuos de cada uno de los puntos para crear una estimación
+de la varianza, <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<p>Recordemos que,</p>
+<div class="math notranslate nohighlight">
+\[
+\text{E}[Y_i \mid X_i = x_i] = \beta_0 + \beta_1 x_i.
+\]</div>
+<p>Entonces,</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y}_i = \hat{\beta}_0 + \hat{\beta}_1 x_i
+\]</div>
+<p>es una estimación natural de la media de <span class="math notranslate nohighlight">\(Y_i\)</span> para un valor dado de <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>Además, recordemos que cuando especificamos el modelo, teníamos tres parámetros desconocidos: <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span> y <span class="math notranslate nohighlight">\(\sigma^2\)</span>. El método de los mínimos cuadrados nos dio estimaciones para <span class="math notranslate nohighlight">\(\beta_0\)</span> y <span class="math notranslate nohighlight">\(\beta_1\)</span>, sin embargo, todavía tenemos que ver una estimación para <span class="math notranslate nohighlight">\(\sigma^2\)</span>. Ahora definiremos <span class="math notranslate nohighlight">\(s_e^2\)</span> que será una estimación para <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_e^2 &amp;= \frac{1}{n - 2} \sum_{i = 1}^{n}(y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i))^2 \\
+      &amp;= \frac{1}{n - 2} \sum_{i = 1}^{n}(y_i - \hat{y}_i)^2 \\
+      &amp;= \frac{1}{n - 2} \sum_{i = 1}^{n} e_i^2
+\end{aligned}
+\end{split}\]</div>
+<p>Probablemente parezca una estimación natural, aparte del uso de <span class="math notranslate nohighlight">\(n - 2\)</span>. En realidad, debería parecerse bastante a algo que hemos visto antes.</p>
+<div class="math notranslate nohighlight">
+\[
+s^2 = \frac{1}{n - 1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+\]</div>
+<p>Aquí, <span class="math notranslate nohighlight">\(s^2\)</span> es la estimación de <span class="math notranslate nohighlight">\(\sigma^2\)</span> cuando tenemos una única variable aleatoria <span class="math notranslate nohighlight">\(X\)</span>. En este caso <span class="math notranslate nohighlight">\(\bar{x}\)</span> es una estimación de <span class="math notranslate nohighlight">\(\mu\)</span> que se supone que es la misma para cada <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Ahora, en el caso de regresión, con <span class="math notranslate nohighlight">\(s_e^2\)</span> cada <span class="math notranslate nohighlight">\(y\)</span> tiene una media diferente debido a la relación con <span class="math notranslate nohighlight">\(x\)</span>. Así, para cada <span class="math notranslate nohighlight">\(y_i\)</span>, utilizamos una estimación diferente de la media, es decir <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="n">s2_e</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">s2_e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>236.53168856447687
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al igual que con la medida univariante de la varianza, este valor de <code class="docutils literal notranslate"><span class="pre">r</span> <span class="pre">round(s2_e,</span> <span class="pre">2)</span></code> no tiene una interpretación práctica en términos de distancia de frenado. Sin embargo, si se toma la raíz cuadrada, se calcula la desviación estándar de los residuos, también conocida como <em>error estándar residual</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s2_e</span><span class="p">)</span>
+<span class="n">s_e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.379586748819907
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto nos dice que nuestras estimaciones de la distancia media de frenado están “típicamente” desviadas por 15.37 pies.</p>
+</section>
+</section>
+<section id="descomposicion-de-la-variacion">
+<h1>Descomposición de la variación<a class="headerlink" href="#descomposicion-de-la-variacion" title="Permalink to this heading">#</a></h1>
+<p>Podemos reexpresar <span class="math notranslate nohighlight">\(y_i - \bar{y}\)</span>, que mide la desviación de una observación respecto a la media muestral, de la siguiente manera,</p>
+<div class="math notranslate nohighlight">
+\[
+y_i - \bar{y} = (y_i - \hat{y}_i) + (\hat{y}_i - \bar{y}).
+\]</div>
+<p>Este es el truco matemático común de “sumar cero”. En este caso sumamos y restamos <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>.</p>
+<p>Aquí, <span class="math notranslate nohighlight">\(y_i - \hat{y}_i\)</span> mide la desviación de una observación de la línea de regresión ajustada y <span class="math notranslate nohighlight">\(\hat{y}_i - \bar{y}\)</span> mide la desviación de la línea de regresión ajustada de la media muestral.</p>
+<p>Si elevamos al cuadrado y sumamos ambos lados de la ecuación anterior, podemos obtener lo siguiente,</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^{n}(y_i - \bar{y})^2 = \sum_{i=1}^{n}(y_i - \hat{y}_i)^2 + \sum_{i=1}^{n}(\hat{y}_i - \bar{y})^2.
+\]</div>
+<p>Esto debería ser algo alarmante o asombroso. ¿Cómo puede ser cierto? Por ahora dejaremos esta pregunta sin respuesta. (Piensa en ello, y tal vez intenta demostrarlo.) Ahora definiremos tres de las cantidades que se ven en esta ecuación.</p>
+<section id="suma-de-cuadrados-total">
+<h2>Suma de cuadrados Total<a class="headerlink" href="#suma-de-cuadrados-total" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\text{SST} = \sum_{i=1}^{n}(y_i - \bar{y})^2
+\]</div>
+<p>La cantidad “Suma de cuadrados total”, o <span class="math notranslate nohighlight">\(\text{SST}\)</span>, representa la <strong>variación total</strong> de los valores <span class="math notranslate nohighlight">\(y\)</span> observados. Esto debería ser una expresión de aspecto familiar. Tenga en cuenta que,</p>
+<div class="math notranslate nohighlight">
+\[
+s ^ 2 = \frac{1}{n - 1}\sum_{i=1}^{n}(y_i - \bar{y})^2 = \frac{1}{n - 1} \text{SST}.
+\]</div>
+</section>
+<section id="suma-de-los-cuadrados-de-la-regresion">
+<h2>Suma de los cuadrados de la regresión<a class="headerlink" href="#suma-de-los-cuadrados-de-la-regresion" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\text{SSReg} = \sum_{i=1}^{n}(\hat{y}_i - \bar{y})^2
+\]</div>
+<p>La cantidad “Suma de cuadrados de regresión”, <span class="math notranslate nohighlight">\(\text{SSReg}\)</span>, representa la <strong>variación explicada</strong> de los valores <span class="math notranslate nohighlight">\(y\)</span> observados.</p>
+</section>
+<section id="suma-de-los-cuadrados-del-error">
+<h2>Suma de los cuadrados del error<a class="headerlink" href="#suma-de-los-cuadrados-del-error" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\text{SSE} = \text{RSS} = \sum_{i=1}^{n}(y_i - \hat{y}_i)^2
+\]</div>
+<p>La cantidad “Suma de los cuadrados del error”, <span class="math notranslate nohighlight">\(\text{SSE}\)</span>,representa la <strong>variación no explicada</strong> de los valores <span class="math notranslate nohighlight">\(y\)</span> observados. A menudo verá <span class="math notranslate nohighlight">\(\text{SSE}\)</span>  escrito como  <span class="math notranslate nohighlight">\(\text{RSS}\)</span>, o “Suma Residual de Cuadrados”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SST</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">SSReg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">y_hat</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">SSE</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tenga en cuenta que,</p>
+<div class="math notranslate nohighlight">
+\[
+s_e^2 = \frac{\text{SSE}}{n - 2}.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Imprimir los resultados</span>
+<span class="nb">print</span><span class="p">({</span><span class="s1">&#39;SST&#39;</span><span class="p">:</span> <span class="n">SST</span><span class="p">,</span> <span class="s1">&#39;SSReg&#39;</span><span class="p">:</span> <span class="n">SSReg</span><span class="p">,</span> <span class="s1">&#39;SSE&#39;</span><span class="p">:</span> <span class="n">SSE</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SSE</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;SST&#39;: 32538.980000000003, &#39;SSReg&#39;: 21185.45894890511, &#39;SSE&#39;: 11353.52105109489}
+236.53168856447687
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos verificar que esto coincide con nuestro cálculo anterior de <span class="math notranslate nohighlight">\(s_e^2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">s2_e</span> <span class="o">==</span> <span class="n">SSE</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Estas tres medidas tampoco tienen una interpretación práctica importante individualmente. Pero juntos están a punto de revelar una nueva estadística que ayudará a medir la solidez de un modelo SLR.</p>
+</section>
+<section id="coeficiente-de-determinacion">
+<h2>Coeficiente de determinación<a class="headerlink" href="#coeficiente-de-determinacion" title="Permalink to this heading">#</a></h2>
+<p>El <strong>coeficiente de determinación</strong>, <span class="math notranslate nohighlight">\(R^2\)</span>, se define como</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+R^2 &amp;= \frac{\text{SSReg}}{\text{SST}} = \frac{\sum_{i=1}^{n}(\hat{y}_i - \bar{y})^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2} \\[2.5ex]
+    &amp;= \frac{\text{SST} - \text{SSE}}{\text{SST}} = 1 - \frac{\text{SSE}}{\text{SST}} \\[2.5ex]
+    &amp;= 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2} =
+1 - \frac{\sum_{i = 1}^{n}e_i^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
+\end{aligned}
+\end{split}\]</div>
+<p>El coeficiente de determinación se interpreta como la proporción de la variación observada en <span class="math notranslate nohighlight">\(y\)</span> que puede explicar el modelo de regresión lineal simple.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R2</span> <span class="o">=</span> <span class="n">SSReg</span> <span class="o">/</span> <span class="n">SST</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6510793807582508
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para el ejemplo de  los carros  calculamos <span class="math notranslate nohighlight">\(R^2 = 0.65\)</span>. Entonces diremos que <span class="math notranslate nohighlight">\(65\%\)</span> de la variabilidad observada en la distancia de frenado se explica por la relación lineal con la velocidad.</p>
+<p>Los siguientes gráficos demuestran visualmente las tres “sumas de cuadrados” para un conjunto de datos simulado que tiene <span class="math notranslate nohighlight">\(R^2 = 0.92\)</span>, que es un valor algo alto. Observe en el gráfico final que las flechas naranjas representan una proporción mayor del total de flechas.</p>
+<p><img alt="" src="Images/SST.png" /></p>
+<p>Los siguientes gráficos demuestran nuevamente visualmente las tres “sumas de cuadrados”, esta vez para un conjunto de datos simulado que tiene <span class="math notranslate nohighlight">\(R^2 = 0.19\)</span>. Observe en el gráfico final que ahora las flechas azules representan una proporción mayor del total de flechas.</p>
+<p><img alt="" src="Images/SST2.png" /></p>
+<p><img alt="" src="Images/SST2.png" /></p>
+</section>
+</section>
+<section id="hacer-regresiones-en-python">
+<h1>Hacer regresiones en Python<a class="headerlink" href="#hacer-regresiones-en-python" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="c1"># estimate the model and assign the result to linear_model</span>
+<span class="n">linear_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="o">=</span><span class="s1">&#39;dist ~ speed&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># print the standard output of the estimated OLS RegressionResults object to the console</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   dist   R-squared:                       0.651
+Model:                            OLS   Adj. R-squared:                  0.644
+Method:                 Least Squares   F-statistic:                     89.57
+Date:                Fri, 08 Sep 2023   Prob (F-statistic):           1.49e-12
+Time:                        17:53:45   Log-Likelihood:                -206.58
+No. Observations:                  50   AIC:                             417.2
+Df Residuals:                      48   BIC:                             421.0
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept    -17.5791      6.758     -2.601      0.012     -31.168      -3.990
+speed          3.9324      0.416      9.464      0.000       3.097       4.768
+==============================================================================
+Omnibus:                        8.975   Durbin-Watson:                   1.676
+Prob(Omnibus):                  0.011   Jarque-Bera (JB):                8.189
+Skew:                           0.885   Prob(JB):                       0.0167
+Kurtosis:                       3.893   Cond. No.                         50.7
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># get the coefficient estimates</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">params</span>
+
+<span class="c1"># get the standard errors</span>
+<span class="n">standard_errors</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">bse</span>
+
+<span class="c1"># get the t-values</span>
+<span class="n">t_values</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">tvalues</span>
+
+<span class="c1"># get the p-values</span>
+<span class="n">p_values</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">pvalues</span>
+
+<span class="c1"># organize the results into a data frame</span>
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Coefficient&#39;</span><span class="p">:</span> <span class="n">coefficients</span><span class="p">,</span>
+    <span class="s1">&#39;Standard Error&#39;</span><span class="p">:</span> <span class="n">standard_errors</span><span class="p">,</span>
+    <span class="s1">&#39;t Value&#39;</span><span class="p">:</span> <span class="n">t_values</span><span class="p">,</span>
+    <span class="s1">&#39;p Value&#39;</span><span class="p">:</span> <span class="n">p_values</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">results_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           Coefficient  Standard Error   t Value       p Value
+Intercept   -17.579095        6.758440 -2.601058  1.231882e-02
+speed         3.932409        0.415513  9.463990  1.489836e-12
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the predicted values</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="c1"># plot the actual and predicted values from regression</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/221b35ddf7a7c07ed4b29404c6d8def38c600ed948976c1edbf1ab41f3bc8761.png" src="../_images/221b35ddf7a7c07ed4b29404c6d8def38c600ed948976c1edbf1ab41f3bc8761.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the residuals</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">resid</span>
+
+
+<span class="c1"># plot the residuals</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;speed&#39;</span><span class="p">],</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1">#put the average residual line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.lines.Line2D at 0x278a40f1a30&gt;
+</pre></div>
+</div>
+<img alt="../_images/e2e9c781b519cfb2f23eb62a169ceedcab4415c717088064df4cc27a09552d7c.png" src="../_images/e2e9c781b519cfb2f23eb62a169ceedcab4415c717088064df4cc27a09552d7c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the R-squared value</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">rsquared</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6510793807582509
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the adjusted R-squared value</span>
+<span class="n">adj_R2</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">rsquared_adj</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">adj_R2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6438102011907145
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the standard error of the regression</span>
+<span class="n">s_e</span> <span class="o">=</span> <span class="n">linear_model</span><span class="o">.</span><span class="n">mse_resid</span> <span class="o">**</span> <span class="mf">0.5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s_e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.379586748819907
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># predict the stopping distance for a speed of several values</span>
+<span class="n">speeds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">speed</span> <span class="ow">in</span> <span class="n">speeds</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">linear_model</span><span class="o">.</span><span class="n">predict</span><span class="p">({</span><span class="s1">&#39;speed&#39;</span><span class="p">:</span> <span class="n">speed</span><span class="p">}))</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    13.880175
+dtype: float64
+0    65.001489
+dtype: float64
+0    179.041343
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consulta el link <a class="reference external" href="https://www.statsmodels.org/stable/index.html">https://www.statsmodels.org/stable/index.html</a> para ver la documentación de la librería <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> de Python.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_4"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="4-1%20Correlaciones.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 4-1: Correlaciones</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="4-3-SLR_supuestos.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lectura 4-3: Supuestos de la regresión lineal simple</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 4-2: Regresión lineal simple</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelando">Modelando</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-de-regresion-lineal-simple">Modelo de regresión lineal simple</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-de-minimos-cuadrados">Enfoque de mínimos cuadrados</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hacer-predicciones">Hacer predicciones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residuales">Residuales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-la-varianza">Estimación de la varianza</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descomposicion-de-la-variacion">Descomposición de la variación</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suma-de-cuadrados-total">Suma de cuadrados Total</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suma-de-los-cuadrados-de-la-regresion">Suma de los cuadrados de la regresión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#suma-de-los-cuadrados-del-error">Suma de los cuadrados del error</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coeficiente-de-determinacion">Coeficiente de determinación</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hacer-regresiones-en-python">Hacer regresiones en Python</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

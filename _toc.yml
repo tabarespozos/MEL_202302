@@ -22,3 +22,14 @@ parts:
   - file: Week_3/3-1-Inference
   - file: Week_3/3-2-Hypothesis
  
+- caption: Semana 4
+  chapters:
+  - file: Week_4/4-0-Schedule_week_4
+  - file: Week_4/4-1 Correlaciones
+  - file: Week_4/4-2-Simple_linear_regression
+  - file: Week_4/4-3-SLR_supuestos
+
+- caption: Semana 5
+  chapters:
+  - file: Week_5/5-0-Schedule_week_5
+  - file: Week_5/5-2-Hypothesis_Confidence
