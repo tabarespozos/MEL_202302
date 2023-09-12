@@ -1,0 +1,875 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 3-3: Pruebas de Hipotesis 2. &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_3/3-3-Hypothesis_2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="../Week_4/4-0-Schedule_week_4.html" />
+    <link rel="prev" title="Lectura 3-2: Pruebas de Hipotesis" href="3-2-Hypothesis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 3-3: Pruebas de Hipotesis 2.</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-1%20Correlaciones.html">Lectura 4-1: Correlaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-2-Simple_linear_regression.html">Lectura 4-2: Regresión lineal simple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-3-SLR_supuestos.html">Lectura 4-3: Supuestos de la regresión lineal simple</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_5/5-2-Hypothesis_Confidence.html">Lectura 5-1: Inferencia en RLS</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_3/3-3-Hypothesis_2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_3/3-3-Hypothesis_2.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_3/3-3-Hypothesis_2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 3-3: Pruebas de Hipotesis 2.</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 3-3: Pruebas de Hipotesis 2.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-para-una-proporcion">Contraste para una proporción</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-para-la-diferencia-de-proporciones">Contraste para la diferencia de proporciones</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-para-el-cociente-de-varianzas">Contraste para el cociente de varianzas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-valor-p-es-solo-una-prueba-del-tamano-de-la-muestra">Un valor p es sólo una prueba del tamaño de la muestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busca-y-encontraras">busca y encontrarás</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-3-3-pruebas-de-hipotesis-2">
+<h1>Lectura 3-3: Pruebas de Hipotesis 2.<a class="headerlink" href="#lectura-3-3-pruebas-de-hipotesis-2" title="Permalink to this heading">#</a></h1>
+<section id="contraste-para-una-proporcion">
+<h2>Contraste para una proporción<a class="headerlink" href="#contraste-para-una-proporcion" title="Permalink to this heading">#</a></h2>
+<p>Ahora consideramos la hipótesis nula de que la proporción<br />
+<span class="math notranslate nohighlight">\(p_1\)</span>, que mide la proporción de una característica<br />
+<span class="math notranslate nohighlight">\(A\)</span>  en una población, es igual a  <span class="math notranslate nohighlight">\(p_2\)</span>, que es la proporción de la misma característia en otra población.</p>
+<div class="math notranslate nohighlight">
+\[H_0: p_{1}-p_{2}=0 \]</div>
+<p>El estadístico para este caso se escribe, a partir de las proporciones muestrales <span class="math notranslate nohighlight">\(\hat{p}_1\)</span>  y <span class="math notranslate nohighlight">\(\hat{p}_2\)</span>  en dos muestras, como:</p>
+<div class="math notranslate nohighlight">
+\[ T=\frac{\hat{p}-p_{0}}{\sqrt{\frac{p_{0}\cdot(1-p_{0})}{n}}}\ \ \approx \ \ N(0,1). \]</div>
+<p><strong>Ejemplo</strong></p>
+<p>El portavoz del gobierno de BestKorea ha dicho que más de la mitad de la población está de acuerdo con la aplicación del artículo 155 en una república autónoma rebelde. Una televisión independiente decide realizar una encuesta. De 288 personas encuestadas, 155 son favorables a la aplicación del artículo 155. ¿Ponen en duda estos resultados la publicidad del gobierno?</p>
+<p><strong>Solución</strong></p>
+<p>Llamamos  p= proporción de personas a favor del 155.</p>
+<p>El gobierno afirma que <span class="math notranslate nohighlight">\(p&gt;0.5\)</span>, luego, al no llevar el signo =, esta opción irá en la hipótesis alternativa. Así, el test será:</p>
+<div class="math notranslate nohighlight">
+\[H_0: p\leq 0.5\]</div>
+<p>frente a</p>
+<div class="math notranslate nohighlight">
+\[H_1:p&gt;0.5\]</div>
+<p>La forma de tomar la decisión de rechazar la hipótesis nula o no es ver si hay mucha diferencia entre lo que dice la muestra y lo que dice la hipótesis nula.</p>
+<p>La hipótesis nula dice que la proporción teórica<br />
+<span class="math notranslate nohighlight">\(p_0\)</span>  es  <span class="math notranslate nohighlight">\(0.5\)</span>. La muestra nos da una proporción muestral<br />
+<span class="math notranslate nohighlight">\(\hat{p}=155/288=0.538\)</span>. Obviamente, este valor difiere de<br />
+0.5, pero ¿mucho, poco, regular?</p>
+<p>La forma de “medir” la diferencia es mediante el estadístico<br />
+T  que, en este caso, es</p>
+<div class="math notranslate nohighlight">
+\[ T=\frac{\hat{p}-p_{0}}{\sqrt{\frac{p_{0}\cdot (1-p_{0})}{n}}}=\frac{0.538-0.5}{\sqrt{\frac{0.5\cdot (1-0.5)}{n}}}=\frac{0.038}{0.029}=1.28\]</div>
+<p>El estadístico que se utiliza sigue una distribución aproximadamente normal, quiere esto decir que el<br />
+p-valor no será tan exacto, sino que hay una cierta diferencia, pero nada para asustar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># Parámetros</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+
+<span class="n">t_critico</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="n">t_prueba</span> <span class="o">=</span> <span class="mf">1.28</span>  <span class="c1"># Aquí pones el valor de tu estadístico de prueba</span>
+
+<span class="c1"># Datos para la curva Normal</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Gráfico</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Distribución normal)&quot;</span><span class="p">)</span>
+
+<span class="c1"># Rellenar región crítica</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">t_critico</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Región Crítica&quot;</span><span class="p">)</span>
+
+<span class="c1"># Estadístico crítico y de prueba</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">t_critico</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;t Crítico = </span><span class="si">{</span><span class="n">t_critico</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">t_prueba</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;t Prueba = </span><span class="si">{</span><span class="n">t_prueba</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Título y leyenda</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prueba unilateral superior con α = </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Densidad de Probabilidad&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4bb931e276b3601e36dc3c7a496da41625e2936c96fa2eb61d8846303af5c24c.png" src="../_images/4bb931e276b3601e36dc3c7a496da41625e2936c96fa2eb61d8846303af5c24c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.proportion</span> <span class="kn">import</span> <span class="n">proportions_ztest</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">155</span>  <span class="c1"># Número de éxitos (caras)</span>
+<span class="n">nobs</span> <span class="o">=</span> <span class="mi">288</span>  <span class="c1"># Número total de intentos</span>
+<span class="n">value</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Proporción nula</span>
+
+<span class="n">stat</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">proportions_ztest</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span> <span class="s1">&#39;larger&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;z-statistic: </span><span class="si">{</span><span class="n">stat</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value: </span><span class="si">{</span><span class="n">pval</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">pval</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rechazamos la hipótesis nula.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No rechazamos la hipótesis nula.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z-statistic: 1.30
+p-value: 0.0968
+No rechazamos la hipótesis nula.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="contraste-para-la-diferencia-de-proporciones">
+<h1>Contraste para la diferencia de proporciones<a class="headerlink" href="#contraste-para-la-diferencia-de-proporciones" title="Permalink to this heading">#</a></h1>
+<p>Ahora consideramos la hipótesis nula de que la proporción  <span class="math notranslate nohighlight">\(p_1\)</span>, que mide la proporción de una característica <span class="math notranslate nohighlight">\(A\)</span> en una población, es igual a<br />
+<span class="math notranslate nohighlight">\(p_2\)</span> , que es la proporción de la misma característia en otra población.</p>
+<div class="math notranslate nohighlight">
+\[ H_{0}:p_{1}=p_{2}\]</div>
+<p>El estadístico para este caso se escribe, a partir de las proporciones muestrales  <span class="math notranslate nohighlight">\(\hat{p}_1\)</span> y <span class="math notranslate nohighlight">\(\hat{p}_2\)</span>  en dos muestras, como:</p>
+<div class="math notranslate nohighlight">
+\[ T=\frac{(\hat{p_{1}}-\hat{p_{2}})-(p_{1}-p_{2})}{\sqrt{\frac{\hat{p_{1}}(1-
+\hat{p_{1}})}{n_{1}}+\frac{\hat{p_{2}}(1-\hat{p_{2}})}{n_{2}}}}\approx \ \ N(0,1).\]</div>
+<p><strong>Ejemplo</strong></p>
+<p>Para comprobar si interceder ante el altísimo (rezar) por una persona enferma influye o no en una más rápida curación, se llevó a cabo el siguiente experimento: los pacientes que iban a ser operados de cirugía de injerto de derivación arterial coronaria (CABG) serían informados de que habría una serie de voluntarios rezando por una pronta recuperación, de la siguiente forma:</p>
+<p>1201 pacientes fueron informados de que podrían recibir o no oraciones intercediendo por ellos. Estos pacientes se dividieron en  2  grupos A y B de 604  y 597 personas, que recibieron ayuda en forma de rezos (grupo A) y no la recibieron (grupo B) (Es decir, cada persona de cada grupo no sabía si recibía esa ayuda o no).</p>
+<p>Un tercer grupo de  601  pacientes fueron informados de que recibirían oraciones intercediendo por ellos, y todos recibieron ayuda de esa manera. Las oraciones duraron 14
+días, empezando a la noche antes de la intervención.</p>
+<p>Al cabo de  30  días de la intervención se controló la presencia de complicaciones. Los resultados finalmente fueron</p>
+<ul class="simple">
+<li><p>Complicaciones en el grupo A =  315.</p></li>
+<li><p>Complicaciones en el grupo B =  304.</p></li>
+</ul>
+<p>Complicaciones en el grupo C =<br />
+352.</p>
+<p>¿Qué conclusiones podemos sacar de estos resultados?</p>
+<p>Este estudio puede leerse con detalle en: “Study of the Therapeutic Effects of Intercessory Prayer (STEP) in cardiac bypass patients: A multicenter randomized trial of uncertainty and certainty of receiving intercessory prayer”. American Heart Journal, 2006 151(4):934-42.</p>
+<p>Empecemos comparando los que recibieron ayuda con los que no (grupos A y B, respectivamente) y ellos no lo sabían. Las proporciones muestrales son  <span class="math notranslate nohighlight">\(\hat{p}_1=315/604=0.52\)</span>,  <span class="math notranslate nohighlight">\(\hat{p}_2=304/597=0.50\)</span>. El contraste que se plantea es</p>
+<div class="math notranslate nohighlight">
+\[H_0: p_1=p_2\]</div>
+<p>frente a<br />
+$<span class="math notranslate nohighlight">\(H_1:p_1\neq p_2\)</span>$</p>
+<p>Para realizar el contraste en python usamos:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.proportion</span> <span class="kn">import</span> <span class="n">proportions_ztest</span>
+
+<span class="c1"># Datos</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">315</span><span class="p">,</span> <span class="mi">304</span><span class="p">])</span>
+<span class="n">nobs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">604</span><span class="p">,</span> <span class="mi">597</span><span class="p">])</span>
+
+<span class="c1"># Realizar el test de proporciones</span>
+<span class="n">z_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">proportions_ztest</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;z-statistic: </span><span class="si">{</span><span class="n">z_stat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z-statistic: 0.426819445261816
+p-value: 0.669510842137018
+</pre></div>
+</div>
+</div>
+</div>
+<p>Comprobamos que el  p -valor para este contraste es 0.426819445261816, lo cual significa que no podemos rechazar la hipótesis nula. Esto quiere decir que rezar (o no rezar) por una tercera persona es indiferente (si esa tercera persona no lo sabe).</p>
+<p>Ahora comparemos los grupos A y B (no saber si rezan por ti) en conjunto, con el C (sabes que rezan por ti).</p>
+<p>Las proporciones muestrales son:</p>
+<div class="math notranslate nohighlight">
+\[\hat{p}_1=\dfrac{315+304}{604+597}=\dfrac{619}{1201}=0.51 \ y \ \hat{p}_2=\dfrac{352}{601}=0.58.\]</div>
+<p>De nuevo, planteamos el contraste</p>
+<div class="math notranslate nohighlight">
+\[H_0: p_1=p_2\]</div>
+<p>frente a<br />
+$<span class="math notranslate nohighlight">\(H_1:p_1\neq p_2\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.proportion</span> <span class="kn">import</span> <span class="n">proportions_ztest</span>
+
+<span class="c1"># Datos</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">619</span><span class="p">,</span> <span class="mi">352</span><span class="p">])</span>
+<span class="n">nobs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1201</span><span class="p">,</span> <span class="mi">601</span><span class="p">])</span>
+
+<span class="c1"># Realizar el test de proporciones</span>
+<span class="n">z_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">proportions_ztest</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">nobs</span><span class="p">,</span> <span class="n">alternative</span><span class="o">=</span><span class="s1">&#39;two-sided&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;z-statistic: </span><span class="si">{</span><span class="n">z_stat</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;p-value: </span><span class="si">{</span><span class="n">p_value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>z-statistic: -2.8219484176705523
+p-value: 0.0047732854071703265
+</pre></div>
+</div>
+</div>
+</div>
+<p>Se obtiene que el  p-valor es prácticamente cero, es decir, que se puede rechazar la hipótesis de que las proporciones no son iguales. Con lo que convendríamos que es mejor que sepas que rezan por tí, que no sepas si lo hacen o no.</p>
+<section id="contraste-para-el-cociente-de-varianzas">
+<h2>Contraste para el cociente de varianzas<a class="headerlink" href="#contraste-para-el-cociente-de-varianzas" title="Permalink to this heading">#</a></h2>
+<p>Si se quiere contrastar que la proporción de las varianzas de las  2  variables <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y\)</span> es igual a un número concreto (una constante):</p>
+<div class="math notranslate nohighlight">
+\[ H_{0}:\frac{\sigma _{2}^{2}}{\sigma_{1}^{2}}=cte,\]</div>
+<p>se utiliza el siguiente estimador:</p>
+<div class="math notranslate nohighlight">
+\[ T=\frac{\hat{S}_{n-1}^{2}\sigma _{2}^{2}}{\hat{S}_{m-1}^{2}\sigma _{1}^{2}}\
+\ \in \ \ F_{n-1,m-1}.\]</div>
+<p>Fijémonos que, si lo que interesa es contrastar si las 2 variables tienen la misma varianza, entonces esa constante es igual a 1, de manera que el estadístico será:</p>
+<div class="math notranslate nohighlight">
+\[ T=\frac{\hat{S}_{n-1}^{2} }{\hat{S}_{m-1}^{2} }\
+\ \in \ \ F_{n-1,m-1},\]</div>
+<p>esto es, hacer el cociente entre las cuasi-varianzas muestrales. Ese estadístico (si la hipótesis nula de que las varianzas teóricas son iguales es cierta) sigue una distribución <span class="math notranslate nohighlight">\(F\)</span> de Fisher-Snedecor de  <span class="math notranslate nohighlight">\(n−1\)</span>  y <span class="math notranslate nohighlight">\(m−1\)</span> grados de libertad.</p>
+<p><strong>Ejemplo</strong></p>
+<p>Con los siguientes datos contrastar si las varianzas de las variables originales pueden considerarse iguales o no.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x=(104,88,100,98,102,92,96,100,96,96)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y=(100,102,96,106,110,110,120,112,112,90)\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">f</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">104</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">96</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">90</span><span class="p">]</span>
+
+<span class="c1"># Compute the variance for both samples</span>
+<span class="n">var_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">var_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Calculate the F statistic</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">var_x</span> <span class="o">/</span> <span class="n">var_y</span>
+
+<span class="c1"># Degrees of freedom</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># Calculate the two-tailed p-value</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">f</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;F = </span><span class="si">{</span><span class="n">F</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">, p-value = </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F = 0.2849, p-value = 0.0754
+</pre></div>
+</div>
+</div>
+</div>
+<p>En este caso, el  p-valor del test es  0.075. Atendiendo al valor estándar 0.05 de decisión, no podriamos decir que las varianzas son diferentes.</p>
+</section>
+<section id="conclusiones">
+<h2>Conclusiones<a class="headerlink" href="#conclusiones" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="un-valor-p-es-solo-una-prueba-del-tamano-de-la-muestra">
+<h2>Un valor p es sólo una prueba del tamaño de la muestra<a class="headerlink" href="#un-valor-p-es-solo-una-prueba-del-tamano-de-la-muestra" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Léelo otra vez: ¡lo digo en serio! Si la hipótesis nula no se cumple (y las hipótesis nulas nunca se cumplen en la vida real), cuanto mayor sea el tamaño de la muestra, más pequeño tenderá a ser el p-valor.</p></li>
+<li><p>Si estás probando si la media es igual a 0 y la verdad es que la media es igual a 0.000000001, y si tienes un tamaño de muestra lo suficientemente grande, entonces OBTENDRÁS UN VALOR P PEQUEÑO.</p></li>
+<li><p><strong>¿Qué importancia tiene esto?</strong> En muchos entornos contemporáneos (pensemos en Internet), el tamaño de las muestras es tan grande que podemos obtener valores p PEQUEÑOS incluso cuando la desviación de la hipótesis nula es insignificante. En otras palabras, podemos tener significación ESTADÍSTICA sin significación PRÁCTICA.</p></li>
+<li><p>A menudo, la gente se centra en ese minúsculo valor p, y el hecho de que el efecto no tiene ninguna relevancia práctica se pierde por completo.</p></li>
+<li><p>Esto también significa que con un tamaño de muestra lo suficientemente grande podemos rechazar básicamente CUALQUIER hipótesis nula (ya que la hipótesis nula nunca se cumple exactamente en la vida real, pero puede estar “lo suficientemente cerca” como para que la violación de la hipótesis nula no sea importante).</p></li>
+<li><p>¿Quieres escribir un artículo diciendo que el consumo de Lucky Charms está correlacionado con el tipo de sangre? Con una muestra lo suficientemente grande, puede obtener un valor p pequeño. (Siempre que haya un mecanismo muy complicado con un tamaño de efecto minúsculo… que probablemente lo haya, ya que la hipótesis nula IRL nunca se cumple).</p></li>
+</ul>
+</section>
+<section id="busca-y-encontraras">
+<h2>busca y encontrarás<a class="headerlink" href="#busca-y-encontraras" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Si observas tus datos durante el tiempo suficiente, encontrarás algo interesante, ¡aunque sólo sea por casualidad!</p></li>
+<li><p>En principio, sabemos que necesitamos realizar una corrección para pruebas múltiples si llevamos a cabo un montón de pruebas.</p></li>
+<li><p>Pero en la práctica, ¿qué ocurre si decidimos qué prueba(s) realizar DESPUÉS de observar los datos? Nuestro valor p será engañosamente pequeño porque hemos echado un vistazo a los datos. Especificar de antemano nuestro plan de análisis nos mantiene honestos… pero en realidad, ¡¡¡es difícil de hacer!!!</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="3-2-Hypothesis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 3-2: Pruebas de Hipotesis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week_4/4-0-Schedule_week_4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 3-3: Pruebas de Hipotesis 2.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-para-una-proporcion">Contraste para una proporción</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-para-la-diferencia-de-proporciones">Contraste para la diferencia de proporciones</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contraste-para-el-cociente-de-varianzas">Contraste para el cociente de varianzas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusiones">Conclusiones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#un-valor-p-es-solo-una-prueba-del-tamano-de-la-muestra">Un valor p es sólo una prueba del tamaño de la muestra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#busca-y-encontraras">busca y encontrarás</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
