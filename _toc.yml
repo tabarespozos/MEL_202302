@@ -34,3 +34,9 @@ parts:
   chapters:
   - file: Week_5/5-0-Schedule_week_5
   - file: Week_5/5-2-Hypothesis_Confidence
+
+- caption: Semana 7
+  chapters:
+  - file: Week_7/7-0-Schedule_week_7
+  - file: Week_7/7-1-Multiple_linear_regresion
+  - file: Week_7/7-2-Categorical_variables

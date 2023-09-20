@@ -1,0 +1,2064 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 7-1: Regresión Lineal Múltiple &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_7/7-1-Multiple_linear_regresion';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lectura 7-2: Predictores categóricos e interacciones" href="7-2-Categorical_variables.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="7-0-Schedule_week_7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-3-Hypothesis_2.html">Lectura 3-3: Pruebas de Hipotesis 2.</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-1%20Correlaciones.html">Lectura 4-1: Correlaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-2-Simple_linear_regression.html">Lectura 4-2: Regresión lineal simple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-3-SLR_supuestos.html">Lectura 4-3: Supuestos de la regresión lineal simple</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_5/5-2-Hypothesis_Confidence.html">Lectura 5-1: Inferencia en RLS</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 7</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 7-1: Regresión Lineal Múltiple</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="7-2-Categorical_variables.html">Lectura 7-2: Predictores categóricos e interacciones</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_7/7-1-Multiple_linear_regresion.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_7/7-1-Multiple_linear_regresion.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_7/7-1-Multiple_linear_regresion.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 7-1: Regresión Lineal Múltiple</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 7-1: Regresión Lineal Múltiple</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significado-lineal">Significado “lineal”</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-matricial-de-la-regresion">Enfoque matricial de la regresión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix">Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.
+$$
+\begin{bmatrix}
+Y_1   \
+Y_2   \
+\vdots\
+Y_n   \
+\end{bmatrix}</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-del-muestreo">Distribución del muestreo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-un-solo-parametro">Pruebas de un solo parámetro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza">Intervalos de confianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-la-respuesta-media">Intervalos de confianza para la respuesta media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-prediccion">Intervalos de predicción</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-de-la-regresion">Importancia de la regresión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-anidados">Modelos anidados</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-7-1-regresion-lineal-multiple">
+<h1>Lectura 7-1: Regresión Lineal Múltiple<a class="headerlink" href="#lectura-7-1-regresion-lineal-multiple" title="Permalink to this heading">#</a></h1>
+<p>En las dos últimas lecturas vimos cómo ajustar un modelo que suponía una relación lineal entre una variable de respuesta y una única variable predictora. En concreto, definimos el modelo de regresión lineal simple,</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 x_i + \epsilon_i \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span>.</p>
+<p>Sin embargo, rara vez se da el caso de que un conjunto de datos tenga una única variable de predicción. Tampoco es frecuente que una variable de respuesta dependa de una única variable. En esta lectura, ampliaremos nuestro modelo lineal actual para permitir que una respuesta dependa de <em>múltiples</em> predictores.</p>
+<section id="significado-lineal">
+<h2>Significado “lineal”<a class="headerlink" href="#significado-lineal" title="Permalink to this heading">#</a></h2>
+<p>El término “lineal” en los modelos de regresión hace referencia al hecho de que los parámetros se incorporan en la ecuación de forma lineal, no a que necesariamente la relación entre cada predictor y la variable respuesta tenga que seguir un patrón lineal.</p>
+<p>La siguiente ecuación muestra un modelo lineal en el que el predictor  <span class="math notranslate nohighlight">\(x_1\)</span> no es lineal respecto a <span class="math notranslate nohighlight">\(y\)</span>:</p>
+<p><img alt="image.png" src="../_images/MLR_1.png" /></p>
+<p>En contraposición, el siguiente no es un modelo lineal:</p>
+<div class="math notranslate nohighlight">
+\[ y = \beta_0 + \beta_1x_1^{\beta_2} + \epsilon\]</div>
+<p>En ocasiones, algunas relaciones no lineales pueden transformarse de forma que se pueden expresar de manera lineal:</p>
+<div class="math notranslate nohighlight">
+\[y = \beta_0x_1^{\beta_1}\epsilon\]</div>
+<div class="math notranslate nohighlight">
+\[ log(y)=log(\beta_0) + \beta_1log(x_1) + log(\epsilon)\]</div>
+<p><strong>A seguir, vamos a visualizar la base de datos que nos servirá de ejemplo para esta lectura.</strong></p>
+<p>Analizaremos de nuevo un conjunto de datos con información sobre coches. Este conjunto de datos, que se puede encontrar en el <a class="reference external" href="https://archive.ics.uci.edu/dataset/9/auto+mpg">Repositorio de Aprendizaje Automático de la UCI</a>, contiene una variable de respuesta mpg que almacena la eficiencia de combustible en ciudad de los coches, así como varias variables predictoras de los atributos de los vehículos. Cargamos los datos y realizamos algunos ajustes básicos antes de pasar al análisis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">statsmodels.sandbox.regression.predstd</span> <span class="kn">import</span> <span class="n">wls_prediction_std</span>
+
+<span class="c1"># Read the data</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data&quot;</span>
+<span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mpg&quot;</span><span class="p">,</span> <span class="s2">&quot;cyl&quot;</span><span class="p">,</span> <span class="s2">&quot;disp&quot;</span><span class="p">,</span> <span class="s2">&quot;hp&quot;</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;acc&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">,</span> <span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="n">autompg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;\s+&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">column_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clean the data</span>
+<span class="n">autompg</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[</span><span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;hp&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;?&#39;</span><span class="p">]</span>
+<span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;hp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;hp&#39;</span><span class="p">])</span>
+<span class="n">autompg</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[</span><span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;plymouth reliant&#39;</span><span class="p">]</span>
+<span class="n">autompg</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;cyl&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; cylinder &quot;</span> <span class="o">+</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">autompg</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[[</span><span class="s2">&quot;mpg&quot;</span><span class="p">,</span> <span class="s2">&quot;cyl&quot;</span><span class="p">,</span> <span class="s2">&quot;disp&quot;</span><span class="p">,</span> <span class="s2">&quot;hp&quot;</span><span class="p">,</span> <span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;acc&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">autompg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cyl</th>
+      <th>disp</th>
+      <th>hp</th>
+      <th>wt</th>
+      <th>acc</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>8 cylinder 70 chevrolet chevelle malibu</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>307.0</td>
+      <td>130.0</td>
+      <td>3504.0</td>
+      <td>12.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>8 cylinder 70 buick skylark 320</th>
+      <td>15.0</td>
+      <td>8</td>
+      <td>350.0</td>
+      <td>165.0</td>
+      <td>3693.0</td>
+      <td>11.5</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>8 cylinder 70 plymouth satellite</th>
+      <td>18.0</td>
+      <td>8</td>
+      <td>318.0</td>
+      <td>150.0</td>
+      <td>3436.0</td>
+      <td>11.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>8 cylinder 70 amc rebel sst</th>
+      <td>16.0</td>
+      <td>8</td>
+      <td>304.0</td>
+      <td>150.0</td>
+      <td>3433.0</td>
+      <td>12.0</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>8 cylinder 70 ford torino</th>
+      <td>17.0</td>
+      <td>8</td>
+      <td>302.0</td>
+      <td>140.0</td>
+      <td>3449.0</td>
+      <td>10.5</td>
+      <td>70</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">autompg</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mpg</th>
+      <th>cyl</th>
+      <th>disp</th>
+      <th>hp</th>
+      <th>wt</th>
+      <th>acc</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>390.000000</td>
+      <td>390.000000</td>
+      <td>390.000000</td>
+      <td>390.000000</td>
+      <td>390.000000</td>
+      <td>390.000000</td>
+      <td>390.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>23.419487</td>
+      <td>5.479487</td>
+      <td>194.716667</td>
+      <td>104.574359</td>
+      <td>2980.353846</td>
+      <td>15.547692</td>
+      <td>75.953846</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>7.815625</td>
+      <td>1.706886</td>
+      <td>104.825696</td>
+      <td>38.561917</td>
+      <td>850.689476</td>
+      <td>2.762684</td>
+      <td>3.675518</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>9.000000</td>
+      <td>3.000000</td>
+      <td>68.000000</td>
+      <td>46.000000</td>
+      <td>1613.000000</td>
+      <td>8.000000</td>
+      <td>70.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>17.000000</td>
+      <td>4.000000</td>
+      <td>105.000000</td>
+      <td>75.000000</td>
+      <td>2223.750000</td>
+      <td>13.800000</td>
+      <td>73.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>22.450000</td>
+      <td>4.000000</td>
+      <td>151.000000</td>
+      <td>94.500000</td>
+      <td>2811.000000</td>
+      <td>15.500000</td>
+      <td>76.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>29.000000</td>
+      <td>8.000000</td>
+      <td>293.250000</td>
+      <td>128.000000</td>
+      <td>3618.250000</td>
+      <td>17.075000</td>
+      <td>79.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>46.600000</td>
+      <td>8.000000</td>
+      <td>455.000000</td>
+      <td>230.000000</td>
+      <td>5140.000000</td>
+      <td>24.800000</td>
+      <td>82.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># EDA</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;ticks&quot;</span><span class="p">,</span> <span class="n">color_codes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">autompg</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+<span class="c1">#put correlation matrix here</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\tabar\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+</pre></div>
+</div>
+<img alt="../_images/c47ee8dcc23bc1249b96564e591fbf337101afe97680910cfbc3afe5c2d9231d.png" src="../_images/c47ee8dcc23bc1249b96564e591fbf337101afe97680910cfbc3afe5c2d9231d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot correlation matrix</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">autompg</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> 
+            <span class="n">xticklabels</span><span class="o">=</span><span class="n">corr</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="n">corr</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/572bdc250101111396e242b324cc0c7f2777b0a0aa059e354e5e53d00ec01e19.png" src="../_images/572bdc250101111396e242b324cc0c7f2777b0a0aa059e354e5e53d00ec01e19.png" />
+</div>
+</div>
+<p>Por ahora nos centraremos en utilizar dos variables, peso y año, como variables predictoras. Es decir, nos gustaría modelar la eficiencia de combustible (mpg) de un coche en función de su peso (wt) y el año del modelo (year). Para ello, definiremos el siguiente modelo lineal,</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i, \qquad i = 1, 2, \ldots, n\]</div>
+<p>Donde, <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. En nuestra notación definimos:</p>
+<p><span class="math notranslate nohighlight">\(x_{i1}\)</span> como el peso (wt) del carro i.</p>
+<p><span class="math notranslate nohighlight">\(x_{i1}\)</span> como el año del modelo (year) del carro i.</p>
+<p>existen ahora en un espacio tridimensional, por lo que en lugar de ajustar una recta a los datos, ajustaremos un plano. (Pronto pasaremos a dimensiones superiores, así que éste será el último ejemplo fácil de visualizar y pensar de esta manera).</p>
+<p><img alt="image.png" src="../_images/MLR_2.png" /></p>
+<p>¿Cómo encontrar ese plano? Pues bien, queremos un plano que esté lo más cerca posible de los puntos de datos. Es decir, que minimice los errores que comete. ¿Cómo definiremos estos errores? Por supuesto, la distancia al cuadrado. Así que nos gustaría minimizar
+$<span class="math notranslate nohighlight">\(
+f(\beta_0, \beta_1, \beta_2) = \sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}))^2
+\)</span><span class="math notranslate nohighlight">\(
+con respecto a \)</span>\beta_0<span class="math notranslate nohighlight">\(, \)</span>\beta_1<span class="math notranslate nohighlight">\(, y \)</span>\beta_2<span class="math notranslate nohighlight">\(. ¿Cómo lo hacemos? Es otro problema sencillo de cálculo multivariante. Todo lo que hemos hecho es añadir una variable extra desde que lo hicimos la última vez. Así que de nuevo, tomamos una derivada con respecto a cada uno de \)</span>\beta_0<span class="math notranslate nohighlight">\(, \)</span>\beta_1<span class="math notranslate nohighlight">\(, y \)</span>\beta_2<span class="math notranslate nohighlight">\( y ponerlos igual a cero, a continuación, resolver el sistema resultante de ecuaciones. Es decir,
+\)</span><span class="math notranslate nohighlight">\(
+\begin{aligned}
+\frac{\partial f}{\partial \beta_0} &amp;= 0 \\
+\frac{\partial f}{\partial \beta_1} &amp;= 0 \\
+\frac{\partial f}{\partial \beta_2} &amp;= 0
+\end{aligned}
+\)</span><span class="math notranslate nohighlight">\(
+Una vez hecho esto, obtendremos de nuevo las **ecuaciones normales.**
+\)</span><span class="math notranslate nohighlight">\(
+\begin{aligned}
+n \beta_0 + \beta_1 \sum_{i = 1}^{n} x_{i1} + \beta_2 \sum_{i = 1}^{n} x_{i2} &amp;= \sum_{i = 1}^{n} y_i  \\
+\beta_0 \sum_{i = 1}^{n} x_{i1} + \beta_1 \sum_{i = 1}^{n} x_{i1}^2 + \beta_2 \sum_{i = 1}^{n} x_{i1}x_{i2} &amp;= \sum_{i = 1}^{n} x_{i1}y_i \\
+\beta_0 \sum_{i = 1}^{n} x_{i2} + \beta_1 \sum_{i = 1}^{n} x_{i1}x_{i2} + \beta_2 \sum_{i = 1}^{n} x_{i2}^2 &amp;= \sum_{i = 1}^{n} x_{i2}y_i
+\end{aligned}
+\)</span>$
+Ahora tenemos tres ecuaciones y tres variables, que podríamos resolver, o simplemente dejar que <code class="docutils literal notranslate"><span class="pre">Python</span></code> resuelva por nosotros.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create linear regression model</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[[</span><span class="s2">&quot;wt&quot;</span><span class="p">,</span> <span class="s2">&quot;year&quot;</span><span class="p">]]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>  <span class="c1"># Adds a constant (intercept) to the predictor</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;mpg&#39;</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># get the coefficients</span>
+<span class="n">model</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const   -14.637642
+wt       -0.006635
+year      0.761402
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>El modelo de regresión obtenido es el siguiente:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = -14.197982 + -0.006664 x_1 + 0.756572 x_2\]</div>
+<p>Los principales elementos que hay que interpretar en un modelo de regresión lineal son los coeficientes de los predictores:</p>
+<p>-<strong><span class="math notranslate nohighlight">\(\beta_0\)</span></strong>: es la ordenada en el origen o intercept, se corresponde con el valor esperado de la variable respuesta  y   cuando todos los predictores son cero.</p>
+<p>-<strong><span class="math notranslate nohighlight">\(\beta_j\)</span></strong>:los coeficientes de regresión parcial de cada predictor indican el cambio promedio esperado de la variable respuesta  y al incrementar en una unidad de la variable predictora <span class="math notranslate nohighlight">\(x_j\)</span>, manteniéndose constantes el resto de variables.</p>
+<p>La magnitud de cada coeficiente parcial de regresión depende de las unidades en las que se mida la variable predictora a la que corresponde, por lo que su magnitud no está asociada con la importancia de cada predictor.</p>
+<p>Para poder determinar qué impacto tienen en el modelo cada una de las variables, se emplean los coeficientes parciales estandarizados, que se obtienen al estandarizar (sustraer la media y dividir entre la desviación estándar) las variables predictoras previo ajuste del modelo. En este caso,  <span class="math notranslate nohighlight">\(\beta_0\)</span> se corresponde con el valor esperado de la variable respuesta cuando todos los predictores se encuentran en su valor promedio, y  <span class="math notranslate nohighlight">\(\beta_j\)</span>  el cambio promedio esperado de la variable respuesta al incrementar en una desviación estándar la variable predictora  <span class="math notranslate nohighlight">\(x_j\)</span>, manteniéndose constantes el resto de variables.</p>
+<p><em><strong>Para el caso de nuestro ejemplo, donde no tenemos las variables estandardizadas, tenemos la siguiente interpretación de los coeficientes:</strong></em></p>
+<ul class="simple">
+<li><p>Aquí, <span class="math notranslate nohighlight">\(\hat{\beta}_0 = -14.197\)</span> es nuestra estimación para <span class="math notranslate nohighlight">\(\beta_0\)</span>, la media de millas por galón para un coche que pesa 0 libras y fue construido en 1900. Vemos que nuestra estimación es negativa, lo que es físicamente imposible. Sin embargo, esto no es inesperado, ya que no podemos esperar que nuestro modelo sea preciso para los coches de 1900 que pesan 0 libras. (¡Porque nunca existieron!) Esto no supone un gran cambio con respecto al SLR. Es decir, <span class="math notranslate nohighlight">\(\beta_0\)</span> sigue siendo simplemente la media cuando todos los predictores son 0.</p></li>
+<li><p>La interpretación de los coeficientes delante de nuestros predictores es ligeramente diferente a la anterior. Por ejemplo <span class="math notranslate nohighlight">\(\hat{\beta}_1 = -0.00664\)</span> es nuestra estimación para <span class="math notranslate nohighlight">\(\beta_1\)</span>, el cambio medio en millas por galón para un aumento de peso (<span class="math notranslate nohighlight">\(x_{1}\)</span>) de una libra <strong>para un coche de un determinado año modelo</strong>, es decir, para un valor fijo de <span class="math notranslate nohighlight">\(x_{2}\)</span>.</p></li>
+<li><p>Obsérvese que este coeficiente es en realidad el mismo para cualquier valor dado de <span class="math notranslate nohighlight">\(x_{2}\)</span>. Más adelante estudiaremos modelos que permiten un cambio diferente en la respuesta media para distintos valores de <span class="math notranslate nohighlight">\(x_{2}\)</span>. Tenga en cuenta también que esta estimación es negativa, lo que cabría esperar ya que, en general, la eficiencia del combustible disminuye para los vehículos más grandes.</p>
+<ul>
+<li><p>Recordemos que en la configuración de regresión lineal múltiple, esta interpretación depende de un valor fijo para <span class="math notranslate nohighlight">\(x_{2}\)</span>, es decir, “para un coche de un determinado año modelo”. Es posible que la relación indirecta entre la eficiencia de combustible y el peso no se mantiene cuando un factor adicional, por ejemplo el año, se incluye, y por lo tanto podríamos tener el signo de nuestro coeficiente invertido.</p></li>
+</ul>
+</li>
+<li><p>Por último, <span class="math notranslate nohighlight">\(\hat{\beta}_2 =0.761402`\)</span> es nuestra estimación para <span class="math notranslate nohighlight">\(\beta_2\)</span>, el cambio medio en millas por galón para un aumento de un año en el año del modelo (<span class="math notranslate nohighlight">\(x_{2}\)</span>) para un coche de un cierto peso, es decir, para un valor fijo de <span class="math notranslate nohighlight">\(x_{1}\)</span>. No es sorprendente que la estimación sea positiva. Es de esperar que, con el paso del tiempo y los años, la tecnología mejore, de modo que un coche de un peso determinado obtenga ahora mejor kilometraje que sus predecesores. Y, sin embargo, el coeficiente podría haber sido negativo porque también estamos incluyendo el peso como variable, y no estrictamente como valor fijo.</p></li>
+</ul>
+</section>
+</section>
+<section id="enfoque-matricial-de-la-regresion">
+<h1>Enfoque matricial de la regresión<a class="headerlink" href="#enfoque-matricial-de-la-regresion" title="Permalink to this heading">#</a></h1>
+<p>En nuestro ejemplo anterior utilizamos dos variables predictoras, pero sólo nos llevará un poco más de trabajo permitir un número arbitrario de variables predictoras y derivar sus estimaciones de coeficientes. Podemos considerar el modelo</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{p-1} x_{i(p-1)} + \epsilon_i, \qquad i = 1, 2, \ldots, n \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. En este modelo, hay <span class="math notranslate nohighlight">\(p - 1\)</span> variables predictoras, <span class="math notranslate nohighlight">\(x_1, x_2, \cdots, x_{p-1}\)</span>. Hay un total de <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\beta\)</span>-parámetros y un único parámetro <span class="math notranslate nohighlight">\(\sigma^2\)</span> para la varianza de los errores. (Cabe señalar que casi con la misma frecuencia, los autores utilizan <span class="math notranslate nohighlight">\(p\)</span> como el número de predictores, haciendo que el número total de parámetros <span class="math notranslate nohighlight">\(\beta\)</span> <span class="math notranslate nohighlight">\(p+1\)</span>. Esto es algo que siempre hay que tener en cuenta cuando se lee sobre regresión múltiple. No hay una norma que se utilice con más frecuencia).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix">
+<h1>Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.
+$$
+\begin{bmatrix}
+Y_1   \
+Y_2   \
+\vdots\
+Y_n   \
+\end{bmatrix}<a class="headerlink" href="#si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix" title="Permalink to this heading">#</a></h1>
+<p>\begin{bmatrix}
+1      &amp; x_{11}    &amp; x_{12}    &amp; \cdots &amp; x_{1(p-1)} \
+1      &amp; x_{21}    &amp; x_{22}    &amp; \cdots &amp; x_{2(p-1)} \
+\vdots &amp; \vdots    &amp; \vdots    &amp;  &amp; \vdots \
+1      &amp; x_{n1}    &amp; x_{n2}    &amp; \cdots &amp; x_{n(p-1)} \
+\end{bmatrix}
+\begin{bmatrix}
+\beta_0 \
+\beta_1 \
+\beta_2 \
+\vdots \
+\beta_{p-1} \
+\end{bmatrix}
++
+\begin{bmatrix}
+\epsilon_1   \
+\epsilon_2   \
+\vdots\
+\epsilon_n   \
+\end{bmatrix}
+$$</p>
+<div class="math notranslate nohighlight">
+\[ Y = X \beta + \epsilon \]</div>
+<p>Donde</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y = \begin{bmatrix} Y_1 \\ Y_2 \\ \vdots\\ Y_n \end{bmatrix}, \quad
+X = \begin{bmatrix}
+1      &amp; x_{11}    &amp; x_{12}    &amp; \cdots &amp; x_{1(p-1)} \\
+1      &amp; x_{21}    &amp; x_{22}    &amp; \cdots &amp; x_{2(p-1)} \\
+\vdots &amp; \vdots    &amp; \vdots    &amp;  &amp; \vdots \\
+1      &amp; x_{n1}    &amp; x_{n2}    &amp; \cdots &amp; x_{n(p-1)} \\
+\end{bmatrix}, \quad
+\beta = \begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\beta_2 \\
+\vdots \\
+\beta_{p-1} \\
+\end{bmatrix}, \quad
+\epsilon = \begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots\\ \epsilon_n \end{bmatrix}
+\end{split}\]</div>
+<p>Así que ahora con los datos,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}y = \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix}\end{split}\]</div>
+<p>Igual que antes, podemos estimar <span class="math notranslate nohighlight">\(\beta\)</span> minimizando,</p>
+<div class="math notranslate nohighlight">
+\[ f(\beta_0, \beta_1, \beta_2, \cdots, \beta_{p-1}) = \sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{p-1} x_{i(p-1)}))^2, \]</div>
+<p>lo que requeriría tomar <span class="math notranslate nohighlight">\(p\)</span> derivadas, que resultan en las
+siguientes <strong>ecuaciones normales</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+n                           &amp; \sum_{i = 1}^{n} x_{i1}           &amp; \sum_{i = 1}^{n} x_{i2}           &amp; \cdots &amp; \sum_{i = 1}^{n} x_{i(p-1)}       \\
+\sum_{i = 1}^{n} x_{i1}     &amp; \sum_{i = 1}^{n} x_{i1}^2         &amp; \sum_{i = 1}^{n} x_{i1}x_{i2}     &amp; \cdots &amp; \sum_{i = 1}^{n} x_{i1}x_{i(p-1)} \\
+\vdots                      &amp; \vdots                            &amp; \vdots                            &amp;        &amp; \vdots                            \\
+\sum_{i = 1}^{n} x_{i(p-1)} &amp; \sum_{i = 1}^{n} x_{i(p-1)}x_{i1} &amp; \sum_{i = 1}^{n} x_{i(p-1)}x_{i2} &amp; \cdots &amp; \sum_{i = 1}^{n} x_{i(p-1)}^2     \\
+\end{bmatrix}
+\begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_{p-1} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\sum_{i = 1}^{n} y_i \\
+\sum_{i = 1}^{n} x_{i1}y_i \\
+\vdots \\
+\sum_{i = 1}^{n} x_{i(p-1)}y_i \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>Las ecuaciones normales pueden escribirse mucho más sucintamente en notación matricial,
+$<span class="math notranslate nohighlight">\( X^X = X^y. \)</span>$</p>
+<p>Podemos entonces resolver esta expresión multiplicando ambos lados por la inversa de <span class="math notranslate nohighlight">\(X^\top X\)</span>, que existe, siempre que las columnas de <span class="math notranslate nohighlight">\(X\)</span> sean linealmente independientes. Entonces, como siempre, denotamos nuestra solución con un sombrero.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\beta} = \left(  X^\top X  \right)^{-1}X^\top y \]</div>
+<p>Para verificar que esto es lo que <code class="docutils literal notranslate"><span class="pre">Python</span></code> ha hecho por nosotros en el caso de dos predictores, creamos una matriz <span class="math notranslate nohighlight">\(X\)</span>. Obsérvese que la primera columna contiene todos los 1s, y las columnas restantes contienen los datos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="c1"># Get the number of observations (n) and number of predictors (p)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">autompg</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>  <span class="c1"># Assuming you&#39;ve trained an OLS model and named it `model`</span>
+
+<span class="c1"># Construct X matrix and y vector</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">],</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;mpg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Calculate beta_hat manually</span>
+<span class="n">beta_hat_manual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+
+<span class="c1"># Print beta_hat</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">beta_hat_manual</span><span class="p">)</span>
+
+<span class="c1"># Print coefficients from the trained model</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-1.46376419e+01 -6.63487587e-03  7.61401955e-01]
+const   -14.637642
+wt       -0.006635
+year      0.761402
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{\beta} = \begin{bmatrix}
+-14.197982    \\
+-0.006664    \\
+0.756572    \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>En nuestra nueva notación, los valores ajustados pueden escribirse</p>
+<div class="math notranslate nohighlight">
+\[\hat{y} = X \hat{\beta}.\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{y} = \begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots\\ \hat{y}_n \end{bmatrix} \end{split}\]</div>
+<p>A continuación, podemos crear un vector para los valores residuales,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}e 
+= \begin{bmatrix} e_1 \\ e_2 \\ \vdots\\ e_n \end{bmatrix} 
+= \begin{bmatrix} y_1 \\ y_2 \\ \vdots\\ y_n \end{bmatrix} - \begin{bmatrix} \hat{y}_1 \\ \hat{y}_2 \\ \vdots\\ \hat{y}_n \end{bmatrix}. \end{split}\]</div>
+<p>Y por último, podemos actualizar nuestra estimación de <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ s_e^2 = \frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n - p} = \frac{e^\top e}{n-p} \]</div>
+<p>Recordemos que nos gusta esta estimación porque es insesgada, es decir,</p>
+<div class="math notranslate nohighlight">
+\[ \text{E}[s_e^2] = \sigma^2 \]</div>
+<p>Obsérvese que el cambio de la estimación SLR a la actual está en el denominador. En concreto, ahora dividimos por <span class="math notranslate nohighlight">\(n - p\)</span> en lugar de <span class="math notranslate nohighlight">\(n - 2\)</span>. O, en realidad, deberíamos tener en cuenta que en el caso del SLR, hay dos parámetros <span class="math notranslate nohighlight">\(\beta\)</span> y por tanto <span class="math notranslate nohighlight">\(p = 2\)</span>.</p>
+<p>Obsérvese también que si ajustamos el modelo <span class="math notranslate nohighlight">\(Y_i = \beta + \epsilon_i\)</span> que <span class="math notranslate nohighlight">\(\hat{y} = \bar{y}\)</span> y <span class="math notranslate nohighlight">\(p = 1\)</span> y <span class="math notranslate nohighlight">\(s_e^2\)</span> pasaría a ser</p>
+<div class="math notranslate nohighlight">
+\[s_e^2 = \frac{\sum_{i=1}^n (y_i - \bar{y})^2}{n - 1}\]</div>
+<p>que es probablemente la primera varianza muestral que viste en una clase de estadística matemática. La misma razón para <span class="math notranslate nohighlight">\(n - 1\)</span> en este caso, que estimamos un parámetro, por lo que perdemos un grado de libertad. Ahora, en general, estamos estimando <span class="math notranslate nohighlight">\(p\)</span> parámetros, los parámetros <span class="math notranslate nohighlight">\(\beta\)</span>, por lo que perdemos <span class="math notranslate nohighlight">\(p\)</span> grados de libertad.</p>
+<p>Además, recordemos que la mayoría de las veces estaremos interesados en <span class="math notranslate nohighlight">\(s_e\)</span>, el error estándar residual ,</p>
+<div class="math notranslate nohighlight">
+\[s_e = \sqrt{\frac{\sum_{i=1}^n (y_i - \hat{y}_i)^2}{n - p}}.\]</div>
+<p>En <code class="docutils literal notranslate"><span class="pre">Python</span></code>, podríamos acceder directamente a <span class="math notranslate nohighlight">\(s_e\)</span> para un modelo ajustado, como hemos visto antes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the standard errror of regression</span>
+<span class="n">model</span><span class="o">.</span><span class="n">mse_resid</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">mse_resid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.43468461998154
+</pre></div>
+</div>
+</div>
+</div>
+<p>Y ahora podemos verificar que nuestra matemática anterior está efectivamente calculando las mismas cantidades.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate predicted values y_hat</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+
+<span class="c1"># Calculate residuals e</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">y_hat</span>
+
+<span class="c1"># Calculate RMSE adjusted for number of predictors</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">e</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">e</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">rmse</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.431366799345832
+</pre></div>
+</div>
+</div>
+</div>
+<section id="distribucion-del-muestreo">
+<h2>Distribución del muestreo<a class="headerlink" href="#distribucion-del-muestreo" title="Permalink to this heading">#</a></h2>
+<p>Como podemos ver en la siguiente salida, los resultados de llamar a <code class="docutils literal notranslate"><span class="pre">summary()</span></code> son similares a SLR, pero hay algunas diferencias, la más obvia es una nueva fila para la variable predictora añadida.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.808</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.807</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   815.6</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sat, 16 Sep 2023</td> <th>  Prob (F-statistic):</th> <td>1.64e-139</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>15:43:15</td>     <th>  Log-Likelihood:    </th> <td> -1032.7</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   390</td>      <th>  AIC:               </th> <td>   2071.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   387</td>      <th>  BIC:               </th> <td>   2083.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>  -14.6376</td> <td>    4.023</td> <td>   -3.638</td> <td> 0.000</td> <td>  -22.548</td> <td>   -6.727</td>
+</tr>
+<tr>
+  <th>wt</th>    <td>   -0.0066</td> <td>    0.000</td> <td>  -30.881</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.006</td>
+</tr>
+<tr>
+  <th>year</th>  <td>    0.7614</td> <td>    0.050</td> <td>   15.312</td> <td> 0.000</td> <td>    0.664</td> <td>    0.859</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>41.185</td> <th>  Durbin-Watson:     </th> <td>   1.242</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  69.160</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.658</td> <th>  Prob(JB):          </th> <td>9.60e-16</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.589</td> <th>  Cond. No.          </th> <td>7.18e+04</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 7.18e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Para entender estas diferencias en detalle, tendremos que obtener primero la distribución de muestreo de <span class="math notranslate nohighlight">\(\hat{\beta}.\)</span></p>
+<p>La derivación de la distribución muestral de <a class="reference external" href="https://book.stat420.org/notes/mvn.pdf">una variable normal multivariada</a> dan una visión general básica. Estos son simplemente para su información, ya que no vamos a presentar la derivación en su totalidad aquí.</p>
+<p>Nuestro objetivo ahora es obtener la distribución del vector <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{\beta} = \begin{bmatrix}
+\hat{\beta}_0 \\
+\hat{\beta}_1 \\
+\hat{\beta}_2 \\
+\vdots \\
+\hat{\beta}_{p-1} \end{bmatrix}
+\end{split}\]</div>
+<p>Recordemos de la última vez que cuando se discuten las distribuciones de muestreo, ahora consideramos <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> como un vector aleatorio, por lo que utilizamos <span class="math notranslate nohighlight">\(Y\)</span> en lugar del vector de datos <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\beta} = \left(  X^\top X  \right)^{-1}X^\top Y\]</div>
+<p>Entonces es una consecuencia de la distribución normal multivariante que,</p>
+<div class="math notranslate nohighlight">
+\[\hat{\beta} \sim N\left(\beta, \sigma^2 \left(X^\top X\right)^{-1}  \right).\]</div>
+<p>Entonces tenemos</p>
+<div class="math notranslate nohighlight">
+\[\text{E}[\hat{\beta}] = \beta\]</div>
+<p>y para cualquier <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> tenemos</p>
+<div class="math notranslate nohighlight">
+\[\text{E}[\hat{\beta}_j] = \beta_j.\]</div>
+<p>También tenemos</p>
+<div class="math notranslate nohighlight">
+\[ \text{Var}[\hat{\beta}] = \sigma^2 \left(  X^\top X  \right)^{-1}\]</div>
+<p>y para cualquier <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> tenemos</p>
+<div class="math notranslate nohighlight">
+\[ \text{Var}[\hat{\beta}_j] = \sigma^2 C_{jj}\]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[C = \left(X^\top X\right)^{-1}\]</div>
+<p>y los elementos de <span class="math notranslate nohighlight">\(C\)</span> se denotan</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} C = \begin{bmatrix}
+C_{00}     &amp; C_{01}     &amp; C_{02}     &amp; \cdots &amp; C_{0(p-1)}     \\
+C_{10}     &amp; C_{11}     &amp; C_{12}     &amp; \cdots &amp; C_{1(p-1)}     \\
+C_{20}     &amp; C_{21}     &amp; C_{22}     &amp; \cdots &amp; C_{2(p-1)}     \\
+\vdots     &amp; \vdots     &amp; \vdots     &amp;        &amp; \vdots         \\
+C_{(p-1)0} &amp; C_{(p-1)1} &amp; C_{(p-1)2} &amp; \cdots &amp; C_{(p-1)(p-1)} \\
+\end{bmatrix}. \end{split}\]</div>
+<p>Esencialmente, los elementos diagonales corresponden al vector <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+<p>Entonces el error estándar para el vector <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> viene dado por</p>
+<div class="math notranslate nohighlight">
+\[\text{SE}[\hat{\beta}] = s_e \sqrt{\left(  X^\top X  \right)^{-1}}\]</div>
+<p>y para una determinada <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span></p>
+<div class="math notranslate nohighlight">
+\[\text{SE}[\hat{\beta}_j] = s_e \sqrt{C_{jj}}.\]</div>
+<p>Por último, cada uno de los <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> sigue una distribución normal,</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\beta}_j \sim N\left(\beta_j, \sigma^2 C_{jj}  \right).\]</div>
+<p>así</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\hat{\beta}_j - \beta_j}{s_e \sqrt{C_{jj}}} \sim t_{n-p}. \]</div>
+<p>Ahora que tenemos los resultados de distribución necesarios, podemos pasar a realizar pruebas y estimaciones de intervalo.</p>
+<section id="pruebas-de-un-solo-parametro">
+<h3>Pruebas de un solo parámetro<a class="headerlink" href="#pruebas-de-un-solo-parametro" title="Permalink to this heading">#</a></h3>
+<p>La primera prueba que veremos es una prueba para un único parámetro <span class="math notranslate nohighlight">\(\beta_j\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[H_0: \beta_j = 0 \quad \text{vs} \quad H_1: \beta_j \neq 0 \]</div>
+<p>De nuevo, la estadística de prueba adopta la forma</p>
+<div class="math notranslate nohighlight">
+\[ = . \]</div>
+<p>En particular,</p>
+<div class="math notranslate nohighlight">
+\[\text{TS} = \frac{\text{EST} - \text{HYP}}{\text{SE}}.\]</div>
+<p>que, bajo la hipótesis nula, sigue una distribución <span class="math notranslate nohighlight">\(t\)</span> con <span class="math notranslate nohighlight">\(n - p\)</span> grados de libertad.</p>
+<p>Recordemos nuestro modelo para <code class="docutils literal notranslate"><span class="pre">mpg</span></code>,</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i, \qquad i = 1, 2, \ldots, n\]</div>
+<p>donde <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_{i1}\)</span> como el peso (<code class="docutils literal notranslate"><span class="pre">wt</span></code>) del <span class="math notranslate nohighlight">\(i\)</span>ésimo coche.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_{i2}\)</span> como el año del modelo (<code class="docutils literal notranslate"><span class="pre">year</span></code>) del coche <span class="math notranslate nohighlight">\(i\)</span>th.</p></li>
+</ul>
+<p>A continuación, la prueba</p>
+<div class="math notranslate nohighlight">
+\[H_0: \beta_1 = 0 \quad \text{vs} \quad H_1: \beta_1 \neq 0\]</div>
+<p>se puede encontrar en la salida de <code class="docutils literal notranslate"><span class="pre">summary()</span></code>, en particular:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get coefficients and their standard errors</span>
+<span class="n">model</span><span class="o">.</span><span class="n">params</span>
+<span class="n">model</span><span class="o">.</span><span class="n">bse</span>
+<span class="c1"># do a dataframe with the coefficients and their standard errors</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;coefficients&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="s1">&#39;standard errors&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">bse</span><span class="p">,</span> <span class="s1">&#39;p-values&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">pvalues</span><span class="p">,</span> <span class="s1">&#39;t-values&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">tvalues</span><span class="p">})</span>
+<span class="n">coefficients</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>coefficients</th>
+      <th>standard errors</th>
+      <th>p-values</th>
+      <th>t-values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>const</th>
+      <td>-14.637642</td>
+      <td>4.023391</td>
+      <td>3.118311e-04</td>
+      <td>-3.638135</td>
+    </tr>
+    <tr>
+      <th>wt</th>
+      <td>-0.006635</td>
+      <td>0.000215</td>
+      <td>1.850466e-106</td>
+      <td>-30.881372</td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td>0.761402</td>
+      <td>0.049727</td>
+      <td>1.036597e-41</td>
+      <td>15.311765</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>La estimación , el error estándar , el estadístico de prueba y el valor p  para esta prueba se muestran en la segunda fila, etiquetada como <code class="docutils literal notranslate"><span class="pre">weight</span></code>. Recuerde que el valor p que se da aquí es específicamente para una prueba de dos colas, en la que el valor de la hipótesis es 0.</p>
+<p>Observe también que en este caso, al plantear la hipótesis de que <span class="math notranslate nohighlight">\(\beta_1 = 0\)</span>, el modelo nulo y el alternativo especifican esencialmente dos modelos diferentes:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(Y = \beta_0 + \beta_2 x_{2} + \epsilon\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>: <span class="math notranslate nohighlight">\(Y = \beta_0 + \beta_1 x_{1} + \beta_2 x_{2} + \epsilon\)</span></p></li>
+</ul>
+<p>Esto es importante. No estamos simplemente probando si existe o no una relación entre el peso y la eficiencia del combustible. Estamos probando si hay una relación entre el peso y la eficiencia de combustible, dado que un término para el año está en el modelo. (Nótese que hemos suprimido algunos índices para facilitar la lectura).</p>
+</section>
+<section id="intervalos-de-confianza">
+<h3>Intervalos de confianza<a class="headerlink" href="#intervalos-de-confianza" title="Permalink to this heading">#</a></h3>
+<p>Dado que <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> es nuestra estimación para <span class="math notranslate nohighlight">\(\beta_j\)</span> y tenemos</p>
+<div class="math notranslate nohighlight">
+\[\text{E}[\hat{\beta}_j] = \beta_j \]</div>
+<p>así como el error estándar,</p>
+<div class="math notranslate nohighlight">
+\[\text{SE}[\hat{\beta}_j] = s_e\sqrt{C_{jj}}\]</div>
+<p>y la distribución muestral de <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> es Normal, entonces podemos construir fácilmente intervalos de confianza para cada uno de los <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\beta}_j \pm t_{\alpha/2, n - p} \cdot s_e\sqrt{C_{jj}} \]</div>
+<p>Podemos encontrarlos en <code class="docutils literal notranslate"><span class="pre">Python</span></code> utilizando el mismo método que antes. Ahora simplemente habrá filas adicionales para los <span class="math notranslate nohighlight">\(\beta\)</span> adicionales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># confidence intervals</span>
+<span class="n">model</span><span class="o">.</span><span class="n">conf_int</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>const</th>
+      <td>-27.978578</td>
+      <td>-1.296706</td>
+    </tr>
+    <tr>
+      <th>wt</th>
+      <td>-0.007347</td>
+      <td>-0.005922</td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td>0.596516</td>
+      <td>0.926288</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="intervalos-de-confianza-para-la-respuesta-media">
+<h3>Intervalos de confianza para la respuesta media<a class="headerlink" href="#intervalos-de-confianza-para-la-respuesta-media" title="Permalink to this heading">#</a></h3>
+<p>Como vimos en SLR, podemos crear intervalos de confianza para la respuesta media, es decir, una estimación de intervalo para <span class="math notranslate nohighlight">\(\text{E}[Y \mid X = x]\)</span>. En SLR, la media de <span class="math notranslate nohighlight">\(Y\)</span> sólo dependía de un único valor <span class="math notranslate nohighlight">\(x\)</span>. Ahora, en la regresión múltiple, <span class="math notranslate nohighlight">\(\text{E}[Y \mid X = x]\)</span> depende del valor de cada uno de los predictores, por lo que definimos el vector <span class="math notranslate nohighlight">\(x_0\)</span> como,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} x_{0} = \begin{bmatrix}
+1 \\
+x_{01} \\
+x_{02} \\
+\vdots \\
+x_{0(p-1)} \\
+\end{bmatrix}.
+. \end{split}\]</div>
+<p>Entonces nuestra estimación de <span class="math notranslate nohighlight">\(\text{E}[Y \mid X = x_0]\)</span> para un conjunto de valores <span class="math notranslate nohighlight">\(x_0\)</span> viene dada por</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat{y}(x_0) &amp;= x_{0}^\top\hat{\beta} \\
+&amp;= \hat{\beta}_0 + \hat{\beta}_1 x_{01} + \hat{\beta}_2 x_{02} + \cdots + \hat{\beta}_{p-1} x_{0(p-1)}.
+\end{aligned}
+\end{split}\]</div>
+<p>Como en el caso del SLR, se trata de una estimación no sesgada.
+$<span class="math notranslate nohighlight">\(\begin{aligned}
+\text{E}[\hat{y}(x_0)] &amp;= x_{0}^\top\beta \\
+&amp;= \beta_0 + \beta_1 x_{01} + \beta_2 x_{02} + \cdots + \beta_{p-1} x_{0(p-1)}
+\end{aligned}
+\)</span>$</p>
+<p>Para realizar una estimación de intervalo, también necesitaremos su error estándar.</p>
+<div class="math notranslate nohighlight">
+\[(x_0)= s_e \]</div>
+<p>Si lo juntamos todo, obtenemos un intervalo de confianza para la respuesta media.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y}(x_0) \pm t_{\alpha/2, n - p} \cdot s_e \sqrt{x_{0}^\top\left(X^\top X\right)^{-1}x_{0}}\]</div>
+<p>Las matemáticas han cambiado un poco, pero el proceso en <code class="docutils literal notranslate"><span class="pre">R</span></code> sigue siendo casi idéntico. Aquí, creamos un marco de datos para dos coches adicionales. Un coche que pesa 3500 libras producido en 1976, así como un segundo coche que pesa 5000 libras que fue producido en 1981.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predictions for new data</span>
+<span class="n">new_cars</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;wt&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">5000</span><span class="p">],</span> <span class="s1">&#39;year&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">76</span><span class="p">,</span> <span class="mi">81</span><span class="p">]})</span>
+<span class="n">new_cars</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">new_cars</span><span class="p">)</span>  <span class="c1"># Add constant for prediction</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación, podemos utilizar la función <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code>  para obtener intervalos para la eficiencia media de combustible para ambos coches nuevos.</p>
+<p>Es importante puntualizar que se devuelven dos intervalos, uno para el promedio y otro para la observación puntual. En este caso, los intervalos son muy similares, ya que los valores de los predictores son bastante cercanos a sus medias. Sin embargo, si los valores de los predictores se alejan de sus medias, los intervalos de predicción y de observación puntual pueden diferir sustancialmente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">new_cars</span><span class="p">)</span>
+<span class="n">prediction_summary</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># 99% confidence</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prediction_summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        mean   mean_se  mean_ci_lower  mean_ci_upper  obs_ci_lower  \
+0  20.006841  0.206924      19.471198      20.542484     11.108294   
+1  13.861537  0.590066      12.334096      15.388979      4.848751   
+
+   obs_ci_upper  
+0     28.905388  
+1     22.874323  
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación, <code class="docutils literal notranslate"><span class="pre">Python</span></code> informa de la estimación <span class="math notranslate nohighlight">\(\hat{y}(x_0)\)</span> (<code class="docutils literal notranslate"><span class="pre">fit</span></code>) para cada uno, así como los límites inferior (<code class="docutils literal notranslate"><span class="pre">lower</span></code>) y superior (<code class="docutils literal notranslate"><span class="pre">uper</span></code>) para el intervalo a un nivel deseado (99%).</p>
+<p>Una advertencia: una de estas estimaciones es buena, mientras que la otra es sospechosa.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve &#39;wt&#39; column from new_cars</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_cars</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">])</span>
+
+<span class="c1"># Compute and print range of &#39;wt&#39; in autompg</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    3500
+1    5000
+Name: wt, dtype: int64
+1613.0 5140.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Obsérvese que ambos pesos de los coches nuevos están dentro del intervalo de valores observados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve &#39;year&#39; column from new_cars</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_cars</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">])</span>
+
+<span class="c1"># Compute and print range of &#39;year&#39; in autompg</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    76
+1    81
+Name: year, dtype: int64
+70 82
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al igual que los años de cada uno de los coches nuevos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot (optional, using matplotlib)</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">],</span> <span class="n">autompg</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;dodgerblue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">new_cars</span><span class="p">[</span><span class="s1">&#39;wt&#39;</span><span class="p">],</span> <span class="n">new_cars</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;New data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Weight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e2d846fb46c1033d733623c8ae988acbbd8bb5963731fa1d90ebeb437daf0f62.png" src="../_images/e2d846fb46c1033d733623c8ae988acbbd8bb5963731fa1d90ebeb437daf0f62.png" />
+</div>
+</div>
+<p>Sin embargo, ahora tenemos que considerar el peso y el año juntos. Y basándonos en el gráfico anterior, uno de los coches nuevos está dentro de la “mancha” de valores observados, mientras que el otro, el coche de 1981 con un peso de 5000 libras, está notablemente fuera de los valores observados. Se trata de una extrapolación oculta que hay que tener en cuenta al utilizar la regresión múltiple.</p>
+<p>Cambiando de marcha de nuevo al nuevo par de datos que se puede estimar razonablemente, hacemos una rápida verificación de algunas de las matemáticas en <code class="docutils literal notranslate"><span class="pre">R</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define the vector x0</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">76</span><span class="p">])</span>
+
+<span class="c1"># Compute the matrix multiplication with beta_hat</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">@</span> <span class="n">beta_hat_manual</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.006841079982173
+</pre></div>
+</div>
+</div>
+</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} x_{0} = \begin{bmatrix}
+1    \\
+3500 \\
+76   \\
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{\beta} = \begin{bmatrix}
+-14.6376419    \\
+-0.0066349    \\
+0.761402    \\
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} \hat{y}(x_0)  = x_{0}^\top\hat{\beta} = 
+\begin{bmatrix}
+1    &amp;
+3500 &amp;
+76   \\
+\end{bmatrix}
+\begin{bmatrix}
+-14.6376419    \\
+-0.0066349    \\
+0.761402    \\
+\end{bmatrix}= 20.0068411\end{split}\]</div>
+<p>También tenga en cuenta que, utilizando un valor particular para <span class="math notranslate nohighlight">\(x_0\)</span>, esencialmente podemos extraer ciertos <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> valores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">beta_hat_manual</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.46376419e+01, -6.63487587e-03,  7.61401955e-01])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Teniendo esto en cuenta, los intervalos de confianza para el individuo <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> son en realidad un caso especial de un intervalo de confianza para la respuesta media.</p>
+</section>
+<section id="intervalos-de-prediccion">
+<h3>Intervalos de predicción<a class="headerlink" href="#intervalos-de-prediccion" title="Permalink to this heading">#</a></h3>
+<p>Al igual que con SLR, la creación de intervalos de predicción implica un ligero cambio en el error estándar para tener en cuenta el hecho de que ahora estamos considerando una observación, en lugar de una media.</p>
+<p>Aquí utilizamos <span class="math notranslate nohighlight">\(\hat{y}(x_0)\)</span> para estimar <span class="math notranslate nohighlight">\(Y_0\)</span>, una nueva observación de <span class="math notranslate nohighlight">\(Y\)</span> en el vector predictor <span class="math notranslate nohighlight">\(x_0\)</span>.
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\hat{y}(x_0) &amp;= x_{0}^\top\hat{\beta} \\
+&amp;= \hat{\beta}_0 + \hat{\beta}_1 x_{01} + \hat{\beta}_2 x_{02} + \cdots + \hat{\beta}_{p-1} x_{0(p-1)}
+\end{aligned}
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\text{E}[\hat{y}(x_0)] &amp;= x_{0}^\top\beta \\
+&amp;= \beta_0 + \beta_1 x_{01} + \beta_2 x_{02} + \cdots + \beta_{p-1} x_{0(p-1)}
+\end{aligned}
+\end{split}\]</div>
+<p>Al igual que hicimos con el SLR, debemos tener en cuenta la variabilidad adicional de una observación con respecto a su media.</p>
+<div class="math notranslate nohighlight">
+\[\text{SE}[\hat{y}(x_0) + \epsilon] = s_e \sqrt{1 + x_{0}^\top\left(X^\top X\right)^{-1}x_{0}} \]</div>
+<p>Entonces llegamos a nuestro intervalo de predicción actualizado para MLR.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y}(x_0) \pm t_{\alpha/2, n - p} \cdot s_e \sqrt{1 + x_{0}^\top\left(X^\top X\right)^{-1}x_{0}}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">new_cars</span><span class="p">)</span>
+<span class="n">prediction_summary</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>  <span class="c1"># 99% confidence</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prediction_summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        mean   mean_se  mean_ci_lower  mean_ci_upper  obs_ci_lower  \
+0  20.006841  0.206924      19.471198      20.542484     11.108294   
+1  13.861537  0.590066      12.334096      15.388979      4.848751   
+
+   obs_ci_upper  
+0     28.905388  
+1     22.874323  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="importancia-de-la-regresion">
+<h2>Importancia de la regresión<a class="headerlink" href="#importancia-de-la-regresion" title="Permalink to this heading">#</a></h2>
+<p>La descomposición de la variación que habíamos visto en SLR sigue siendo válida para MLR.</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=1}^{n}(y_i - \bar{y})^2 = \sum_{i=1}^{n}(y_i - \hat{y}_i)^2 + \sum_{i=1}^{n}(\hat{y}_i - \bar{y})^2\]</div>
+<p>Es decir,</p>
+<div class="math notranslate nohighlight">
+\[\text{SST} = \text{SSE} + \text{SSReg}.\]</div>
+<p>Esto significa que podemos seguir calculando <span class="math notranslate nohighlight">\(R^2\)</span> de la misma manera que antes, lo que <code class="docutils literal notranslate"><span class="pre">Python</span></code> sigue haciendo automáticamente.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get r-squared</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">rsquared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8082354790152035
+</pre></div>
+</div>
+</div>
+</div>
+<p>La interpretación cambia ligeramente en comparación con el SLR. En este caso MLR, decimos que <span class="math notranslate nohighlight">\(80.82\%\)</span> de la variación observada en millas por galón se explica por la relación lineal con las dos variables predictoras, peso y año.</p>
+<p>En regresión múltiple, la significación de la prueba de regresión es</p>
+<div class="math notranslate nohighlight">
+\[H_0: \beta_1 = \beta_2 = \cdots = \beta_{p - 1} = 0.\]</div>
+<p>Aquí, vemos que la hipótesis nula establece todos los <span class="math notranslate nohighlight">\(\beta_j\)</span> igual a 0, <em>excepto</em> el intercepto, <span class="math notranslate nohighlight">\(\beta_0\)</span>. Podríamos decir entonces que el modelo nulo, o “modelo bajo la hipótesis nula” es</p>
+<div class="math notranslate nohighlight">
+\[Y_i = \beta_0 + \epsilon_i.\]</div>
+<p>Este es un modelo donde la <em>regresión</em> es insignificante. <strong>Ninguno</strong> de los predictores tiene una relación lineal significativa con la respuesta. Notablemente, vamos a denotar los valores ajustados de este modelo como <span class="math notranslate nohighlight">\(\hat{y}_{0i}\)</span>, que en este caso resulta ser:</p>
+<div class="math notranslate nohighlight">
+\[\hat{y}_{0i} = \bar{y}.\]</div>
+<p>La hipótesis alternativa aquí es que al menos uno de los <span class="math notranslate nohighlight">\(\beta_j\)</span> de la hipótesis nula no es 0.</p>
+<div class="math notranslate nohighlight">
+\[H_1: \text{At least one of } \beta_j \neq 0, j = 1, 2, \cdots, (p-1)\]</div>
+<p>Podríamos decir entonces que el modelo completo, o “modelo bajo la hipótesis alternativa” es</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{(p-1)} x_{i(p-1)} + \epsilon_i\]</div>
+<p>Este es un modelo donde la regresión es significativa. <strong>Al menos uno</strong> de los predictores tiene una relación lineal significativa con la respuesta. Hay alguna relación lineal entre <span class="math notranslate nohighlight">\(y\)</span> y los predictores, <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_{p - 1}\)</span>.</p>
+<p>Denotaremos los valores ajustados de este modelo como <span class="math notranslate nohighlight">\(\hat{y}_{1i}\)</span>.</p>
+<p>Para desarrollar la prueba <span class="math notranslate nohighlight">\(F\)</span> para la significación de la regresión, vamos a organizar la descomposición de la varianza en una tabla ANOVA.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>Sum of Squares</p></th>
+<th class="head"><p>Degrees of Freedom</p></th>
+<th class="head"><p>Mean Square</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(F\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Regression</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(\hat{y}_{1i} - \bar{y})^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p - 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{SSReg} / (p - 1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{MSReg} / \text{MSE}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Error</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(y_i - \hat{y}_{1i})^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n - p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{SSE} / (n - p)\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Total</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(y_i - \bar{y})^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n - 1\)</span></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p>En resumen, la estadística <span class="math notranslate nohighlight">\(F\)</span> es</p>
+<div class="math notranslate nohighlight">
+\[F = \frac{\sum_{i=1}^{n}(\hat{y}_{1i} - \bar{y})^2 / (p - 1)}{\sum_{i=1}^{n}(y_i - \hat{y}_{1i})^2 / (n - p)},\]</div>
+<p>y el valor p se calcula como</p>
+<div class="math notranslate nohighlight">
+\[P(F_{p-1, n-p} &gt; F)\]</div>
+<p>ya que rechazamos para valores grandes de <span class="math notranslate nohighlight">\(F\)</span>. Un valor grande del estadístico corresponde a una gran parte de la varianza explicada por la regresión. Aquí <span class="math notranslate nohighlight">\(F_{p-1, n-p}\)</span> representa una variable aleatoria que sigue una distribución <span class="math notranslate nohighlight">\(F\)</span> con <span class="math notranslate nohighlight">\(p - 1\)</span> y <span class="math notranslate nohighlight">\(n - p\)</span> grados de libertad.</p>
+<p>Para realizar esta prueba en <code class="docutils literal notranslate"><span class="pre">R</span></code>, primero especificamos explícitamente los dos modelos en <code class="docutils literal notranslate"><span class="pre">R</span></code> y guardamos los resultados en variables diferentes. A continuación, utilizamos <code class="docutils literal notranslate"><span class="pre">anova()</span></code> para comparar los dos modelos, dando a <code class="docutils literal notranslate"><span class="pre">anova()</span></code> el modelo nulo en primer lugar y el modelo alternativo (completo) en segundo lugar. (Especificar primero el modelo completo dará como resultado el mismo valor p, pero algunos valores intermedios sin sentido).</p>
+<p>En este caso,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(Y_i = \beta_0 + \epsilon_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>:
+<span class="math notranslate nohighlight">\(Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \epsilon_i\)</span></p></li>
+</ul>
+<p>Es decir, en el modelo nulo, no utilizamos ninguno de los predictores, mientras que en el modelo completo (alternativo), al menos uno de los predictores es útil.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">null_mpg_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">autompg</span><span class="p">[[]]))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1"># Model with only constant</span>
+<span class="n">anova_results</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">null_mpg_model</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">anova_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   df_resid           ssr  df_diff       ss_diff           F         Pr(&gt;F)
+0     389.0  23761.671897      0.0           NaN         NaN            NaN
+1     387.0   4556.645629      2.0  19205.026268  815.550053  1.643078e-139
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get F-statistic</span>
+<span class="n">anova_results</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>815.5500526702807
+</pre></div>
+</div>
+</div>
+</div>
+<p>de la tabla que nos muestra la funciòn <code class="docutils literal notranslate"><span class="pre">anova_lm</span></code> vemos que el valor del estadístico <span class="math notranslate nohighlight">\(F\)</span> es , y el valor p es extremadamente bajo, por lo que rechazamos la hipótesis nula en cualquier <span class="math notranslate nohighlight">\(\alpha\)</span> razonable y decimos que la regresión es significativa. Al menos uno de <code class="docutils literal notranslate"><span class="pre">wt</span></code> o <code class="docutils literal notranslate"><span class="pre">year</span></code> tiene una relación lineal útil con <code class="docutils literal notranslate"><span class="pre">mpg</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.808</td> 
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.807</td> 
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   815.6</td> 
+</tr>
+<tr>
+  <th>Date:</th>             <td>Sat, 16 Sep 2023</td> <th>  Prob (F-statistic):</th> <td>1.64e-139</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>15:59:00</td>     <th>  Log-Likelihood:    </th> <td> -1032.7</td> 
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   390</td>      <th>  AIC:               </th> <td>   2071.</td> 
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   387</td>      <th>  BIC:               </th> <td>   2083.</td> 
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>const</th> <td>  -14.6376</td> <td>    4.023</td> <td>   -3.638</td> <td> 0.000</td> <td>  -22.548</td> <td>   -6.727</td>
+</tr>
+<tr>
+  <th>wt</th>    <td>   -0.0066</td> <td>    0.000</td> <td>  -30.881</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.006</td>
+</tr>
+<tr>
+  <th>year</th>  <td>    0.7614</td> <td>    0.050</td> <td>   15.312</td> <td> 0.000</td> <td>    0.664</td> <td>    0.859</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>41.185</td> <th>  Durbin-Watson:     </th> <td>   1.242</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  69.160</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.658</td> <th>  Prob(JB):          </th> <td>9.60e-16</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.589</td> <th>  Cond. No.          </th> <td>7.18e+04</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 7.18e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+</div>
+<p>Observe que el valor indicado en la fila de <code class="docutils literal notranslate"><span class="pre">estadístico</span> <span class="pre">F</span></code> es realmente el estadístico de prueba <span class="math notranslate nohighlight">\(F\)</span> para la prueba de significación de la regresión y, además, indica los dos grados de libertad correspondientes.</p>
+<p>Observe también que ninguna de las pruebas <span class="math notranslate nohighlight">\(t\)</span> individuales es equivalente a la prueba <span class="math notranslate nohighlight">\(F\)</span> como lo eran en SLR. Esta equivalencia sólo es válida para SLR porque la prueba individual para <span class="math notranslate nohighlight">\(\beta_1\)</span> es la misma que la prueba para todos los parámetros sin intercepción, ya que sólo hay uno.</p>
+<p>También podemos verificar las sumas de cuadrados y los grados de libertad directamente en <code class="docutils literal notranslate"><span class="pre">python</span></code>. En particular, podemos ver que la suma de cuadrados de la regresión es la misma que la suma de cuadrados de la regresión en la tabla ANOVA anterior.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate additional statistics</span>
+<span class="n">SSReg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">model</span><span class="o">.</span><span class="n">fittedvalues</span> <span class="o">-</span> <span class="n">null_mpg_model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">SSE</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resid</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">SST</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SSReg:&quot;</span><span class="p">,</span> <span class="n">SSReg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SSE:&quot;</span><span class="p">,</span> <span class="n">SSE</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SST:&quot;</span><span class="p">,</span> <span class="n">SST</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SSReg: 19205.026268226196
+SSE: 4556.6456292096955
+SST: 23761.671897435903
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Degrees of Freedom</span>
+<span class="n">DoF_Reg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">null_mpg_model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+<span class="n">DoF_Error</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+<span class="n">DoF_Total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">null_mpg_model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degrees of Freedom: Regression:&quot;</span><span class="p">,</span> <span class="n">DoF_Reg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degrees of Freedom: Error:&quot;</span><span class="p">,</span> <span class="n">DoF_Error</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Degrees of Freedom: Total:&quot;</span><span class="p">,</span> <span class="n">DoF_Total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degrees of Freedom: Regression: 2
+Degrees of Freedom: Error: 387
+Degrees of Freedom: Total: 389
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="modelos-anidados">
+<h2>Modelos anidados<a class="headerlink" href="#modelos-anidados" title="Permalink to this heading">#</a></h2>
+<p>La prueba de significación de la regresión es en realidad un caso especial de prueba de lo que llamaremos <strong>modelos anidados</strong>. De forma más general, podemos comparar dos modelos, en los que un modelo está “anidado” dentro del otro, lo que significa que un modelo contiene un subconjunto de predictores sólo del modelo mayor.</p>
+<p>Consideremos el siguiente modelo completo,</p>
+<div class="math notranslate nohighlight">
+\[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{(p-1)} x_{i(p-1)} + \epsilon_i \]</div>
+<p>Este modelo tiene <span class="math notranslate nohighlight">\(p - 1\)</span> predictores, para un total de <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\beta\)</span> parámetros. Denotaremos los valores ajustados de este modelo como
+<span class="math notranslate nohighlight">\(\hat{y}_{1i}\)</span>.</p>
+<p>Sea el modelo nulo</p>
+<div class="math notranslate nohighlight">
+\[Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{(q-1)} x_{i(q-1)} + \epsilon_i\]</div>
+<p>donde <span class="math notranslate nohighlight">\(q &lt; p\)</span>. Este modelo tiene <span class="math notranslate nohighlight">\(q - 1\)</span> predictores, para un total de <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\(\beta\)</span>-parámetros. Denotaremos los valores ajustados de este modelo como
+<span class="math notranslate nohighlight">\(\hat{y}_{0i}\)</span>.</p>
+<p>La diferencia entre estos dos modelos puede codificarse mediante la hipótesis nula de una prueba.</p>
+<div class="math notranslate nohighlight">
+\[H_0: \beta_q = \beta_{q+1} = \cdots = \beta_{p - 1} = 0. \]</div>
+<p>En concreto, los parámetros <span class="math notranslate nohighlight">\(\beta\)</span> del modelo completo que no están en el modelo nulo son cero. El modelo resultante, que está anidado, es el modelo nulo.</p>
+<p>A continuación, podemos realizar esta prueba utilizando una prueba <span class="math notranslate nohighlight">\(F\)</span>, que es el resultado de la siguiente tabla ANOVA.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source</p></th>
+<th class="head"><p>Sum of Squares</p></th>
+<th class="head"><p>Degrees of Freedom</p></th>
+<th class="head"><p>Mean Square</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(F\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Diff</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(\hat{y}_{1i} - \hat{y}_{0i})^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(p - q\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{SSD} / (p - q)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{MSD} / \text{MSE}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Full</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(y_i - \hat{y}_{1i})^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n - p\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{SSE} / (n - p)\)</span></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Null</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(y_i - \hat{y}_{0i})^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n - q\)</span></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<div class="math notranslate nohighlight">
+\[ F = \frac{\sum_{i=1}^{n}(\hat{y}_{1i} - \hat{y}_{0i})^2 / (p - q)}{\sum_{i=1}^{n}(y_i - \hat{y}_{1i})^2 / (n - p)}.\]</div>
+<p>Observe que la fila “Diff” compara la suma de las diferencias al cuadrado de los valores ajustados. Los grados de libertad son entonces la diferencia del número de parámetros <span class="math notranslate nohighlight">\(\beta\)</span> estimados entre los dos modelos.</p>
+<p>Por ejemplo, el conjunto de datos <code class="docutils literal notranslate"><span class="pre">autompg</span></code> tiene una serie de variables adicionales que aún no hemos utilizado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># names of columns</span>
+<span class="n">autompg</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;mpg&#39;, &#39;cyl&#39;, &#39;disp&#39;, &#39;hp&#39;, &#39;wt&#39;, &#39;acc&#39;, &#39;year&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seguiremos utilizando <code class="docutils literal notranslate"><span class="pre">mpg</span></code> como respuesta, pero ahora consideraremos dos modelos diferentes.</p>
+<ul class="simple">
+<li><p>Completo: <code class="docutils literal notranslate"><span class="pre">mpg</span> <span class="pre">~</span> <span class="pre">wt</span> <span class="pre">+</span> <span class="pre">year</span> <span class="pre">+</span> <span class="pre">cyl</span> <span class="pre">+</span> <span class="pre">disp</span> <span class="pre">+</span> <span class="pre">hp</span> <span class="pre">+</span> <span class="pre">acc</span></code></p></li>
+<li><p>Nulo: <code class="docutils literal notranslate"><span class="pre">mpg</span> <span class="pre">~</span> <span class="pre">wt</span> <span class="pre">+</span> <span class="pre">year</span></code></p></li>
+</ul>
+<p>Obsérvese que se trata de modelos anidados, ya que el modelo nulo contiene un subconjunto de predictores del modelo completo y ningún predictor adicional. Ambos modelos tienen un intercepto <span class="math notranslate nohighlight">\(\beta_0\)</span> así como un coeficiente delante de cada uno de los predictores. Podríamos entonces escribir la hipótesis nula para comparar estos dos modelos como,</p>
+<div class="math notranslate nohighlight">
+\[ H_0: \beta_{\texttt{cyl}} = \beta_{\texttt{disp}} = \beta_{\texttt{hp}} = \beta_{\texttt{acc}} = 0 \]</div>
+<p>La alternativa es simplemente que al menos uno de los <span class="math notranslate nohighlight">\(\beta_{j}\)</span> del nulo no sea 0.</p>
+<p>Para realizar esta prueba en <code class="docutils literal notranslate"><span class="pre">Python</span></code> primero definimos ambos modelos, luego se los damos a los comandos <code class="docutils literal notranslate"><span class="pre">anova_lm()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="c1"># Generate the formula string for the full model</span>
+<span class="n">dependent_var</span> <span class="o">=</span> <span class="s1">&#39;mpg&#39;</span>
+<span class="n">independent_vars</span> <span class="o">=</span> <span class="n">autompg</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">dependent_var</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">full_formula</span> <span class="o">=</span> <span class="n">dependent_var</span> <span class="o">+</span> <span class="s1">&#39; ~ &#39;</span> <span class="o">+</span> <span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">independent_vars</span><span class="p">)</span>
+
+<span class="c1"># Define the null model</span>
+<span class="n">null_mpg_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;mpg ~ wt + year&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">autompg</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Define the full model using the generated formula</span>
+<span class="n">full_mpg_model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">full_formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">autompg</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Compare the models using an ANOVA test</span>
+<span class="n">anova_results</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">anova_lm</span><span class="p">(</span><span class="n">null_mpg_model</span><span class="p">,</span> <span class="n">full_mpg_model</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">anova_results</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   df_resid          ssr  df_diff    ss_diff         F    Pr(&gt;F)
+0     387.0  4556.645629      0.0        NaN       NaN       NaN
+1     383.0  4530.465818      4.0  26.179812  0.553302  0.696725
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Utilizamos <code class="docutils literal notranslate"><span class="pre">statsmodels.formula.api</span></code> (importado como smf) cuando queremos definir modelos utilizando cadenas de fórmulas similares a R.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">smf.ols('mpg</span> <span class="pre">~</span> <span class="pre">.',</span> <span class="pre">data=autompg).fit()</span></code> define un modelo con mpg como respuesta y todas las demás columnas de autompg como predictores.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sm.stats.anova_lm</span></code> se utiliza para comparar los modelos, e imprimirá una tabla mostrando los resultados de la prueba ANOVA.</p></li>
+</ul>
+<p><strong>Volviendo a los resultados</strong></p>
+<p>Aquí vemos que el valor del estadístico <span class="math notranslate nohighlight">\(F\)</span> es 0.55, y el valor p es muy grande, por lo que no podemos rechazar la hipótesis nula en ningún <span class="math notranslate nohighlight">\(\alpha\)</span> razonable y decimos que ninguna de <code class="docutils literal notranslate"><span class="pre">cyl</span></code>, <code class="docutils literal notranslate"><span class="pre">disp</span></code>, <code class="docutils literal notranslate"><span class="pre">hp</span></code>, y <code class="docutils literal notranslate"><span class="pre">acc</span></code> son significativas con <code class="docutils literal notranslate"><span class="pre">wt</span></code> y <code class="docutils literal notranslate"><span class="pre">year</span></code> ya en el modelo.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_7"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="7-0-Schedule_week_7.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="7-2-Categorical_variables.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lectura 7-2: Predictores categóricos e interacciones</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 7-1: Regresión Lineal Múltiple</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#significado-lineal">Significado “lineal”</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-matricial-de-la-regresion">Enfoque matricial de la regresión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix">Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.
+$$
+\begin{bmatrix}
+Y_1   \
+Y_2   \
+\vdots\
+Y_n   \
+\end{bmatrix}</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-del-muestreo">Distribución del muestreo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-un-solo-parametro">Pruebas de un solo parámetro</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza">Intervalos de confianza</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-la-respuesta-media">Intervalos de confianza para la respuesta media</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-prediccion">Intervalos de predicción</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-de-la-regresion">Importancia de la regresión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-anidados">Modelos anidados</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
