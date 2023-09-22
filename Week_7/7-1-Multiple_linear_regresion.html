@@ -228,6 +228,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 7-1: Regresión Lineal Múltiple</a></li>
 
 
+
+
 <li class="toctree-l1"><a class="reference internal" href="7-2-Categorical_variables.html">Lectura 7-2: Predictores categóricos e interacciones</a></li>
 
 
@@ -463,25 +465,15 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-matricial-de-la-regresion">Enfoque matricial de la regresión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix">Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.
-$$
-\begin{bmatrix}
-Y_1   \
-Y_2   \
-\vdots\
-Y_n   \
-\end{bmatrix}</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-del-muestreo">Distribución del muestreo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-un-solo-parametro">Pruebas de un solo parámetro</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza">Intervalos de confianza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-la-respuesta-media">Intervalos de confianza para la respuesta media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-prediccion">Intervalos de predicción</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-del-muestreo">Distribución del muestreo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-un-solo-parametro">Pruebas de un solo parámetro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza">Intervalos de confianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-la-respuesta-media">Intervalos de confianza para la respuesta media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-prediccion">Intervalos de predicción</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-de-la-regresion">Importancia de la regresión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-anidados">Modelos anidados</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-de-la-regresion">Importancia de la regresión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-anidados">Modelos anidados</a></li>
 </ul>
 
             </nav>
@@ -764,11 +756,7 @@ Y_n   \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\tabar\AppData\Local\Programs\Python\Python311\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
-  self._figure.tight_layout(*args, **kwargs)
-</pre></div>
-</div>
-<img alt="../_images/c47ee8dcc23bc1249b96564e591fbf337101afe97680910cfbc3afe5c2d9231d.png" src="../_images/c47ee8dcc23bc1249b96564e591fbf337101afe97680910cfbc3afe5c2d9231d.png" />
+<img alt="../_images/81a5d7a740dbf3b4f04c5c5a5c026491ea2ab43f63ec5a19ec8f288c7684306a.png" src="../_images/81a5d7a740dbf3b4f04c5c5a5c026491ea2ab43f63ec5a19ec8f288c7684306a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -785,7 +773,7 @@ Y_n   \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/572bdc250101111396e242b324cc0c7f2777b0a0aa059e354e5e53d00ec01e19.png" src="../_images/572bdc250101111396e242b324cc0c7f2777b0a0aa059e354e5e53d00ec01e19.png" />
+<img alt="../_images/962a787993a5110873e1a895faba0a6545f84d69b92f1327644a89cc580828ad.png" src="../_images/962a787993a5110873e1a895faba0a6545f84d69b92f1327644a89cc580828ad.png" />
 </div>
 </div>
 <p>Por ahora nos centraremos en utilizar dos variables, peso y año, como variables predictoras. Es decir, nos gustaría modelar la eficiencia de combustible (mpg) de un coche en función de su peso (wt) y el año del modelo (year). Para ello, definiremos el siguiente modelo lineal,</p>
@@ -796,27 +784,31 @@ Y_n   \
 <p><span class="math notranslate nohighlight">\(x_{i1}\)</span> como el año del modelo (year) del carro i.</p>
 <p>existen ahora en un espacio tridimensional, por lo que en lugar de ajustar una recta a los datos, ajustaremos un plano. (Pronto pasaremos a dimensiones superiores, así que éste será el último ejemplo fácil de visualizar y pensar de esta manera).</p>
 <p><img alt="image.png" src="../_images/MLR_2.png" /></p>
-<p>¿Cómo encontrar ese plano? Pues bien, queremos un plano que esté lo más cerca posible de los puntos de datos. Es decir, que minimice los errores que comete. ¿Cómo definiremos estos errores? Por supuesto, la distancia al cuadrado. Así que nos gustaría minimizar
-$<span class="math notranslate nohighlight">\(
+<p>¿Cómo encontrar ese plano? Pues bien, queremos un plano que esté lo más cerca posible de los puntos de datos. Es decir, que minimice los errores que comete. ¿Cómo definiremos estos errores? Por supuesto, la distancia al cuadrado. Así que nos gustaría minimizar</p>
+<div class="math notranslate nohighlight">
+\[
 f(\beta_0, \beta_1, \beta_2) = \sum_{i = 1}^{n}(y_i - (\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}))^2
-\)</span><span class="math notranslate nohighlight">\(
-con respecto a \)</span>\beta_0<span class="math notranslate nohighlight">\(, \)</span>\beta_1<span class="math notranslate nohighlight">\(, y \)</span>\beta_2<span class="math notranslate nohighlight">\(. ¿Cómo lo hacemos? Es otro problema sencillo de cálculo multivariante. Todo lo que hemos hecho es añadir una variable extra desde que lo hicimos la última vez. Así que de nuevo, tomamos una derivada con respecto a cada uno de \)</span>\beta_0<span class="math notranslate nohighlight">\(, \)</span>\beta_1<span class="math notranslate nohighlight">\(, y \)</span>\beta_2<span class="math notranslate nohighlight">\( y ponerlos igual a cero, a continuación, resolver el sistema resultante de ecuaciones. Es decir,
-\)</span><span class="math notranslate nohighlight">\(
+\]</div>
+<p>con respecto a <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>, y <span class="math notranslate nohighlight">\(\beta_2\)</span>. ¿Cómo lo hacemos? Es otro problema sencillo de cálculo multivariante. Todo lo que hemos hecho es añadir una variable extra desde que lo hicimos la última vez. Así que de nuevo, tomamos una derivada con respecto a cada uno de <span class="math notranslate nohighlight">\(\beta_0\)</span>, <span class="math notranslate nohighlight">\(\beta_1\)</span>, y <span class="math notranslate nohighlight">\(\beta_2\)</span> y ponerlos igual a cero, a continuación, resolver el sistema resultante de ecuaciones. Es decir,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 \frac{\partial f}{\partial \beta_0} &amp;= 0 \\
 \frac{\partial f}{\partial \beta_1} &amp;= 0 \\
 \frac{\partial f}{\partial \beta_2} &amp;= 0
 \end{aligned}
-\)</span><span class="math notranslate nohighlight">\(
-Una vez hecho esto, obtendremos de nuevo las **ecuaciones normales.**
-\)</span><span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<p>Una vez hecho esto, obtendremos de nuevo las <strong>ecuaciones normales.</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{aligned}
 n \beta_0 + \beta_1 \sum_{i = 1}^{n} x_{i1} + \beta_2 \sum_{i = 1}^{n} x_{i2} &amp;= \sum_{i = 1}^{n} y_i  \\
 \beta_0 \sum_{i = 1}^{n} x_{i1} + \beta_1 \sum_{i = 1}^{n} x_{i1}^2 + \beta_2 \sum_{i = 1}^{n} x_{i1}x_{i2} &amp;= \sum_{i = 1}^{n} x_{i1}y_i \\
 \beta_0 \sum_{i = 1}^{n} x_{i2} + \beta_1 \sum_{i = 1}^{n} x_{i1}x_{i2} + \beta_2 \sum_{i = 1}^{n} x_{i2}^2 &amp;= \sum_{i = 1}^{n} x_{i2}y_i
 \end{aligned}
-\)</span>$
-Ahora tenemos tres ecuaciones y tres variables, que podríamos resolver, o simplemente dejar que <code class="docutils literal notranslate"><span class="pre">Python</span></code> resuelva por nosotros.</p>
+\end{split}\]</div>
+<p>Ahora tenemos tres ecuaciones y tres variables, que podríamos resolver, o simplemente dejar que <code class="docutils literal notranslate"><span class="pre">Python</span></code>
+resuelva por nosotros.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create linear regression model</span>
@@ -866,38 +858,38 @@ dtype: float64
 <p>En nuestro ejemplo anterior utilizamos dos variables predictoras, pero sólo nos llevará un poco más de trabajo permitir un número arbitrario de variables predictoras y derivar sus estimaciones de coeficientes. Podemos considerar el modelo</p>
 <div class="math notranslate nohighlight">
 \[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{p-1} x_{i(p-1)} + \epsilon_i, \qquad i = 1, 2, \ldots, n \]</div>
-<p>donde <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. En este modelo, hay <span class="math notranslate nohighlight">\(p - 1\)</span> variables predictoras, <span class="math notranslate nohighlight">\(x_1, x_2, \cdots, x_{p-1}\)</span>. Hay un total de <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\beta\)</span>-parámetros y un único parámetro <span class="math notranslate nohighlight">\(\sigma^2\)</span> para la varianza de los errores. (Cabe señalar que casi con la misma frecuencia, los autores utilizan <span class="math notranslate nohighlight">\(p\)</span> como el número de predictores, haciendo que el número total de parámetros <span class="math notranslate nohighlight">\(\beta\)</span> <span class="math notranslate nohighlight">\(p+1\)</span>. Esto es algo que siempre hay que tener en cuenta cuando se lee sobre regresión múltiple. No hay una norma que se utilice con más frecuencia).</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix">
-<h1>Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.
-$$
+<p>donde <span class="math notranslate nohighlight">\(\epsilon_i \sim N(0, \sigma^2)\)</span>. En este modelo, hay <span class="math notranslate nohighlight">\(p - 1\)</span> variables predictoras, <span class="math notranslate nohighlight">\(x_1, x_2, \cdots, x_{p-1}\)</span>. Hay un total de <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\beta\)</span> -parámetros y un único parámetro <span class="math notranslate nohighlight">\(\sigma^2\)</span> para la varianza de los errores. (Cabe señalar que casi con la misma frecuencia, los autores utilizan <span class="math notranslate nohighlight">\(p\)</span> como el número de predictores, haciendo que el número total de parámetros <span class="math notranslate nohighlight">\(\beta\)</span> <span class="math notranslate nohighlight">\(p+1\)</span>. Esto es algo que siempre hay que tener en cuenta cuando se lee sobre regresión múltiple. No hay una norma que se utilice con más frecuencia).</p>
+<p>Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{bmatrix}
-Y_1   \
-Y_2   \
-\vdots\
-Y_n   \
-\end{bmatrix}<a class="headerlink" href="#si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix" title="Permalink to this heading">#</a></h1>
-<p>\begin{bmatrix}
-1      &amp; x_{11}    &amp; x_{12}    &amp; \cdots &amp; x_{1(p-1)} \
-1      &amp; x_{21}    &amp; x_{22}    &amp; \cdots &amp; x_{2(p-1)} \
-\vdots &amp; \vdots    &amp; \vdots    &amp;  &amp; \vdots \
-1      &amp; x_{n1}    &amp; x_{n2}    &amp; \cdots &amp; x_{n(p-1)} \
+Y_1   \\
+Y_2   \\
+\vdots\\
+Y_n   \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1      &amp; x_{11}    &amp; x_{12}    &amp; \cdots &amp; x_{1(p-1)} \\
+1      &amp; x_{21}    &amp; x_{22}    &amp; \cdots &amp; x_{2(p-1)} \\
+\vdots &amp; \vdots    &amp; \vdots    &amp;  &amp; \vdots \\
+1      &amp; x_{n1}    &amp; x_{n2}    &amp; \cdots &amp; x_{n(p-1)} \\
 \end{bmatrix}
 \begin{bmatrix}
-\beta_0 \
-\beta_1 \
-\beta_2 \
-\vdots \
-\beta_{p-1} \
+\beta_0 \\
+\beta_1 \\
+\beta_2 \\
+\vdots \\
+\beta_{p-1} \\
 \end{bmatrix}
 +
 \begin{bmatrix}
-\epsilon_1   \
-\epsilon_2   \
-\vdots\
-\epsilon_n   \
+\epsilon_1   \\
+\epsilon_2   \\
+\vdots\\
+\epsilon_n   \\
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <div class="math notranslate nohighlight">
 \[ Y = X \beta + \epsilon \]</div>
 <p>Donde</p>
@@ -950,7 +942,7 @@ n                           &amp; \sum_{i = 1}^{n} x_{i1}           &amp; \sum_{
 \end{bmatrix}
 \end{split}\]</div>
 <p>Las ecuaciones normales pueden escribirse mucho más sucintamente en notación matricial,
-$<span class="math notranslate nohighlight">\( X^X = X^y. \)</span>$</p>
+$<span class="math notranslate nohighlight">\( \left(  X^\top X  \right)\hat{\beta} = X^\top y \)</span>$</p>
 <p>Podemos entonces resolver esta expresión multiplicando ambos lados por la inversa de <span class="math notranslate nohighlight">\(X^\top X\)</span>, que existe, siempre que las columnas de <span class="math notranslate nohighlight">\(X\)</span> sean linealmente independientes. Entonces, como siempre, denotamos nuestra solución con un sombrero.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{\beta} = \left(  X^\top X  \right)^{-1}X^\top y \]</div>
@@ -1031,7 +1023,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.43468461998154
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.431366799345846
 </pre></div>
 </div>
 </div>
@@ -1053,79 +1045,53 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.431366799345832
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.431366799345794
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="distribucion-del-muestreo">
-<h2>Distribución del muestreo<a class="headerlink" href="#distribucion-del-muestreo" title="Permalink to this heading">#</a></h2>
+<h1>Distribución del muestreo<a class="headerlink" href="#distribucion-del-muestreo" title="Permalink to this heading">#</a></h1>
 <p>Como podemos ver en la siguiente salida, los resultados de llamar a <code class="docutils literal notranslate"><span class="pre">summary()</span></code> son similares a SLR, pero hay algunas diferencias, la más obvia es una nueva fila para la variable predictora añadida.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>           <td>mpg</td>       <th>  R-squared:         </th> <td>   0.808</td> 
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.807</td> 
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   815.6</td> 
-</tr>
-<tr>
-  <th>Date:</th>             <td>Sat, 16 Sep 2023</td> <th>  Prob (F-statistic):</th> <td>1.64e-139</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>15:43:15</td>     <th>  Log-Likelihood:    </th> <td> -1032.7</td> 
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   390</td>      <th>  AIC:               </th> <td>   2071.</td> 
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   387</td>      <th>  BIC:               </th> <td>   2083.</td> 
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>    
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>    
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-    <td></td>       <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>const</th> <td>  -14.6376</td> <td>    4.023</td> <td>   -3.638</td> <td> 0.000</td> <td>  -22.548</td> <td>   -6.727</td>
-</tr>
-<tr>
-  <th>wt</th>    <td>   -0.0066</td> <td>    0.000</td> <td>  -30.881</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.006</td>
-</tr>
-<tr>
-  <th>year</th>  <td>    0.7614</td> <td>    0.050</td> <td>   15.312</td> <td> 0.000</td> <td>    0.664</td> <td>    0.859</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>41.185</td> <th>  Durbin-Watson:     </th> <td>   1.242</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  69.160</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.658</td> <th>  Prob(JB):          </th> <td>9.60e-16</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td> 4.589</td> <th>  Cond. No.          </th> <td>7.18e+04</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.<br/>[2] The condition number is large, 7.18e+04. This might indicate that there are<br/>strong multicollinearity or other numerical problems.</div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    mpg   R-squared:                       0.808
+Model:                            OLS   Adj. R-squared:                  0.807
+Method:                 Least Squares   F-statistic:                     815.6
+Date:                Thu, 21 Sep 2023   Prob (F-statistic):          1.64e-139
+Time:                        10:27:13   Log-Likelihood:                -1032.7
+No. Observations:                 390   AIC:                             2071.
+Df Residuals:                     387   BIC:                             2083.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const        -14.6376      4.023     -3.638      0.000     -22.548      -6.727
+wt            -0.0066      0.000    -30.881      0.000      -0.007      -0.006
+year           0.7614      0.050     15.312      0.000       0.664       0.859
+==============================================================================
+Omnibus:                       41.185   Durbin-Watson:                   1.242
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               69.160
+Skew:                           0.658   Prob(JB):                     9.60e-16
+Kurtosis:                       4.589   Cond. No.                     7.18e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 7.18e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
 </div>
 <p>Para entender estas diferencias en detalle, tendremos que obtener primero la distribución de muestreo de <span class="math notranslate nohighlight">\(\hat{\beta}.\)</span></p>
 <p>La derivación de la distribución muestral de <a class="reference external" href="https://book.stat420.org/notes/mvn.pdf">una variable normal multivariada</a> dan una visión general básica. Estos son simplemente para su información, ya que no vamos a presentar la derivación en su totalidad aquí.</p>
@@ -1183,16 +1149,16 @@ C_{(p-1)0} &amp; C_{(p-1)1} &amp; C_{(p-1)2} &amp; \cdots &amp; C_{(p-1)(p-1)} \
 \[ \frac{\hat{\beta}_j - \beta_j}{s_e \sqrt{C_{jj}}} \sim t_{n-p}. \]</div>
 <p>Ahora que tenemos los resultados de distribución necesarios, podemos pasar a realizar pruebas y estimaciones de intervalo.</p>
 <section id="pruebas-de-un-solo-parametro">
-<h3>Pruebas de un solo parámetro<a class="headerlink" href="#pruebas-de-un-solo-parametro" title="Permalink to this heading">#</a></h3>
+<h2>Pruebas de un solo parámetro<a class="headerlink" href="#pruebas-de-un-solo-parametro" title="Permalink to this heading">#</a></h2>
 <p>La primera prueba que veremos es una prueba para un único parámetro <span class="math notranslate nohighlight">\(\beta_j\)</span>.</p>
 <div class="math notranslate nohighlight">
 \[H_0: \beta_j = 0 \quad \text{vs} \quad H_1: \beta_j \neq 0 \]</div>
 <p>De nuevo, la estadística de prueba adopta la forma</p>
 <div class="math notranslate nohighlight">
-\[ = . \]</div>
+\[\text{TS} = \frac{\text{EST} - \text{HYP}}{\text{SE}}.\]</div>
 <p>En particular,</p>
 <div class="math notranslate nohighlight">
-\[\text{TS} = \frac{\text{EST} - \text{HYP}}{\text{SE}}.\]</div>
+\[t = \frac{\hat{\beta}_j - \beta_j}{\text{SE}[\hat{\beta}_j]} = \frac{\hat{\beta}_j-0}{s_e\sqrt{C_{jj}}},\]</div>
 <p>que, bajo la hipótesis nula, sigue una distribución <span class="math notranslate nohighlight">\(t\)</span> con <span class="math notranslate nohighlight">\(n - p\)</span> grados de libertad.</p>
 <p>Recordemos nuestro modelo para <code class="docutils literal notranslate"><span class="pre">mpg</span></code>,</p>
 <div class="math notranslate nohighlight">
@@ -1277,7 +1243,7 @@ C_{(p-1)0} &amp; C_{(p-1)1} &amp; C_{(p-1)2} &amp; \cdots &amp; C_{(p-1)(p-1)} \
 <p>Esto es importante. No estamos simplemente probando si existe o no una relación entre el peso y la eficiencia del combustible. Estamos probando si hay una relación entre el peso y la eficiencia de combustible, dado que un término para el año está en el modelo. (Nótese que hemos suprimido algunos índices para facilitar la lectura).</p>
 </section>
 <section id="intervalos-de-confianza">
-<h3>Intervalos de confianza<a class="headerlink" href="#intervalos-de-confianza" title="Permalink to this heading">#</a></h3>
+<h2>Intervalos de confianza<a class="headerlink" href="#intervalos-de-confianza" title="Permalink to this heading">#</a></h2>
 <p>Dado que <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> es nuestra estimación para <span class="math notranslate nohighlight">\(\beta_j\)</span> y tenemos</p>
 <div class="math notranslate nohighlight">
 \[\text{E}[\hat{\beta}_j] = \beta_j \]</div>
@@ -1340,7 +1306,7 @@ C_{(p-1)0} &amp; C_{(p-1)1} &amp; C_{(p-1)2} &amp; \cdots &amp; C_{(p-1)(p-1)} \
 </div>
 </section>
 <section id="intervalos-de-confianza-para-la-respuesta-media">
-<h3>Intervalos de confianza para la respuesta media<a class="headerlink" href="#intervalos-de-confianza-para-la-respuesta-media" title="Permalink to this heading">#</a></h3>
+<h2>Intervalos de confianza para la respuesta media<a class="headerlink" href="#intervalos-de-confianza-para-la-respuesta-media" title="Permalink to this heading">#</a></h2>
 <p>Como vimos en SLR, podemos crear intervalos de confianza para la respuesta media, es decir, una estimación de intervalo para <span class="math notranslate nohighlight">\(\text{E}[Y \mid X = x]\)</span>. En SLR, la media de <span class="math notranslate nohighlight">\(Y\)</span> sólo dependía de un único valor <span class="math notranslate nohighlight">\(x\)</span>. Ahora, en la regresión múltiple, <span class="math notranslate nohighlight">\(\text{E}[Y \mid X = x]\)</span> depende del valor de cada uno de los predictores, por lo que definimos el vector <span class="math notranslate nohighlight">\(x_0\)</span> como,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} x_{0} = \begin{bmatrix}
@@ -1371,7 +1337,7 @@ $<span class="math notranslate nohighlight">\(\begin{aligned}
 <p>Si lo juntamos todo, obtenemos un intervalo de confianza para la respuesta media.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{y}(x_0) \pm t_{\alpha/2, n - p} \cdot s_e \sqrt{x_{0}^\top\left(X^\top X\right)^{-1}x_{0}}\]</div>
-<p>Las matemáticas han cambiado un poco, pero el proceso en <code class="docutils literal notranslate"><span class="pre">R</span></code> sigue siendo casi idéntico. Aquí, creamos un marco de datos para dos coches adicionales. Un coche que pesa 3500 libras producido en 1976, así como un segundo coche que pesa 5000 libras que fue producido en 1981.</p>
+<p>Las matemáticas han cambiado un poco, pero el proceso en <code class="docutils literal notranslate"><span class="pre">Python</span></code> sigue siendo casi idéntico. Aquí, creamos un marco de datos para dos coches adicionales. Un coche que pesa 3500 libras producido en 1976, así como un segundo coche que pesa 5000 libras que fue producido en 1981.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predictions for new data</span>
@@ -1527,7 +1493,7 @@ Name: year, dtype: int64
 <p>Teniendo esto en cuenta, los intervalos de confianza para el individuo <span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span> son en realidad un caso especial de un intervalo de confianza para la respuesta media.</p>
 </section>
 <section id="intervalos-de-prediccion">
-<h3>Intervalos de predicción<a class="headerlink" href="#intervalos-de-prediccion" title="Permalink to this heading">#</a></h3>
+<h2>Intervalos de predicción<a class="headerlink" href="#intervalos-de-prediccion" title="Permalink to this heading">#</a></h2>
 <p>Al igual que con SLR, la creación de intervalos de predicción implica un ligero cambio en el error estándar para tener en cuenta el hecho de que ahora estamos considerando una observación, en lugar de una media.</p>
 <p>Aquí utilizamos <span class="math notranslate nohighlight">\(\hat{y}(x_0)\)</span> para estimar <span class="math notranslate nohighlight">\(Y_0\)</span>, una nueva observación de <span class="math notranslate nohighlight">\(Y\)</span> en el vector predictor <span class="math notranslate nohighlight">\(x_0\)</span>.
 $<span class="math notranslate nohighlight">\(
@@ -1572,7 +1538,7 @@ $<span class="math notranslate nohighlight">\(
 </section>
 </section>
 <section id="importancia-de-la-regresion">
-<h2>Importancia de la regresión<a class="headerlink" href="#importancia-de-la-regresion" title="Permalink to this heading">#</a></h2>
+<h1>Importancia de la regresión<a class="headerlink" href="#importancia-de-la-regresion" title="Permalink to this heading">#</a></h1>
 <p>La descomposición de la variación que habíamos visto en SLR sigue siendo válida para MLR.</p>
 <div class="math notranslate nohighlight">
 \[ \sum_{i=1}^{n}(y_i - \bar{y})^2 = \sum_{i=1}^{n}(y_i - \hat{y}_i)^2 + \sum_{i=1}^{n}(\hat{y}_i - \bar{y})^2\]</div>
@@ -1650,7 +1616,7 @@ $<span class="math notranslate nohighlight">\(
 <div class="math notranslate nohighlight">
 \[P(F_{p-1, n-p} &gt; F)\]</div>
 <p>ya que rechazamos para valores grandes de <span class="math notranslate nohighlight">\(F\)</span>. Un valor grande del estadístico corresponde a una gran parte de la varianza explicada por la regresión. Aquí <span class="math notranslate nohighlight">\(F_{p-1, n-p}\)</span> representa una variable aleatoria que sigue una distribución <span class="math notranslate nohighlight">\(F\)</span> con <span class="math notranslate nohighlight">\(p - 1\)</span> y <span class="math notranslate nohighlight">\(n - p\)</span> grados de libertad.</p>
-<p>Para realizar esta prueba en <code class="docutils literal notranslate"><span class="pre">R</span></code>, primero especificamos explícitamente los dos modelos en <code class="docutils literal notranslate"><span class="pre">R</span></code> y guardamos los resultados en variables diferentes. A continuación, utilizamos <code class="docutils literal notranslate"><span class="pre">anova()</span></code> para comparar los dos modelos, dando a <code class="docutils literal notranslate"><span class="pre">anova()</span></code> el modelo nulo en primer lugar y el modelo alternativo (completo) en segundo lugar. (Especificar primero el modelo completo dará como resultado el mismo valor p, pero algunos valores intermedios sin sentido).</p>
+<p>Para realizar esta prueba en <code class="docutils literal notranslate"><span class="pre">Python</span></code>, primero especificamos explícitamente los dos modelos en <code class="docutils literal notranslate"><span class="pre">Python</span></code> y guardamos los resultados en variables diferentes. A continuación, utilizamos <code class="docutils literal notranslate"><span class="pre">anova()</span></code> para comparar los dos modelos, dando a <code class="docutils literal notranslate"><span class="pre">anova()</span></code> el modelo nulo en primer lugar y el modelo alternativo (completo) en segundo lugar. (Especificar primero el modelo completo dará como resultado el mismo valor p, pero algunos valores intermedios sin sentido).</p>
 <p>En este caso,</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(H_0\)</span>: <span class="math notranslate nohighlight">\(Y_i = \beta_0 + \epsilon_i\)</span></p></li>
@@ -1801,18 +1767,16 @@ Degrees of Freedom: Total: 389
 </div>
 </section>
 <section id="modelos-anidados">
-<h2>Modelos anidados<a class="headerlink" href="#modelos-anidados" title="Permalink to this heading">#</a></h2>
+<h1>Modelos anidados<a class="headerlink" href="#modelos-anidados" title="Permalink to this heading">#</a></h1>
 <p>La prueba de significación de la regresión es en realidad un caso especial de prueba de lo que llamaremos <strong>modelos anidados</strong>. De forma más general, podemos comparar dos modelos, en los que un modelo está “anidado” dentro del otro, lo que significa que un modelo contiene un subconjunto de predictores sólo del modelo mayor.</p>
 <p>Consideremos el siguiente modelo completo,</p>
 <div class="math notranslate nohighlight">
 \[ Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{(p-1)} x_{i(p-1)} + \epsilon_i \]</div>
-<p>Este modelo tiene <span class="math notranslate nohighlight">\(p - 1\)</span> predictores, para un total de <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\beta\)</span> parámetros. Denotaremos los valores ajustados de este modelo como
-<span class="math notranslate nohighlight">\(\hat{y}_{1i}\)</span>.</p>
+<p>Este modelo tiene <span class="math notranslate nohighlight">\(p - 1\)</span> predictores, para un total de <span class="math notranslate nohighlight">\(p\)</span> <span class="math notranslate nohighlight">\(\beta\)</span> parámetros. Denotaremos los valores ajustados de este modelo como <span class="math notranslate nohighlight">\(\hat{y}_{1i}\)</span>.</p>
 <p>Sea el modelo nulo</p>
 <div class="math notranslate nohighlight">
 \[Y_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \cdots + \beta_{(q-1)} x_{i(q-1)} + \epsilon_i\]</div>
-<p>donde <span class="math notranslate nohighlight">\(q &lt; p\)</span>. Este modelo tiene <span class="math notranslate nohighlight">\(q - 1\)</span> predictores, para un total de <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\(\beta\)</span>-parámetros. Denotaremos los valores ajustados de este modelo como
-<span class="math notranslate nohighlight">\(\hat{y}_{0i}\)</span>.</p>
+<p>donde <span class="math notranslate nohighlight">\(q &lt; p\)</span>. Este modelo tiene <span class="math notranslate nohighlight">\(q - 1\)</span> predictores, para un total de <span class="math notranslate nohighlight">\(q\)</span> <span class="math notranslate nohighlight">\(\beta\)</span>-parámetros. Denotaremos los valores ajustados de este modelo como <span class="math notranslate nohighlight">\(\hat{y}_{0i}\)</span>.</p>
 <p>La diferencia entre estos dos modelos puede codificarse mediante la hipótesis nula de una prueba.</p>
 <div class="math notranslate nohighlight">
 \[H_0: \beta_q = \beta_{q+1} = \cdots = \beta_{p - 1} = 0. \]</div>
@@ -1914,7 +1878,6 @@ Degrees of Freedom: Total: 389
 <p><strong>Volviendo a los resultados</strong></p>
 <p>Aquí vemos que el valor del estadístico <span class="math notranslate nohighlight">\(F\)</span> es 0.55, y el valor p es muy grande, por lo que no podemos rechazar la hipótesis nula en ningún <span class="math notranslate nohighlight">\(\alpha\)</span> razonable y decimos que ninguna de <code class="docutils literal notranslate"><span class="pre">cyl</span></code>, <code class="docutils literal notranslate"><span class="pre">disp</span></code>, <code class="docutils literal notranslate"><span class="pre">hp</span></code>, y <code class="docutils literal notranslate"><span class="pre">acc</span></code> son significativas con <code class="docutils literal notranslate"><span class="pre">wt</span></code> y <code class="docutils literal notranslate"><span class="pre">year</span></code> ya en el modelo.</p>
 </section>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1988,25 +1951,15 @@ Degrees of Freedom: Total: 389
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enfoque-matricial-de-la-regresion">Enfoque matricial de la regresión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#si-tuvieramos-que-apilar-las-n-ecuaciones-lineales-que-representan-cada-y-i-en-un-vector-columna-obtenemos-lo-siguiente-begin-bmatrix-y-1-y-2-vdots-y-n-end-bmatrix">Si tuviéramos que apilar las <span class="math notranslate nohighlight">\(n\)</span> ecuaciones lineales que representan cada <span class="math notranslate nohighlight">\(Y_i\)</span> en un vector columna, obtenemos lo siguiente.
-$$
-\begin{bmatrix}
-Y_1   \
-Y_2   \
-\vdots\
-Y_n   \
-\end{bmatrix}</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-del-muestreo">Distribución del muestreo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-un-solo-parametro">Pruebas de un solo parámetro</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza">Intervalos de confianza</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-la-respuesta-media">Intervalos de confianza para la respuesta media</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-prediccion">Intervalos de predicción</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#distribucion-del-muestreo">Distribución del muestreo</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pruebas-de-un-solo-parametro">Pruebas de un solo parámetro</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza">Intervalos de confianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-confianza-para-la-respuesta-media">Intervalos de confianza para la respuesta media</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalos-de-prediccion">Intervalos de predicción</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-de-la-regresion">Importancia de la regresión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-anidados">Modelos anidados</a></li>
-</ul>
-</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#importancia-de-la-regresion">Importancia de la regresión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-anidados">Modelos anidados</a></li>
 </ul>
 
   </nav></div>

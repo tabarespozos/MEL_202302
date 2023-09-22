@@ -227,6 +227,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="7-1-Multiple_linear_regresion.html">Lectura 7-1: Regresión Lineal Múltiple</a></li>
 
 
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 7-2: Predictores categóricos e interacciones</a></li>
 
 
@@ -1101,7 +1103,7 @@ Y = (\beta_0 + \beta_2) + (\beta_1 + \beta_3) x_1 + \epsilon.
 <li><p><span class="math notranslate nohighlight">\(\beta_1\)</span> es el cambio en la media de <code class="docutils literal notranslate"><span class="pre">mpg</span></code> para un aumento de un <code class="docutils literal notranslate"><span class="pre">disp</span></code>, para carros <strong>extranjeros</strong>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\beta_0 + \beta_2\)</span> es la media de <code class="docutils literal notranslate"><span class="pre">mpg</span></code> de un coche nacional con
 <strong>0</strong> <code class="docutils literal notranslate"><span class="pre">disp</span></code>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta_1 + \beta_3\)</span> es el cambio en la media de <code class="docutils literal notranslate"><span class="pre">mpg</span></code> para un aumento de un <code class="docutils literal notranslate"><span class="pre">disp</span></code>, para carros <strong>domésticos</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_1 + \beta_3\)</span> es el cambio en la media de <code class="docutils literal notranslate"><span class="pre">mpg</span></code> para un aumento de un <code class="docutils literal notranslate"><span class="pre">disp</span></code>, para carros <strong>nacionales</strong>.</p></li>
 </ul>
 <p>¿Cómo ajustamos este modelo en <code class="docutils literal notranslate"><span class="pre">Python</span></code>? Hay varias formas de hacerlo.</p>
 <p>Un método sería simplemente crear una nueva variable, y luego ajustar un modelo como cualquier otro.</p>
@@ -1278,7 +1280,7 @@ dtype: float64
 </div>
 </div>
 <p>Vemos que estas líneas se ajustan mucho mejor a los datos, lo que coincide con el resultado de nuestras pruebas.</p>
-<p>Hasta ahora sólo hemos visto la interacción entre una variable categórica (<code class="docutils literal notranslate"><span class="pre">doméstica</span></code>) y una variable numérica (<code class="docutils literal notranslate"><span class="pre">disp</span></code>). Aunque esto es fácil de visualizar, ya que permite diferentes pendientes para dos líneas, no es el único tipo de interacción que podemos utilizar en un modelo. También podemos considerar interacciones entre dos variables numéricas.</p>
+<p>Hasta ahora sólo hemos visto la interacción entre una variable categórica (<code class="docutils literal notranslate"><span class="pre">nacional</span></code>) y una variable numérica (<code class="docutils literal notranslate"><span class="pre">disp</span></code>). Aunque esto es fácil de visualizar, ya que permite diferentes pendientes para dos líneas, no es el único tipo de interacción que podemos utilizar en un modelo. También podemos considerar interacciones entre dos variables numéricas.</p>
 <p>Consideremos el modelo</p>
 <div class="math notranslate nohighlight">
 \[
