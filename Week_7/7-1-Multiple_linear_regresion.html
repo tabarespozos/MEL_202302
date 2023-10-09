@@ -237,6 +237,22 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 8</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_8/8-1-diagnostics.html">Lectura 8-1: Diagnóstico de modelos</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_8/8-2-transformations.html">Lectura 8-2: Transformaciones</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_8/8-3-collinearity.html">Lectura 8-3: Colinealidad</a></li>
+
+
+</ul>
 
     </div>
 </nav></div>
@@ -756,7 +772,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/81a5d7a740dbf3b4f04c5c5a5c026491ea2ab43f63ec5a19ec8f288c7684306a.png" src="../_images/81a5d7a740dbf3b4f04c5c5a5c026491ea2ab43f63ec5a19ec8f288c7684306a.png" />
+<img alt="../_images/f052759cf9a7b1a565cf475cd695b13b643055cdec139bc05c9918747d1084c4.png" src="../_images/f052759cf9a7b1a565cf475cd695b13b643055cdec139bc05c9918747d1084c4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -773,7 +789,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/962a787993a5110873e1a895faba0a6545f84d69b92f1327644a89cc580828ad.png" src="../_images/962a787993a5110873e1a895faba0a6545f84d69b92f1327644a89cc580828ad.png" />
+<img alt="../_images/1db9487bf4df2dd12ee36e23012359bcef856d982cef7e5336f15ffe10638f3a.png" src="../_images/1db9487bf4df2dd12ee36e23012359bcef856d982cef7e5336f15ffe10638f3a.png" />
 </div>
 </div>
 <p>Por ahora nos centraremos en utilizar dos variables, peso y año, como variables predictoras. Es decir, nos gustaría modelar la eficiencia de combustible (mpg) de un coche en función de su peso (wt) y el año del modelo (year). Para ello, definiremos el siguiente modelo lineal,</p>
@@ -1045,7 +1061,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.431366799345794
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4313667993457795
 </pre></div>
 </div>
 </div>
@@ -1066,8 +1082,8 @@ dtype: float64
 Dep. Variable:                    mpg   R-squared:                       0.808
 Model:                            OLS   Adj. R-squared:                  0.807
 Method:                 Least Squares   F-statistic:                     815.6
-Date:                Thu, 21 Sep 2023   Prob (F-statistic):          1.64e-139
-Time:                        10:27:13   Log-Likelihood:                -1032.7
+Date:                Mon, 09 Oct 2023   Prob (F-statistic):          1.64e-139
+Time:                        10:43:20   Log-Likelihood:                -1032.7
 No. Observations:                 390   AIC:                             2071.
 Df Residuals:                     387   BIC:                             2083.
 Df Model:                           2                                         
@@ -1426,7 +1442,7 @@ Name: year, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e2d846fb46c1033d733623c8ae988acbbd8bb5963731fa1d90ebeb437daf0f62.png" src="../_images/e2d846fb46c1033d733623c8ae988acbbd8bb5963731fa1d90ebeb437daf0f62.png" />
+<img alt="../_images/6ab2fe93b34a8772d691c44ff8a524007b7a7b9a5e2a1c6adfc41553eef735da.png" src="../_images/6ab2fe93b34a8772d691c44ff8a524007b7a7b9a5e2a1c6adfc41553eef735da.png" />
 </div>
 </div>
 <p>Sin embargo, ahora tenemos que considerar el peso y el año juntos. Y basándonos en el gráfico anterior, uno de los coches nuevos está dentro de la “mancha” de valores observados, mientras que el otro, el coche de 1981 con un peso de 5000 libras, está notablemente fuera de los valores observados. Se trata de una extrapolación oculta que hay que tener en cuenta al utilizar la regresión múltiple.</p>
@@ -1446,7 +1462,7 @@ Name: year, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.006841079982173
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20.00684107998096
 </pre></div>
 </div>
 </div>
@@ -1673,10 +1689,10 @@ $<span class="math notranslate nohighlight">\(
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   815.6</td> 
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 16 Sep 2023</td> <th>  Prob (F-statistic):</th> <td>1.64e-139</td>
+  <th>Date:</th>             <td>Mon, 09 Oct 2023</td> <th>  Prob (F-statistic):</th> <td>1.64e-139</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>15:59:00</td>     <th>  Log-Likelihood:    </th> <td> -1032.7</td> 
+  <th>Time:</th>                 <td>10:43:21</td>     <th>  Log-Likelihood:    </th> <td> -1032.7</td> 
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   390</td>      <th>  AIC:               </th> <td>   2071.</td> 
@@ -1737,8 +1753,8 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SSReg: 19205.026268226196
-SSE: 4556.6456292096955
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SSReg: 19205.02626822619
+SSE: 4556.645629209696
 SST: 23761.671897435903
 </pre></div>
 </div>
