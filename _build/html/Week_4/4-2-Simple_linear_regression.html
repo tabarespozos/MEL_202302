@@ -197,6 +197,8 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-3-Hypothesis_2.html">Lectura 3-3: Pruebas de Hipotesis 2.</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
 <ul class="current nav bd-sidenav">
@@ -218,6 +220,36 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 7</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_7/7-1-Multiple_linear_regresion.html">Lectura 7-1: Regresión Lineal Múltiple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_7/7-2-Categorical_variables.html">Lectura 7-2: Predictores categóricos e interacciones</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 8</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_8/8-1-diagnostics.html">Lectura 8-1: Diagnóstico de modelos</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_8/8-2-transformations.html">Lectura 8-2: Transformaciones</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_8/8-3-collinearity.html">Lectura 8-3: Colinealidad</a></li>
 
 
 </ul>
@@ -698,7 +730,7 @@ Y_i \mid X_i \sim N(\beta_0 + \beta_1 x_i, \sigma^2)
 \text{Var}[Y_i \mid X_i = x_i] = \sigma^2.
 \]</div>
 <p>Esto se muestra visualmente en la siguiente imagen. Vemos que para cualquier valor <span class="math notranslate nohighlight">\(x\)</span>, el valor esperado de <span class="math notranslate nohighlight">\(Y\)</span> es <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 x\)</span>. Para cada valor de <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(Y\)</span> tiene la misma varianza <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
-<p><img alt="" src="Images/SLR_model.png" /></p>
+<p><img alt="" src="../_images/SLR_model.png" /></p>
 <p>A menudo, hablamos directamente de las suposiciones que hace este modelo. Se pueden abreviar ingeniosamente con <strong>LINE</strong>.</p>
 <ul class="simple">
 <li><p><strong>L</strong>ineal. La relación entre <span class="math notranslate nohighlight">\(Y\)</span> y <span class="math notranslate nohighlight">\(x\)</span> es lineal, de la forma <span class="math notranslate nohighlight">\(\beta_0 + \beta_1 * x\)</span>.</p></li>
@@ -1210,10 +1242,10 @@ R^2 &amp;= \frac{\text{SSReg}}{\text{SST}} = \frac{\sum_{i=1}^{n}(\hat{y}_i - \b
 </div>
 <p>Para el ejemplo de  los carros  calculamos <span class="math notranslate nohighlight">\(R^2 = 0.65\)</span>. Entonces diremos que <span class="math notranslate nohighlight">\(65\%\)</span> de la variabilidad observada en la distancia de frenado se explica por la relación lineal con la velocidad.</p>
 <p>Los siguientes gráficos demuestran visualmente las tres “sumas de cuadrados” para un conjunto de datos simulado que tiene <span class="math notranslate nohighlight">\(R^2 = 0.92\)</span>, que es un valor algo alto. Observe en el gráfico final que las flechas naranjas representan una proporción mayor del total de flechas.</p>
-<p><img alt="" src="Images/SST.png" /></p>
+<p><img alt="" src="../_images/SST.png" /></p>
 <p>Los siguientes gráficos demuestran nuevamente visualmente las tres “sumas de cuadrados”, esta vez para un conjunto de datos simulado que tiene <span class="math notranslate nohighlight">\(R^2 = 0.19\)</span>. Observe en el gráfico final que ahora las flechas azules representan una proporción mayor del total de flechas.</p>
-<p><img alt="" src="Images/SST2.png" /></p>
-<p><img alt="" src="Images/SST2.png" /></p>
+<p><img alt="" src="../_images/SST2.png" /></p>
+<p><img alt="" src="../_images/SST2.png" /></p>
 </section>
 </section>
 <section id="hacer-regresiones-en-python">

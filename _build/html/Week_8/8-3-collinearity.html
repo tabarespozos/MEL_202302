@@ -1,0 +1,1452 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lectura 8-3: Colinealidad &#8212; MEL 202302</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Week_8/8-3-collinearity';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="../Week_9/9-0-Schedule_week_9.html" />
+    <link rel="prev" title="Lectura 8-2: Transformaciones" href="8-2-transformations.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../Syllabus.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">MEL 202302</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Syllabus.html">
+                    Syllabus
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 1</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-0-Schedule_week_1.html">Semana 1. Introducción al análisis estadístico</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-1-Introduction_pensamiento_stat.html">Lectura 1-1: Introducción al Pensamiento estadístico</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-2-Estad%C3%ADstica_descriptiva.html">Lectura 1-2:  Estadística Descriptiva</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_1/1-3-Visualizations.html">Lectura 1-3: Visualización de datos con Python</a></li>
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 2</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-0-Schedule_week_2.html">Semana 2. Probabilidad y distribuciones Probabilidad y Distribuciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_2/2-1-Prob.html">Lectura 2-1: Probabilidad y estadística</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 3</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-1-Inference.html">Lectura 3-1: Inferencia estadística</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-2-Hypothesis.html">Lectura 3-2: Pruebas de Hipotesis</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_3/3-3-Hypothesis_2.html">Lectura 3-3: Pruebas de Hipotesis 2.</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 4</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-1%20Correlaciones.html">Lectura 4-1: Correlaciones</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-2-Simple_linear_regression.html">Lectura 4-2: Regresión lineal simple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_4/4-3-SLR_supuestos.html">Lectura 4-3: Supuestos de la regresión lineal simple</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 5</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_5/5-2-Hypothesis_Confidence.html">Lectura 5-1: Inferencia en RLS</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 7</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Week_7/7-1-Multiple_linear_regresion.html">Lectura 7-1: Regresión Lineal Múltiple</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Week_7/7-2-Categorical_variables.html">Lectura 7-2: Predictores categóricos e interacciones</a></li>
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Semana 8</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="8-1-diagnostics.html">Lectura 8-1: Diagnóstico de modelos</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="8-2-transformations.html">Lectura 8-2: Transformaciones</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lectura 8-3: Colinealidad</a></li>
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/tabarespozos/MEL_202302/blob/MEL_202302/Week_8/8-3-collinearity.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/tabarespozos/MEL_202302/issues/new?title=Issue%20on%20page%20%2FWeek_8/8-3-collinearity.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Week_8/8-3-collinearity.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lectura 8-3: Colinealidad</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 8-3: Colinealidad</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#colinealidad-exacta">Colinealidad exacta</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#colinealidad">Colinealidad</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-de-inflacion-de-la-varianza">Factor de Inflación de la Varianza.</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="lectura-8-3-colinealidad">
+<h1>Lectura 8-3: Colinealidad<a class="headerlink" href="#lectura-8-3-colinealidad" title="Permalink to this heading">#</a></h1>
+</section>
+<section id="colinealidad-exacta">
+<h1>Colinealidad exacta<a class="headerlink" href="#colinealidad-exacta" title="Permalink to this heading">#</a></h1>
+<p>Vamos a crear un conjunto de datos donde uno de los predictores, <span class="math notranslate nohighlight">\(x_3\)</span>, es una combinación lineal de los otros predictores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">gen_exact_collin_data</span><span class="p">(</span><span class="n">num_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">+</span> <span class="mi">3</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_samples</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;x1&#39;</span><span class="p">:</span> <span class="n">x1</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">:</span> <span class="n">x2</span><span class="p">,</span> <span class="s1">&#39;x3&#39;</span><span class="p">:</span> <span class="n">x3</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Observe que, de la forma en que estamos generando estos datos, la respuesta <span class="math notranslate nohighlight">\(y\)</span> sólo depende realmente de <span class="math notranslate nohighlight">\(x_1\)</span> y <span class="math notranslate nohighlight">\(x_2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_collin_data</span> <span class="o">=</span> <span class="n">gen_exact_collin_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>            y         x1         x2          x3
+0  151.248075  84.967142  62.923146  424.626868
+1  150.074915  78.617357  67.896773  431.821808
+2  158.846364  86.476885  68.286427  449.099480
+3  165.272714  95.230299  65.988614  457.415052
+4  148.474368  77.658466  69.193571  435.091218
+</pre></div>
+</div>
+</div>
+</div>
+<p>¿Qué ocurre cuando intentamos ajustar un modelo de regresión en <code class="docutils literal notranslate"><span class="pre">Python</span></code> utilizando todos los predictores?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.988
+Model:                            OLS   Adj. R-squared:                  0.988
+Method:                 Least Squares   F-statistic:                     4146.
+Date:                Mon, 09 Oct 2023   Prob (F-statistic):           1.15e-94
+Time:                        09:51:17   Log-Likelihood:                -147.62
+No. Observations:                 100   AIC:                             301.2
+Df Residuals:                      97   BIC:                             309.1
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          0.4127      1.392      0.297      0.767      -2.349       3.175
+x1             0.3299      0.396      0.833      0.407      -0.456       1.116
+x2            -0.3879      0.797     -0.487      0.628      -1.970       1.195
+x3             0.3464      0.194      1.783      0.078      -0.039       0.732
+==============================================================================
+Omnibus:                        3.125   Durbin-Watson:                   2.220
+Prob(Omnibus):                  0.210   Jarque-Bera (JB):                3.080
+Skew:                           0.108   Prob(JB):                        0.214
+Kurtosis:                       3.832   Cond. No.                     9.10e+16
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is 2.5e-27. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vemos que <code class="docutils literal notranslate"><span class="pre">Python</span></code> simplemente decide excluir una variable. ¿Por qué sucede?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-9.65821262e+08 -6.43880844e+08 -1.28776169e+09  3.21940422e+08]
+ [-6.43880844e+08 -4.29253896e+08 -8.58507791e+08  2.14626948e+08]
+ [-1.28776169e+09 -8.58507791e+08 -1.71701558e+09  4.29253896e+08]
+ [ 3.21940422e+08  2.14626948e+08  4.29253896e+08 -1.07313474e+08]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Si intentamos encontrar <span class="math notranslate nohighlight">\(\boldsymbol{\hat{\beta}}\)</span> utilizando
+<span class="math notranslate nohighlight">\(\left( \boldsymbol{X}^T \boldsymbol{X} \right)^{-1}\)</span>, vemos que esto no es posible, debido a que las columnas de <span class="math notranslate nohighlight">\(\boldsymbol{X}\)</span> son linealmente dependientes. Las líneas de código anteriores no se han ejecutado, ¡porque producen un error!</p>
+<p>Cuando esto ocurre, decimos que hay <strong>colinealidad exacta</strong> en el conjunto de datos.</p>
+<p>Como resultado de este problema, <code class="docutils literal notranslate"><span class="pre">Python</span></code> esencialmente eligió ajustar el modelo <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">~</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></code>. Sin embargo, observe que otros dos modelos lograrían exactamente el mismo ajuste.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">]]))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x3&#39;</span><span class="p">]]))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">exact_collin_data</span><span class="p">[[</span><span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="s1">&#39;x3&#39;</span><span class="p">]]))</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vemos que los valores ajustados para cada uno de los tres modelos son exactamente los mismos. Esto se debe a que <span class="math notranslate nohighlight">\(x_3\)</span> contiene toda la información de <span class="math notranslate nohighlight">\(x_1\)</span> y <span class="math notranslate nohighlight">\(x_2\)</span>. Mientras una de <span class="math notranslate nohighlight">\(x_1\)</span> o <span class="math notranslate nohighlight">\(x_2\)</span> esté incluida en el modelo, <span class="math notranslate nohighlight">\(x_3\)</span> puede utilizarse para recuperar la información de la variable no incluida.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">model3</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aunque sus valores ajustados son todos iguales, sus coeficientes estimados son muy diferentes. El signo de <span class="math notranslate nohighlight">\(x_2\)</span> cambia en dos de los modelos. Así que sólo <code class="docutils literal notranslate"><span class="pre">fit1</span></code> <em>explica</em> correctamente la relación entre las variables, <code class="docutils literal notranslate"><span class="pre">fit2</span></code> y <code class="docutils literal notranslate"><span class="pre">fit3</span></code> aún <em>predicen</em> tan bien como <code class="docutils literal notranslate"><span class="pre">fit1</span></code>, a pesar de que los coeficientes tienen poco o ningún significado, un concepto al que volveremos más adelante.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const    1.451809
+x1       1.022609
+x2       0.997545
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const    0.703650
+x1       0.523837
+x3       0.249386
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model3</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const   -0.082105
+x2      -1.047673
+x3       0.511304
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="colinealidad">
+<h1>Colinealidad<a class="headerlink" href="#colinealidad" title="Permalink to this heading">#</a></h1>
+<p>La colinealidad exacta es un ejemplo extremo de <strong>colinealidad</strong>, que se produce en la regresión múltiple cuando las variables predictoras están muy correlacionadas. La colinealidad a menudo se denomina <em>colinealidad múltiple</em>, ya que es un fenómeno que realmente sólo se produce durante la regresión múltiple.</p>
+<p>Si observamos el conjunto de datos <code class="docutils literal notranslate"><span class="pre">seatpos</span></code> del paquete <code class="docutils literal notranslate"><span class="pre">faraway</span></code>, veremos un ejemplo de este concepto. Los predictores de este conjunto de datos son varios atributos de los conductores de coches, como su altura, peso y edad. La variable de respuesta <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code> mide la “distancia horizontal del punto medio de las caderas desde un lugar fijo del coche en mm”. Esencialmente, mide la posición del asiento para un conductor determinado. Se trata de una información potencialmente útil para los fabricantes de automóviles que tengan en cuenta la comodidad y la seguridad a la hora de diseñar los vehículos.</p>
+<p>Intentaremos ajustar un modelo que prediga el <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code>. Hay dos variables predictoras que nos interesan de inmediato: <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> y <code class="docutils literal notranslate"><span class="pre">Ht</span></code>. Ciertamente esperamos que la altura de una persona esté altamente correlacionada con su altura cuando lleva zapatos. Prestaremos especial atención a estas dos variables a la hora de ajustar los modelos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">faraway.utils</span>
+<span class="kn">import</span> <span class="nn">faraway.datasets.seatpos</span>   
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># cargar base de datos de ejemplo</span>
+
+<span class="n">seatpos</span> <span class="o">=</span> <span class="n">faraway</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">seatpos</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+<span class="n">seatpos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Weight</th>
+      <th>HtShoes</th>
+      <th>Ht</th>
+      <th>Seated</th>
+      <th>Arm</th>
+      <th>Thigh</th>
+      <th>Leg</th>
+      <th>hipcenter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>46</td>
+      <td>180</td>
+      <td>187.2</td>
+      <td>184.9</td>
+      <td>95.2</td>
+      <td>36.1</td>
+      <td>45.3</td>
+      <td>41.3</td>
+      <td>-206.300</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>31</td>
+      <td>175</td>
+      <td>167.5</td>
+      <td>165.5</td>
+      <td>83.8</td>
+      <td>32.9</td>
+      <td>36.5</td>
+      <td>35.9</td>
+      <td>-178.210</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>23</td>
+      <td>100</td>
+      <td>153.6</td>
+      <td>152.2</td>
+      <td>82.9</td>
+      <td>26.0</td>
+      <td>36.6</td>
+      <td>31.0</td>
+      <td>-71.673</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>19</td>
+      <td>185</td>
+      <td>190.3</td>
+      <td>187.4</td>
+      <td>97.3</td>
+      <td>37.4</td>
+      <td>44.1</td>
+      <td>41.0</td>
+      <td>-257.720</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>23</td>
+      <td>159</td>
+      <td>178.0</td>
+      <td>174.1</td>
+      <td>93.9</td>
+      <td>29.5</td>
+      <td>40.1</td>
+      <td>36.9</td>
+      <td>-173.230</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>47</td>
+      <td>170</td>
+      <td>178.7</td>
+      <td>177.0</td>
+      <td>92.4</td>
+      <td>36.0</td>
+      <td>43.2</td>
+      <td>37.4</td>
+      <td>-185.150</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>30</td>
+      <td>137</td>
+      <td>165.7</td>
+      <td>164.6</td>
+      <td>87.7</td>
+      <td>32.5</td>
+      <td>35.6</td>
+      <td>36.2</td>
+      <td>-164.750</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>28</td>
+      <td>192</td>
+      <td>185.3</td>
+      <td>182.7</td>
+      <td>96.9</td>
+      <td>35.8</td>
+      <td>39.9</td>
+      <td>43.1</td>
+      <td>-270.920</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>23</td>
+      <td>150</td>
+      <td>167.6</td>
+      <td>165.0</td>
+      <td>91.4</td>
+      <td>29.4</td>
+      <td>35.5</td>
+      <td>33.4</td>
+      <td>-151.780</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>29</td>
+      <td>120</td>
+      <td>161.2</td>
+      <td>158.7</td>
+      <td>85.2</td>
+      <td>26.6</td>
+      <td>31.0</td>
+      <td>32.8</td>
+      <td>-113.880</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>47</td>
+      <td>143</td>
+      <td>171.9</td>
+      <td>169.1</td>
+      <td>87.8</td>
+      <td>32.9</td>
+      <td>39.2</td>
+      <td>36.9</td>
+      <td>-196.150</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>41</td>
+      <td>107</td>
+      <td>155.7</td>
+      <td>152.5</td>
+      <td>82.9</td>
+      <td>29.6</td>
+      <td>32.7</td>
+      <td>31.1</td>
+      <td>-125.550</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>51</td>
+      <td>227</td>
+      <td>179.8</td>
+      <td>177.2</td>
+      <td>91.7</td>
+      <td>31.1</td>
+      <td>41.4</td>
+      <td>40.2</td>
+      <td>-203.610</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>30</td>
+      <td>147</td>
+      <td>164.9</td>
+      <td>162.7</td>
+      <td>88.0</td>
+      <td>27.7</td>
+      <td>33.6</td>
+      <td>33.8</td>
+      <td>-163.220</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>22</td>
+      <td>178</td>
+      <td>177.2</td>
+      <td>176.4</td>
+      <td>94.1</td>
+      <td>31.1</td>
+      <td>41.0</td>
+      <td>36.6</td>
+      <td>-204.110</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>67</td>
+      <td>166</td>
+      <td>177.1</td>
+      <td>175.3</td>
+      <td>89.4</td>
+      <td>36.7</td>
+      <td>40.1</td>
+      <td>39.2</td>
+      <td>-186.800</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>25</td>
+      <td>153</td>
+      <td>173.4</td>
+      <td>171.2</td>
+      <td>85.0</td>
+      <td>33.1</td>
+      <td>45.2</td>
+      <td>38.4</td>
+      <td>-228.350</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>65</td>
+      <td>113</td>
+      <td>162.6</td>
+      <td>158.7</td>
+      <td>85.2</td>
+      <td>31.1</td>
+      <td>35.7</td>
+      <td>32.5</td>
+      <td>-103.850</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>22</td>
+      <td>142</td>
+      <td>167.3</td>
+      <td>164.6</td>
+      <td>90.4</td>
+      <td>29.5</td>
+      <td>36.5</td>
+      <td>34.0</td>
+      <td>-105.690</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>21</td>
+      <td>130</td>
+      <td>172.5</td>
+      <td>170.5</td>
+      <td>89.7</td>
+      <td>29.9</td>
+      <td>35.8</td>
+      <td>35.6</td>
+      <td>-137.360</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="c1"># Create a pairplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">seatpos</span><span class="p">,</span> <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;dodgerblue&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;seaborn.axisgrid.PairGrid at 0x204ee10a940&gt;
+</pre></div>
+</div>
+<img alt="../_images/b7867d838b0672ce5d8002620dd5eb888f77b54381aee3726a5dfe548be78f0f.png" src="../_images/b7867d838b0672ce5d8002620dd5eb888f77b54381aee3726a5dfe548be78f0f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a correlation matrix and heatmap</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">seatpos</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Después de cargar el paquete <code class="docutils literal notranslate"><span class="pre">faraway</span></code>, hacemos algunas comprobaciones rápidas de la correlación entre los predictores. Visualmente, podemos hacerlo con la función <code class="docutils literal notranslate"><span class="pre">pairs()</span></code>, que traza todos los diagramas de dispersión posibles entre pares de variables en el conjunto de datos.</p>
+<p>También podemos hacerlo numéricamente con la función <code class="docutils literal notranslate"><span class="pre">cor()</span></code>, que cuando se aplica a un conjunto de datos, devuelve todas las correlaciones por pares. Observe que se trata de una matriz simétrica. Recordemos que la correlación mide la fuerza y dirección de la relación lineal entre dos variables. La correlación correlación entre <code class="docutils literal notranslate"><span class="pre">Ht</span></code> y <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> es extremadamente alta. Tan alta, que redondeada a dos decimales, ¡parece 1!</p>
+<p>A diferencia de la colinealidad exacta, aquí aún podemos ajustar un modelo con todos los predictores, pero ¿qué efecto tiene esto?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hip_model</span>
+<span class="n">X_hip</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">seatpos</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s1">&#39;hipcenter&#39;</span><span class="p">))</span>
+<span class="n">hip_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">seatpos</span><span class="p">[</span><span class="s1">&#39;hipcenter&#39;</span><span class="p">],</span> <span class="n">X_hip</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hip_model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              hipcenter   R-squared:                       0.687
+Model:                            OLS   Adj. R-squared:                  0.600
+Method:                 Least Squares   F-statistic:                     7.940
+Date:                Mon, 09 Oct 2023   Prob (F-statistic):           1.31e-05
+Time:                        09:51:27   Log-Likelihood:                -186.73
+No. Observations:                  38   AIC:                             391.5
+Df Residuals:                      29   BIC:                             406.2
+Df Model:                           8                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const        436.4321    166.572      2.620      0.014      95.755     777.109
+Age            0.7757      0.570      1.360      0.184      -0.391       1.942
+Weight         0.0263      0.331      0.080      0.937      -0.651       0.703
+HtShoes       -2.6924      9.753     -0.276      0.784     -22.640      17.255
+Ht             0.6013     10.130      0.059      0.953     -20.117      21.319
+Seated         0.5338      3.762      0.142      0.888      -7.160       8.228
+Arm           -1.3281      3.900     -0.341      0.736      -9.305       6.649
+Thigh         -1.1431      2.660     -0.430      0.671      -6.583       4.297
+Leg           -6.4390      4.714     -1.366      0.182     -16.080       3.202
+==============================================================================
+Omnibus:                        0.543   Durbin-Watson:                   1.769
+Prob(Omnibus):                  0.762   Jarque-Bera (JB):                0.664
+Skew:                           0.157   Prob(JB):                        0.717
+Kurtosis:                       2.434   Cond. No.                     8.44e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 8.44e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Una de las primeras cosas que debemos observar es que la prueba <span class="math notranslate nohighlight">\(F\)</span> para la regresión nos dice que la regresión es significativa, sin embargo cada predictor individual no lo es. Otro resultado interesante son los signos opuestos de los coeficientes de <code class="docutils literal notranslate"><span class="pre">Ht</span></code>  y <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code>. Esto debería parecer contrario a la intuición. ¿Aumentar <code class="docutils literal notranslate"><span class="pre">Ht</span></code> aumenta el <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code>, pero aumentar <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> disminuye el <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code>?</p>
+<p>Esto ocurre porque los predictores están muy correlacionados. Por ejemplo, la variable <code class="docutils literal notranslate"><span class="pre">HtShoe</span></code> explica una gran parte de la variación en <code class="docutils literal notranslate"><span class="pre">Ht</span></code>. Cuando ambas están en el modelo, sus efectos sobre la respuesta disminuyen individualmente, pero juntas siguen explicando una gran parte de la variación del <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code>.</p>
+<p>Definimos <span class="math notranslate nohighlight">\(R_j^2\)</span> como la proporción de la variación observada en el predictor <span class="math notranslate nohighlight">\(j\)</span> º explicada por los otros predictores. En otras palabras, <span class="math notranslate nohighlight">\(R_j^2\)</span> es la R-cuadrado múltiple para la regresión de <span class="math notranslate nohighlight">\(x_j\)</span> en cada uno de los otros predictores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ht_shoes_model</span>
+<span class="n">X_shoes</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">seatpos</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hipcenter&#39;</span><span class="p">,</span> <span class="s1">&#39;HtShoes&#39;</span><span class="p">]))</span>
+<span class="n">ht_shoes_model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">seatpos</span><span class="p">[</span><span class="s1">&#39;HtShoes&#39;</span><span class="p">],</span> <span class="n">X_shoes</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ht_shoes_model</span><span class="o">.</span><span class="n">rsquared</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9967472204300996
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aquí vemos que los otros predictores explican <span class="math notranslate nohighlight">\(99,67%\)</span> de la variación en <code class="docutils literal notranslate"><span class="pre">HtShoe</span></code>. Al ajustar este modelo, eliminamos <code class="docutils literal notranslate"><span class="pre">hipcenter</span></code> ya que no es un predictor.</p>
+<section id="factor-de-inflacion-de-la-varianza">
+<h2>Factor de Inflación de la Varianza.<a class="headerlink" href="#factor-de-inflacion-de-la-varianza" title="Permalink to this heading">#</a></h2>
+<p>Observe ahora que la varianza de <span class="math notranslate nohighlight">\(\hat{\beta_j}\)</span> puede escribirse como</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(\hat{\beta_j}) = \sigma^2 C_{jj} = \sigma^2 \left( \frac{1}{1 - R_j^2}  \right) \frac{1}{S_{x_j x_j}}
+\]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[
+S_{x_j x_j} = \sum(x_{ij}-\bar{x}_j)^2.
+\]</div>
+<p>Esto nos da una manera de entender cómo la colinealidad afecta a nuestras estimaciones de regresión.</p>
+<p>Vamos a llamar,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{1 - R_j^2}
+\]</div>
+<p>a varianza de nuestras estimaciones de regresión. Cuando <span class="math notranslate nohighlight">\(R_j^2\)</span> es grande, es decir, cerca de 1, <span class="math notranslate nohighlight">\(x_j\)</span> está bien explicado por los otros predictores. Con un gran <span class="math notranslate nohighlight">\(R_j^2\)</span> el factor de inflación de la varianza se hace grande. Esto nos dice que cuando <span class="math notranslate nohighlight">\(x_j\)</span> está muy correlacionada con otros predictores, nuestra estimación de <span class="math notranslate nohighlight">\(\beta_j\)</span> es muy variable.</p>
+<p>La función <code class="docutils literal notranslate"><span class="pre">vif</span></code> del paquete <code class="docutils literal notranslate"><span class="pre">faraway</span></code> calcula los VIF para cada uno de los predictores de un modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># VIF</span>
+<span class="n">vif_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X_hip</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_hip</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])],</span> <span class="n">index</span><span class="o">=</span><span class="n">X_hip</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vif_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const      741.029693
+Age          1.997931
+Weight       3.647030
+HtShoes    307.429378
+Ht         333.137832
+Seated       8.951054
+Arm          4.496368
+Thigh        2.762886
+Leg          6.694291
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>En la práctica, se suele decir que cualquier VIF superior a <span class="math notranslate nohighlight">\(5\)</span> es motivo de preocupación. Así pues, en este ejemplo vemos que hay un gran problema de multicolinealidad, ya que muchos de los predictores tienen un VIF superior a
+<span class="math notranslate nohighlight">\(5\)</span>.</p>
+<p>Investiguemos más a fondo cómo la presencia de colinealidad afecta realmente a un modelo. Si añadimos una cantidad moderada de ruido a los datos, vemos que las estimaciones de los coeficientes cambian drásticamente. Se trata de un efecto bastante indeseable. Añadir ruido aleatorio no debería afectar a los coeficientes de un modelo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hip_model_noise</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1337</span><span class="p">)</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">seatpos</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">hip_model_noise</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">seatpos</span><span class="p">[</span><span class="s1">&#39;hipcenter&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">noise</span><span class="p">,</span> <span class="n">X_hip</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>La adición de ruido ha tenido un efecto tan grande que el signo del coeficiente de <code class="docutils literal notranslate"><span class="pre">Ht</span></code> ha cambiado.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hip_model</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hip_model_noise</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const      436.432128
+Age          0.775716
+Weight       0.026313
+HtShoes     -2.692408
+Ht           0.601345
+Seated       0.533752
+Arm         -1.328069
+Thigh       -1.143119
+Leg         -6.439046
+dtype: float64
+const      426.619853
+Age          0.839339
+Weight       0.052547
+HtShoes     -2.074232
+Ht          -0.900223
+Seated       1.942362
+Arm         -1.126823
+Thigh       -0.949328
+Leg         -6.123736
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Esto nos dice que un modelo con colinealidad es malo para explicar la relación entre la respuesta y los predictores. Ni siquiera podemos confiar en la dirección de la relación. Sin embargo, ¿afecta la colinealidad a la predicción?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hip_model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">hip_model_noise</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted, Without Noise&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted, With Noise&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">hip_model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">hip_model</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fa96f474bce34ac11d865929be9858555d06c9a20395802745a3d131a8459c45.png" src="../_images/fa96f474bce34ac11d865929be9858555d06c9a20395802745a3d131a8459c45.png" />
+</div>
+</div>
+<p>Si comparamos los valores predichos de ambos modelos, vemos que son bastante similares.</p>
+<p>Veamos ahora un modelo más pequeño,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># hip_model_small</span>
+<span class="n">X_small</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">seatpos</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Arm&#39;</span><span class="p">,</span> <span class="s1">&#39;Ht&#39;</span><span class="p">]])</span>
+<span class="n">hip_model_small</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">seatpos</span><span class="p">[</span><span class="s1">&#39;hipcenter&#39;</span><span class="p">],</span> <span class="n">X_small</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hip_model_small</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:              hipcenter   R-squared:                       0.663
+Model:                            OLS   Adj. R-squared:                  0.633
+Method:                 Least Squares   F-statistic:                     22.30
+Date:                Mon, 09 Oct 2023   Prob (F-statistic):           3.65e-08
+Time:                        09:51:27   Log-Likelihood:                -188.10
+No. Observations:                  38   AIC:                             384.2
+Df Residuals:                      34   BIC:                             390.8
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const        493.2491    101.072      4.880      0.000     287.845     698.653
+Age            0.7988      0.511      1.563      0.127      -0.240       1.837
+Arm           -2.9385      3.521     -0.835      0.410     -10.094       4.217
+Ht            -3.4991      0.995     -3.515      0.001      -5.522      -1.476
+==============================================================================
+Omnibus:                        0.377   Durbin-Watson:                   1.713
+Prob(Omnibus):                  0.828   Jarque-Bera (JB):                0.543
+Skew:                          -0.131   Prob(JB):                        0.762
+Kurtosis:                       2.476   Cond. No.                     3.04e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.04e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># VIF for hip_model_small</span>
+<span class="n">vif_small</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X_small</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X_small</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])],</span> <span class="n">index</span><span class="o">=</span><span class="n">X_small</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vif_small</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>const    297.575788
+Age        1.749943
+Arm        3.996766
+Ht         3.508693
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Inmediatamente vemos que la multicolinealidad no es un problema aquí.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.anova</span> <span class="kn">import</span> <span class="n">anova_lm</span>
+<span class="n">table</span> <span class="o">=</span> <span class="n">anova_lm</span><span class="p">(</span><span class="n">hip_model_small</span><span class="p">,</span> <span class="n">hip_model</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   df_resid           ssr  df_diff      ss_diff         F    Pr(&gt;F)
+0      34.0  44353.689039      0.0          NaN       NaN       NaN
+1      29.0  41261.783500      5.0  3091.905539  0.434617  0.820666
+</pre></div>
+</div>
+</div>
+</div>
+<p>Obsérvese también que utilizando una prueba <span class="math notranslate nohighlight">\(F\)</span> para comparar los dos modelos, preferiríamos el modelo más pequeño.</p>
+<p>Ahora investigaremos el efecto de añadir otra variable a este modelo más pequeño. En concreto, queremos añadir la variable <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code>. Así que ahora nuestros posibles predictores son <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code>, <code class="docutils literal notranslate"><span class="pre">Age</span></code>, <code class="docutils literal notranslate"><span class="pre">Arm</span></code>, y <code class="docutils literal notranslate"><span class="pre">Ht</span></code>. Nuestra respuesta sigue siendo <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code>.</p>
+<p>Para cuantificar este efecto observaremos un <strong>trazado de suma de variables</strong> y un <strong>coeficiente de correlación parcial</strong>. Para ambos, observaremos los residuos de dos modelos:</p>
+<ul class="simple">
+<li><p>Regresión de la respuesta (<code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code>) contra todos los predictores
+excepto el predictor de interés (<code class="docutils literal notranslate"><span class="pre">HtShoes</span></code>).</p></li>
+<li><p>La regresión del predictor de interés (<code class="docutils literal notranslate"><span class="pre">HtShoes</span></code>) frente a los otros
+predictores (<code class="docutils literal notranslate"><span class="pre">Edad</span></code>, <code class="docutils literal notranslate"><span class="pre">Arm</span></code> y <code class="docutils literal notranslate"><span class="pre">Ht</span></code>).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ht_shoes_model_small</span>
+<span class="n">ht_shoes_model_small</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">seatpos</span><span class="p">[</span><span class="s1">&#39;HtShoes&#39;</span><span class="p">],</span> <span class="n">X_small</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Así que ahora, los residuos de <code class="docutils literal notranslate"><span class="pre">hip_model_small</span></code> nos dan la variación de <code class="docutils literal notranslate"><span class="pre">hipcenter</span></code> que es <em>unexplained</em> por <code class="docutils literal notranslate"><span class="pre">Age</span></code>, <code class="docutils literal notranslate"><span class="pre">Arm</span></code>, y <code class="docutils literal notranslate"><span class="pre">Ht</span></code>. Del mismo modo, los residuos de <code class="docutils literal notranslate"><span class="pre">ht_shoes_model_small</span></code> nos dan la variación de <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> no explicada por <code class="docutils literal notranslate"><span class="pre">Edad</span></code>, <code class="docutils literal notranslate"><span class="pre">Brazo</span></code> y <code class="docutils literal notranslate"><span class="pre">Ht</span></code>.</p>
+<p>La correlación de estos dos residuos nos da el <strong>coeficiente de correlación parcial</strong> de <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> y el <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code> con los efectos de <code class="docutils literal notranslate"><span class="pre">Edad</span></code>, <code class="docutils literal notranslate"><span class="pre">Brazo</span></code> y <code class="docutils literal notranslate"><span class="pre">Ht</span></code> eliminados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Correlation between residuals</span>
+<span class="n">corr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">ht_shoes_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">hip_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.03311061236881338
+</pre></div>
+</div>
+</div>
+</div>
+<p>Como este valor es pequeño, cercano a cero, significa que la variación del <code class="docutils literal notranslate"><span class="pre">centro</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">cadera</span></code> que no se explica por la <code class="docutils literal notranslate"><span class="pre">Edad</span></code>, el  <code class="docutils literal notranslate"><span class="pre">Brazo</span></code> ” y el <code class="docutils literal notranslate"><span class="pre">Ht</span></code> muestra muy poca correlación con la variación del <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code>  que no se explica por la <code class="docutils literal notranslate"><span class="pre">Edad</span></code>, el <code class="docutils literal notranslate"><span class="pre">Brazo</span></code> y el <code class="docutils literal notranslate"><span class="pre">Ht</span></code>. Por lo tanto, añadir  <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> al modelo probablemente sería poco beneficioso.</p>
+<p>Del mismo modo, un <strong>gráfico de variables añadidas</strong> visualiza estos residuos entre sí. También es útil hacer una regresión de los residuos de la respuesta frente a los residuos del predictor y añadir la línea de regresión al gráfico.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Residuals plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ht_shoes_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">hip_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dodgerblue&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Residuals, Added Predictor&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals, Original Model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Variable Added Plot&#39;</span><span class="p">)</span>
+
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">ht_shoes_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">hip_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ht_shoes_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">intercept</span> <span class="o">+</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">ht_shoes_model_small</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/96301e49f19d9382615ea49e8170c75f5a7fd5bcb878640256e3f27440c8232f.png" src="../_images/96301e49f19d9382615ea49e8170c75f5a7fd5bcb878640256e3f27440c8232f.png" />
+</div>
+</div>
+<p>En este caso, el gráfico de variables añadidas no muestra prácticamente ninguna relación lineal. Esto nos indica que añadir <code class="docutils literal notranslate"><span class="pre">HtShoes</span></code> al modelo probablemente no merecería la pena. Dado que su variación se explica en gran medida por los otros predictores, añadirla al modelo no mejorará mucho el modelo. Sin embargo, aumentará la variación de las estimaciones y hará que el modelo sea mucho más difícil de interpretar.</p>
+<p>Si hubiera existido una relación lineal fuerte y, por tanto, un coeficiente de correlación parcial elevado, probablemente habría sido útil añadir el predictor adicional al modelo.</p>
+<p>En general, este equilibrio es cierto. A medida que un modelo tiene más predictores, los errores serán menores y su <em>predicción</em> será mejor, pero será más difícil de interpretar. Esta es la razón por la que, si estamos interesados en <em>explicar</em> la relación entre los predictores y la respuesta, a menudo queremos un modelo que se ajuste bien, pero con un pequeño número de predictores con poca correlación.</p>
+<p>Proximamente aprenderemos métodos para encontrar modelos que se ajusten bien, pero que también tengan un pequeño número de predictores. También hablaremos del <em>sobreajuste</em>. Aunque añadir predictores adicionales siempre reducirá los errores, a veces estaremos “ajustando el ruido” y dicho modelo no se generalizará bien a observaciones adicionales.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Week_8"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="8-2-transformations.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lectura 8-2: Transformaciones</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Week_9/9-0-Schedule_week_9.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lectura 8-3: Colinealidad</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#colinealidad-exacta">Colinealidad exacta</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#colinealidad">Colinealidad</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-de-inflacion-de-la-varianza">Factor de Inflación de la Varianza.</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Alejandra Tabares
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

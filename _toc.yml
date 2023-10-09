@@ -10,33 +10,41 @@ parts:
   - file: Week_1/1-1-Introduction_pensamiento_stat
   - file: Week_1/1-2-Estadística_descriptiva
   - file: Week_1/1-3-Visualizations
-
 - caption: Semana 2
   chapters:
   - file: Week_2/2-0-Schedule_week_2
   - file: Week_2/2-1-Prob
-
 - caption: Semana 3
   chapters:
   - file: Week_3/3-0-Schedule_week_3
   - file: Week_3/3-1-Inference
   - file: Week_3/3-2-Hypothesis
   - file: Week_3/3-3-Hypothesis_2
- 
 - caption: Semana 4
   chapters:
   - file: Week_4/4-0-Schedule_week_4
   - file: Week_4/4-1 Correlaciones
   - file: Week_4/4-2-Simple_linear_regression
   - file: Week_4/4-3-SLR_supuestos
-
 - caption: Semana 5
   chapters:
   - file: Week_5/5-0-Schedule_week_5
   - file: Week_5/5-2-Hypothesis_Confidence
-
 - caption: Semana 7
   chapters:
   - file: Week_7/7-0-Schedule_week_7
   - file: Week_7/7-1-Multiple_linear_regresion
   - file: Week_7/7-2-Categorical_variables
+- caption: Semana 8
+  chapters:
+  - file: Week_8/8-0-Schedule_week_8
+  - file: Week_8/8-1-diagnostics
+  - file: Week_8/8-2-transformations
+  - file: Week_8/8-3-collinearity
+- caption: Semana 9
+  chapters:
+  - file: Week_9/9-0-Schedule_week_9
+- caption: Semana 10
+  chapters:
+  - file: Week_10/10-0-Schedule_week_10
+  #- file: Week_10/10-1-Selection
